@@ -1,0 +1,434 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model GlobalPanda.BusinessInfo.JobDetailInfo
+<section class="container">
+    <div class="container-fluid">
+        <div class="container nav-tabs-main">
+            <div class="col-xs-12 innerpages" id="employer">
+                <h2>Post a Job</h2>
+                @using (Html.BeginForm("PostJob", "Jobs", FormMethod.Post, new { @class = "form-inline cont", @onsubmit = "return checkTypeid(this);" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <table class="table uploadcvtable">
+                        <tr>
+                            <td class="registersubheadings">
+                                Location
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="divAlertLocSel" style="display: none">
+                                    @Html.ListBox("SelectedLocationList", new SelectList(((System.Data.DataTable)(ViewData["location"] == null ? new System.Data.DataTable() : ViewData["location"])).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @multiple = "multiple", @size = "5", @class = "fieldAlerts LocationAlert", required = "required" })
+                                    <div style="display: none">
+                                        @Html.ListBox("SelectedLocationIDList", new SelectList(((System.Data.DataTable)(ViewData["location"] == null ? new System.Data.DataTable() : ViewData["location"])).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @multiple = "multiple", @size = "5", @class = "fieldAlerts LocationID" })
+                                    </div>
+                                    <div style="display: none">
+                                        @Html.ListBox("SelectedLocationTypeList", new SelectList(((System.Data.DataTable)(ViewData["location"] == null ? new System.Data.DataTable() : ViewData["location"])).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @multiple = "multiple", @size = "5", @class = "fieldAlerts LocationType" })
+                                    </div>
+                                    <div style="float: right">
+                                        <img title="Remove selected" src="../../Content/images/delete.png" id="deletedSelect" onclick="deleteSelect('SelectedLocationList');"
+                                             style="display: block !important; visibility: inherit !important;" />
+                                    </div>
+                                </div>
+                                <div id="divAlertRemoveSel" style="display: none">
+                                    @Html.ListBox("RemoveSelectedLocation", new SelectList(((System.Data.DataTable)new System.Data.DataTable()).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @multiple = "multiple", @size = "6", @class = "form-control" })
+                                </div>
+                                <i>Begin typing to select one or more options.</i>
+                                @Html.TextArea("LocationSearch", string.Empty, new { @id = "search-empLocationpost", @class = "form-control LocationSearch", placeholder = "please enter location", @Style = "width:100px" })
+                                <div id='searchable-empLocationtree' class="jobseekeremplocation" style="display:none"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                Occupation
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="search-empOccu" class="form-control topic-picker ui-autocomplete-input" type="text" name="Empoccupation" autocomplete="off" placeholder="enter your occupation" role="textbox" aria-autocomplete="list" aria-haspopup="true" required>
+                                <div id='occutreepostJob' class="jobseekerempoccupation" style="display:none"></div>
+                                @Html.TextBoxFor(m => m.ISICRev4Id, new { @maxlength = "100", @class = "hidden" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                Industry
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="search-empIndustry" class="form-control topic-picker ui-autocomplete-input" type="text" name="EmpIndustry" autocomplete="off" placeholder="enter your industry" role="textbox" aria-autocomplete="list" aria-haspopup="true" required>
+                                <div id='indtreepostJob' class="jobseekerempindustry" style="display:none"></div>
+                                @Html.HiddenFor(m => m.ISCO08Id)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                Frequency
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DropDownList("SalaryFrequency", new SelectList(((System.Data.DataTable)Session["Frequency"]).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.SalaryFrequency)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                Job Type
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DropDownListFor(x => x.TypeId, new SelectList(((System.Data.DataTable)Session["JobType"]).Rows as System.Collections.IEnumerable, "[0]", "[1]"), String.Empty, new { @class = "form-control", placeholder = "Enter Here" })
+                                @Html.ValidationMessageFor(x => x.TypeId)
+                            </td>
+                        </tr>
+
+                        @*<tr>
+                                <td class="registersubheadings">
+                                    Job Salary Min
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DropDownList("SalaryCurrency", new SelectList(((System.Data.DataTable)Session["Currencies"]).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @class = "form-control", placeholder = "Enter Here" })
+                                    @Html.TextBoxFor(m => m.SalaryMin, new { @maxlength = "100", @class = "form-control", placeholder = "Enter Here" })
+                                    @Html.ValidationMessageFor(m => m.SalaryMin)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="registersubheadings">
+                                    Job Salary Max
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DropDownList("SalaryCurrency", new SelectList(((System.Data.DataTable)Session["Currencies"]).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @class = "form-control", placeholder = "Enter Here" })
+
+                                    @Html.TextBoxFor(m => m.SalaryMax, new { @maxlength = "100", @class = "form-control", required = "required", placeholder = "Enter Here" })
+                                    @Html.ValidationMessageFor(m => m.SalaryMax)
+                                </td>
+                            </tr>*@
+                        <tr>
+                            <td class="registersubheadings">
+                                Job Reference Code
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.TextBox("ReferenceNo", Session["ReferenceNo"], new { @maxlength = "100", @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.ReferenceNo)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                Title
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.TextBoxFor(m => m.Title, new { @maxlength = "100", @class = "form-control", required = "required", @style = "text-transform:uppercase" })
+                                @Html.ValidationMessageFor(m => m.Title)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                Heading 1
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.TextBoxFor(m => m.Bullet1, new { @maxlength = "100", @class = "form-control", placeholder = "Input a standout feature of the position, employer or location." })
+                                @Html.ValidationMessageFor(m => m.Bullet1)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                Heading 2
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.TextBoxFor(m => m.Bullet2, new { @maxlength = "100", @class = "form-control", placeholder = "2nd standout feature of the position, employer or location." })
+                                @Html.ValidationMessageFor(m => m.Bullet2)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                Heading 3
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.TextBoxFor(m => m.Bullet3, new { @maxlength = "100", @class = "form-control", placeholder = "3rd standout feature of the position, employer or location." })
+                                @Html.ValidationMessageFor(m => m.Bullet3)
+                            </td>
+                        </tr>
+                        @*<tr>
+                                <td class="registersubheadings">
+                                    Sub Heading
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.TextBoxFor(m => m.SubHeading, new { @maxlength = "100", @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.SubHeading)
+                                </td>
+                            </tr>*@
+                        <tr>
+                            <td class="registersubheadings">
+                                Online Summary
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.TextBoxFor(m => m.Summary, new { @maxlength = "150", @class = "form-control", @onkeyup = "countJobContentChar(this)", placeholder = "Please input a succinct description of the position, ie. a little more depth than the Job Title." })
+                                <div style="color:white" id="JobContentChar"></div>
+                                @Html.ValidationMessageFor(m => m.Summary)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                Job Content
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="jobspan">** Please input an opening sentence/s or paragraph/s with general information about the position. Do not include Duties, Must Haves, Nice to Haves, or Remuneration, as you will input this information in the lists below. Examples can be seen in existing job advertisements at </p>
+                                @Html.TextAreaFor(m => m.JobContent, new { @id = "editor1", @maxlength = "10000", @class = "form-control", placeholder = "Enter your Summary Here", required = "required" })
+                                @Html.ValidationMessageFor(m => m.JobContent)
+                                <div id="txtContentCounter">
+                                    <b>10000</b>
+                                </div>
+                                characters remaining.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                <button type="button" class="btn btn-add btn-lg btn-block pull-left" data-toggle="modal" data-target="#Duties">
+                                    DUTIES
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.ListBox("DutiesList", new SelectList(((System.Data.DataTable)(ViewData["DUTIESLIST"] == null ? new System.Data.DataTable() : ViewData["DUTIESLIST"])).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @rows = 5, @class = "form-control dutiesListBox", @style = "margin-top:10px", @placeholder = "duties list appears here" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                <button type="button" class="btn btn-add btn-lg btn-block pull-left" data-toggle="modal" data-target="#EssImpCriteria" title="please click to add essential criteria">
+                                    MUST HAVES
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.ListBox("MustHaveList", new SelectList(((System.Data.DataTable)(ViewData["MustHaveList"] == null ? new System.Data.DataTable() : ViewData["MustHaveList"])).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @rows = 5, @class = "form-control havelist", @style = "margin-top:10px", @placeholder = "must haves list appears here" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                <button type="button" class="btn btn-add btn-lg btn-block pull-left" data-toggle="modal" data-target="#EssConfCriteria" title="please click to add desirable criteria">
+                                    NICE TO HAVE
+                                </button>
+                            </td>
+
+                        <tr>
+                            <td>
+                                @Html.ListBox("NiceToHaveList", new SelectList(((System.Data.DataTable)(ViewData["NiceToHaveList"] == null ? new System.Data.DataTable() : ViewData["NiceToHaveList"])).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @rows = 5, @class = "form-control nicetohavelist", @style = "margin-top:10px", @id = "tblNicetoHaveList", @placeholder = "nice to haves list appears here" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                <button type="button" class="btn btn-add btn-lg btn-block pull-left" data-toggle="modal" data-target="#RemunerList">
+                                    REMUNERATION
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                @Html.ListBox("Remuneration", new SelectList(((System.Data.DataTable)(ViewData["RemunerationList"] == null ? new System.Data.DataTable() : ViewData["RemunerationList"])).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @rows = 5, @class = "form-control remunerationListBox", @style = "margin-top:10px", @placeholder = "remuneration list appears here" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                Video Link
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.TextBoxFor(m => m.WebsiteURL, new { @maxlength = "100", @class = "form-control", placeholder = "Enter Video Link Here" })
+                                @Html.ValidationMessageFor(m => m.AdFooter)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                Add Footer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.TextBoxFor(m => m.AdFooter, new { @maxlength = "100", @class = "form-control", placeholder = "Enter Footer Here" })
+                                @Html.ValidationMessageFor(m => m.AdFooter)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                Client ID
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="client" class="form-control" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="registersubheadings">
+                                Hot Job
+                                @Html.CheckBoxFor(m => m.HotJob, new { @maxlength = "100", @style = "width: 34px !important;margin-top: -11px;" })
+                                @Html.ValidationMessageFor(m => m.HotJob)
+                            </td>
+                        </tr>
+                    </table>
+                    <button type="submit" id="btnsubmit" value="Submit" class="btn btn-green btn-lg btn-block">Submit</button>
+                }
+                @using (Html.BeginForm("Reset", "Jobs"))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <button type="submit" id="btnsubmit" value="Submit" class="btn btn-green btn-lg btn-block">Reset</button>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="EssImpCriteria" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <textarea rows="4" cols="50" maxlength="500" id="esscriteria" onkeyup="countCharEss(this)" class="form-control"></textarea>
+                    <div style="color:white" id="essCriteriaText"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-green btn-lg btn-block" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-green btn-lg btn-block" onclick="addEssentialCriteria()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="EssConfCriteria" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="essenpopup modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body row">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-add btn-lg btn-block pull-left" onclick="insertEssenRow()">Add Row</button>
+                        <button type="button" class="btn btn-add btn-lg btn-block pull-left" onclick="deleteRow('sortableEssen')">Delete Row</button>
+                    </div>
+                    <div class="col-sm-12">
+                        <TABLE id="sortableEssen" class="table popuptable">
+                            <tbody class="EssenSortable">
+                                <TR>
+                                    <TD><INPUT type="checkbox" name="chk" class="form-control" style="width:24px" /></TD>
+                                    <TD>
+                                        <textarea rows="4" cols="50" maxlength="500" id="txtEssDesc" onkeyup="countChar(this)" class="form-control"></textarea>
+                                        <div style="color:white" id="charNum"></div>
+                                    </TD>
+                                </TR>
+                            </tbody>
+                        </TABLE>
+                    </div>
+                </div>
+                <div class="modal-footer col-sm-12">
+                    <button type="button" class="btn btn-green btn-lg btn-block" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-green btn-lg btn-block" onclick="addConfigEssenCriteria()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="Duties" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="essenpopup modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body row">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-add btn-lg btn-block pull-left" onclick="insertDutiesRow()">Add Row</button>
+                        <button type="button" class="btn btn-add btn-lg btn-block pull-left" onclick="deleteDutiesRow('JobDuties')">Delete Row</button>
+                    </div>
+                    <div class="col-sm-12">
+                        <TABLE id="JobDuties" class="table popuptable">
+                            <tbody class="DutiesSortable">
+                                <TR>
+                                    <TD><INPUT type="checkbox" name="chk" class="form-control" style="width:24px" /></TD>
+                                    <TD>
+                                        <textarea rows="4" cols="50" maxlength="500" id="txtDuties" onkeyup="countChar(this)" class="form-control"></textarea>
+                                        <div style="color:white" id="charNum"></div>
+                                    </TD>
+                                </TR>
+                            </tbody>
+                        </TABLE>
+                    </div>
+                </div>
+                <div class="modal-footer col-sm-12">
+                    <button type="button" class="btn btn-green btn-lg btn-block" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-green btn-lg btn-block" onclick="addDuties()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="RemunerList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="essenpopup modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body row">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-add btn-lg btn-block pull-left" onclick="insertRemunerationRow()">Add Row</button>
+                        <button type="button" class="btn btn-add btn-lg btn-block pull-left" onclick="deleteRemunerationRow('JobRemuneration')">Delete Row</button>
+                    </div>
+                    <div class="col-sm-12">
+                        <TABLE id="JobRemuneration" class="table popuptable">
+                            <tbody class="remuneSortable">
+                                <TR>
+                                    <TD><INPUT type="checkbox" name="chk" class="form-control" style="width:24px" /></TD>
+                                    <TD>
+                                        <textarea rows="4" cols="50" maxlength="500" id="txtRemuneration" onkeyup="countChar(this)" class="form-control"></textarea>
+                                        <div style="color:white" id="charNum"></div>
+                                    </TD>
+                                </TR>
+                            </tbody>
+                        </TABLE>
+                    </div>
+                </div>
+                <div class="modal-footer col-sm-12">
+                    <button type="button" class="btn btn-green btn-lg btn-block" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-green btn-lg btn-block" onclick="addRemuneration()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @**@
+    @if (TempData["errorPostJob"] != null)
+    {
+        <script type="text/javascript">
+            var test = '@TempData["errorPostJob"].ToString()';
+            var r = alert(test);
+        </script>
+    }
+</section>
+<div class="clearfix"></div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

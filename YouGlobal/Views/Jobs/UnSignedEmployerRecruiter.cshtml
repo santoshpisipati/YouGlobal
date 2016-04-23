@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="container">
+    <div class="row secondary-nav ">
+        <div class="row secondary-nav secondary-nav-margin">
+            <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/04.png" alt="Job seekers"></i><a href="@Url.Action("LookingforStaff", "Staff")" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m active">Looking for Staff?</a></div>
+            <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/05.png" alt="Job seekers"></i><a href="@Url.Action("JoinUsHtml", "Join")" class="button btn-uploadcv button--antiman button--inverted button--border-thin button--text-thick button--size-m whynotjoinus">Recruiters - Why Not Join Us?</a></div>
+            @if (Session["username"] != null && !string.IsNullOrEmpty(Session["username"].ToString()))
+            {
+                if (Session["loggedinas"] != null && !string.IsNullOrEmpty(Convert.ToString(Session["loggedinas"])))
+                {
+                    Int32 loggedIn = Convert.ToInt32(Session["loggedinas"]);
+                    if (loggedIn == 1)
+                    {  @Html.Partial("LoginModal")
+                        <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Job seekers"></i>@Html.ActionLink("Post Job", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin" })</div> }
+                    else
+                    {
+                        <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Job seekers"></i><a href="@Url.Action("PostJob", "Jobs")" class="button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin">Post Job</a></div>
+                    }
+                }
+                else
+                {
+                    <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Job seekers"></i><a href="@Url.Action("PostJob", "Jobs")" class="button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin">Post Job</a></div>
+                }
+
+            }
+            else
+            {
+                @Html.Partial("LoginModal")
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Job seekers"></i>@Html.ActionLink("Post Job", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin" })</div>
+            }
+        </div>
+    </div>
+    <div class="container nav-tabs-main">
+        <div class="col-xs-12 innerpages" id="about-us">
+            <h3>Employers worldwide, YOU Global can help YOU!</h3>
+            <h3>Recruiters worldwide - @Html.ActionLink("join YOU Global today!.", "JoinUsHtml", "Join", routeValues: null, htmlAttributes: new { id = "otherServics", @class = "underline" }) </h3>
+
+            <p>
+                With rapid access to millions of jobseekers globally, YOU Global is committed to providing you with candidates who closely match your requirements.
+            </p>
+            <p>
+                YOU Global is flexible with the business terms entered into with you. We take your specific requirements into account, and offer innovative payment options.
+            </p>
+            <p>
+                Once business terms are agreed upon, and you have provided us with details of a vacancy and the type of candidates required, YOU Global begins to search for and attract potential candidates, either globally or locally, that's up to you. No matter where in the world, no matter what industry, no matter what occupation or seniority of the position, YOU Global has the resources and know-how to help find you a solution.
+            </p>
+            <p>
+                YOU Global offers a range of @Html.ActionLink("services", "OtherServices", "Jobs", routeValues: null, htmlAttributes: new { id = "otherServics", @class = "underline" }) in addition to search and placement.
+            </p>
+            <p>
+                @Html.ActionLink("Job Advertising", "JobAdvertising", "Jobs", routeValues: null, htmlAttributes: new { id = "otherServics", @class = "underline" })
+            </p>
+            <p>
+                For more about how YOU Global can assist your business, or to speak to one of our Consultants globally, @Html.ActionLink("Contact YOU Global", "ContactUsHtml", "Contact", routeValues: null, htmlAttributes: new { id = "otherServics", @class = "underline" }) today.
+            </p>
+        </div>
+    </div>
+    @if (TempData["notice"] != null)
+    {
+        <script type="text/javascript">
+            var test = '@TempData["notice"].ToString()';
+            var r = alert(test);
+            if (test.indexOf("Successful") > -1) {
+                window.location.href = '@Url.Action("Home","Home")';
+            }
+        </script>
+    }
+    <!-- container End -->
+    <!-- container-fluid End -->
+</section>

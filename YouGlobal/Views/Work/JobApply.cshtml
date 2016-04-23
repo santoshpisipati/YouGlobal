@@ -1,0 +1,275 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+</script>
+@using YG_MVC.Models;
+@using System.Data;
+@{ var jobapply = (JobApplyModel)Model; var essIncr = 1;
+    var desiIncr = 1; }
+
+<section class="container">
+    <div class="container-fluid">
+        <!--  secondary-nav start -->
+        <div class="container padding">
+            <div class="row secondary-nav secondary-nav-margin">
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/04.png" alt="Job seekers"></i><a href="@Url.Action("JobSeeker", "Jobs")" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m active">Job Search</a></div>
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/05.png" alt="Job seekers"></i><a href="@Url.Action("JobSeekerEmp", "Jobs")" class="button btn-uploadcv button--antiman button--inverted button--border-thin button--text-thick button--size-m">Upload CV</a></div>
+                @*<div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Other services"></i><a class="button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin" data-featherlight="#f2" data-featherlight-variant="fixwidth">Job Alerts</a></div>*@
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Job Alerts"></i><a href="@Url.Action("JobAlert", "Jobs")" class="button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin">Job Alerts</a></div>
+            </div>
+        </div>
+        <div class="container nav-tabs-main">
+            <div class="col-md-12 row innerpages" id="about-us">
+                <form onsubmit="return  checkCriteria(this);" name="submitjob" id='submitjob' action="@Url.Action("ApplyJob", "Work")"
+                      method="post" enctype="multipart/form-data">
+                    @if (ViewData["msg"] != null)
+                    {
+                        <script type="text/javascript">            hideProgress(); alert('@ViewData["msg"].ToString()')</script>
+                    }
+                    @*<div id="progress" style="position: fixed; top: 0; bottom: 0; left: 0; right: 0;
+                        overflow: hidden; padding: 0; margin: 0; background-color: #F0F0F0; filter: alpha(opacity=50);
+                        opacity: 0.5; z-index: 100000;">
+                                    <img id="loading" src="../../Content/images/consultant/spinner3-bluey.gif" alt="" />
+                                </div>*@
+                    <table class="table uploadcvtable">
+                        <tbody>
+                            <tr>
+                                <td class="title" align="left">
+                                    @Html.Label("JobTitle", jobapply.JobTitle)
+                                    @Html.Hidden("JobId", jobapply.JobId)
+                                    @Html.Hidden("JobTitle", jobapply.JobTitle)
+                                    @Html.Hidden("ReferenceNo", jobapply.ReferenceNo)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <hr />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table uploadcvtable">
+                        <tbody>
+                            <tr>
+                                <td class="subheadings" width="100">
+                                    Given Name <span class="mandatoryString"><font color="red">*</font></span>
+                                </td>
+                                <td class="body">
+                                    @Html.TextBox("FirstName", "", new { @class = "form-control", maxlength = "50" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="subheadings">
+                                    Family Name <span class="mandatoryString"><font color="red">*</font></span>
+                                </td>
+                                <td class="body">
+                                    @Html.TextBox("LastName", "", new { @class = "form-control", maxlength = "50" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="subheadings">
+                                    Email <span class="mandatoryString"><font color="red">*</font></span>
+                                </td>
+                                <td class="body">
+                                    @Html.TextBox("Email", "", new { @class = "form-control", maxlength = "50" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="subheadings" nowrap="nowrap">
+                                    Birth date<span class="mandatoryString"><font color="red">*</font></span>
+                                </td>
+                                <td class="body">
+                                    @Html.TextBox("BirthDate", "", new { @class = "form-control", })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="subheadings" nowrap="nowrap">
+                                    Contact No.<span class="mandatoryString"><font color="red">*</font></span>
+                                </td>
+                                <td class="body">
+                                    @Html.TextBox("ContactNumber", "", new { @class = "form-control", maxlength = "50" })
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    @if (jobapply.EssentialCriteriaList != null)
+                    {
+                        <table class="table uploadcvtable">
+                            <tbody>
+                                <tr>
+                                    <th class="subheadings_big1" align="left" id="essCritId">
+                                        MUST HAVES:
+                                    </th>
+                                </tr>
+                                @foreach (DataRow dr in jobapply.EssentialCriteriaList.Rows)
+                {
+                                    <tr>
+                                        <td class="subheadings" align="left">
+                                            <p style="margin-left: 20px;" align="left">
+                                                <span class="essCritCounter">
+                                                    @essIncr++ )
+                                                </span>
+                                                @dr["description"].ToString() <font color="red">*</font>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="body" align="left">
+                                            @Html.TextArea(dr["EssentialCriteriaId"].ToString(), new { @class = "required form-control", rows = 2 })
+                                            <div id='div+@dr["EssentialCriteriaId"].ToString()' style="margin-left: 20px">
+                                                <font size="1">characters left: 500</font>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    @if (jobapply.DesirableCriteriaList != null && jobapply.DesirableCriteriaList.Rows.Count > 0)
+                    {
+                        <table class="table uploadcvtable">
+                            <tbody>
+                                <tr>
+                                    <th class="subheadings_big1" align="left" id="Th1">
+                                        NICE TO HAVES:
+                                    </th>
+                                </tr>
+                                @foreach (DataRow dr in jobapply.DesirableCriteriaList.Rows)
+                {
+                                    <tr>
+                                        <td class="subheadings">
+                                            <p style="margin-left: 20px;" align="left">
+                                                <span class="essCritCounter">
+                                                    @desiIncr++ )
+                                                </span>
+                                                @dr["description"].ToString()
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="body" align="left">
+                                            @Html.TextArea(dr["DesirableCriteriaId"].ToString(), new { @class = "desi form-control", rows = 2 })
+                                            <div id='divDesi+@dr["DesirableCriteriaId"].ToString()' style="margin-left: 20px">
+                                                <font size="1">characters left: 500</font>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    <table class="table uploadcvtable">
+                        <tbody>
+                            <tr>
+                                <th align="left" class="subheadings_big1">
+                                    <p>
+                                        <u>COVER LETTER: </u>
+                                    </p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td class="subheadings">
+                                    <p class="subheadings" style="margin-left: 20">
+                                        Please either enter a cover letter here as text:
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="body">
+                                    @Html.TextArea("CoverLetter", new { @class = "form-control", rows = 5 })
+                                    <div id="desCoverLettContent" style="margin-left: 20">
+                                        <font size="1">characters left: 2000</font><input type="hidden" value="2000" name="CoverLettContentRemLngth" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="subheadings">
+                                    <p class="subheadings" style="margin-left: 20">
+                                        Or attach a cover letter file
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th align="left" class="subheadings_big1">
+                                    <p>
+                                        <u>Cover Letter:</u> <font size="1">
+                                        </font><span class="mandatoryString"><font color="red"></font></span>
+                                    </p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input class="formInput" type="file" name="coverLetterOptional" id="coverLetterOptional"
+                                           onchange="get_filename(this,2,'Cover Letter');" value="" />
+                                    <button type="button" name="removefile" value="" id="deletefie" class="btn btn-upload btn-lg btn-block" onclick="clearContents('coverLetterOptional')">remove</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="subheadings">
+                                    <p style="margin-left: 20">
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th align="left" class="subheadings_big1">
+                                    <p>
+                                        <u>CV:</u> <font size="1">
+                                        </font><span class="mandatoryString"><font color="red">&nbsp;*</font></span>
+                                    </p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="file" name="attachment" id="attachment" onchange="get_filename(this,1,'CV');" />
+                                    <button type="button" name="removefile" value="remove" id="Button1" onclick="clearContents('attachment')" class="btn btn-upload btn-lg btn-block">remove</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="420" class="body">
+                                    <input type="checkbox" checked="checked" name="retentionConsentChkBox" style="width: 24px !important;" />
+                                    <input type="hidden" value="" name="retentionConsent" />It's OK to retain my details
+                                    for other positions
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table uploadcvtable">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img width="1" height="20" src="../../Content/images/clear.gif" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="subheadings">
+                                    <button type="submit" class="btn btn-red pull-let btn-lg btn-block" id="applyButton">Submit</button>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="lightbox jobalert" id="f2">
+        @using (Html.BeginForm("JobAlert", "Jobs", FormMethod.Post, new { @class = "form-inline cont", @onsubmit = "return checkFormFields(this);" }))
+        {
+            <div class="form-group col-md-12 row">
+                <label for="inputname">Name</label>
+                @Html.TextBox("Name", string.Empty, new { @class = "form-control", @required = "required" })
+            </div>
+            <div class="form-group col-md-12 row">
+                <label for="InputeEmail">Email</label>
+                @Html.TextBox("Email", string.Empty, new { @class = "form-control", @required = "required" })
+            </div>
+            <div class="form-group col-md-12 row">
+                <label for="alertfrequency">job alerts frequency</label>
+                @Html.DropDownList("MailFrequency", new SelectList(((System.Data.DataTable)Session["FrequencyList"]).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @class = "form-control selectpicker" })
+            </div>
+            <div class="form-group col-md-12 row">
+                <input type="submit" class="btn btn-jobalert btn-lg btn-block" value="Subscribe" />
+            </div>
+        }
+    </div>
+</section>

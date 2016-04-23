@@ -1,0 +1,430 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--------------------------------------------------------------------------->
+<!--                           INTRODUCTION
+
+ The Code Project article submission template (HTML version)
+
+Using this template will help us post your article sooner. To use, just
+follow the 3 easy steps below:
+
+     1. Fill in the article description details
+     2. Add links to your images and downloads
+     3. Include the main article text
+
+That's all there is to it! All formatting will be done by our submission
+scripts and style sheets.
+
+-->
+<!--------------------------------------------------------------------------->
+<!--                        IGNORE THIS SECTION                            -->
+<html>
+<head>
+    <title>The Code Project</title>
+    <style>
+        BODY, P, TD {
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 10pt;
+        }
+
+        H2, H3, H4, H5 {
+            color: #ff9900;
+            font-weight: bold;
+        }
+
+        H2 {
+            font-size: 13pt;
+        }
+
+        H3 {
+            font-size: 12pt;
+        }
+
+        H4 {
+            font-size: 10pt;
+            color: black;
+        }
+
+        PRE {
+            BACKGROUND-COLOR: #FBEDBB;
+            FONT-FAMILY: "Courier New", Courier, mono;
+            WHITE-SPACE: pre;
+        }
+
+        CODE {
+            COLOR: #990000;
+            FONT-FAMILY: "Courier New", Courier, mono;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="http://www.codeproject.com/App_Themes/Std/CodeProject.css">
+</head>
+<body bgcolor="#FFFFFF" color=#000000>
+    <!--------------------------------------------------------------------------->
+    <!-------------------------------     STEP 1      --------------------------->
+    <!--  Fill in the details (CodeProject will reformat this section for you) -->
+
+<pre>
+Title:       Use Twitter Bootstrap Modal Dialog for smoother login experience.
+Author:      Rolf-Cerff
+Email:       rolf.cerff@googlemail.com
+Language:    C# 5.0, JavaScript
+Platform:    Windows
+Technology:  ASP.NET MVC, ASP.NET Identity, Twitter Bootstrap 3.0, Visual Studio 2013
+Level:       Intermediate
+Description: This article shows how to modify the default ASP.NET MVC project to use Twitter Bootstrap Modal Dialog as login dialog. Graceful degration for non JavaScript Browsers is included.
+Section      Web Development
+SubSection   ASP.NET
+License:     CPOL
+</pre>
+
+    <!-------------------------------     STEP 2      --------------------------->
+    <!--  Include download and sample image information.                       -->
+
+    <ul class=download>
+        <li><a href="Sample.Web.ModalLogin.zip">Download demo project (contains sources) - 761 Kb </a></li>
+    </ul>
+
+    <p><img src="ModalLogin.png" alt="Modal login" width=400 height=200></p>
+
+
+    <!-------------------------------     STEP 3      --------------------------->
+    <!--  Add the article text. Please use simple formatting (<h2>, <p> etc)   -->
+
+    <h2>Introduction</h2>
+
+    <p>
+        This article shows how to use the Modal Dialog jQuery plugin of the Twitter Boostrap framework to create a more smooth login user experience.
+        This solution can be easy included into an ASP.NET MVC project created by default Visual Studio 2013 ASP.NET MVC project template.
+        Instead redirecting to the login page when clicking &quot;Login&quot; navigation item, mouse clicking on that link opens the login form in a modal dialog.
+        Using Twitter Boostrap jquery modal dialog plugin lets this dialog well integrate into overall Boostrap design of the web site created by the ASP.NET MVC project template.
+        This solution leads to a more smooth login user experience. When the user has JavaScript disabled the user is redirected to the login page and the application behaves as usual.
+    </p>
+    <h2>Contributions</h2>
+    <p>This project has arisen with contributions by</p>
+    <ul>
+        <li><a target="_blank" title="How to implement Ajax Login in ASP.NET MVC" href="http://www.binaryintellect.net/articles/51a057aa-dd50-435c-96a1-31b1fc43b9d6.aspx">Implementing Ajax Login in ASP.NET MVC</a></li>
+        <li>
+            <a target="_blank" title="Forloop HtmlHelpers" href="https://bitbucket.org/forloop/forloop-htmlhelpers/wiki/Home">Foorloop HtmlHelpers</a> HtmlHelpers that helps Partial Views to add script blocks or references to script files to the right place.
+            Available as a NuGet packacge to install in your web project. Refer to documentation how to add and use it in your project.
+        </li>
+    </ul>
+    <h2>Background</h2>
+    <p>
+        The Visual Studio ASP.NET MVC project template comes with a login solution that redirects the user to a separate Login view when clicking on &quot;Login&quot; navigation item.
+        Web users today expect a more smooth user experience which is most realized by DHTML, AJAX and JavaScript.
+        Many web sites realizes the login experience as a small popup which opens in front of the calling page and redirects the user to the target page when the user successfully logged in.
+    </p>
+    <p>
+        This was the motivation of this article, to provide a smoother login experience, using the default functionality of ASP.NET MVC project template as much as possible
+        and conform to default ASP.NET MVC design which is based on Twitter Bootstrap. Documentation about Twitter Bootstrap can be found on <a target="_blank" href="http://getbootstrap.com/">getbootstrap.com</a>.
+        Documentation about the Bootstrap Modal plugin can be found <a target="_blank" href="http://getbootstrap.com/javascript/#modals">here</a>.
+    </p>
+    <p>
+        The Modal dialog does not submit the login form as long as the user has not successful logged in.
+        The login itself is initiated via an AJAX call to an aditional Action method on Account controller and not via form submit.
+        The result of success and failure is handled on client side and not as per default server side.
+        Because the modal login is invisible when the page opens, the modal login form is closed when the page hosting the modal login form submits.
+    </p>
+    <h2>Using the code</h2>
+    <p>
+        The code is included in the sample project. This project is based on the default Visual Studio 2013 ASP.NET MVC project template.
+    </p>
+    <h3>Preparation</h3>
+    <p>
+        Maybe you already have a MVC project and you want to try adding the modal login to your existing project. Alternatively you can create a new ASP.NET MVC Website in Visual Studio and add the necessary code to this project.
+        You can use the sample project as a starting point for your own web project. It is almost identical to the default project template of Visual Studio.
+        As mentioned the default ASP.NET MVC project template contains Twitter Bootstrap resources (script and styles) so you can start immediately with the steps below after you created a ASP.NET MVC project.
+    </p>
+    <p>
+        Before beginning to write or copy the code to your web project it is recommended that you install the Forloop.HtmlHelpers from NuGet to your project.
+        This little helper aims you to add script or script references to the end of e.g. the <code>&lt;body&gt;</code> tag.
+        After installing the helpers you need to addf the following two lines of code to existing code files:
+    </p>
+    <p><code>App_Start/BundleConfig.cs</code></p>
+    <p>
+        Add the following line of code after all bundle configuration:
+        <pre lang="C#">ScriptContext.ScriptPathResolver = System.Web.Optimization.Scripts.Render;</pre>
+    </p>
+    <p><code>Views/Shared/_Layout.cshtml</code></p>
+    <p>Add a call to the Forloop HtmlHelper method RenderScripts()</p>
+    <pre lang="aspnet">
+...
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/jqueryval")
+@RenderSection("scripts", required: false)
+<span style="background-color: yellow">@Html.RenderScripts()</span>
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+    <p>
+        Render the jQuery validation script references. The script bundle for that is already created in <code>BundleConfig.cs</code>. So you need only a command to render a reference of that bundle to <code>Views/Shared/_Layout.cshtml</code>.
+        This ensures client side validation and avoid submitting the form to validate the login form. Adding it to the layout view makes it possible to remove it from views based on this layout.
+    </p>
+    <pre lang="aspnet">
+...
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<span style="background-color: yellow">@Scripts.Render("~/bundles/jqueryval")</span>
+@RenderSection("scripts", required: false)
+@Html.RenderScripts()
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+    <h3>Create the Modal Login View</h3>
+    <p>
+        The Twitter Bootstrap Modal plugin is based on a jQuery plugin.
+        It is already integrated into the default <code>bootstrap.js</code> script resource that is delivered by Bootstrap and is delivered by the default Visual Studio 2013cASP.NET MVC project template.
+        So you don't need to add any additional resources.
+    </p>
+    <p>
+        The Bootstrap Modal dialog is built up by a specific HTML structure with prescribed class names as is well known when creating web sites based on Twitter Bootstrap.
+        Javascript code that mades up the Modal dialog appearance and functionality uses this structure.
+        To setup the login as a modal dialog we need to do five things.
+        <ol>
+            <li>Create a MVC layout view for modal dialogs based on Twitter Bootstrap</li>
+            <li>Separate out login form from <code>Login.cshtml</code> into a partial view so we can use it in modal dialog and the login page</li>
+            <li>Create modal login view based on partial login view and modal layout created in the first step</li>
+            <li>Add reference of partial login view into <code>Login.cshtml</code> view</li>
+            <li>Add the Modal Login form to default page layout view</li>
+        </ol>
+    </p>
+    <h4>Create a MVC layout for modal dialogs</h4>
+    <p>
+        Create a &quot;MVC 5 Layout Page&quot; in the <code>Views/Shared</code> folder of your Visual Studio Project. Name it e.g. <code>_LayoutModal.cshtml</code>.
+        This layout view contains the following code:
+    </p>
+<pre lang="aspnet">
+    @* Layout Page for Twitter Bootstrap Modal Dialogs *@
+    &lt;div class='modal fade' id='@ViewBag.ModalId' tabindex='-1' role='dialog' aria-labelledby='@ViewBag.ModalId@Html.Raw(' label')' aria-hidden='true'&gt;
+        &lt;div class='modal-dialog'&gt;
+            &lt;div class='modal-content'&gt;
+                &lt;div class='modal-header'&gt;
+                    &lt;button type='button' class='close' data-dismiss='modal' aria-label='Close'&gt;&lt;span aria-hidden='true'&gt;&times;&lt;/span&gt;&lt;/button&gt;
+                    &lt;h4 class='modal-title' id='@ViewBag.ModalId@Html.Raw(' label')'&gt;@ViewBag.ModalTitle&lt;/h4&gt;
+                &lt;/div&gt;
+                &lt;div class='modal-body'&gt;
+                        @RenderBody()
+                &lt;/div&gt;
+                &lt;div class='modal-footer'&gt;
+                    &lt;button type='button' class='btn btn-default' data-dismiss='modal'&gt;Close&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+</pre>
+    <h4>Separate out login form code into a partial view</h4>
+    <p>
+        To use the login form in modal dialog and default login page we create a <code>_LoginPartialForm.cshtml</code> partial view in the <code>Views/Shared</code> forlder.
+        Select option &quot;Create as a partial view&quot; option when create the view.
+    </p>
+    <p>Next, cut the login form <code>Login.cshtml</code> and paste it into the new partial view <code>_LoginPartialForm.cshtml</code>. Used the unedited default Razor markup in <code>Login.cshtml</code> this looks like:</p>
+<pre lang="aspnet">
+@using Sample.Web.ModalLogin.Models
+@model LoginViewModel
+&lt;div class='row'&gt;
+    &lt;div class='col-md-8'&gt;
+        &lt;section id='loginForm'&gt;
+            @using (Html.BeginForm('Login', 'Account', new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = 'form-horizontal', role = 'form' }))
+            {
+                @Html.AntiForgeryToken()
+                &lt;h4&gt;Use a local account to log in.&lt;/h4&gt;
+                &lt;hr /&gt;
+<span style="background-color: yellow">&lt;div class='alert alert-danger' role='alert' style='display: none' id='alertBox'&gt;&lt;/div&gt;</span>
+                @Html.ValidationSummary(true, '', new { @class = 'text-danger' })
+                &lt;div class='form-group'&gt;
+                ...
+            }
+        &lt;/section&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+    <p>
+        We added a Bootstrap Alert element to show login errors and server side exceptions. We edited some css classes of the Bootstrap Grid so it looks better in the modal dialog.
+    </p>
+    <h4>Create modal login view</h4>
+    <p>The next step is to create a view using the <code>_LayoutModal.cshtml</code> created in the first step and including the partial view created in step two.</p>
+    <p>
+        For that create a view under <code>Views/Shared</code> and name it e.g <code>LoginModal.cshtml</code>. When creating the view select option &quot;Use a layout page&quot; and select the <code>_LayoutModal.cshtml</code> layout view.
+        Add partial <code>_LoginPartialForm.cshtml</code> into the view. Add the reference to the partial login form to the view. <code>@Html.Partial("_LoginPartialForm")</code> e.g. at the end of the view.
+    </p>
+    <p>
+        The following code snippet shows the content of <code>LoginModal.cshtml</code>. It renders the <code>_LoginPartialForm.cshtml</code> login form as the body.
+        There are two <code>ViewBag</code> properties to set: the <code>id</code> attribute of the modal dialog and a title label of the modal dialog.
+        This is to distinguish if more than one modal dialog is on the page.
+        The lines of code at the beginning of the view ensures that the JavaScript file containing the client functionality of our modal login is placed at the end of the <code>&lt;body&gt;</code> node.
+        This is accomplished by the Foorloop HtmlHelpers library described ahead.
+        The <code>LoginModal.js</code> file itself will be described below.
+    </p>
+<pre lang="aspnet">
+@using Forloop.HtmlHelpers
+@using (Html.BeginScriptContext()){
+    Html.AddScriptFile("~/Scripts/app/views/LoginModal.js");
+}
+@{
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+    ViewBag.ModalTitle = "Login";
+    ViewBag.ModalId = "ModalLogin";
+}
+   
+@Html.Partial("_LoginPartialForm")
+    </pre>
+    <h4>Add reference of partial login view into <code>Login.cshtml</code> view</h4>
+    <p>
+        As with the <code>LoginModal.cshtml</code> view you need to add a command to render the partial view <code>_LoginPartialForm.cshtml</code> in <code>Login.cshtml</code> by adding <code>@Html.Partial("_LoginPartialForm")</code> to <code>Login.cshtml</code>.
+    </p>
+    <h4>Add the Modal Login form to default page layout</h4>
+    <p>To open the modal login dialog we need to add it to the <code>_Layout.cshtml</code> layout view.</p>
+<pre lang="aspnet">
+&lt;body&gt;>
+@if (!Request.IsAuthenticated)
+{
+    @Html.Partial("LoginModal")
+}
+   ...
+</pre>
+    <p>The modal dialog needs to be at topmost of the DOM tree beneath the <code>&lt;body&gt;</code> tag. Of cource only when not authenticated the modal login form and its script resources needs to be rendered.</p>
+    <h3>Bring the Modal Login Form to work</h3>
+    <p>
+        After creating the modal mogin form itself we need to edit the &quot;Login&quot; navigation item that so it displays the modal login form when Javascript is enabled instead of redirecting to the default Login view.
+        This is accomplished by manipulating the DOM of the &quot;Login&quot; navigation link via JavaScript when the page is loaded.
+        The following code snippet can be found in the <code>LoginModal.js</code> file described below. The link is only edited when Javascript is enabled.
+        Otherwise nothing happens and the &quot;Login&quot; link behave as default and redirects the user to the login page.
+    </p>
+<pre lang="jscript">
+$(document).ready(function () {
+    var loginLink = $("a[id='loginLink']");
+    loginLink.attr({ "href": "#", "data-toggle": "modal", "data-target": "#ModalLogin" })
+});
+</pre>
+    <h4>Add login functionality to modal login form</h4>
+    <p>
+        As mentioned earlier we must not submit the modal login form when logging in because in this case the modal login will be closed even if the login was not successful.
+        A better user experience is to keep the login dialog open until the user ha successfully logged in.
+        Therefore we handle login via AJAX call to a new Controller method that returns a <code>JsonResult</code> instead of an <code>ActionResult</code>.
+        This method is called via AJAX request when the user submits the form by clicking on &quot;Login&quot; button.
+    </p>
+    <p>The following code shows this Action method.</p>
+<pre lang="C#">
+[HttpPost]
+[AllowAnonymous]
+[ValidateAntiForgeryToken]
+public async Task<jsonresult> LoginJson(string username, string password, bool rememberme)
+{
+    var result = await SignInManager.PasswordSignInAsync(username, password, rememberme, shouldLockout: false);
+    switch (result)
+    {
+        case SignInStatus.Success:
+            return Json(true);
+        case SignInStatus.LockedOut:
+        case SignInStatus.RequiresVerification:
+        case SignInStatus.Failure:
+            return Json(false);
+        default:
+            break;
+    }
+    return Json(false);
+}
+</pre>
+    <p>
+        This sample uses the simplest possible approach.
+        It uses sign in without additional verification and returns simply <code>true</code> when the user logged in successful and <code>false</code> when the login failed.
+
+    </p>
+    <p>
+        Now we have to work on the client side part. For better separation of concern (separate function from view specific code) we could split the functionality into two Javascript files.
+        For this simple example I added the code in one file.
+        The following shows the client side scripts which you can be found in the file <code>Scripts/app/LoginModal.js</code>.
+    </p>
+    <p>
+        The first part contains view related functionality.
+        We handle the submit event of the form, call the new Action method <code>LoginJson</code> on <code>Account</code> controller via AJAX call and surpress the submit of the form.
+        When successfully logged in the user is redirected to the same page.
+        When an error occured or the login failed e.g. - because wrong credentials are provided - an error is displayed but the form remains open.
+    </p>
+    <p>
+        Together with the credentials provided by the user, we have to post the anti forgery token (against CSRF attack) to the Action method.
+        In ASP.NET MVC views this token value can be found in a hidden input field named <code>__RequestVerificationToken</code>.
+    </p>
+    <p>
+        We handle the two Modal events <code>hidden.bs.modal</code> and <code>shown.bs.modal</code> to reset the form when the user closes it and to focus the first input field when it is opened.
+    </p>
+<pre lang="jscript">
+$(document).ready(function () {
+    var loginLink = $("a[id='loginLink']");
+    loginLink.attr({ "href": "#", "data-toggle": "modal", "data-target": "#ModalLogin" });
+    $("#loginform").submit(function (event) {
+        if ($("#loginform").valid()) {
+            var username = $("#Email").val();
+            var password = $("#Password").val();
+            var rememberme = $("#RememberMe").val();
+            var antiForgeryToken = Sample.Web.ModalLogin.Views.Common.getAntiForgeryValue();
+            Sample.Web.ModalLogin.Identity.LoginIntoStd(username, password, rememberme, antiForgeryToken, Sample.Web.ModalLogin.Views.LoginModal.loginSuccess, Sample.Web.ModalLogin.Views.LoginModal.loginFailure);
+        }
+        return false;
+    });
+    $("#ModalLogin").on("hidden.bs.modal", function (e) {
+        Sample.Web.ModalLogin.Views.LoginModal.resetLoginForm();
+    });
+    $("#ModalLogin").on("shown.bs.modal", function (e) {
+        $("#Email").focus();
+    });
+});
+var Sample = Sample || {};
+Sample.Web = Sample.Web || {};
+Sample.Web.ModalLogin = Sample.Web.ModalLogin || {};
+Sample.Web.ModalLogin.Views = Sample.Web.ModalLogin.Views || {}
+Sample.Web.ModalLogin.Views.Common = {
+    getAntiForgeryValue: function () {
+        return $('input[name="__RequestVerificationToken"]').val();
+    }
+}
+Sample.Web.ModalLogin.Views.LoginModal = {
+    resetLoginForm: function () {
+        $("#loginform").get(0).reset();
+        $("#alertBox").css("display", "none");
+    },
+    loginFailure: function (message) {
+        var alertBox = $("#alertBox");
+        alertBox.html(message);
+        alertBox.css("display", "block");
+    },
+    loginSuccess: function () {
+        window.location.href = window.location.href;
+    }
+}
+Sample.Web.ModalLogin.Identity = {
+    LoginIntoStd: function (username, password, rememberme, antiForgeryToken, successCallback, failureCallback) {
+        var data = { "__RequestVerificationToken": antiForgeryToken, "username": username, "password": password, "rememberme": rememberme };
+        $.ajax({
+            url: "/Account/LoginJson",
+            type: "POST",
+            data: data
+        })
+        .done(function (loginSuccessful) {
+            if (loginSuccessful) {
+                successCallback();
+            }
+            else {
+                failureCallback("Invalid login attempt.");
+            }
+        })
+        .fail(function (jqxhr, textStatus, errorThrown) {
+            failureCallback(errorThrown);
+        });
+    }
+}
+</pre>
+    <h2>Points of Interest</h2>
+
+    <p>With the means provided by the Visual Studio 2013 project template for ASP,NET MVC applications developers can enhance the login experience with the use of the integrated Twitter Bootstrap Modal dialog plugin.</p>
+
+    <h2>History</h2>
+
+    <ul>
+        <li>16 May, 2015: Version 1.0</li>
+    </ul>
+
+    <!-------------------------------    That's it!   --------------------------->
+</body>
+
+</html>

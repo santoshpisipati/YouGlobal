@@ -1,0 +1,139 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using System.Web.UI.WebControls;
+@using System.Data;
+<section class="container">
+    <div class="container nav-tabs-main">
+        <div class="col-md-12 row innerpages" id="about-us">
+            <h2>Job Alerts</h2>
+            @using (Html.BeginForm("JobAlert", "Jobs", FormMethod.Post, new { @class = "form-inline cont", @onsubmit = "return checkFormFields(this);" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="subheadings1">
+                    @if (!string.IsNullOrEmpty(System.Configuration.ConfigurationManager.AppSettings.Get("ShowJobAlerts")))
+                    {
+                        <form class="form-inline otherserform">
+                            <div class="row">
+                                <div class="form-group  col-md-12 ">
+                                    <label class="subheadings" for="firstname">
+                                        Given Name <span class="mandatoryString"><font color="red">*</font></span>
+                                    </label>
+                                    @Html.TextBox("Name", string.Empty, new { @class = "form-control", @placeholder = "Enter you given name" })<br />
+                                </div>
+                                <div class="form-group  col-md-12 ">
+                                    <label class="subheadings" for="firstname">
+                                        Middle Name
+                                    </label>
+                                    @Html.TextBox("MiddleName", string.Empty, new { @class = "form-control", @placeholder = "Enter you middle name" })<br />
+                                </div>
+                                <div class="form-group  col-md-12 ">
+                                    <label class="subheadings" for="firstname">
+                                        Family Name <span class="mandatoryString"><font color="red">*</font></span>
+                                    </label>
+                                    @Html.TextBox("SurName", string.Empty, new { @class = "form-control", @placeholder = "Enter you family name" })<br />
+                                </div>
+                                <div class="form-group  col-md-12 ">
+                                    <label class="subheadings" for="firstname">
+                                        Email <span class="mandatoryString"><font color="red">*</font></span>
+                                    </label>
+                                    @Html.TextBox("Email", string.Empty, new { @class = "form-control", @placeholder = "Enter you email address" })<br />
+                                </div>
+                                <div class="form-group  col-md-12">
+                                    <label class="subheadings" for="firstname">
+                                        Contact Number <span class="mandatoryString"><font color="red">*</font></span>
+                                    </label>
+                                    @Html.TextBox("PhoneCode", string.Empty, new { @class = "form-control", @Style = "width:50px", @placeholder = "Begin typing to select your country calling code" })
+                                    @Html.TextBox("ContactNumber", string.Empty, new { @class = "form-control", @Style = "width:100px", @placeholder = "Enter your Contact Number" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group  col-md-12">
+                                    <label class="subheadings" for="firstname">
+                                        Occupation <span class="mandatoryString"><font color="red">*</font></span>
+                                    </label>
+                                    <div id="divOccSel" style="display: none">
+                                        @Html.ListBox("OccupationSelect", new SelectList(((DataTable)(ViewData["occupation"] == null ? new DataTable() : ViewData["occupation"])).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @multiple = "multiple", @size = "5", @class = "fieldAlerts OccupationSelect" })
+                                        <div style="float: right">
+                                            <img title="Remove selected" src="../../Content/images/delete.png" id="btnOremove"
+                                                 style="display: block !important; visibility: inherit !important;" />
+                                        </div>
+                                    </div>
+                                    @Html.TextArea("IndustrySeardasdch", string.Empty, new { @class = "form-control", @Style = "width:100px", @placeholder = "Begin typing an occupation in which you're interested",@id = "search-empOccuj" })
+                                    @*<textarea id="search-empOccuj" class="form-control" type="text" maxlength="10" name="Empemployer" autocomplete="off" placeholder="Begin typing an occupation in which you're interested" role="textbox" aria-autocomplete="list" aria-haspopup="true" />*@
+                                    <div id='occutreepostJob' class="jobseekerempoccupation" style="display:none"><img id="occloading" src="~/Content/images/imgs/ajax-loader.gif" style="display:none;" alt="" /> </div>
+                                    <div class="keywordText">
+                                        @*<i>Begin typing to select one or more options.</i>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group  col-md-12">
+                                    <label class="subheadings" for="firstname">
+                                        Industry <span class="mandatoryString"><font color="red">*</font></span>
+                                    </label>
+                                    <div id="divAlertIndSel" style="display: none">
+                                        @Html.ListBox("IndustrySelect", new SelectList((new DataTable()).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @multiple = "multiple", @size = "10", @class = "form-control IndustryAlert" })
+                                        <div style="float: right">
+                                            <img title="Remove selected" src="../../Content/images/delete.png" id="btnIndRemove"
+                                                 style="display: block !important; visibility: inherit !important;" />
+                                        </div>
+                                    </div>
+                                    @Html.TextArea("IndustrySearch", string.Empty, new { @class = "form-control", @Style = "width:100px", @placeholder = "Begin typing an industry in which you're interested" })
+                                    <div id='indtreepostJob' class="jobseekerempindustry" style="display:none"><img id="indloading" src="~/Content/images/imgs/ajax-loader.gif" style="display:none;" alt="" /> </div>
+                                        <div class="keywordText">
+                                            @*<i>Begin typing to select one or more options.</i>*@
+                                        </div>
+                                        <div style="display: none">
+                                            @Html.ListBox("IndustrySelectID", new SelectList(((System.Data.DataTable)(ViewData["location"] == null ? new System.Data.DataTable() : ViewData["location"])).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @multiple = "multiple", @size = "5", @class = "form-control IndustryID" })
+                                        </div>
+</div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group  col-md-12">
+                                    <label class="subheadings" for="firstname">
+                                        Location <span class="mandatoryString"><font color="red">*</font></span>
+                                    </label>
+                                    <div id="divAlertLocSel" style="display: none">
+                                        @Html.ListBox("SelectedLocationList", new SelectList(((System.Data.DataTable)(ViewData["location"] == null ? new System.Data.DataTable() : ViewData["location"])).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @multiple = "multiple", @size = "5", @class = "form-control LocationAlert" })
+                                        <div style="display: none">
+                                            @Html.ListBox("SelectedLocationIDList", new SelectList(((System.Data.DataTable)(ViewData["location"] == null ? new System.Data.DataTable() : ViewData["location"])).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @multiple = "multiple", @size = "5", @class = "form-control LocationID" })
+                                        </div>
+                                        <div style="float: right">
+                                            <img title="Remove selected" src="../../Content/images/delete.png" id="deletedSelect" onclick="deleteSelect('SelectedLocationList');"
+                                                 style="display: block !important; visibility: inherit !important;" />
+                                        </div>
+                                    </div>
+                                    <div id="divAlertRemoveSel" style="display: none">
+                                        @Html.ListBox("RemoveSelectedLocation", new SelectList(((System.Data.DataTable)new System.Data.DataTable()).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @multiple = "multiple", @size = "6", @class = "form-control" })
+                                    </div>
+                                    @Html.TextArea("LocationSearch", string.Empty, new { @id = "search-empLocationpost", @class = "form-control LocationSearch", placeholder = "Begin typing a location in which you're interested", @Style = "width:100px" })
+                                    <div id='searchable-empLocationtree' class="jobseekeremplocation" style="display:none"><img id="locloading" src="~/Content/images/imgs/ajax-loader.gif" style="display:none;" alt="" /> </div>
+                                    @*<i>Begin typing to select one or more options.</i>*@
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group  col-md-12">
+                                    <label class="subheadings" for="firstname">
+                                        Job Alerts frequency <span class="mandatoryString"><font color="red">*</font></span>
+                                    </label>
+                                    <div class="form-group  col-md-13">
+                                        @Html.DropDownList("MailFrequency", new SelectList(((DataTable)Session["FrequencyList"]).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group  col-md-12">
+                                    <div class="form-group">
+                                        <button type="submit" id="btnsubmit" value="Submit" class="btn btn-jobalert btn-lg btn-block">Subscribe</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</section>

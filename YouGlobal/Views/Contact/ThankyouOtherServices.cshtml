@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="container">
+    <div class="container-fluid">
+        <!--  secondary-nav start -->
+        <div class="container padding">
+            <div class="row secondary-nav secondary-nav-margin">
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/04.png" alt="Job seekers"></i><a href="@Url.Action("JobSeeker", "Jobs")" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m active">Job Search</a></div>
+                @if (Session["username"] != null && !string.IsNullOrEmpty(Session["username"].ToString()))
+                {
+                    <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/05.png" alt="upload cv"></i><a href="@Url.Action("JobSeekerEmp", "Jobs")" class="button btn-uploadcv button--antiman button--inverted button--border-thin button--text-thick button--size-m">Upload CV</a></div>
+                }
+                else
+                {
+                    @Html.Partial("LoginModal")
+                    <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/05.png" alt="Job seekers"></i>@Html.ActionLink("Upload CV", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "button btn-uploadcv button--antiman button--inverted button--border-thin button--text-thick button--size-m" })</div>
+                }
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Other services"></i><a class="button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin" data-featherlight="#f2" data-featherlight-variant="fixwidth">Job Alerts</a></div>
+            </div>
+        </div>
+        <div class="container nav-tabs-main">
+            <div class="col-md-12 row innerpages" id="about-us">
+                <div class="left_articles">
+                    <div class="subheader">
+                        <h2>
+                            Thank You!
+                        </h2>
+                    </div>
+                    <div class="left_articles_noBorder">
+                        <p>
+                            Thank you for submitting your query to YOU Global.<br />
+                            If you'd like us to automatically keep you informed of opportunities please subscribe
+                            to our Job Alerts facility from this page, or join us at <a href='http://www.facebook.com/Sample.Web.ModalLogin'
+                                                                                        target="_blank">Facebook</a>, follow us on <a href='http://twitter.com/Sample.Web.ModalLogin'
+                                                                                                                                      target="_blank">Twitter</a> , and/or join us at our <a href='http://www.linkedin.com/groups/YOU-Global-jobs-worldwide-all-3726149'
+                                                                                                                                                                                             target="_blank">LinkedIn Group</a> or <a href='http://www.linkedin.com/company/you-global'
+                                                                                                                                                                                                                                      target="_blank">LinkedIn company profile</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

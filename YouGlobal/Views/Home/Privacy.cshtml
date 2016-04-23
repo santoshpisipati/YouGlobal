@@ -1,0 +1,185 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="container">
+    <div class="container-fluid">
+
+        <!--  secondary-nav start -->
+        <div class="container padding">
+            <div class="row secondary-nav secondary-nav-margin">
+                <div class="col-lg-4 col-md-4">
+                    <i>
+                        <img src="~/Content/images/imgs/01.png" alt="Job seekers">
+                    </i><a href="@Url.Action("JobSeeker", "Jobs" )" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m">Job seekers</a>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <i>
+                        <img src="~/Content/images/imgs/02.png" alt="Employers">
+                    </i><a href="@Url.Action("PostJob", "Jobs" )" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <i>
+                        <img src="~/Content/images/imgs/03.png" alt="Other services">
+                    </i><a href="@Url.Action("OtherServices", "Jobs" )" class="button btn-otherservices button--antiman button--inverted button--border-thin button--text-thick button--size-m">Other Services</a>
+                </div>
+            </div>
+        </div>
+        <!--  secondary-nav start -->
+
+        <div class="container nav-tabs-main">
+            <div class="col-xs-12 innerpages" id="about-us">
+
+                <h2>PRIVACY STATEMENT</h2>
+
+                <p>
+                    Your privacy is important to YOU Global. This privacy statement provides information about the personal information that YOU Global collects, and the ways in which YOU Global uses that personal information.
+                </p>
+                <!-- accordion menu-->
+                <div class="panel-group accordion_menus" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    What information we collect
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <p>YOU Global may collect and use the following kinds of personal information:</p>
+                                <ul class='list'>
+                                    <li>information about your use of this website; </li>
+                                    <li>information that you provide using for the purpose of registering with the website;</li>
+                                    <li>information about transactions carried out over this website; </li>
+                                    <li>information that you provide for the purpose of subscribing to the website services, including applying for an advertised job vacancy;</li>
+                                    <li>any other information that you send to YOU Global.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Using personal information
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <p>YOU Global may use your personal information to:</p>
+                                <ul class='list'>
+                                    <li>administer this website; </li>
+                                    <li>personalise the website for you;</li>
+                                    <li>enable your access to and use of the website services;</li>
+                                    <li>publish information about you on the website, but only with your express consent;</li>
+                                    <li>send to you products that you purchase;</li>
+                                    <li>supply to you services that you purchase or subscribe to;</li>
+                                    <li>send to you statements and invoices;</li>
+                                    <li>collect payments from you; and</li>
+                                    <li>send you marketing communications.</li>
+                                </ul>
+                                <br />
+                                <p>Where YOU Global discloses your personal information to its licensees, consultants, agents or sub-contractors for these purposes, the licensee, consultant, agent or sub-contractor in question will be obligated to use that personal information in accordance with the terms of this privacy statement.</p>
+                                <p>In addition to the disclosures reasonably necessary for the purposes identified elsewhere above, YOU Global may disclose your personal information to the extent that it is required to do so by law, in connection with any legal proceedings or prospective legal proceedings, and in order to establish, exercise or defend its legal rights.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Securing your data
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                <p>YOU Global will take reasonable technical and organisational precautions to prevent the loss, misuse or alteration of your personal information.</p>
+                                <p>YOU Global will store all the personal information you provide on its secure servers.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading4">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                    Cross-border data transfers
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
+                            <div class="panel-body">
+                                <p>Information that YOU Global collects may be stored and processed in and transferred between any of the countries in which YOU Global operates to enable the use of the information in accordance with this privacy policy.</p>
+                                <p>In addition, personal information that you submit for publication on the website will be published on the internet and may be available around the world.</p>
+                                <p>You agree to such cross-border transfers of personal information.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading5">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                                    Updating this statement
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
+                            <div class="panel-body">
+                                <p>YOU Global may update this privacy policy by posting a new version on this website.</p>
+                                <p>You should check this page occasionally to ensure you are familiar with any changes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading6">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                                    Other websites
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
+                            <div class="panel-body">
+                                <p>This website contains links to other websites.</p>
+                                <p>YOU Global is not responsible for the privacy policies or practices of any third party.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading7">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                                    Contact YOU Global
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
+                            <div class="panel-body">
+                                <p>If you have any questions about this privacy policy or YOU Global’s treatment of your personal information, please refer to our Contact Us page for details of how to contact us.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading8">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                                    Credit
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading8">
+                            <div class="panel-body">
+                                This document was created using a Contractology template available at http://www.freenetlaw.com.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- col-xs-9 End -->
+            <!-- Social Media Section -->
+        </div>
+        <!-- container End -->
+    </div>
+</section>

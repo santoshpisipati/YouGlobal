@@ -1,0 +1,39 @@
+﻿@model Sample.Web.ModalLogin.Models.RegisterLoginModel
+
+<div class="col-sm-12">
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = "" }, FormMethod.Post, new { role = "form", id = "loginForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="alert alert-danger" role="alert" style="display: none" id="alertBox"></div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group col-md-12 row">
+            @Html.LabelFor(m => m.LoginModel.UserName)
+            @Html.TextBoxFor(m => m.LoginModel.UserName, new { @maxlength = "100", @class = "form-control", placeholder = "Enter user name" })
+            @Html.ValidationMessageFor(m => m.LoginModel.UserName, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-12 row">
+            @Html.Label("Password", new { @class = "control-label" })
+            @Html.PasswordFor(m => m.LoginModel.LoginPassword, new { @class = "form-control", placeholder = "Enter password" })
+            @Html.ValidationMessageFor(m => m.LoginModel.LoginPassword, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-12 row">
+            @Html.Label("Log In As", new { @class = "control-label" })
+        </div>
+        <div class="form-group col-md-12 row">
+            @Html.CheckBoxFor(m => m.LoginModel.IsJobSeeker, new { @id = "IsSeek", @style = "width: 24px !important;", required = "required" }) @Html.Label("Job Seeker", new { @class = "control-label loginlabel" })
+            @Html.CheckBoxFor(m => m.LoginModel.IsEmployer, new { @id = "IsEmp", @style = "width: 24px !important;", required = "required" }) @Html.Label("Employer", new { @class = "control-label loginlabel" })
+            @Html.CheckBoxFor(m => m.LoginModel.IsConsultant, new { @id = "IsCon", @style = "width: 24px !important;", required = "required" }) @Html.Label("Consultant", new { @class = "control-label loginlabel" })
+        </div>
+        <div class="form-group col-md-12 row">
+            @Html.CheckBoxFor(m => m.LoginModel.RememberMe, new { @style = "width: 24px !important;" })
+            @Html.LabelFor(m => m.LoginModel.RememberMe, new { @class = "control -label loginlabel" })
+        </div>
+        <div class="form-group col-md-12 row">
+            <button type="submit" class="btn btn-green btn-lg btn-block" id="btnLogin">Log in</button>
+        </div>
+        <div class="form-group col-md-12 row">
+            @Html.ActionLink("Forgot Password", "ForgotPassword", "Account")
+        </div>
+    }
+</div>
+<div class="clearfix"></div>

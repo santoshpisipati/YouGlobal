@@ -1,0 +1,59 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="container">
+    <div class="container-fluid">
+        <!--  secondary-nav start -->
+        <div class="container padding">
+            <div class="row secondary-nav secondary-nav-margin">
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/04.png" alt="Job seekers"></i><a href="@Url.Action("JobSeeker", "Jobs")" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m active">Job Search</a></div>
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/04.png" alt="Job seekers"></i><a href="@Url.Action("JobSeekerEmp", "Jobs")" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m active">Upload CV</a></div>
+                @*<div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Other services"></i><a class="button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin" data-featherlight="#f2" data-featherlight-variant="fixwidth">Job Alerts</a></div>*@
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Job Alerts"></i><a href="@Url.Action("JobAlert", "Jobs")" class="button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin">Job Alerts</a></div>
+            </div>
+        </div>
+        <div class="container nav-tabs-main">
+            <div class="col-md-12 row innerpages" id="about-us">
+                <div class="left_articles">
+                    <div class="subheader">
+                        <h2>
+                            Thank You!
+                        </h2>
+                    </div>
+                    <div class="left_articles_noBorder">
+                        <p>
+                            Thank you for submitting your CV to YOU Global.<br />
+                            If you'd like us to automatically keep you informed of opportunities please subscribe
+                            to our Job Alerts facility from this page, or join us at <a href='http://www.facebook.com/Sample.Web.ModalLogin'
+                                                                                        target="_blank">Facebook</a>, follow us on <a href='http://twitter.com/Sample.Web.ModalLogin'
+                                                                                                                                      target="_blank">Twitter</a> , and/or join us at our <a href='http://www.linkedin.com/groups/YOU-Global-jobs-worldwide-all-3726149'
+                                                                                                                                                                                             target="_blank">LinkedIn Group</a> or <a href='http://www.linkedin.com/company/you-global'
+                                                                                                                                                                                                                                      target="_blank">LinkedIn company profile</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="lightbox jobalert" id="f2">
+        @using (Html.BeginForm("JobAlert", "Jobs", FormMethod.Post, new { @class = "form-inline cont", @onsubmit = "return checkFormFields(this);" }))
+        {
+            <div class="form-group col-md-12 row">
+                <label for="inputname">Name</label>
+                @Html.TextBox("Name", string.Empty, new { @class = "fieldQuick", @required = "required" })
+            </div>
+            <div class="form-group col-md-12 row">
+                <label for="InputeEmail">Email</label>
+                @Html.TextBox("Email", string.Empty, new { @class = "fieldQuick", @required = "required" })
+            </div>
+            <div class="form-group col-md-12 row">
+                <label for="alertfrequency">job alerts frequency</label>
+                @Html.DropDownList("MailFrequency", new SelectList(((System.Data.DataTable)Session["FrequencyList"]).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @class = "fieldAlerts" })
+            </div>
+            <div class="form-group col-md-12 row">
+                <input type="submit" class="btn btn-jobalert btn-lg btn-block" value="Subscribe" />
+            </div>
+        }
+    </div>
+</section>

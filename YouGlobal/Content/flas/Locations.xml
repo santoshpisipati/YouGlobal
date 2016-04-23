@@ -1,0 +1,1249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<locations>
+  <location regionName="Country" name="Please select" />
+  <location regionName="Country" name="ALBANIA">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="GRUBISIC, Jugoslav">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Jugoslav GRUBISIC</contactPerson>
+          <designation>Recruitment Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>ALBANIA</addressLine5>
+          <telephoneNumber></telephoneNumber>
+          <mobileNumber>+381 62 8635 961</mobileNumber>
+          <faxNumber></faxNumber>
+          <email>admin@you-global.com</email>
+          <skype>enaimpex</skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Jugoslav GRUBISIC</contactPerson>
+          <designation>Recruitment Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Jugoslav GRUBISIC, Recruitment Consultant</bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Albania, Bosnia, Croatia, Herzegovina, Ireland, Macedonia, Montenegro, Romania, Serbia, United Kingdom<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font><br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+          <bioImage>/Content/flas/photos/112.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+  <location regionName="Country" name="AUSTRALIA">
+    <location regionName="Location" name="Please select" />
+    <location regionName="State" name="New South Wales (NSW)">
+      <location regionName="Consultant" name="Please select" />
+      <location regionName="Consultant" name="PHAN, Holly">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Holly PHAN</contactPerson>
+            <designation>Recruitment Consultant</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>New South Wales (NSW)</addressLine4>
+            <addressLine5>AUSTRALIA</addressLine5>
+            <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+            <mobileNumber>+61 421 612 826</mobileNumber>
+            <faxNumber>+44 70 9224 8529</faxNumber>
+            <email>admin@you-global.com</email>
+            <skype>hopp2010</skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Holly PHAN</contactPerson>
+            <designation>Recruitment Consultant</designation>
+            <addressLine1>GPO Box 2100</addressLine1>
+            <addressLine2>Brisbane&amp;nbsp;&amp;nbsp;QLD&amp;nbsp;&amp;nbsp;4001</addressLine2>
+            <addressLine3>AUSTRALIA</addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Holly PHAN, Recruitment Consultant</bioName>
+            <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Australia, Vietnam<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Accounting, Banking &amp; Finance, Education<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font>Bach of Economics (The University of Sydney, 1998)<br></br></bioText>
+            <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+    </location>
+    <location regionName="State" name="Queensland (QLD)">
+      <location regionName="Consultant" name="Please select" />
+      <location regionName="Consultant" name="KNOWLES, Steven">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Steven KNOWLES</contactPerson>
+            <designation>Managing Partner</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>Queensland (QLD)</addressLine4>
+            <addressLine5>AUSTRALIA</addressLine5>
+            <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+            <mobileNumber>+61 410 108 104</mobileNumber>
+            <faxNumber>+44 70 9224 8529</faxNumber>
+            <email>admin@you-global.com</email>
+            <skype>steven-knowles</skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Steven KNOWLES</contactPerson>
+            <designation>Managing Partner</designation>
+            <addressLine1>GPO Box 2100</addressLine1>
+            <addressLine2>Brisbane&amp;nbsp;&amp;nbsp;QLD&amp;nbsp;&amp;nbsp;4001</addressLine2>
+            <addressLine3>AUSTRALIA</addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Steven KNOWLES, Managing Partner</bioName>
+            <bioText>Founder and Managing Partner of YOU Global. <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Australia, Middle East, UK<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Banking &amp; finance, Engineering &amp; Construction, Health / Medical<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font>B Com (Banking &amp; Finance), F Fin, JP (Qual)<br></br></bioText>
+            <bioImage>/Content/flas/photos/1.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+      <location regionName="Consultant" name="PICKARD, Rob">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Rob PICKARD</contactPerson>
+            <designation>Partner</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>Queensland (QLD)</addressLine4>
+            <addressLine5>AUSTRALIA</addressLine5>
+            <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+            <mobileNumber>+61 410 108 104</mobileNumber>
+            <faxNumber>+44 70 9224 8529</faxNumber>
+            <email>admin@you-global.com</email>
+            <skype></skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Rob PICKARD</contactPerson>
+            <designation>Partner</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Rob PICKARD, Partner</bioName>
+            <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Asia, Australia, Europe, South America, UAE<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Brand Management, Sales &amp; Marketing<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+            <bioImage>/Content/flas/photos/53.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+      <location regionName="Consultant" name="BLOMELEY, Danny">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Danny BLOMELEY</contactPerson>
+            <designation>Director</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>Queensland (QLD)</addressLine4>
+            <addressLine5>AUSTRALIA</addressLine5>
+            <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+            <mobileNumber>+61 448 102 009</mobileNumber>
+            <faxNumber>+44 70 9224 8529</faxNumber>
+            <email>admin@you-global.com</email>
+            <skype></skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Danny BLOMELEY</contactPerson>
+            <designation>Director</designation>
+            <addressLine1>GPO Box 2100</addressLine1>
+            <addressLine2>Brisbane&amp;nbsp;&amp;nbsp;QLD&amp;nbsp;&amp;nbsp;4001</addressLine2>
+            <addressLine3>AUSTRALIA</addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Danny BLOMELEY, Director</bioName>
+            <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Australia, India, Middle East<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font><br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font>Adv Dip - Business / Marketing, Assoc Dip of Applied Science - OH&amp;S, Post Grad Dip - Business Administration, Adv Cert - Human &amp; Physical Resource Management, MBA<br></br></bioText>
+            <bioImage>/Content/flas/photos/120.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+      <location regionName="Consultant" name="TYLER, Anastasia">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Anastasia TYLER</contactPerson>
+            <designation>Recruitment Consultant</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>Queensland (QLD)</addressLine4>
+            <addressLine5>AUSTRALIA</addressLine5>
+            <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+            <mobileNumber>+61 467 338 082</mobileNumber>
+            <faxNumber>+44 70 9224 8529</faxNumber>
+            <email>admin@you-global.com</email>
+            <skype></skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Anastasia TYLER</contactPerson>
+            <designation>Recruitment Consultant</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Anastasia TYLER, Recruitment Consultant</bioName>
+            <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Australia, UAE<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Education<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font>BA (Journalism)
+Dip. Ed. Secondary Education<br></br></bioText>
+            <bioImage>/Content/flas/photos/88.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+      <location regionName="Consultant" name="GUSTAVSSON, Jade">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Jade GUSTAVSSON</contactPerson>
+            <designation>Senior Recruiter</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>Queensland (QLD)</addressLine4>
+            <addressLine5>AUSTRALIA</addressLine5>
+            <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+            <mobileNumber>+61 407 135 458</mobileNumber>
+            <faxNumber>+44 70 9224 8529</faxNumber>
+            <email>admin@you-global.com</email>
+            <skype></skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Jade GUSTAVSSON</contactPerson>
+            <designation>Senior Recruiter</designation>
+            <addressLine1>GPO Box 2100</addressLine1>
+            <addressLine2>Brisbane&amp;nbsp;&amp;nbsp;QLD&amp;nbsp;&amp;nbsp;4001</addressLine2>
+            <addressLine3>AUSTRALIA</addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Jade GUSTAVSSON, Senior Recruiter</bioName>
+            <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Australia<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Call Centres, Manufacturing, Mining, Telecommunications<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+            <bioImage>/Content/flas/photos/106.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+    </location>
+    <location regionName="State" name="Victoria (VIC)">
+      <location regionName="Consultant" name="Please select" />
+      <location regionName="Consultant" name="BLOMELEY, Danny">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Danny BLOMELEY</contactPerson>
+            <designation>Director</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>Victoria (VIC)</addressLine4>
+            <addressLine5>AUSTRALIA</addressLine5>
+            <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+            <mobileNumber>+61 448 102 009</mobileNumber>
+            <faxNumber>+44 70 9224 8529</faxNumber>
+            <email>admin@you-global.com</email>
+            <skype></skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Danny BLOMELEY</contactPerson>
+            <designation>Director</designation>
+            <addressLine1>GPO Box 2100</addressLine1>
+            <addressLine2>Brisbane&amp;nbsp;&amp;nbsp;QLD&amp;nbsp;&amp;nbsp;4001</addressLine2>
+            <addressLine3>AUSTRALIA</addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Danny BLOMELEY, Director</bioName>
+            <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Australia, India, Middle East<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font><br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font>Adv Dip - Business / Marketing, Assoc Dip of Applied Science - OH&amp;S, Post Grad Dip - Business Administration, Adv Cert - Human &amp; Physical Resource Management, MBA<br></br></bioText>
+            <bioImage>/Content/flas/photos/120.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+    </location>
+    <location regionName="State" name="Western Australia (WA)">
+      <location regionName="Consultant" name="Please select" />
+      <location regionName="Consultant" name="ROBERTSON, Colette">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Colette ROBERTSON</contactPerson>
+            <designation>Consultant</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>Western Australia (WA)</addressLine4>
+            <addressLine5>AUSTRALIA</addressLine5>
+            <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+            <mobileNumber>+61 429 540 729</mobileNumber>
+            <faxNumber>+44 70 9224 8529</faxNumber>
+            <email>admin@you-global.com</email>
+            <skype>colette.robertson1</skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Colette ROBERTSON</contactPerson>
+            <designation>Consultant</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Colette ROBERTSON, Consultant</bioName>
+            <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Australia, New Zealand, South Africa, United Arab Emirates<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>Africaans, English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Engineering, General<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+            <bioImage>/Content/flas/photos/30.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+    </location>
+  </location>
+  <location regionName="Country" name="BELGIUM">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="MIDDEL, Paul">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Paul MIDDEL</contactPerson>
+          <designation>Partner</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>BELGIUM</addressLine5>
+          <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+          <mobileNumber>+61 410 108 104</mobileNumber>
+          <faxNumber>+44 70 9224 8529</faxNumber>
+          <email>admin@you-global.com</email>
+          <skype></skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Paul MIDDEL</contactPerson>
+          <designation>Partner</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Paul MIDDEL, Partner</bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Middle East, South America, USA<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>Dutch, English, French<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Brand Management, Sales &amp; Marketing<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+          <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+  <location regionName="Country" name="BHUTAN">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="-, Wangchuk">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Wangchuk -</contactPerson>
+          <designation>Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>BHUTAN</addressLine5>
+          <telephoneNumber>+975 2326268</telephoneNumber>
+          <mobileNumber>+975 17110971</mobileNumber>
+          <faxNumber>+44 70 9224 8529</faxNumber>
+          <email>admin@you-global.com</email>
+          <skype></skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Wangchuk -</contactPerson>
+          <designation>Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Wangchuk -, Consultant</bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Bhutan, India, UAE, USA<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Travel industry<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+          <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+  <location regionName="Country" name="BOSNIA AND HERZEGOVINA">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="GRUBISIC, Jugoslav">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Jugoslav GRUBISIC</contactPerson>
+          <designation>Recruitment Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>BOSNIA AND HERZEGOVINA</addressLine5>
+          <telephoneNumber></telephoneNumber>
+          <mobileNumber>+381 62 8635 961</mobileNumber>
+          <faxNumber></faxNumber>
+          <email>admin@you-global.com</email>
+          <skype>enaimpex</skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Jugoslav GRUBISIC</contactPerson>
+          <designation>Recruitment Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Jugoslav GRUBISIC, Recruitment Consultant</bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Albania, Bosnia, Croatia, Herzegovina, Ireland, Macedonia, Montenegro, Romania, Serbia, United Kingdom<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font><br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+          <bioImage>/Content/flas/photos/112.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+  <location regionName="Country" name="BRAZIL">
+    <location regionName="Location" name="Please select" />
+    <location regionName="State" name="São Paulo state [Sao Paulo]">
+      <location regionName="Consultant" name="Please select" />
+      <location regionName="Consultant" name="ALBUQUERQUE, Patricia">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Patricia ALBUQUERQUE</contactPerson>
+            <designation>Business Development Manager - International Recruitment</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>São Paulo state [Sao Paulo]</addressLine4>
+            <addressLine5>BRAZIL</addressLine5>
+            <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+            <mobileNumber>+55 11 98316 0211</mobileNumber>
+            <faxNumber>+44 70 9224 8529</faxNumber>
+            <email>admin@you-global.com</email>
+            <skype>patricia.lacerda.de.albuquerque</skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Patricia ALBUQUERQUE</contactPerson>
+            <designation>Business Development Manager - International Recruitment</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Patricia ALBUQUERQUE, Business Development Manager - International Recruitment</bioName>
+            <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Brazil, Switzerland
+<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English, French, Portuguese, Spanish<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Education, Hospitality, Human Resources and Management<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font>BSc Psychology, Human Resources and Management Certificate, Associate of Science (AS) Management of Hotel Operations<br></br></bioText>
+            <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+    </location>
+  </location>
+  <location regionName="Country" name="CANADA">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Province" name="Alberta">
+      <location regionName="Consultant" name="Please select" />
+      <location regionName="Consultant" name="SAMPSON, Angela">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Angela SAMPSON</contactPerson>
+            <designation>Consultant</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>Alberta</addressLine4>
+            <addressLine5>CANADA</addressLine5>
+            <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+            <mobileNumber>+1 780 779 3564</mobileNumber>
+            <faxNumber>+44 70 9224 8529</faxNumber>
+            <email>admin@you-global.com</email>
+            <skype></skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Angela SAMPSON</contactPerson>
+            <designation>Consultant</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Angela SAMPSON, Consultant</bioName>
+            <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Canada<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Travel<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+            <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+    </location>
+    <location regionName="Province" name="Ontario">
+      <location regionName="Consultant" name="Please select" />
+      <location regionName="Consultant" name="HASSAN, Alawi">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Alawi HASSAN</contactPerson>
+            <designation>Consultant</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>Ontario</addressLine4>
+            <addressLine5>CANADA</addressLine5>
+            <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+            <mobileNumber></mobileNumber>
+            <faxNumber>+44 70 9224 8529</faxNumber>
+            <email>admin@you-global.com</email>
+            <skype></skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Alawi HASSAN</contactPerson>
+            <designation>Consultant</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Alawi HASSAN, Consultant</bioName>
+            <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Canada, Middle East<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>Arabic, English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>General, Sports Management<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+            <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+    </location>
+  </location>
+  <location regionName="Country" name="CROATIA">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="GRUBISIC, Jugoslav">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Jugoslav GRUBISIC</contactPerson>
+          <designation>Recruitment Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>CROATIA</addressLine5>
+          <telephoneNumber></telephoneNumber>
+          <mobileNumber>+381 62 8635 961</mobileNumber>
+          <faxNumber></faxNumber>
+          <email>admin@you-global.com</email>
+          <skype>enaimpex</skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Jugoslav GRUBISIC</contactPerson>
+          <designation>Recruitment Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Jugoslav GRUBISIC, Recruitment Consultant</bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Albania, Bosnia, Croatia, Herzegovina, Ireland, Macedonia, Montenegro, Romania, Serbia, United Kingdom<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font><br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+          <bioImage>/Content/flas/photos/112.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+    <location regionName="Consultant" name="VRKIC, Ivica">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Ivica VRKIC</contactPerson>
+          <designation>Recruitment Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>CROATIA</addressLine5>
+          <telephoneNumber>+44 20 3239 0506</telephoneNumber>
+          <mobileNumber></mobileNumber>
+          <faxNumber></faxNumber>
+          <email>admin@you-global.com</email>
+          <skype>ivica_vrkic</skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Ivica VRKIC</contactPerson>
+          <designation>Recruitment Consultant</designation>
+          <addressLine1>GPO Box 2100</addressLine1>
+          <addressLine2>Brisbane&amp;nbsp;&amp;nbsp;QLD&amp;nbsp;&amp;nbsp;4001</addressLine2>
+          <addressLine3>AUSTRALIA</addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Ivica VRKIC, Recruitment Consultant</bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Austria, Croatia, Germany, Switzerland<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>Croatian, English, German<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Healthcare, Hospitality, Medical<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font>Human Resources Management (HRM)<br></br></bioText>
+          <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+  <location regionName="Country" name="LITHUANIA">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="Gerasimovaite, Simona">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Simona Gerasimovaite</contactPerson>
+          <designation></designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>LITHUANIA</addressLine5>
+          <telephoneNumber></telephoneNumber>
+          <mobileNumber>+37067657574</mobileNumber>
+          <faxNumber></faxNumber>
+          <email>admin@you-global.com</email>
+          <skype>appllegirl</skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Simona Gerasimovaite</contactPerson>
+          <designation></designation>
+          <addressLine1>c/- GPO Box 2100</addressLine1>
+          <addressLine2>Brisbane&amp;nbsp;&amp;nbsp;QLD&amp;nbsp;&amp;nbsp;4001</addressLine2>
+          <addressLine3>AUSTRALIA</addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Simona Gerasimovaite, </bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Denmark, Lithuania, United Kingdom<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English, German, Lithuanian, Polish (basic), Russian<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font><br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font>B Eng (Engineering Design &amp; Industrial Innovation), B Arts (Public Administration)<br></br></bioText>
+          <bioImage>/Content/flas/photos/109.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+  <location regionName="Country" name="MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="GRUBISIC, Jugoslav">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Jugoslav GRUBISIC</contactPerson>
+          <designation>Recruitment Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF</addressLine5>
+          <telephoneNumber></telephoneNumber>
+          <mobileNumber>+381 62 8635 961</mobileNumber>
+          <faxNumber></faxNumber>
+          <email>admin@you-global.com</email>
+          <skype>enaimpex</skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Jugoslav GRUBISIC</contactPerson>
+          <designation>Recruitment Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Jugoslav GRUBISIC, Recruitment Consultant</bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Albania, Bosnia, Croatia, Herzegovina, Ireland, Macedonia, Montenegro, Romania, Serbia, United Kingdom<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font><br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+          <bioImage>/Content/flas/photos/112.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+  <location regionName="Country" name="MALAYSIA">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="SMITH, Angela">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Angela SMITH</contactPerson>
+          <designation></designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>MALAYSIA</addressLine5>
+          <telephoneNumber></telephoneNumber>
+          <mobileNumber>+65 9637 2623</mobileNumber>
+          <faxNumber></faxNumber>
+          <email>admin@you-global.com</email>
+          <skype></skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Angela SMITH</contactPerson>
+          <designation></designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Angela SMITH, </bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Malaysia, Singapore<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>Chinese, English, Malay<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Information Technology<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font>BSc in Computing and Information Systems<br></br></bioText>
+          <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+  <location regionName="Country" name="MONTENEGRO">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="GRUBISIC, Jugoslav">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Jugoslav GRUBISIC</contactPerson>
+          <designation>Recruitment Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>MONTENEGRO</addressLine5>
+          <telephoneNumber></telephoneNumber>
+          <mobileNumber>+381 62 8635 961</mobileNumber>
+          <faxNumber></faxNumber>
+          <email>admin@you-global.com</email>
+          <skype>enaimpex</skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Jugoslav GRUBISIC</contactPerson>
+          <designation>Recruitment Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Jugoslav GRUBISIC, Recruitment Consultant</bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Albania, Bosnia, Croatia, Herzegovina, Ireland, Macedonia, Montenegro, Romania, Serbia, United Kingdom<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font><br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+          <bioImage>/Content/flas/photos/112.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+  <location regionName="Country" name="MOROCCO">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="MIDDEL, Paul">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Paul MIDDEL</contactPerson>
+          <designation>Partner</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>MOROCCO</addressLine5>
+          <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+          <mobileNumber>+61 410 108 104</mobileNumber>
+          <faxNumber>+44 70 9224 8529</faxNumber>
+          <email>admin@you-global.com</email>
+          <skype></skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Paul MIDDEL</contactPerson>
+          <designation>Partner</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Paul MIDDEL, Partner</bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Middle East, South America, USA<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>Dutch, English, French<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Brand Management, Sales &amp; Marketing<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+          <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+    <location regionName="Consultant" name="ELMAHMOUDI, Abdel">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Abdel ELMAHMOUDI</contactPerson>
+          <designation>Recruitment Manager</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>MOROCCO</addressLine5>
+          <telephoneNumber>+974 44 42 5923</telephoneNumber>
+          <mobileNumber>+974 33 82 9395</mobileNumber>
+          <faxNumber>+44 70 9224 8529</faxNumber>
+          <email>admin@you-global.com</email>
+          <skype></skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Abdel ELMAHMOUDI</contactPerson>
+          <designation>Recruitment Manager</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Abdel ELMAHMOUDI, Recruitment Manager</bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Africa, Middle East<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>Arabic, English, French, Spanish<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Airlines, Education, Hospitality<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font>B Arts (English Language &amp; Literature), Degree in English Studies<br></br></bioText>
+          <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+  <location regionName="Country" name="PAKISTAN">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="MUHAMMAD RAFIQUE, Mirza">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Mirza MUHAMMAD RAFIQUE</contactPerson>
+          <designation>International Business Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>PAKISTAN</addressLine5>
+          <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+          <mobileNumber>+92 332 5303035</mobileNumber>
+          <faxNumber>+44 70 9224 8529</faxNumber>
+          <email>admin@you-global.com</email>
+          <skype></skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Mirza MUHAMMAD RAFIQUE</contactPerson>
+          <designation>International Business Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Mirza MUHAMMAD RAFIQUE, International Business Consultant</bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Middle East, Kazakhstan, Pakistan, Russia<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English, Punjabi, Urdu<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Hospitality, IT, Sales &amp; Marketing<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font>BSc Computer Science, MBA<br></br></bioText>
+          <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+  <location regionName="Country" name="QATAR">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="ELMAHMOUDI, Abdel">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Abdel ELMAHMOUDI</contactPerson>
+          <designation>Recruitment Manager</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>QATAR</addressLine5>
+          <telephoneNumber>+974 44 42 5923</telephoneNumber>
+          <mobileNumber>+974 33 82 9395</mobileNumber>
+          <faxNumber>+44 70 9224 8529</faxNumber>
+          <email>admin@you-global.com</email>
+          <skype></skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Abdel ELMAHMOUDI</contactPerson>
+          <designation>Recruitment Manager</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Abdel ELMAHMOUDI, Recruitment Manager</bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Africa, Middle East<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>Arabic, English, French, Spanish<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Airlines, Education, Hospitality<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font>B Arts (English Language &amp; Literature), Degree in English Studies<br></br></bioText>
+          <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+  <location regionName="Country" name="ROMANIA">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="GRUBISIC, Jugoslav">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Jugoslav GRUBISIC</contactPerson>
+          <designation>Recruitment Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>ROMANIA</addressLine5>
+          <telephoneNumber></telephoneNumber>
+          <mobileNumber>+381 62 8635 961</mobileNumber>
+          <faxNumber></faxNumber>
+          <email>admin@you-global.com</email>
+          <skype>enaimpex</skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Jugoslav GRUBISIC</contactPerson>
+          <designation>Recruitment Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Jugoslav GRUBISIC, Recruitment Consultant</bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Albania, Bosnia, Croatia, Herzegovina, Ireland, Macedonia, Montenegro, Romania, Serbia, United Kingdom<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font><br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+          <bioImage>/Content/flas/photos/112.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+  <location regionName="Country" name="SERBIA">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="GRUBISIC, Jugoslav">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Jugoslav GRUBISIC</contactPerson>
+          <designation>Recruitment Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>SERBIA</addressLine5>
+          <telephoneNumber></telephoneNumber>
+          <mobileNumber>+381 62 8635 961</mobileNumber>
+          <faxNumber></faxNumber>
+          <email>admin@you-global.com</email>
+          <skype>enaimpex</skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Jugoslav GRUBISIC</contactPerson>
+          <designation>Recruitment Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Jugoslav GRUBISIC, Recruitment Consultant</bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Albania, Bosnia, Croatia, Herzegovina, Ireland, Macedonia, Montenegro, Romania, Serbia, United Kingdom<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font><br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+          <bioImage>/Content/flas/photos/112.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+  <location regionName="Country" name="SINGAPORE">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="SMITH, Angela">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Angela SMITH</contactPerson>
+          <designation></designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>SINGAPORE</addressLine5>
+          <telephoneNumber></telephoneNumber>
+          <mobileNumber>+65 9637 2623</mobileNumber>
+          <faxNumber></faxNumber>
+          <email>admin@you-global.com</email>
+          <skype></skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Angela SMITH</contactPerson>
+          <designation></designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Angela SMITH, </bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Malaysia, Singapore<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>Chinese, English, Malay<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Information Technology<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font>BSc in Computing and Information Systems<br></br></bioText>
+          <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+  <location regionName="Country" name="SWITZERLAND">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="ALBUQUERQUE, Patricia">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Patricia ALBUQUERQUE</contactPerson>
+          <designation>Business Development Manager - International Recruitment</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>SWITZERLAND</addressLine5>
+          <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+          <mobileNumber>+55 11 98316 0211</mobileNumber>
+          <faxNumber>+44 70 9224 8529</faxNumber>
+          <email>admin@you-global.com</email>
+          <skype>patricia.lacerda.de.albuquerque</skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Patricia ALBUQUERQUE</contactPerson>
+          <designation>Business Development Manager - International Recruitment</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Patricia ALBUQUERQUE, Business Development Manager - International Recruitment</bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Brazil, Switzerland
+<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English, French, Portuguese, Spanish<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Education, Hospitality, Human Resources and Management<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font>BSc Psychology, Human Resources and Management Certificate, Associate of Science (AS) Management of Hotel Operations<br></br></bioText>
+          <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+  <location regionName="Country" name="UNITED ARAB EMIRATES [UAE]">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Emirate" name="Abu Dhabi">
+      <location regionName="Consultant" name="Please select" />
+      <location regionName="Consultant" name="HASSAN, Alawi">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Alawi HASSAN</contactPerson>
+            <designation>Consultant</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>Abu Dhabi</addressLine4>
+            <addressLine5>UNITED ARAB EMIRATES [UAE]</addressLine5>
+            <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+            <mobileNumber></mobileNumber>
+            <faxNumber>+44 70 9224 8529</faxNumber>
+            <email>admin@you-global.com</email>
+            <skype></skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Alawi HASSAN</contactPerson>
+            <designation>Consultant</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Alawi HASSAN, Consultant</bioName>
+            <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Canada, Middle East<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>Arabic, English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>General, Sports Management<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+            <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+    </location>
+    <location regionName="Emirate" name="Dubai">
+      <location regionName="Consultant" name="Please select" />
+      <location regionName="Consultant" name="MIDDEL, Paul">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Paul MIDDEL</contactPerson>
+            <designation>Partner</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>Dubai</addressLine4>
+            <addressLine5>UNITED ARAB EMIRATES [UAE]</addressLine5>
+            <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+            <mobileNumber>+61 410 108 104</mobileNumber>
+            <faxNumber>+44 70 9224 8529</faxNumber>
+            <email>admin@you-global.com</email>
+            <skype></skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Paul MIDDEL</contactPerson>
+            <designation>Partner</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Paul MIDDEL, Partner</bioName>
+            <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Middle East, South America, USA<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>Dutch, English, French<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Brand Management, Sales &amp; Marketing<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+            <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+      <location regionName="Consultant" name="KNOWLES, Steven">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Steven KNOWLES</contactPerson>
+            <designation>Managing Partner</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>Dubai</addressLine4>
+            <addressLine5>UNITED ARAB EMIRATES [UAE]</addressLine5>
+            <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+            <mobileNumber>+61 410 108 104</mobileNumber>
+            <faxNumber>+44 70 9224 8529</faxNumber>
+            <email>admin@you-global.com</email>
+            <skype>steven-knowles</skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Steven KNOWLES</contactPerson>
+            <designation>Managing Partner</designation>
+            <addressLine1>GPO Box 2100</addressLine1>
+            <addressLine2>Brisbane&amp;nbsp;&amp;nbsp;QLD&amp;nbsp;&amp;nbsp;4001</addressLine2>
+            <addressLine3>AUSTRALIA</addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Steven KNOWLES, Managing Partner</bioName>
+            <bioText>Founder and Managing Partner of YOU Global. <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Australia, Middle East, UK<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Banking &amp; finance, Engineering &amp; Construction, Health / Medical<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font>B Com (Banking &amp; Finance), F Fin, JP (Qual)<br></br></bioText>
+            <bioImage>/Content/flas/photos/1.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+      <location regionName="Consultant" name="SINHA, Nidhi">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Nidhi SINHA</contactPerson>
+            <designation>Senior Recruiter</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>Dubai</addressLine4>
+            <addressLine5>UNITED ARAB EMIRATES [UAE]</addressLine5>
+            <telephoneNumber></telephoneNumber>
+            <mobileNumber></mobileNumber>
+            <faxNumber></faxNumber>
+            <email>admin@you-global.com</email>
+            <skype></skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Nidhi SINHA</contactPerson>
+            <designation>Senior Recruiter</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Nidhi SINHA, Senior Recruiter</bioName>
+            <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>India, Saudi Arabia, United Arab Emirates, United Kingdom<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English, Hindi<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font><br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font>BA, MA (Sociology), MPhil (Sociology), Post Grad Dip Personnel Management &amp; Industrial Relations<br></br></bioText>
+            <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+      <location regionName="Consultant" name="DELFINO, Ed">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Ed DELFINO</contactPerson>
+            <designation>Consultant</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>Dubai</addressLine4>
+            <addressLine5>UNITED ARAB EMIRATES [UAE]</addressLine5>
+            <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+            <mobileNumber>+971 56 961 2630</mobileNumber>
+            <faxNumber>+44 70 9224 8529</faxNumber>
+            <email>admin@you-global.com</email>
+            <skype></skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Ed DELFINO</contactPerson>
+            <designation>Consultant</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Ed DELFINO, Consultant</bioName>
+            <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Middle East, Philippines<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Banking &amp; Finance, Education<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+            <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+      <location regionName="Consultant" name="PICKARD, Rob">
+        <contactDetails>
+          <contactAddress>
+            <contactPerson>Rob PICKARD</contactPerson>
+            <designation>Partner</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4>Dubai</addressLine4>
+            <addressLine5>UNITED ARAB EMIRATES [UAE]</addressLine5>
+            <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+            <mobileNumber>+61 410 108 104</mobileNumber>
+            <faxNumber>+44 70 9224 8529</faxNumber>
+            <email>admin@you-global.com</email>
+            <skype></skype>
+          </contactAddress>
+          <postalAddress>
+            <contactPerson>Rob PICKARD</contactPerson>
+            <designation>Partner</designation>
+            <addressLine1></addressLine1>
+            <addressLine2></addressLine2>
+            <addressLine3></addressLine3>
+            <addressLine4></addressLine4>
+            <addressLine5></addressLine5>
+          </postalAddress>
+          <bioDetails>
+            <bioName>Rob PICKARD, Partner</bioName>
+            <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Asia, Australia, Europe, South America, UAE<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>Brand Management, Sales &amp; Marketing<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+            <bioImage>/Content/flas/photos/53.jpg</bioImage>
+          </bioDetails>
+        </contactDetails>
+      </location>
+    </location>
+  </location>
+  <location regionName="Country" name="YEMEN">
+    <location regionName="Location" name="Please select" />
+    <location regionName="Consultant" name="HASSAN, Alawi">
+      <contactDetails>
+        <contactAddress>
+          <contactPerson>Alawi HASSAN</contactPerson>
+          <designation>Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5>YEMEN</addressLine5>
+          <telephoneNumber>+61 7 3103 3363</telephoneNumber>
+          <mobileNumber></mobileNumber>
+          <faxNumber>+44 70 9224 8529</faxNumber>
+          <email>admin@you-global.com</email>
+          <skype></skype>
+        </contactAddress>
+        <postalAddress>
+          <contactPerson>Alawi HASSAN</contactPerson>
+          <designation>Consultant</designation>
+          <addressLine1></addressLine1>
+          <addressLine2></addressLine2>
+          <addressLine3></addressLine3>
+          <addressLine4></addressLine4>
+          <addressLine5></addressLine5>
+        </postalAddress>
+        <bioDetails>
+          <bioName>Alawi HASSAN, Consultant</bioName>
+          <bioText> <br></br><br></br><font color="#006393" size="11"><b>Geographic Familiarity:</b></font>Canada, Middle East<br></br><br></br><font color="#006393" size="11"><b>Languages:</b></font>Arabic, English<br></br><br></br><font color="#006393" size="11"><b>Industry Specialisation:</b></font>General, Sports Management<br></br><br></br><font color="#006393" size="11"><b>Formal Qualifications:</b></font><br></br></bioText>
+          <bioImage>/Content/flas/photos/PhotoMain.jpg</bioImage>
+        </bioDetails>
+      </contactDetails>
+    </location>
+  </location>
+</locations>

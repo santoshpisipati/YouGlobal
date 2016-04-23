@@ -1,0 +1,2609 @@
+﻿@using Forloop.HtmlHelpers
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*<title>@ViewBag.Title - My ASP.NET Application</title>*@
+    <title>YOU Global - Recruitment Specialists</title>
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Google Font family=Open+Sans  -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Bootstrap -->
+    <link href="~/Content/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <!-- Custom css -->
+    <link href="~/Content/css/style.css" type="text/css" rel="stylesheet">
+    <link href="~/Content/css/buttons.css" type="text/css" rel="stylesheet">
+
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script src="~/Scripts/ckeditor/config.js"></script>
+
+    <!-- LIGHT BOX -->
+    <link type="text/css" rel="stylesheet" href="~/Content/css/featherlight.min.css" />
+    @*@Styles.Render("~/Content/css")*@
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+      
+        var counter = 2;
+        function addCVEmploymentControl(id) {
+            var c1 = $(id).siblings('table')[0];
+            var newTextBoxDiv = $(document.createElement('div')).attr("id", 'employmentDiv' + counter);
+            $(c1).clone().appendTo(newTextBoxDiv);
+            newTextBoxDiv.find("input").val('');
+            newTextBoxDiv.find("div").show();
+            newTextBoxDiv.appendTo("#divCVEmployment");
+            employmentHistory();
+        }
+        function removeCVEmployment(id) {
+            var div = $(id).parent().parent().parent().parent().parent();
+            if (div != null)
+                div.html('');
+        }
+    </script>
+</head>
+<body>
+    @if (!Request.IsAuthenticated)
+    {
+        @Html.Partial("LoginModal")
+        @Html.Partial("RegisterModal")
+    }
+    <div id="supersized">
+        <img src="~/Content/images/slider-img/slider-1.jpg">
+        <img src="~/Content/images/slider-img/slider-4.jpg">
+        <img src="~/Content/images/slider-img/slider-2.jpg">
+        <img src="~/Content/images/slider-img/slider-3.jpg">
+    </div>
+    <img id="loadingbusy" src="~/Content/images/imgs/ajax-loader.gif" class="busyindicator" alt="" /> 
+    <div class="container-main-div">
+        <!-- Header Section Main div -->
+        <section class="container header-section">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="logo">
+                        <a href="@Url.Action("Home", "Home" )">
+                            <img src="~/Content/images/imgs/logo.png" class="img-responsive logo" alt="logo">
+                        </a>
+                    </div>
+                </div>
+               
+                <div class="col-lg-6">
+                    <!--- Toggle Menu--->
+                    <div id="toggle"><span></span></div>
+                    <div id="menu">
+                        <span id="title">Menu</span>
+                        <ul>
+                            <li>@Html.ActionLink("Home", "Home", "Home", null, new { id = "mainNavJobsBoard", @class = "key" })</li>
+                            <li>@Html.ActionLink("Job Seekers", "JobSeeker", "Jobs", null, new { id = "mainNavJobsBoard", @class = "key" })</li>
+                            @if (Session["username"] != null && !string.IsNullOrEmpty(Session["username"].ToString()))
+                            {
+                                <li>@Html.ActionLink("Employers/Recruiters", "PostJob", "Jobs", null, new { id = "mainNavJobsBoard", @class = "key" })</li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("Employers/Recruiters", "UnSignedEmployerRecruiter", "Jobs", null, new { id = "mainNavJobsBoard", @class = "key" }) </li>
+                            }
+                            <li>@Html.ActionLink("About YOU Global", "AboutUs", "Home", null, new { id = "mainNavJobsBoard", @class = "key" })</li>
+                            <li>@Html.ActionLink("Other Services", "OtherServices", "Jobs", null, new { id = "mainNavJobsBoard", @class = "key" })</li>
+                            <li>@Html.ActionLink("Why Not Join Us?", "JoinUsHtml", "Join", null, new { id = "mainNavJobsBoard", @class = "key" })</li>
+                            <li>@Html.ActionLink("Contact Us", "ContactUsHtml", "Contact", null, new { id = "mainNavContactUs", @class = "key" })</li>
+                            <li>@Html.ActionLink("Terms Of Use", "TermsOfUse", "Home", null, new { id = "mainNavContactUs", @class = "key" })</li>
+                            <li>@Html.ActionLink("Privacy & Cookies", "Privacy", "Home", null, new { id = "mainNavContactUs", @class = "key" })</li>
+                            @*<li>@Html.ActionLink("TreeView", "Index", "TreeView", null, new { id = "mainNavTreeview", @class = "key" })</li>
+                            <li>@Html.ActionLink("Sample", "Sample", "TreeView", null, new { id = "mainNavTreeview", @class = "key" })</li>*@
+                        </ul>
+                    </div>
+                    <!--- Toggle Menu End--->
+                    <div class="nav-main-div">
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
+            </div>
+        </section>
+        @RenderBody()
+    </div>
+    <div id="footer1">
+        <div class="container footer-sub">
+            <div class="row">
+                <div class="col-lg-6">&copy; @DateTime.Now.Year YOU Global Consultants. All rights reserved.</div>
+                <div class="col-lg-6 text-right">
+                    @Html.ActionLink("Privacy Statement", "Privacy", "Home", null, new { id = "mainNavContactUs", @class = "key" }) | @Html.ActionLink("Terms Of Use", "TermsOfUse", "Home", null, new { id = "mainNavContactUs", @class = "key" })
+                    <span>
+                        <a href="#"><img src="/Content/images/social-media-img/social-media-img01.png" alt="icon"></a>
+                        <a href="#"><img src="/Content/images/social-media-img/social-media-img02.png" alt="icon"></a>
+                        <a href="#"><img src="/Content/images/social-media-img/social-media-img03.png" alt="icon"></a>
+                        <a href="#"> <img src="/Content/images/social-media-img/social-media-img04.png" alt="icon"></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
+    @Html.RenderScripts()
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!---- Toggle Js ---->
+    <script>
+        $('#loadingbusy').show();
+        $("#toggle").click(function () {
+            $(this).toggleClass("open");
+            $("#menu").toggleClass("opened");
+        });
+        CKEDITOR.replace('editor1');
+    </script>
+
+    <!-- lightbox -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+    <script src="~/Scripts/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!----- Banner Js -------->
+    <link rel="stylesheet" href="~/Content/css/index-slider.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/Content/css/yg.css" type="text/css" media="screen" />
+    <script src="~/Scripts/index-slider-effect.js"></script>
+    <script src="~/Scripts/index-slider.js"></script>
+    <script src="~/Scripts/bootstrap-treeview.js"></script>
+    <script src="~/Scripts/expand.js"></script>
+    <script src="~/Scripts/index-slider-2.js"></script>
+    @*<script src="http://code.jquery.com/ui/1.8.24/jquery-ui.min.js"></script>*@
+    @*for drag and drop*@
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    @*for drag and drop*@
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="stylesheet" href="~/Content/css/pagination.css" type="text/css" />
+    @*<link rel="stylesheet" href="http://live.datatables.net/media/css/demo_table.css" type="text/css" media="screen" />*@
+    <link rel="stylesheet" href="~/Scripts/textext/css/textext.core.css" type="text/css">
+    <link rel="stylesheet" href="~/Scripts/textext/css/textext.plugin.tags.css" type="text/css">
+    <script src="~/Scripts/textext/js/textext.core.js"></script>
+    <script src="~/Scripts/textext/js/textext.plugin.tags.js"></script>
+    <script type="text/javascript">
+        $("input#PhoneCode").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+
+                    url: '@Url.Action("SearchCountryCode", "Jobs")', dataType: "json",
+                    type: "POST",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Value, value: item.Key };
+                        }))
+                    }
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                var code = ui.item.value;
+                ui.item.value = code.substring(code.indexOf('(') + 1, code.indexOf(')'));
+            }
+        }, "option", "appendTo", "#f2");
+
+        $(function () {
+            $('.required').keyup(function () {
+                textCounter(this, 'div+' + this.name, 500, null);
+            })
+
+            $('.desi').keyup(function () {
+                textCounter(this, 'divDesi+' + this.name, 500, null);
+            })
+
+            $('#CoverLetter').keyup(function () {
+                textCounter(this, 'desCoverLettContent', 2000, null);
+            })
+        });
+
+        $("tbody.EssenSortable")
+       .sortable({
+           connectWith: ".EssenSortable",
+           items: "> tr:not(:first)",
+           helper: "clone",
+           zIndex: 999990
+       });
+
+        $("tbody.remuneSortable")
+      .sortable({
+          connectWith: ".remuneSortable",
+          items: "> tr:not(:first)",
+          helper: "clone",
+          zIndex: 999990
+      });
+
+        $("tbody.DutiesSortable")
+      .sortable({
+          connectWith: ".DutiesSortable",
+          items: "> tr:not(:first)",
+          helper: "clone",
+          zIndex: 999990
+      });
+    </script>
+    <script type="text/javascript">
+        $('#search-term').textext({ plugins: 'tags' }).bind('tagClick', function (e, tag, value, callback) {
+        });
+        $('textarea#search-term').autocomplete(
+              {
+                  source: function (request, response) {
+                      $('#loadingbusy').show();
+                      $.ajax({
+                          url: '@Url.Action("searchOccupation", "Jobs")', dataType: "json",
+                          type: "POST",
+                          data: { term: request.term },
+                          success: function (data) {
+                              if (data.length > 0) {
+                                  var occupationDiv = document.getElementById("search-termoccu");
+                                  occupationDiv.style.display = "block";
+                                  $('#loadingbusy').hide()
+                                  $('#search-termoccu').treeview({
+                                      levels: 1,
+                                      showTags: true,
+                                      color: "white",
+                                      backColor: "transparent",
+                                      expandIcon: 'glyphicon glyphicon-plus',
+                                      collapseIcon: 'glyphicon  glyphicon-minus',
+                                      onhoverColor: "rgba(0, 0, 0, 0.69)",
+                                      selectedBackColor: "#0066cc",
+                                      data: data
+                                  }).on('nodeSelected', function (event, node) {
+                                      sel = true;
+                                      //$("#divOccSel").show();
+                                      var position = $("textarea#search-term").offset();
+                                      $(".ui-autocomplete").css("top", position.top + 20);
+                                      readyToClose = false;
+                                      var id = node.value;
+                                      var code = $.trim(node.text);
+                                      var exist = 0;
+                                      var clength;
+                                      var c1;
+                                      var c2;
+                                      if (code == '- Any -') {
+                                          $(".OccupationSelect option").each(function () {
+                                              $('textarea#search-term').textext()[0].tags().removeTag([this.text]);
+                                              $(this).remove();
+                                          });
+                                          var lst = "<option selected='true' value='0'>" + code + "</option>";
+                                          $(".OccupationSelect").html(lst);
+                                          var terms = split($('textarea#search-term').val());
+                                          if (terms.length <= 3) {
+                                              // remove the current input
+                                              terms.pop();
+                                              // add the selected item
+                                              terms.push(node.text);
+                                              // add placeholder to get the comma-and-space at the end
+                                              terms.push("");
+                                              //$('textarea#IndustrySearch').val(terms.join(", "));
+                                              $('textarea#search-term').textext()[0].tags().addTags([node.text]);
+                                              return false;
+                                          } else {
+                                              var last = terms.pop();
+                                              $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
+                                              $(this).effect("highlight", {}, 1000);
+                                              $(this).attr("style", "border: solid 1px red;");
+                                              return false;
+                                          }
+                                          return;
+                                      }
+                                      c1 = $.trim(id.split(' ')[1]);
+                                      if (id != '') {
+                                          $(".OccupationSelect option").each(function () {
+                                              c2 = $.trim($(this).val().split(' ')[1]);
+                                              if (exist == 1) {
+                                                  return;
+                                              }
+                                              if (c1 == c2) {
+                                                  alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                                  exist = 1;
+                                                  return;
+                                              }
+                                              else {
+                                                  if (c1.length > c2.length) {
+                                                      if (c1.substring(0, c2.length) == c2) {
+                                                          alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                                          exist = 1;
+                                                          return;
+                                                      }
+                                                  }
+                                                  else if (c1.length == 0) {
+                                                      alert('This category is already exist');
+                                                      exist = 1;
+                                                      return;
+                                                  }
+                                                  else {
+                                                      if (c2.substring(0, c1.length) == c1) {
+                                                          $('textarea#search-term').textext()[0].tags().removeTag([this.text]);
+                                                          $('textarea#search-term').textext()[0].tags().addTags([code]);
+                                                          $(this).text(code);
+                                                          $(this).val(id);
+                                                          $(".OccupationSelect option").each(function () {
+                                                              if ($(this).val().split(' ')[1] != c1) {
+                                                                  if ($(this).val().split(' ')[1].substring(0, c1.length) == c1) {
+                                                                      $('textarea#search-term').textext()[0].tags().removeTag([this.text]);
+                                                                      $(this).remove();
+                                                                  }
+                                                              }
+                                                          });
+                                                          exist = 1;
+                                                          return;
+                                                      }
+                                                  }
+                                              }
+                                              if ($(this).text() == "- Any -") {
+                                                  $(".OccupationSelect").html('');
+
+                                              }
+                                          });
+                                      }
+                                      else {
+                                          exist = 1;
+                                      }
+                                      if (exist == 0) {
+                                          var lst = "<option selected='true' value='" + id + "'>" + code + "</option>";
+                                          $(".OccupationSelect").append(lst);
+                                          var terms = split($('textarea#search-term').val());
+                                          if (terms.length <= 3) {
+                                              // remove the current input
+                                              terms.pop();
+                                              // add the selected item
+                                              terms.push(node.text);
+                                              // add placeholder to get the comma-and-space at the end
+                                              terms.push("");
+                                              //$('textarea#IndustrySearch').val(terms.join(", "));
+                                              $('textarea#search-term').textext()[0].tags().addTags([node.text]);
+                                              return false;
+                                          } else {
+                                              var last = terms.pop();
+                                              $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
+                                              $(this).effect("highlight", {}, 1000);
+                                              $(this).attr("style", "border: solid 1px red;");
+                                              return false;
+                                          }
+                                      }
+                                      $('#hdf').val('1');
+                                      //occupationDiv.style.display = "none";
+                                  })
+                              }
+                              else {
+                                  var occupationDiv = document.getElementById("search-termoccu");
+                                  occupationDiv.style.display = "none";
+                                  $('#search-termoccu').treeview({
+                                      color: "white",
+                                      backColor: "rgba(0, 0, 0, 0.69)",
+                                      data: []
+                                  });
+                              }
+                          }
+                      });
+                  }
+              });
+        $('#search-empIndtree').textext({ plugins: 'tags' }).bind('tagClick', function (e, tag, value, callback) {
+        });
+        $('textarea#search-empIndtree').autocomplete(
+              {
+                  source: function (request, response) {
+                      $('#loadingbusy').show();
+                      $.ajax({
+                          url: '@Url.Action("searchIndustry", "Jobs")', dataType: "json",
+                          type: "POST",
+                          data: { term: request.term },
+                          success: function (data) {
+                              if (data.length > 0) {
+                                  var industryDiv = document.getElementById("searchable-empIndtree");
+                                  industryDiv.style.display = "block";
+                                  $('#loadingbusy').hide();
+                                  $('#searchable-empIndtree').treeview({
+                                      levels: 1,
+                                      showTags: true,
+                                      color: "white",
+                                      backColor: "transparent",
+                                      hoverColor: "rgba(0, 0, 0, 0.69)",
+                                      expandIcon: 'glyphicon glyphicon-plus',
+                                      collapseIcon: 'glyphicon  glyphicon-minus',
+                                      onhoverColor: "rgba(0, 0, 0, 0.69)",
+                                      data: data
+                                  }).on('nodeSelected', function (event, node) {
+                                      sel = true;
+                                      readyToClose = false;
+                                      //$("#divIndSel").show();
+                                      var position = $("textarea#search-empIndtree").offset();
+                                      var id = node.value;
+                                      if (node.value != null)
+                                          var sect = node.value.split(' ')[2];
+                                      var code = $.trim(node.text);
+                                      node.label = '';
+                                      node.value = '';
+                                      var exist = 0;
+                                      var clength;
+                                      var c1;
+                                      var c2;
+                                      if (code == '- Any -') {
+                                          $(".IndustrySelect option").each(function () {
+                                              $('textarea#search-empIndtree').textext()[0].tags().removeTag([this.text]);
+                                              $(this).remove();
+                                          });
+                                          var lst = "<option selected='true' value='0'>" + code + "</option>";
+                                          $(".IndustrySelect").html(lst);
+                                          var terms = split($('textarea#search-empIndtree').val());
+                                          if (terms.length <= 3) {
+                                              // remove the current input
+                                              terms.pop();
+                                              // add the selected item
+                                              terms.push(node.text);
+                                              // add placeholder to get the comma-and-space at the end
+                                              terms.push("");
+                                              //$('textarea#IndustrySearch').val(terms.join(", "));
+                                              $('textarea#search-empIndtree').textext()[0].tags().addTags([node.text]);
+                                              return false;
+                                          } else {
+                                              var last = terms.pop();
+                                              $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
+                                              $(this).effect("highlight", {}, 1000);
+                                              $(this).attr("style", "border: solid 1px red;");
+                                              return false;
+                                          }
+                                          return;
+                                      }
+                                      c1 = $.trim(id.split(' ')[1]);
+                                      if (id != '') {
+                                          $(".IndustrySelect option").each(function () {
+                                              c2 = $.trim($(this).val().split(' ')[1]);
+                                              if (exist == 1) {
+                                                  return;
+                                              }
+                                              if (c1.length == 1) {
+                                                  if ($(this).attr('indsection') == c1) {
+                                                      $(".IndustrySelect option").each(function () {
+                                                          if ($(this).attr('indsection') == c1) {
+                                                              $('textarea#search-empIndtree').textext()[0].tags().removeTag([this.text]);
+                                                              $(this).remove();
+                                                          }
+                                                      });
+                                                      var lst = "<option indsection='" + sect + "' selected='true' value='" + id + "'>" + code + "</option>";
+                                                      $('textarea#search-empIndtree').textext()[0].tags().addTags([code]);
+                                                      $(".IndustrySelect").append(lst);
+                                                      exist = 1;
+                                                      return;
+                                                  }
+                                              }
+                                              if (sect != null) {
+                                                  if (sect == c2) {
+                                                      alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                                      exist = 1;
+                                                      return;
+                                                  }
+                                              }
+
+                                              if (c1 == c2) {
+                                                  alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                                  exist = 1;
+                                                  return;
+                                              }
+
+                                              else {
+                                                  if (c1.length > c2.length) {
+                                                      if (c1.substring(0, c2.length) == c2) {
+                                                          alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                                          exist = 1;
+                                                          return;
+                                                      }
+                                                  }
+                                                  else if (c1.length == 0) {
+                                                      alert('This category is already exist');
+                                                      exist = 1;
+                                                      return;
+                                                  }
+                                                  else {
+                                                      if (c2.substring(0, c1.length) == c1) {
+                                                          $(this).text(code);
+                                                          $(this).val(id);
+                                                          $(".IndustrySelect option").each(function () {
+                                                              if ($(this).val().split(' ')[1] != c1) {
+                                                                  if ($(this).val().split(' ')[1].substring(0, c1.length) == c1) {
+                                                                      $(this).remove();
+                                                                  }
+                                                              }
+                                                          });
+                                                          exist = 1;
+                                                          return;
+                                                      }
+                                                  }
+                                              }
+                                              if ($(this).text() == "- Any -") {
+                                                  $(".IndustrySelect").html('');
+                                              }
+                                          });
+                                      }
+                                      else {
+                                          exist = 1;
+                                      }
+                                      if (exist == 0) {
+
+                                          var lst = "<option indsection='" + sect + "' selected='true' value='" + id + "'>" + code + "</option>";
+                                          $(".IndustrySelect").append(lst);
+                                          var lstid = "<option selected='true' value='" + id + "'>" + id + "</option>";
+                                          $(".IndustryID").append(lst);
+                                          var terms = split($('textarea#search-empIndtree').val());
+                                          if (terms.length <= 3) {
+                                              // remove the current input
+                                              terms.pop();
+                                              // add the selected item
+                                              terms.push(node.text);
+                                              // add placeholder to get the comma-and-space at the end
+                                              terms.push("");
+                                              //$('textarea#IndustrySearch').val(terms.join(", "));
+                                              $('textarea#search-empIndtree').textext()[0].tags().addTags([node.text]);
+                                              return false;
+                                          } else {
+                                              var last = terms.pop();
+                                              $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
+                                              $(this).effect("highlight", {}, 1000);
+                                              $(this).attr("style", "border: solid 1px red;");
+                                              return false;
+                                          }
+                                          //industryDiv.style.display = "none";
+                                      }
+                                      $('#hdfI').val('1');
+                                  });
+                              }
+                              else {
+                                  var industryDiv = document.getElementById("searchable-empIndtree");
+                                  industryDiv.style.display = "none";
+                                  $('#searchable-empIndtree').treeview({
+                                      color: "white",
+                                      backColor: "transparent",
+                                      data: []
+                                  });
+                              }
+                          }
+                      });
+                  }
+              });
+        
+
+        $('input#search-empLocationsearch').autocomplete(
+         {
+             source: function (request, response) {
+                 $('#loadingbusy').show();
+                 $.ajax({
+                     url: '@Url.Action("SearchLocationWithId", "Jobs")', dataType: "json",
+                     type: "POST",
+                     data: { term: request.term },
+                     success: function (data) {
+                         var digit = ""; var text = "";
+                         if (data.length > 0) {
+                             var locationDiv = document.getElementById("searchable-empLocationtree");
+                             locationDiv.style.display = "block";
+                             $('#loadingbusy').hide();
+                             $('#searchable-empLocationtree').treeview({
+                                 levels: 1,
+                                 showTags: true,
+                                 color: "white",
+                                 backColor: "transparent",
+                                 expandIcon: 'glyphicon glyphicon-plus',
+                                 collapseIcon: 'glyphicon  glyphicon-minus',
+                                 onhoverColor: "rgba(0, 0, 0, 0.69)",
+                                 data: data
+                             }).on('nodeSelected', function (event, node) {
+                                 id = node.value;
+                                 digit = id;
+                                 code = $.trim(node.text);
+                                 text = code;
+                                 $('input#search-empLocationsearch').val(code);
+                                 sel = true;
+                                 readyToClose = false;
+                                 $("#divAlertLocSel").show();
+                                 var position = $("input#search-empLocationsearch").offset();
+                                 $(".ui-autocomplete").css("top", position.top + 20);
+                                 if ($(".LocationAlert option").length > 9) {
+                                     alert("You can select up to 10 Location categories. Consider wider selections, such as 'Anywhere', or 'Europe', or filter by occupation or industry instead.");
+                                     return false;
+                                 }
+                                 if (code == "- Anywhere -") {
+                                     if ($(".LocationAlert option").length > 0) {
+                                         alert("Please delete other locations before selecting 'Anywhere'");
+                                         this.value = '';
+                                         return false;
+                                     }
+                                     var lst = "<option selected='true' value='0:1'>- Anywhere -</option>";
+                                     $(".LocationAlert option").each(function () {
+                                         $('textarea#search-empLocationsearch').textext()[0].tags().removeTag([this.text]);
+                                         $(this).remove();
+                                     });
+                                     $(".LocationAlert").html(lst);
+                                     $('#LocationSearch').val('');
+                                     this.value = '';
+                                     var terms = split($('textarea#search-empLocationsearch').val());
+                                     if (terms.length <= 3) {
+                                         // remove the current input
+                                         terms.pop();
+                                         // add the selected item
+                                         terms.push(node.text);
+                                         // add placeholder to get the comma-and-space at the end
+                                         terms.push("");
+                                         //$('textarea#empLocationsearch').val(terms.join(", "));
+                                         $('textarea#search-empLocationsearch').textext()[0].tags().addTags([node.text]);
+                                         return false;
+                                     } else {
+                                         var last = terms.pop();
+                                         $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
+                                         $(this).effect("highlight", {}, 1000);
+                                         $(this).attr("style", "border: solid 1px red;");
+                                         return false;
+                                     }
+                                     return false;
+                                 }
+                                 var c2
+                                 var nid;
+                                 var oid;
+                                 var ot;
+                                 var nt;
+                                 var exist = 0;
+                                 nid = id.split(':')[0];
+                                 nt = id.split(':')[1];
+
+                                 var n = nid.split(',');
+                                 var pt = code.replace('>', '').replace('>', '').replace('>', '').replace('>', '');
+                                 var gd = '';
+                                 if (nt == 5) {
+                                     $.ajax({
+                                         url: '@Url.Action("GetLocationGroupDetails", "Jobs")', dataType: "json",
+                                         type: "POST",
+                                         data: { groupId: nid },
+                                         async: false,
+                                         success: function (data) {
+                                             gd = data;
+                                         }
+                                     });
+                                 }
+                                 var gdt = gd.split(',');
+                                 $(".LocationAlert option").each(function () {
+
+                                     if (exist == 1)
+                                         return;
+                                     oid = $(this).val().split(':')[0];
+                                     ot = $(this).val().split(':')[1];
+                                     var o = oid.split(',');
+
+                                     if (oid == nid) {
+                                         alert('This location is already covered by ' + $(this).text());
+                                         exist = 1;
+                                         return;
+                                     }
+                                     var cn = 1;
+                                     var len = o.length > n.length ? o.length : n.length;
+                                     for (var i = len - 1; i >= 0; i--) {
+                                         if (ot < nt) {
+                                             if (ot == 1) {
+                                                 if (o[i] == n[i]) {
+                                                     alert('The location you have tried to add is already covered by a parent location.');
+                                                     exist = 1;
+                                                     return;
+                                                 }
+                                             }
+
+                                             else {
+                                                 if (i <= nt - 2) {
+
+                                                     if (o[i] == n[i] && o[i + 1] == n[i + 1]) {
+                                                         alert('The location you have tried to add is already covered by a parent location.');
+                                                         exist = 1;
+                                                         return;
+                                                     }
+                                                 }
+                                             }
+                                         }
+
+                                         else if (ot > nt) {
+                                             if (i >= nt - 1) {
+                                                 if (o[i] == n[i]) {
+                                                     alert('\"' + pt + '\" has subsidiary locations already selected. Please remove the subsidiary locations, then you can select \"' + pt + '\".');
+                                                     exist = 1;
+                                                     return;
+                                                 }
+                                             }
+                                         }
+                                         else {
+                                             if (i >= nt - 1) {
+                                                 if (o[i] == n[i]) {
+                                                     alert('\"' + pt + '\" has subsidiary locations already selected. Please remove the subsidiary locations, then you can select \"' + pt + '\".');
+                                                     exist = 1;
+                                                     return;
+                                                 }
+                                             }
+                                         }
+                                     }
+                                     c2 = $(this).text();
+                                     if (code == c2) {
+                                         alert('This location is already exist');
+                                         exist = 1;
+                                         return;
+                                     }
+
+                                     if ($(this).text() == "- Anywhere -") {
+                                         $(".LocationAlert").html('');
+                                     }
+                                 });
+
+                                 var location = '';
+                                 if (nt == 5 && exist == 0) {
+
+                                     $.ajax({
+                                         url: '@Url.Action("GetLocationDetails", "Jobs")', dataType: "json",
+                                         type: "get",
+                                         data: { groupId: nid },
+                                         async: false,
+                                         success: function (data) {
+                                             if (data == 'True') {
+                                                 alert('The location you have tried to add is already selected');
+                                                 exist = 1;
+                                                 return false;
+                                             }
+                                         },
+                                         error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                             //alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                                         }
+                                     });
+                                 }
+
+                                 if (nt == 1 && exist == 0) {
+                                     $.ajax({
+                                         url: '@Url.Action("CheckCountryExists", "Jobs")', dataType: "json",
+                                         type: "get",
+                                         data: { countryId: nid, type: nt },
+                                         async: false,
+                                         success: function (data) {
+                                             if (data != 'false' && data != '') {
+                                                 alert('The location you have tried to add is already covered by ' + data.split('#')[0]);
+                                                 exist = 1;
+                                                 return;
+                                             }
+                                         },
+                                         error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                             //alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                                         }
+                                     });
+                                 }
+
+                                 if (nt == 2 && exist == 0) {
+                                     $.ajax({
+                                         url: '@Url.Action("CheckLocationExists", "Jobs")', dataType: "json",
+                                         type: "get",
+                                         data: { locationId: nid, type: nt },
+                                         async: false,
+                                         success: function (data) {
+                                             if (data != 'false' && data != '') {
+                                                 alert('The location you have tried to add is already covered by ' + data.split('#')[0]);
+                                                 exist = 1;
+                                                 return;
+                                             }
+                                         },
+                                         error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                             //alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                                         }
+                                     });
+                                 }
+
+                                 if (nt == 3 && exist == 0) {
+                                     $.ajax({
+                                         url: '@Url.Action("CheckSubLocationExists", "Jobs")', dataType: "json",
+                                         type: "get",
+                                         data: { sublocationId: nid, type: nt },
+                                         async: false,
+                                         success: function (data) {
+                                             if (data != 'false' && data != '') {
+                                                 alert('The location you have tried to add is already covered by ' + data.split('#')[0]);
+                                                 exist = 1;
+                                                 return;
+                                             }
+                                         },
+                                         error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                             //alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                                         }
+                                     });
+                                 }
+
+                                 if (nt == 4 && exist == 0) {
+                                     $.ajax({
+                                         url: '@Url.Action("CheckSubSubLocationExists", "Jobs")', dataType: "json",
+                                         type: "get",
+                                         data: { subsublocationId: nid, type: nt },
+                                         async: false,
+                                         success: function (data) {
+                                             if (data != 'false' && data != '') {
+                                                 alert('The location you have tried to add is already covered by ' + data.split('#')[0]);
+                                                 exist = 1;
+                                                 return;
+                                             }
+                                         },
+                                         error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                             //alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                                         }
+                                     });
+                                 }
+
+                                 if (exist == 0) {
+                                     $.ajax({
+                                         url: '@Url.Action("AddSearchLocations", "Jobs")', dataType: "json",
+                                         type: "get",
+                                         data: { locationId: nid, locationType: nt },
+                                         async: false,
+                                         success: function (data) { }
+                                     });
+                                 }
+
+                                 if (exist == 0) {
+                                     code = code.replace(">", "").replace(">", "").replace(">", "").replace(">", "");
+                                     if (window.location.href.indexOf("JobSeeker") > -1) {
+                                         code = code.replace(">", "").replace(">", "").replace(">", "").replace(">", "");
+                                         $('input#search-empLocationsearch').val(code);
+                                     }
+                                     else {
+                                         $('input#search-empLocationsearch').val('')
+                                     }
+                                     var lst = "<option selected='true' value='" + code + "'>" + code + "</option>";
+                                     var idarr = id.split(',');//code.split('>');
+                                     var idarrValue = "";
+                                     if (idarr.length > 2) {
+                                         idarrValue = idarr[idarr.length - 1];//code.split('>');
+                                         var idvalue = idarrValue.split(":");
+                                         var lstid = "<option selected='true' value='" + idvalue[0] + "'>" + idvalue[0] + "</option>";
+                                         var lstType = "<option selected='true' value='" + idvalue[1] + "'>" + idvalue[1] + "</option>";
+                                         $(".LocationID").append(lstid);
+                                         $(".LocationAlert").append(lst);
+                                         $(".LocationType").append(lstType);
+                                         //this.value = '';
+
+                                     }
+                                     else {
+                                         var idvalue = idarr[0].split(":");
+                                         var lstid = "<option selected='true' value='" + idvalue[0] + "'>" + idvalue[0] + "</option>";
+                                         var lstType = "<option selected='true' value='" + idvalue[1] + "'>" + idvalue[1] + "</option>";
+                                         $(".LocationID").append(lstid);
+                                         $(".LocationAlert").append(lst);
+                                         $(".LocationType").append(lstType);
+                                         //this.value = '';
+                                     }
+                                     locationDiv.style.display = "none";
+                                 }
+                                 return false;
+                             })
+                         }
+                         else {
+                             var locationDiv = document.getElementById("searchable-empLocationtree");
+                             locationDiv.style.display = "none";
+                             $('#searchable-empLocationtree').treeview({
+                                 color: "white",
+                                 backColor: "transparent",
+                                 data: []
+                             });
+                         }
+                     }
+                 })
+             }
+         });
+
+        $(function () {
+            $.fn.supersized.options = {
+                startwidth: 640,
+                startheight: 360,
+                vertical_center: 1,
+                slideshow: 1,
+                navigation: 0,
+                thumbnail_navigation: 0,
+                transition: 1, //0-None, 1-Fade, 2-slide top, 3-slide right, 4-slide bottom, 5-slide left
+                pause_hover: 0,
+                slide_counter: 0,
+                slide_captions: 0,
+                slide_interval: 17000,
+                slides: [{
+                    image: '/Content/images/slider-img/slider-1.jpg'
+                }, {
+                    image: '/Content/images/slider-img/slider-4.jpg'
+                }, {
+                    image: '/Content/images/slider-img/slider-3.jpg'
+                }, {
+                    image: '/Content/images/slider-img/slider-2.jpg'
+                }, ]
+            };
+            $('#supersized').supersized();
+        });
+        function removeCVEmployment(id) {
+            var div = $(id).parent().parent().parent().parent().parent();
+            if (div != null)
+                div.html('');
+        }
+        $(function () {
+            employmentHistory();
+        });
+
+        $(function () {
+            employmentHistory();
+        });
+        function employmentHistory() {
+            $["ui"]["autocomplete"].prototype["_renderItem"] = function (ul, item) {
+                return $("<li></li>").data("item.autocomplete", item).append($("<a></a>").html(item.label)).appendTo(ul);
+            };
+            $('input#search-empInd').autocomplete(
+         {
+             source: function (request, response) {
+                 $.ajax({
+                     url: '@Url.Action("SearchIndustry", "Jobs")', dataType: "json",
+                     type: "POST",
+                     data: { term: request.term },
+                     success: function (data) {
+                         if (data.length > 0) {
+                             var industryDiv = $('input#search-empInd').next();
+                             for (i = 0; i < industryDiv.length - 1; i++) {
+                                 industryDiv[i].style.display = "none";
+                             }
+                             $('input#search-empInd').next().treeview({
+                                 levels: 1,
+                                 showTags: true,
+                                 color: "white",
+                                 backColor: "transparent",
+                                 expandIcon: 'glyphicon glyphicon-plus',
+                                 collapseIcon: 'glyphicon  glyphicon-minus',
+                                 onhoverColor: "rgba(0, 0, 0, 0.69)",
+                                 data: data
+                             }).on('nodeSelected', function (event, node) {
+                                 readyToClose = false;
+                                 $("#divIndSel").show();
+                                 var position = $("input#search-empInd").offset();
+                                 $(".ui-autocomplete").css("top", position.top + 20);
+                                 var id = node.value;
+                                 var sect = node.value.split(' ')[2];
+                                 var code = $.trim(node.text);
+                                 node.text = '';
+                                 node.value = '';
+                                 var exist = 0;
+                                 var clength;
+                                 var c1;
+                                 var c2;
+                                 if (code == '- Any -') {
+                                     var lst = "<option selected='true' value='0'>" + code + "</option>";
+                                     $(".IndustrySelect").html(lst);
+                                     return;
+                                 }
+                                 c1 = $.trim(id.split(' ')[1]);
+                                 if (id != '') {
+                                     $(".IndustrySelect option").each(function () {
+                                         c2 = $.trim($(this).val().split(' ')[1]);
+                                         if (exist == 1) {
+                                             return;
+                                         }
+                                         if (c1.length == 1) {
+                                             if ($(this).attr('indsection') == c1) {
+                                                 $(".IndustrySelect option").each(function () {
+                                                     if ($(this).attr('indsection') == c1) {
+                                                         $(this).remove();
+
+                                                     }
+                                                 });
+                                                 var lst = "<option indsection='" + sect + "' selected='true' value='" + id + "'>" + code + "</option>";
+                                                
+                                                 $(".IndustrySelect").append(lst);
+                                                 exist = 1;
+                                                 return;
+                                             }
+                                         }
+                                         if (sect != null) {
+                                             if (sect == c2) {
+                                                 alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                                 exist = 1;
+                                                 return;
+                                             }
+                                         }
+
+                                         if (c1 == c2) {
+                                             alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                             exist = 1;
+                                             return;
+                                         }
+
+                                         else {
+                                             if (c1.length > c2.length) {
+                                                 if (c1.substring(0, c2.length) == c2) {
+                                                     alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                                     exist = 1;
+                                                     return;
+                                                 }
+                                             }
+                                             else if (c1.length == 0) {
+                                                 alert('This category is already exist');
+                                                 exist = 1;
+                                                 return;
+                                             }
+                                             else {
+                                                 if (c2.substring(0, c1.length) == c1) {
+
+                                                     $(this).text(code);
+                                                     $(this).val(id);
+                                                     $(".IndustrySelect option").each(function () {
+                                                         if ($(this).val().split(' ')[1] != c1) {
+                                                             if ($(this).val().split(' ')[1].substring(0, c1.length) == c1) {
+                                                                 $(this).remove();
+                                                             }
+                                                         }
+                                                     });
+                                                     exist = 1;
+                                                     return;
+                                                 }
+                                             }
+                                         }
+                                         if ($(this).text() == "- Any -") {
+                                             $(".IndustrySelect").html('');
+
+                                         }
+                                     });
+                                 }
+                                 else {
+                                     exist = 1;
+                                 }
+                                 if (exist == 0) {
+                                     $(this).siblings().val(code);
+                                     var lst = "<option indsection='" + sect + "' selected='true' value='" + id + "'>" + code + "</option>";
+                                     $(".IndustrySelect").append(lst);
+                                     var lstid = "<option selected='true' value='" + id + "'>" + id + "</option>";
+                                     $(".IndustryID").append(lst);
+                                     industryDiv.style.display = "none";
+                                 }
+                                 $('#hdfI').val('1');
+
+                             })
+                         }
+                     }
+                 })
+             }
+         });
+
+            $('input#search-empOccu').autocomplete(
+        {
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("SearchOccupation", "Jobs")', dataType: "json",
+                    type: "POST",
+                    data: { term: request.term },
+                    success: function (data) {
+                        if (data.length > 0) {
+                            var occupationDiv = $('input#search-empOccu').next();
+                            for (i = 0; i < occupationDiv.length - 1; i++) {
+                                occupationDiv[i].style.display = "none";
+                            }
+                            $('input#search-empOccu').next().treeview({
+                                levels: 1,
+                                showTags: true,
+                                color: "white",
+                                backColor: "transparent",
+                                expandIcon: 'glyphicon glyphicon-plus',
+                                collapseIcon: 'glyphicon  glyphicon-minus',
+                                onhoverColor: "rgba(0, 0, 0, 0.69)",
+                                data: data
+                            }).on('nodeSelected', function (event, node) {
+                                var code = node.text;
+                                var id = node.value.split(' ')[1].length
+                                var cls;
+                                cls = $.trim(code.split(' ')[3]);
+                                if (id != 4) {
+                                    alert('Please select an option beginning with Tier 4.');
+                                    $(this).val('');
+                                    return false;
+                                }
+                                else {
+                                    $(this).siblings().val(node.text);
+                                    var code = $.trim(node.text);
+                                    code = code.replace(">", "").replace(">", "").replace(">", "").replace(">", "");
+                                    var items = node.value.split(' ');
+                                    if (items.length > 1) {
+                                        $('input#ISICRev4Id').val(items[0]);
+                                    }
+                                    else {
+                                        $('input#ISICRev4Id').val(ui.item.value);
+                                    }
+                                    node.value = $.trim(code);
+                                    var code1 = $('#project').text();
+                                    $('#project').text(code1 + node.value);
+                                    if (code != "- Any -") {
+                                        node.value = code;
+                                    }
+                                    occupationDiv.style.display = "none";
+                                }
+                            })
+                        }
+                    }
+                })
+            }
+        });
+
+            $('input#search-empLoca').autocomplete(
+        {
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("SearchLocationWithOutAny", "Jobs")', dataType: "json",
+                    type: "POST",
+                    data: { term: request.term },
+                    success: function (data) {
+                        if (data.length > 0) {
+                            var locationDiv = $('input#search-empLoca').next();
+                            for (i = 0; i < locationDiv.length - 1; i++) {
+                                locationDiv[i].style.display = "none";
+                            }
+                            $('input#search-empLoca').next().treeview({
+                                levels: 1,
+                                showTags: true,
+                                color: "white",
+                                backColor: "transparent",
+                                expandIcon: 'glyphicon glyphicon-plus',
+                                collapseIcon: 'glyphicon  glyphicon-minus',
+                                onhoverColor: "rgba(0, 0, 0, 0.69)",
+                                data: data
+                            }).on('nodeSelected', function (event, node) {
+                                var code = node.text;
+                                var cls;
+                                cls = $.trim(code.split(' ')[3]);
+                                var code = $.trim(node.text);
+                                var id = node.value;
+                                code = code.replace(">", "").replace(">", "").replace(">", "").replace(">", "");
+                                node.value = $.trim(code);
+                                var code1 = $('#project').text();
+                                $('#project').text(code1 + node.value);
+                                $(this).siblings().val(code);
+                                locationDiv.style.display = "none";
+                            })
+                        }
+                    }
+                })
+            }
+        });
+            $("input#search-empText").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '@Url.Action("SearchEmployer", "Jobs")', dataType: "json",
+                        type: "POST",
+                        data: { term: request.term },
+                        success: function (data) {
+                            if (data.length > 0) {
+                                //var employerDiv = document.getElementById("emptreepostJob");
+                                //employerDiv.style.display = "block";
+                                var employerDiv = $('input#search-empText').next();
+                                for (i = 0; i < employerDiv.length - 1; i++) {
+                                    employerDiv[i].style.display = "none";
+                                }
+                                $('input#search-empText').next().treeview({
+                                    levels: 1,
+                                    showTags: true,
+                                    color: "white",
+                                    backColor: "transparent",
+                                    expandIcon: 'glyphicon glyphicon-plus',
+                                    collapseIcon: 'glyphicon  glyphicon-minus',
+                                    onhoverColor: "rgba(0, 0, 0, 0.69)",
+                                    data: data
+                                }).on('nodeSelected', function (event, node) {
+                                    var code1 = $('#project').text();
+                                    $('#project').text(code1 + node.value);
+                                    var id = node.value;
+                                    var code = $.trim(node.text);
+                                    node.value = code;
+                                    $(this).siblings().val(code);
+                                    employerDiv.style.display = "none";
+                                })
+                            }
+                        }
+                    })
+                }
+            });
+        }
+
+        $('input#search-empLocaa').autocomplete(
+        {
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("SearchLocationWithOutAny", "Jobs")', dataType: "json",
+                    type: "POST",
+                    data: { term: request.term },
+                    success: function (data) {
+                        if (data.length > 0) {
+                            var locationDiv = document.getElementById("searchable-empLocationtree");
+                            locationDiv.style.display = "block";
+                            $('#loctreepostJob').treeview({
+                                levels: 1,
+                                showTags: true,
+                                color: "white",
+                                backColor: "transparent",
+                                expandIcon: 'glyphicon glyphicon-plus',
+                                collapseIcon: 'glyphicon  glyphicon-minus',
+                                onhoverColor: "rgba(0, 0, 0, 0.69)",
+                                data: data
+                            }).on('nodeSelected', function (event, node) {
+                                var code = node.text;
+                                var cls;
+                                cls = $.trim(code.split(' ')[3]);
+                                var code = $.trim(node.text);
+                                var id = node.value;
+                                code = code.replace(">", "").replace(">", "").replace(">", "").replace(">", "");
+                                node.value = $.trim(code);
+                                var code1 = $('#project').text();
+                                $('#project').text(code1 + node.value);
+                                $(this).siblings().val(code);
+                                locationDiv.style.display = "none";
+                            })
+                        }
+                    }
+                })
+            }
+        });
+
+        $("input#search-empText").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("SearchEmployer", "Jobs")', dataType: "json",
+                    type: "POST",
+                    data: { term: request.term },
+                    success: function (data) {
+                        if (data.length > 0) {
+                            var employerDiv = document.getElementById("emptreepostJob");
+                            employerDiv.style.display = "block";
+                            $('#emptreepostJob').treeview({
+                                levels: 1,
+                                showTags: true,
+                                color: "white",
+                                backColor: "transparent",
+                                expandIcon: 'glyphicon glyphicon-plus',
+                                collapseIcon: 'glyphicon  glyphicon-minus',
+                                onhoverColor: "rgba(0, 0, 0, 0.69)",
+                                data: data
+                            }).on('nodeSelected', function (event, node) {
+                                var code1 = $('#project').text();
+                                $('#project').text(code1 + node.value);
+                                var id = node.value;
+                                var code = $.trim(node.text);
+                                node.value = code;
+                                $(this).siblings().val(code);
+                                employerDiv.style.display = "none";
+                            })
+                        }
+                    }
+                })
+            }
+        });
+
+        $('input#search-empLoca').autocomplete(
+        {
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("SearchLocationWithOutAny", "Jobs")', dataType: "json",
+                    type: "POST",
+                    data: { term: request.term },
+                    success: function (data) {
+                        if (data.length > 0) {
+                            var locationDiv = $('input#search-empLoca').next()
+                            locationDiv[0].style.display = "block";
+                            $('#loctreepostJob').treeview({
+                                levels: 1,
+                                showTags: true,
+                                color: "white",
+                                backColor: "transparent",
+                                expandIcon: 'glyphicon glyphicon-plus',
+                                collapseIcon: 'glyphicon  glyphicon-minus',
+                                onhoverColor: "rgba(0, 0, 0, 0.69)",
+                                data: data
+                            }).on('nodeSelected', function (event, node) {
+                                var code = node.text;
+                                var cls;
+                                cls = $.trim(code.split(' ')[3]);
+                                var code = $.trim(node.text);
+                                var id = node.value;
+                                code = code.replace(">", "").replace(">", "").replace(">", "").replace(">", "");
+                                node.value = $.trim(code);
+                                var code1 = $('#project').text();
+                                $('#project').text(code1 + node.value);
+                                $(this).siblings().val(code);
+                                locationDiv.style.display = "none";
+                            })
+                        }
+                    }
+                })
+            }
+        });
+
+        $('input#search-empOccu').autocomplete(
+        {
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("SearchOccupation", "Jobs")', dataType: "json",
+                    type: "POST",
+                    data: { term: request.term },
+                    success: function (data) {
+                        if (data.length > 0) {
+                            var occupationDiv = document.getElementById("occutreepostJob");
+                            occupationDiv.style.display = "block";
+                            $('#occutreepostJob').treeview({
+                                levels: 1,
+                                showTags: true,
+                                color: "white",
+                                backColor: "transparent",
+                                expandIcon: 'glyphicon glyphicon-plus',
+                                collapseIcon: 'glyphicon  glyphicon-minus',
+                                onhoverColor: "rgba(0, 0, 0, 0.69)",
+                                data: data
+                            }).on('nodeSelected', function (event, node) {
+                                var code = node.text;
+                                var id = node.value.split(' ')[1].length
+                                var cls;
+                                cls = $.trim(code.split(' ')[3]);
+                                if (id != 4) {
+                                    alert('Please select an option beginning with Tier 4.');
+                                    $(this).val('');
+                                    return false;
+                                }
+                                else {
+                                    $(this).siblings().val(node.text);
+                                    var code = $.trim(node.text);
+                                    code = code.replace(">", "").replace(">", "").replace(">", "").replace(">", "");
+                                    var items = node.value.split(' ');
+                                    if (items.length > 1) {
+                                        $('input#ISICRev4Id').val(items[0]);
+                                    }
+                                    else {
+                                        $('input#ISICRev4Id').val(ui.item.value);
+                                    }
+                                    node.value = $.trim(code);
+                                    var code1 = $('#project').text();
+                                    $('#project').text(code1 + node.value);
+                                    if (code != "- Any -") {
+                                        node.value = code;
+                                    }
+                                    occupationDiv.style.display = "none";
+                                }
+                            })
+                        }
+                    }
+                })
+            }
+        });
+
+        $('input#search-empInd').autocomplete(
+        {
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("SearchIndustry", "Jobs")', dataType: "json",
+                    type: "POST",
+                    data: { term: request.term },
+                    success: function (data) {
+                        if (data.length > 0) {
+                            var industryDiv = document.getElementById("indtreepostJob");
+                            industryDiv.style.display = "block";
+                            $('#indtreepostJob').treeview({
+                                levels: 1,
+                                showTags: true,
+                                color: "white",
+                                backColor: "transparent",
+                                expandIcon: 'glyphicon glyphicon-plus',
+                                collapseIcon: 'glyphicon  glyphicon-minus',
+                                onhoverColor: "rgba(0, 0, 0, 0.69)",
+                                data: data
+                            }).on('nodeSelected', function (event, node) {
+                                readyToClose = false;
+                                $("#divIndSel").show();
+                                var position = $("input#search-empInd").offset();
+                                $(".ui-autocomplete").css("top", position.top + 20);
+                                var id = node.value;
+                                var sect = node.value.split(' ')[2];
+                                var code = $.trim(node.text);
+                                node.text = '';
+                                node.value = '';
+                                var exist = 0;
+                                var clength;
+                                var c1;
+                                var c2;
+                                if (code == '- Any -') {
+                                    var lst = "<option selected='true' value='0'>" + code + "</option>";
+                                    $(".IndustrySelect").html(lst);
+                                    return;
+                                }
+                                c1 = $.trim(id.split(' ')[1]);
+                                if (id != '') {
+                                    $(".IndustrySelect option").each(function () {
+
+                                        c2 = $.trim($(this).val().split(' ')[1]);
+
+                                        if (exist == 1) {
+                                            return;
+                                        }
+                                        if (c1.length == 1) {
+                                            if ($(this).attr('indsection') == c1) {
+                                                $(".IndustrySelect option").each(function () {
+                                                    if ($(this).attr('indsection') == c1) 
+                                                    {
+                                                        $('input#search-empInd').textext()[0].tags().removeTag([this.text]);
+                                                        $(this).remove();
+                                                    }
+                                                });
+                                                var lst = "<option indsection='" + sect + "' selected='true' value='" + id + "'>" + code + "</option>";
+                                                $(".IndustrySelect").append(lst);
+                                                exist = 1;
+                                                return;
+                                            }
+                                        }
+                                        if (sect != null) {
+                                            if (sect == c2) {
+                                                alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                                exist = 1;
+                                                return;
+                                            }
+                                        }
+
+                                        if (c1 == c2) {
+                                            alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                            exist = 1;
+                                            return;
+                                        }
+
+                                        else {
+                                            if (c1.length > c2.length) {
+                                                if (c1.substring(0, c2.length) == c2) {
+                                                    alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                                    exist = 1;
+                                                    return;
+                                                }
+                                            }
+                                            else if (c1.length == 0) {
+                                                alert('This category is already exist');
+                                                exist = 1;
+                                                return;
+                                            }
+                                            else {
+                                                if (c2.substring(0, c1.length) == c1) {
+
+                                                    $(this).text(code);
+                                                    $(this).val(id);
+                                                    $(".IndustrySelect option").each(function () {
+                                                        if ($(this).val().split(' ')[1] != c1) {
+                                                            if ($(this).val().split(' ')[1].substring(0, c1.length) == c1) {
+                                                                $(this).remove();
+                                                            }
+                                                        }
+                                                    });
+                                                    exist = 1;
+                                                    return;
+                                                }
+                                            }
+                                        }
+                                        if ($(this).text() == "- Any -") {
+                                            $(".IndustrySelect").html('');
+
+                                        }
+                                    });
+                                }
+                                else {
+                                    exist = 1;
+                                }
+                                if (exist == 0) {
+                                    $(this).siblings().val(code);
+                                    var lst = "<option indsection='" + sect + "' selected='true' value='" + id + "'>" + code + "</option>";
+                                    $(".IndustrySelect").append(lst);
+                                    var lstid = "<option selected='true' value='" + id + "'>" + id + "</option>";
+                                    $(".IndustryID").append(lst);
+                                    industryDiv.style.display = "none";
+                                }
+                                $('#hdfI').val('1');
+
+                            })
+                        }
+                    }
+                })
+            }
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+        $('input#search-empIndustry').autocomplete(
+            {
+                source: function (request, response) {
+                    $.ajax({
+                        url: '@Url.Action("SearchIndustry", "Jobs")', dataType: "json",
+                        type: "POST",
+                        data: { term: request.term },
+                        success: function (data) {
+                            if (data.length > 0) {
+                                var IndustryDiv = document.getElementById("indtreepostJob");
+                                IndustryDiv.style.display = "block";
+                                $('#indtreepostJob').treeview({
+                                    levels: 1,
+                                    showTags: true,
+                                    color: "white",
+                                    backColor: "transparent",
+                                    expandIcon: 'glyphicon glyphicon-plus',
+                                    collapseIcon: 'glyphicon  glyphicon-minus',
+                                    onhoverColor: "rgba(0, 0, 0, 0.69)",
+                                    data: data
+                                }).on('nodeSelected', function (event, node) {
+                                    readyToClose = false;
+                                    $("#divIndSel").show();
+                                    var position = $("input#search-empIndustry").offset();
+                                    $(".ui-autocomplete").css("top", position.top + 20);
+                                    var id = node.value;
+                                    var sect = node.value.split(' ')[0];
+                                    var code = $.trim(node.text);
+                                    var cls = node.value.split(' ')[1].length
+                                    if (cls != 4) {
+                                        alert('Please select an option beginning with Tier 4.');
+                                        $(this).val('');
+                                        return false;
+                                    }
+                                    else {
+                                        $(this).siblings().val(code);
+                                        if (code != "- Any -") {
+                                            code = code.replace(">", "").replace(">", "").replace(">", "").replace(">", "");
+                                            code = $.trim($(code).text());
+                                            node.value = code;
+                                            $('hidden#ISCO08Id').val(id);
+                                            var code1 = $('#project').text();
+                                            $('#project').text(code1 + node.value);
+                                        }
+                                        IndustryDiv.style.display = "none";
+                                    }
+                                })
+                            }
+                        }
+                    });
+                }
+            });
+        var readyToClose = false;
+        var sel = false;
+        $('body').click(function () {
+            if (sel == false)
+                $('.ui-autocomplete').hide('');
+            sel = false;
+        });
+
+        $("#btnFind").click(function () {
+
+            $(".OccupationSelect").find("option").attr("selected", true);
+            $(".IndustrySelect").find("option").attr("selected", true);
+
+        });
+
+        $('.ui - autocomplete').click(function () {
+            $('.ui-autocomplete').show();
+        });
+
+        $(function () {
+            if ($(".OccupationSelect > option").length == 0)
+                $("#divOccSel").hide();
+            else
+                $("#divOccSel").show();
+
+            if ($(".IndustrySelect > option").length == 0)
+                $("#divIndSel").hide();
+            else
+                $("#divIndSel").show();
+
+        });
+
+        $("#btnOremove").click(function () {
+            $(".OccupationSelect > option:selected").each(function () {
+                $(this).remove();
+            });
+            if ($(".OccupationSelect > option").length == 0)
+                $("#divOccSel").hide();
+        });
+
+        $("#btnIremove").click(function () {
+            $(".IndustrySelect > option:selected").each(function () {
+                $(this).remove();
+            });
+            if ($(".IndustrySelect > option").length == 0)
+                $("#divIndSel").hide();
+        });
+
+        $('input#search-empOccuj').keyup(function (e) {
+            if (e.keyCode != 9) {
+                $('#hdf').val('');
+                if (e.which == 27) {
+                    readyToClose = true;
+                    $('input#search-empOccuj').autocomplete('close');
+                }
+            }
+        });
+        $("input#search-empOccuj").keypress(function (e) {
+            if (!e) e = window.event;
+
+            if (e.keyCode == '27' || e.keyCode == '13') {
+                readyToClose = true;
+                $('input#search-empOccuj').autocomplete('close');
+                return false;
+            }
+        });
+
+        $('#search-empOccuj').textext({ plugins: 'tags' }).bind('tagClick', function (e, tag, value, callback) {
+        });
+
+        $('textarea#search-empOccuj').autocomplete(
+            {
+                source: function (request, response) {
+                    $.ajax({
+                        url: '@Url.Action("SearchOccupation", "Jobs")', dataType: "json",
+                        type: "POST",
+                        data: { term: request.term },
+                        success: function (data) {
+                            if (data.length > 0) {
+                                var OccupationDiv = document.getElementById("occutreepostJob");
+                                OccupationDiv.style.display = "block";
+                                $('#occutreepostJob').treeview({
+                                    levels: 1,
+                                    showTags: true,
+                                    color: "white",
+                                    backColor: "transparent",
+                                    expandIcon: 'glyphicon glyphicon-plus',
+                                    collapseIcon: 'glyphicon  glyphicon-minus',
+                                    onhoverColor: "rgba(0, 0, 0, 0.69)",
+                                    data: data
+                                }).on('nodeSelected', function (event, node) {
+                                    readyToClose = false;
+                                    //$("#divOccSel").show();
+                                    var position = $("textarea#search-empOccuj").offset();
+                                    $(".ui-autocomplete").css("top", position.top + 20);
+                                    readyToClose = false;
+                                    var id = node.value;
+                                    var code = $.trim(node.text);
+                                    node.label = '';
+                                    node.value = '';
+                                    var exist = 0;
+                                    var clength;
+                                    var c1;
+                                    var c2;
+                                    if (code == '- Any -') {
+                                        $(".OccupationSelect option").each(function () {
+                                            $('textarea#search-empOccuj').textext()[0].tags().removeTag([this.text]);
+                                            $(this).remove();
+                                        });
+                                        var lst = "<option selected='true' value='0'>" + code + "</option>";
+                                        $(".OccupationSelect").html(lst);
+                                        var terms = split($('textarea#search-empOccuj').val());
+                                        if (terms.length <= 3) {
+                                            // remove the current input
+                                            terms.pop();
+                                            // add the selected item
+                                            terms.push(node.text);
+                                            // add placeholder to get the comma-and-space at the end
+                                            terms.push("");
+                                            //$('textarea#IndustrySearch').val(terms.join(", "));
+                                            $('textarea#search-empOccuj').textext()[0].tags().addTags([node.text]);
+                                            return false;
+                                        } else {
+                                            var last = terms.pop();
+                                            $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
+                                            $(this).effect("highlight", {}, 1000);
+                                            $(this).attr("style", "border: solid 1px red;");
+                                            return false;
+                                        }
+                                        return;
+                                    }
+                                    c1 = $.trim(id.split(' ')[1]);
+                                    if (id != '') {
+                                        $(".OccupationSelect option").each(function () {
+                                            c2 = $.trim($(this).val().split(' ')[1]);
+                                            if (exist == 1) {
+                                                return;
+                                            }
+                                            if (c1 == c2) {
+                                                alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                                exist = 1;
+                                                return;
+                                            }
+
+                                            else {
+                                                if (c1.length > c2.length) {
+                                                    if (c1.substring(0, c2.length) == c2) {
+                                                        alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                                        exist = 1;
+                                                        return;
+                                                    }
+                                                }
+                                                else if (c1.length == 0) {
+                                                    alert('This category is already exist');
+                                                    exist = 1;
+                                                    return;
+                                                }
+                                                else {
+                                                    if (c2.substring(0, c1.length) == c1) {
+                                                        $('textarea#search-empOccuj').textext()[0].tags().removeTag([this.text]);
+                                                        $('textarea#search-empOccuj').textext()[0].tags().addTags([code]);
+                                                        $(this).text(code);
+                                                        $(this).val(id);
+                                                        $(".OccupationSelect option").each(function () {
+                                                            if ($(this).val().split(' ')[1] != c1) {
+                                                                if ($(this).val().split(' ')[1].substring(0, c1.length) == c1) {
+                                                                    $('textarea#search-empOccuj').textext()[0].tags().removeTag([this.text]);
+                                                                    $(this).remove();
+                                                                }
+                                                            }
+                                                        });
+                                                        exist = 1;
+                                                        return;
+                                                    }
+                                                }
+                                            }
+                                            if ($(this).text() == "- Any -") {
+                                                $(".OccupationSelect").html('');
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        exist = 1;
+                                    }
+                                    if (exist == 0) {
+                                        var lst = "<option selected='true' value='" + id + "'>" + code + "</option>";
+                                        $(".OccupationSelect").append(lst);
+                                        var terms = split($('textarea#search-empOccuj').val());
+                                        if (terms.length <= 3) {
+                                            // remove the current input
+                                            terms.pop();
+                                            // add the selected item
+                                            terms.push(node.text);
+                                            // add placeholder to get the comma-and-space at the end
+                                            terms.push("");
+                                            //$('textarea#IndustrySearch').val(terms.join(", "));
+                                            $('textarea#search-empOccuj').textext()[0].tags().addTags([node.text]);
+                                            return false;
+                                        } else {
+                                            var last = terms.pop();
+                                            $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
+                                            $(this).effect("highlight", {}, 1000);
+                                            $(this).attr("style", "border: solid 1px red;");
+                                            return false;
+                                        }
+                                        //OccupationDiv.style.display = "none";
+                                    }
+                                    $('#hdf').val('1');
+                                });
+                            }
+                        }
+
+                    });
+                }
+            });
+      
+        $('input#search-empInd').keyup(function (e) {
+            if (e.keyCode != 9) {
+                $('#hdfI').val('');
+                if (e.which == 27) {
+                    readyToClose = true;
+                    $('input#search-empInd').autocomplete('close');
+                }
+            }
+        });
+
+        $("input#search-empInd").keypress(function (e) {
+            if (!e) e = window.event;
+            if (e.keyCode == '27' || e.keyCode == '13') {
+                readyToClose = true;
+                $('input#search-empInd').autocomplete('close');
+                return false;
+            }
+        });
+
+        $('input#search-empLocationSearch').keyup(function (e) {
+            if (e.keyCode != 9) {
+                $('#hdfL').val('');
+                if (e.which == 27) {
+                    readyToClose = true;
+                    $('input#search-empLocationSearch').autocomplete('close');
+                }
+            }
+        });
+
+        $("input#search-empLocationSearch").keypress(function (e) {
+            if (!e) e = window.event;
+            if (e.keyCode == '27' || e.keyCode == '13') {
+                readyToClose = true;
+                $('input#search-empLocationSearch').autocomplete('close');
+                return false;
+            }
+        });
+
+        $('input#search-empLocationSearch').autocomplete(
+            {
+                source: function (request, response) {
+                    $.ajax({
+                        url: '@Url.Action("SearchLocationWithOutAny", "Jobs")', dataType: "json",
+                        type: "POST",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.Value, value: item.Key };
+                            }))
+                        }
+                    });
+                },
+                minLength: 1,
+                select: function (event, ui) {
+                    sel = true;
+                    readyToClose = false;
+                    var code = $.trim($(ui.item.label).text());
+                    code = code.replace(">", "").replace(">", "").replace(">", "").replace(">", "");
+                    ui.item.value = $.trim(code);
+                    $('#hdfL').val('1');
+                },
+                change: function (event, ui) {
+
+                    if (ui.item) {
+                        return;
+                    }
+                    if ($('#hdfL').val() == '') {
+                        $('input#search-empLocationSearch').val('');
+                        alert('The Location field contains invalid data. Please make a selection from the list without editing the selection you make.');
+                    }
+
+                }
+            });
+
+        function showtip(id) {
+            var img = $(id);
+            var title = $(img).attr("alt");
+            $(img).opentip(title, { showEffect: 'blindDown', tipJoint: "top left", removeElementsOnHide: true, stem: true, target: true, tipjoint: ['center', 'top'], hideTrigger: "tip", hideTriggers: ["trigger", "tip"], showOn: "creation", hideOn: "mouseout", fixed: true, background: "rgb(234, 236, 240)", borderColor: "rgb(187, 187, 187)" });
+        }
+    </script>
+    <script type="text/javascript">
+        var readyToClose = false;
+        $(function () {
+            $(':input[data-autocomplete]').each(function () {
+                $(this).autocomplete({
+                    source: $(this).attr('data-autocomplete')
+                });
+            });
+        });
+
+        $('#search-empLocationpost').textext({ plugins: 'tags' }).bind('tagClick', function (e, tag, value, callback) {
+        });
+
+        //PostJob
+        $('textarea#search-empLocationpost').autocomplete(
+         {
+             source: function (request, response) {
+                 $.ajax({
+                     url: '@Url.Action("getLocation", "Jobs")', dataType: "json",
+                     type: "POST",
+                     data: { term: request.term },
+                     success: function (data) {
+                         if (data.length > 0) {
+                             var locationDiv = document.getElementById("searchable-empLocationtree");
+                             locationDiv.style.display = "block";
+                             $('#searchable-empLocationtree').treeview({
+                                 levels: 1,
+                                 showTags: true,
+                                 color: "white",
+                                 backColor: "transparent",
+                                 expandIcon: 'glyphicon glyphicon-plus',
+                                 collapseIcon: 'glyphicon  glyphicon-minus',
+                                 onhoverColor: "rgba(0, 0, 0, 0.69)",
+                                 data: data
+                             }).on('nodeSelected', function (event, node) {
+                                 $('textarea#search-empLocationpost').val('');
+                                 sel = true;
+                                 readyToClose = false;
+                                 //$("#divAlertLocSel").show();
+                                 var position = $("textarea#search-empLocationpost").offset();
+                                 $(".ui-autocomplete").css("top", position.top + 20);
+                                 var code = $.trim(node.text);
+                                 var id = node.value;
+                                 if ($(".LocationAlert option").length > 9) {
+                                     alert("You can select up to 10 Location categories. Consider wider selections, such as 'Anywhere', or 'Europe', or filter by occupation or industry instead.");
+                                     return false;
+                                 }
+                                 if (code == "- Anywhere -") {
+                                     if ($(".LocationAlert option").length > 0) {
+                                         alert("Please delete other locations before selecting 'Anywhere'");
+                                         this.value = '';
+                                         return false;
+                                     }
+                                     var lst = "<option selected='true' value='0:1'>- Anywhere -</option>";
+                                     $(".LocationAlert").html(lst);
+                                     $('#LocationSearch').val('');
+                                     this.value = '';
+                                     return false;
+                                 }
+
+                                 var c2
+                                 var nid;
+                                 var oid;
+                                 var ot;
+                                 var nt;
+                                 var exist = 0;
+                                 nid = id.split(':')[0];
+                                 nt = id.split(':')[1];
+
+                                 var n = nid.split(',');
+                                 var pt = code.replace('>', '').replace('>', '').replace('>', '').replace('>', '');
+                                 var gd = '';
+                                 if (nt == 5) {
+                                     $.ajax({
+                                         url: '@Url.Action("GetLocationGroupDetails", "Jobs")', dataType: "json",
+                                         type: "POST",
+                                         data: { groupId: nid },
+                                         async: false,
+                                         success: function (data) {
+                                             gd = data;
+                                         }
+                                     });
+                                 }
+                                 var gdt = gd.split(',');
+                                 $(".LocationAlert option").each(function () {
+
+                                     if (exist == 1)
+                                         return;
+                                     oid = $(this).val().split(':')[0];
+                                     ot = $(this).val().split(':')[1];
+                                     var o = oid.split(',');
+
+                                     if (oid == nid) {
+                                         alert('This location is already covered by ' + $(this).text());
+                                         exist = 1;
+                                         return;
+                                     }
+                                     var cn = 1;
+                                     var len = o.length > n.length ? o.length : n.length;
+                                     for (var i = len - 1; i >= 0; i--) {
+                                         if (ot < nt) {
+                                             if (ot == 1) {
+                                                 if (o[i] == n[i]) {
+                                                     alert('The location you have tried to add is already covered by a parent location.');
+                                                     exist = 1;
+                                                     return;
+                                                 }
+                                             }
+
+                                             else {
+                                                 if (i <= nt - 2) {
+
+                                                     if (o[i] == n[i] && o[i + 1] == n[i + 1]) {
+                                                         alert('The location you have tried to add is already covered by a parent location.');
+                                                         exist = 1;
+                                                         return;
+                                                     }
+                                                 }
+                                             }
+                                         }
+
+                                         else if (ot > nt) {
+                                             if (i >= nt - 1) {
+                                                 if (o[i] == n[i]) {
+                                                     alert('\"' + pt + '\" has subsidiary locations already selected. Please remove the subsidiary locations, then you can select \"' + pt + '\".');
+                                                     exist = 1;
+                                                     return;
+                                                 }
+                                             }
+                                         }
+                                         else {
+                                             if (i >= nt - 1) {
+                                                 if (o[i] == n[i]) {
+                                                     alert('\"' + pt + '\" has subsidiary locations already selected. Please remove the subsidiary locations, then you can select \"' + pt + '\".');
+                                                     exist = 1;
+                                                     return;
+                                                 }
+                                             }
+                                         }
+                                     }
+                                     c2 = $(this).text();
+                                     if (code == c2) {
+                                         alert('This location is already exist');
+                                         exist = 1;
+                                         return;
+                                     }
+
+                                     if ($(this).text() == "- Anywhere -") {
+                                         $(".LocationAlert").html('');
+                                     }
+                                 });
+
+                                 var location = '';
+                                 if (nt == 5 && exist == 0) {
+
+                                     $.ajax({
+                                         url: '@Url.Action("GetLocationDetails", "Jobs")', dataType: "json",
+                                         type: "get",
+                                         data: { groupId: nid },
+                                         async: false,
+                                         success: function (data) {
+                                             if (data == 'True') {
+                                                 alert('The location you have tried to add is already selected');
+                                                 exist = 1;
+                                                 return false;
+                                             }
+                                         },
+                                         error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                             //alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                                         }
+                                     });
+                                 }
+
+                                 if (nt == 1 && exist == 0) {
+                                     $.ajax({
+                                         url: '@Url.Action("CheckCountryExists", "Jobs")', dataType: "json",
+                                         type: "get",
+                                         data: { countryId: nid, type: nt },
+                                         async: false,
+                                         success: function (data) {
+                                             if (data != 'false' && data != '') {
+                                                 alert('The location you have tried to add is already covered by ' + data.split('#')[0]);
+                                                 exist = 1;
+                                                 return;
+                                             }
+                                         },
+                                         error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                             //alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                                         }
+                                     });
+                                 }
+
+                                 if (nt == 2 && exist == 0) {
+                                     $.ajax({
+                                         url: '@Url.Action("CheckLocationExists", "Jobs")', dataType: "json",
+                                         type: "get",
+                                         data: { locationId: nid, type: nt },
+                                         async: false,
+                                         success: function (data) {
+                                             if (data != 'false' && data != '') {
+                                                 alert('The location you have tried to add is already covered by ' + data.split('#')[0]);
+                                                 exist = 1;
+                                                 return;
+                                             }
+                                         },
+                                         error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                             //alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                                         }
+                                     });
+                                 }
+
+                                 if (nt == 3 && exist == 0) {
+                                     $.ajax({
+                                         url: '@Url.Action("CheckSubLocationExists", "Jobs")', dataType: "json",
+                                         type: "get",
+                                         data: { sublocationId: nid, type: nt },
+                                         async: false,
+                                         success: function (data) {
+                                             if (data != 'false' && data != '') {
+                                                 alert('The location you have tried to add is already covered by ' + data.split('#')[0]);
+                                                 exist = 1;
+                                                 return;
+                                             }
+                                         },
+                                         error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                             //alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                                         }
+                                     });
+                                 }
+
+                                 if (nt == 4 && exist == 0) {
+                                     $.ajax({
+                                         url: '@Url.Action("CheckSubSubLocationExists", "Jobs")', dataType: "json",
+                                         type: "get",
+                                         data: { subsublocationId: nid, type: nt },
+                                         async: false,
+                                         success: function (data) {
+                                             if (data != 'false' && data != '') {
+                                                 alert('The location you have tried to add is already covered by ' + data.split('#')[0]);
+                                                 exist = 1;
+                                                 return;
+                                             }
+                                         },
+                                         error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                             //alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                                         }
+                                     });
+                                 }
+
+                                 if (exist == 0) {
+                                     $.ajax({
+                                         url: '@Url.Action("AddSearchLocations", "Jobs")', dataType: "json",
+                                         type: "get",
+                                         data: { locationId: nid, locationType: nt },
+                                         async: false,
+                                         success: function (data) { }
+                                     });
+                                 }
+
+                                 if (exist == 0) {
+                                     if (window.location.href.indexOf("JobSeeker") > -1) {
+                                         $('textarea#search-empLocationpost').val(code);
+                                     }
+                                     else {
+                                         $('textarea#search-empLocationpost').val('')
+                                     }
+                                     var lst = "<option selected='true' value='" + id + "'>" + code + "</option>";
+                                     var idarr = id.split(',');//code.split('>');
+                                     var idarrValue = "";
+                                     if (idarr.length > 2) {
+                                         idarrValue = idarr[idarr.length - 1];//code.split('>');
+                                         var idvalue = idarrValue.split(":");
+                                         var lstid = "<option selected='true' value='" + idvalue[0] + "'>" + idvalue[0] + "</option>";
+                                         var lstType = "<option selected='true' value='" + idarr.length + "'>" + idarr.length + "</option>";
+                                         $(".LocationID").append(lstid);
+                                         $(".LocationAlert").append(lst);
+                                         $(".LocationType").append(lstType);
+                                         var terms = split($('#search-empLocationpost').val());
+                                         if (terms.length <= 3) {
+                                             // remove the current input
+                                             terms.pop();
+                                             // add the selected item
+                                             terms.push(node.text);
+                                             // add placeholder to get the comma-and-space at the end
+                                             terms.push("");
+                                             //$('textarea#IndustrySearch').val(terms.join(", "));
+                                             $('textarea#search-empLocationpost').textext()[0].tags().addTags([node.text, 1]);
+                                             return false;
+                                         } else {
+                                             var last = terms.pop();
+                                             $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
+                                             $(this).effect("highlight", {}, 1000);
+                                             $(this).attr("style", "border: solid 1px red;");
+                                             return false;
+                                         }
+                                     }
+                                     else {
+                                         var idvalue = idarr[0].split(":");
+                                         var lstid = "<option selected='true' value='" + idvalue[0] + "'>" + idvalue[0] + "</option>";
+                                         var lstType = "<option selected='true' value='" + idarr.length + "'>" + idarr.length + "</option>";
+                                         $(".LocationID").append(lstid);
+                                         $(".LocationAlert").append(lst);
+                                         $(".LocationType").append(lstType);
+                                         var terms = split($('#search-empLocationpost').val());
+                                         if (terms.length <= 3) {
+                                             // remove the current input
+                                             terms.pop();
+                                             // add the selected item
+                                             terms.push(node.text);
+                                             // add placeholder to get the comma-and-space at the end
+                                             terms.push("");
+                                             //$('textarea#IndustrySearch').val(terms.join(", "));
+                                             $('textarea#search-empLocationpost').textext()[0].tags().addTags([node.text, 1]);
+                                             return false;
+                                         } else {
+                                             var last = terms.pop();
+                                             $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
+                                             $(this).effect("highlight", {}, 1000);
+                                             $(this).attr("style", "border: solid 1px red;");
+                                             return false;
+                                         }
+                                     }
+                                     locationDiv.style.display = "none";
+                                 }
+                                 return false;
+                             });
+                         }
+                     }
+                 });
+             }
+         });
+
+        $("#btnLocREmove").click(function () {
+            $("#LocationSelect > option:selected").each(function () {
+                if ($(this).val().split(':')[1] == '5') {
+                    $("#RemoveSelectedLocation").append($('<option>').text($(this).text()).val($(this).text()));
+                }
+                else {
+                    $("#RemoveSelectedLocation").append($('<option>').text($(this).val()).val($(this).val()));
+                }
+
+                $(this).remove();
+            });
+
+            var arr = new Array();
+            $("#RemoveSelectedLocation option").each(function () {
+                arr.push($(this).text());
+            });
+
+            $.ajax({
+                url: "/Jobs/RemoveSelected.shtml",
+                dataType: "JSON",
+                type: "post",
+                data: { groupName: arr },
+                async: false,
+                success: function (data) {
+
+                    $(arr).each(function () {
+                        $("#RemoveSelectedLocation option").remove(":contains(" + $(arr).val() + ")");
+                    });
+
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                }
+            });
+        });
+
+        //PostJob
+
+        function get_filename1(obj, type, ftype) {
+            if (type == 2) {
+                if ($('.Attachresume1')[0].files[0] != null) {
+                    var file = $('.Attachresume1')[0].files[0].name; // $('.Attachresume').val(); //  document.getElementById('Attachresume').files[0];
+                    if (file != '') {
+                        if (file == obj.files[0].name) {
+                            alert('The Cover Letter you are trying to attach has the same name and size as the file you have attached as your CV. Please choose the correct file, or you may proceed without attaching a Cover Letter.');
+                            clearContents1(obj.id);
+                            return;
+                        }
+                    }
+                }
+            }
+            if (type == 1) {
+                if ($('.CoverLetterOptional1')[0].files[0] != null) {
+                    var file = $('.CoverLetterOptional1')[0].files[0].name; // $('.CoverLetterOptional').val(); // document.getElementById('CoverLetterOptional').files[0];
+                    if (file != '') {
+                        if (file == obj.files[0].name) {
+                            alert('The CV you are trying to attach has the same name and size as the file you have attached as your Cover Letter. Please choose a different file as your CV, or remove the file you have attached as your Cover Letter.');
+                            clearContents1(obj.id);
+                            return;
+                        }
+                    }
+                }
+            }
+            $.ajax({
+                type: 'get',
+                url: '@Url.Action("CheckFileExt", "Work")',
+                data: {
+                    ext: obj.value,
+                    type: type,
+                    size: obj.files[0].size,
+                    ftype: ftype
+                },
+                cache: false,
+                dataType: 'json',
+                success: function (data) {
+
+                    if (data.data == "1") {
+                        alert(data.msg);
+                        clearContents1(obj.id);
+                    }
+                }
+            })
+        }
+        function clearContents1(ele) {
+            var file = $('.' + ele + '1'); //document.getElementById(ele);
+            file.select();
+            file.val('');
+            file.focus();
+            if (ele == 'file2') {
+                $('#prev_file2').html('');
+            }
+        }
+
+        $('a').on('click', function () {
+            var target = $(this).attr('rel');
+            $("#" + target).show().siblings("div").hide();
+        });
+        $(document).ready(function () {
+            $("#div1").show();
+            $("#div2").hide();
+            $("#div3").hide();
+        });
+
+        function split(val) {
+            return val.split(/,\s*/);
+        }
+        function extractLast(term) {
+            return split(term).pop();
+        }
+
+        $('#IndustrySearch').textext({ plugins: 'tags' }).bind('tagClick', function (e, tag, value, callback) {
+        });
+        $('#IndustrySearch').autocomplete(
+        {
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("SearchIndustryWithAny", "Jobs")', dataType: "json",
+                    type: "POST",
+                    data: { term : extractLast(request.term) },
+                    success: function (data) {
+                        if (data.length > 0) {
+                             var toAppend = '';
+                               $.each(data,function(i,o){
+                                   toAppend += '<option value=' + o.value + '>' + o.text + '</option>';
+                              });
+                               $('.chosen-select').append(toAppend);
+                            var locationDiv = document.getElementById("indtreepostJob");
+                            locationDiv.style.display = "block";
+                            $('#indtreepostJob').treeview({
+                                levels: 1,
+                                showTags: true,
+                                color: "white",
+                                backColor: "transparent",
+                                expandIcon: 'glyphicon glyphicon-plus',
+                                collapseIcon: 'glyphicon  glyphicon-minus',
+                                onhoverColor: "rgba(0, 0, 0, 0.69)",
+                                data: data
+
+                            }).on('nodeSelected', function (event, node) {
+                                readyToClose = false;
+                                //$("#divAlertIndSel").show();
+                                var position = $("textarea#IndustrySearch").offset();
+                                $(".ui-autocomplete").css("top", position.top + 20);
+                                readyToClose = false;
+                                var id = node.value;
+                                if (node.value != null)
+                                    var sect = node.value.split(' ')[2];
+                                var code = $.trim(node.text);
+                                node.label = '';
+                                node.value = '';
+                                var exist = 0;
+                                var clength;
+                                var c1;
+                                var c2;
+
+                                if (code == '- Any -') {
+                                    $(".IndustryAlert option").each(function () {
+                                        $('textarea#IndustrySearch').textext()[0].tags().removeTag([this.text]);
+                                        $(this).remove();
+                                    });
+                                    var lst = "<option selected='true' value='0'>" + code + "</option>";
+                                    $(".IndustryAlert").html(lst);
+                                    var terms = split($('textarea#IndustrySearch').val());
+                                    if (terms.length <= 3) {
+                                        // remove the current input
+                                        terms.pop();
+                                        // add the selected item
+                                        terms.push(node.text);
+                                        // add placeholder to get the comma-and-space at the end
+                                        terms.push("");
+                                        //$('textarea#IndustrySearch').val(terms.join(", "));
+                                        $('textarea#IndustrySearch').textext()[0].tags().addTags([node.text]);
+                                        return false;
+                                    } else {
+                                        var last = terms.pop();
+                                        $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
+                                        $(this).effect("highlight", {}, 1000);
+                                        $(this).attr("style", "border: solid 1px red;");
+                                        return false;
+                                    }
+                                    return;
+                                }
+                                if ($(".IndustryAlert option").length > 9) {
+                                    alert("You can select up to 10 industry categories. Consider selecting a smaller number of higher tiers to be alerted to a greater range of vacancies.");
+                                    return false;
+                                }
+
+                                c1 = $.trim(id.split(' ')[1]);
+                                if (id != '') {
+                                    $(".IndustryAlert option").each(function () {
+                                        c2 = $.trim($(this).val().split(' ')[1]);
+                                        if (exist == 1) {
+                                            return;
+                                        }
+                                        if (c1.length == 1) {
+                                            if ($(this).attr('indsection') == c1) {
+                                                $(".IndustryAlert option").each(function () {
+                                                    if ($(this).attr('indsection') == c1) {
+                                                        $(this).remove();
+                                                        $('textarea#IndustrySearch').textext()[0].tags().removeTag([this.text])
+                                                    }
+                                                });
+                                                var lst = "<option indsection='" + sect + "' selected='true' value='" + id + "'>" + code + "</option>";
+                                               ;
+                                                $('textarea#IndustrySearch').textext()[0].tags().addTags([code]);
+                                                $(".IndustryAlert").append(lst);
+                                                exist = 1;
+                                                return;
+                                            }
+                                        }
+                                        if (c1 == c2) {
+                                            alert('You have already selected ' + $(this).text());
+                                            exist = 1;
+                                            return;
+                                        }
+                                        if (sect != null) {
+                                            if (sect == c2) {
+                                                alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                                exist = 1;
+                                                return;
+                                            }
+                                        }
+                                        if (c1 == c2) {
+                                            alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                            exist = 1;
+                                            return;
+                                        }
+
+                                        else {
+                                            if (c1.length > c2.length) {
+                                                if (c1.substring(0, c2.length) == c2) {
+                                                    alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                                    exist = 1;
+                                                    return;
+                                                }
+                                            }
+                                            else if (c1.length == 0) {
+                                                alert('This category is already exist');
+                                                exist = 1;
+                                                return;
+                                            }
+                                            else {
+                                                if (c2.substring(0, c1.length) == c1) {
+                                                    $(this).text(code);
+                                                    $(this).val(id);
+                                                    $(".IndustryAlert option").each(function () {
+
+                                                        if ($(this).val().split(' ')[1] != c1) {
+                                                            if ($(this).val().split(' ')[1].substring(0, c1.length) == c1) {
+                                                                $(this).remove();
+                                                            }
+                                                        }
+                                                    });
+                                                    exist = 1;
+                                                    return;
+                                                }
+                                            }
+                                        }
+                                        if ($(this).text() == "- Any -") {
+                                            $(".IndustryAlert").html('');
+
+                                        }
+                                    });
+                                }
+                                else {
+                                    exist = 1;
+                                }
+                                if (exist == 0) {
+                                    var lst = "<option indsection='" + sect + "' selected='true' value='" + id + "'>" + code + "</option>";
+                                    $(".IndustryAlert").append(lst);
+                                    var n = id.split(' ');
+                                    var lstid = "<option selected='true' value='" + n[0] + "'>" + n[0] + "</option>";
+                                    $(".IndustryID").append(lstid);
+                                    //locationDiv.style.display = "none";
+                                    var terms = split($('#IndustrySearch').val());
+                                    if (terms.length <= 3) {
+                                        // remove the current input
+                                        terms.pop();
+                                        // add the selected item
+                                        terms.push(node.text);
+                                        // add placeholder to get the comma-and-space at the end
+                                        terms.push("");
+                                        //$('textarea#IndustrySearch').val(terms.join(", "));
+                                        $('textarea#IndustrySearch').textext()[0].tags().addTags([node.text, 1]);
+                                        return false;
+                                    } else {
+                                        var last = terms.pop();
+                                        $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
+                                        $(this).effect("highlight", {}, 1000);
+                                        $(this).attr("style", "border: solid 1px red;");
+                                        return false;
+                                    }
+                                }
+                                $('#hdf').val('1');
+                                return false;
+                            })
+                        };
+                    }
+                });
+            }
+        });
+
+        $('input#Occupation').autocomplete(
+        {
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("SearchOccupationWithany", "Jobs")', dataType: "json",
+                    type: "POST",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Value, value: item.Key };
+                        }))
+                    }
+                });
+            },
+            // source: '<%= Url.Action("SearchOccupation", "Jobs")%>',
+            minLength: 1,
+            select: function (event, ui) {
+                sel = true;
+                $("#divAlertOccSel").show();
+                readyToClose = false;
+                var position = $("#OccupationSearch").offset();
+                $(".ui-autocomplete").css("top", position.top + 20);
+                var id = ui.item.value;
+                var sect = ui.item.value.split(' ')[2];
+                var code = $(ui.item.label).text();
+                ui.item.label = '';
+                ui.item.value = '';
+                var exist = 0;
+                var clength;
+                var c1;
+                var c2;
+                if (code == '- Any -') {
+                    var lst = "<option selected='true' value='0'>" + code + "</option>";
+                    $(".OccupationAlert").html(lst);
+                    return;
+                }
+                if ($(".OccupationAlert option").length > 9) {
+                    alert("You can select up to 10 occupational categories. Consider selecting a smaller number of higher tiers to be alerted to a greater range of vacancies.");
+                    return false;
+                }
+                c1 = $.trim(id.split(' ')[1]);
+                if (id != '') {
+                    $(".OccupationAlert option").each(function () {
+                        c2 = $.trim($(this).val().split(' ')[1]);
+
+                        if (exist == 1) {
+                            return;
+                        }
+                        if (sect != null) {
+                            if (sect == c2) {
+                                alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                exist = 1;
+                                return;
+                            }
+                        }
+                        if (c1 == c2) {
+                            alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                            exist = 1;
+                            return;
+                        }
+
+                        else {
+                            if (c1.length > c2.length) {
+                                if (c1.substring(0, c2.length) == c2) {
+                                    alert('This category is already covered by ' + $(this).text().replace(">", "").replace(">", "").replace(">", "").replace(">", ""));
+                                    exist = 1;
+                                    return;
+                                }
+                            }
+                            else if (c1.length == 0) {
+                                alert('This category is already exist');
+                                exist = 1;
+                                return;
+                            }
+                            else {
+                                if (c2.substring(0, c1.length) == c1) {
+                                    $(this).text(code);
+                                    $(this).val(id);
+                                    $(".OccupationAlert option").each(function () {
+                                        if ($(this).val().split(' ')[1] != c1) {
+                                            if ($(this).val().split(' ')[1].substring(0, c1.length) == c1) {
+                                                $(this).remove();
+                                            }
+                                        }
+                                    });
+                                    exist = 1;
+                                    return;
+                                }
+                            }
+                        }
+                        if ($(this).text() == "- Any -") {
+                            $(".OccupationAlert").html('');
+
+                        }
+                    });
+                }
+                else {
+                    exist = 1;
+                }
+                if (exist == 0) {
+
+                    var lst = "<option selected='true' value='" + id + "'>" + code + "</option>";
+                    $(".OccupationAlert").append(lst);
+                }
+
+                $('#hdf').val('1');
+
+            },
+            change: function (event, ui) {
+                if (ui.item) {
+                    return;
+                }
+                if ($('#hdf').val() == '') {
+                    $('#OccupationSearch').val('');
+                    alert('The Occupation field contains invalid data. Please make a selection from the list without editing the selection you make.');
+                }
+            }
+        });
+        $('#loadingbusy').hide();
+    </script>
+    <script src="~/Scripts/yg.js"></script>
+   
+    <!----- Banner Js -------->
+</body>
+</html>

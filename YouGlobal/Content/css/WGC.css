@@ -1,0 +1,154 @@
+#aspnetForm
+{
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+body
+{
+    font-family: Verdana, Arial, Sans-Serif;
+    font-size: smaller;
+}
+
+input, select, textarea
+{
+    font-family: Verdana, Arial, Sans-Serif;
+}
+
+table
+{
+    border: none;
+    border-collapse: collapse;
+}
+
+a:link, a:visited, a:active, a:hover
+{
+    text-decoration: none;
+    color: #3366cc;
+}
+
+a:hover
+{
+    text-decoration: underline;
+}
+
+body#left
+{
+    margin: 5px 5px 5px 5px; /*background-color: #88c045;     background-image: url('../_Images/background.jpg');      background-repeat: repeat-x;      background-position: top;*/
+}
+
+body#main
+{
+    margin: 5px 5px 5px 5px; /*background-color: #88c045;     background-image: url('../_Images/background.jpg');      background-repeat: repeat-x;      background-position: top;*/
+}
+
+div#header
+{
+    background-color: #9fcb68;
+    padding: 5px;
+    margin-bottom: 5px;
+    font-size: larger;
+    font-weight: bold;
+    color: #1b625e;
+}
+
+fieldset
+{
+    margin-bottom: 15px;
+    display: inline;
+}
+
+fieldset legend
+{
+    font-size: 1.0em;
+    padding-bottom: 5px;
+}
+
+.footer
+{
+    padding: 5px;
+}
+
+table.form th
+{
+    padding-top: 3px;
+    padding-right: 5px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    vertical-align: top;
+    text-align: left;
+    white-space: nowrap;
+}
+
+table.form td
+{
+    padding-top: 3px;
+    padding-right: 20px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    vertical-align: top;
+    white-space: nowrap;
+    height: 22px;
+}
+
+.required
+{
+    border-bottom: solid 1px red;
+}
+
+table.list th, table.form td table.list th
+{
+    border: solid 1px #bfb8bf;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 0px;
+    background-color: #cde3ab; /*#9fcb68;*/
+    color: #1b625e;
+    text-align: left;
+}
+
+table.list td, table.form td table.list td
+{
+    border: solid 1px #bfb8bf;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0px;
+    vertical-align: top;
+}
+
+.autocomplete_completionListElement
+{
+    visibility: hidden;
+    margin: 0px !important;
+    background-color: inherit;
+    color: windowtext;
+    border: buttonshadow;
+    border-width: 1px;
+    border-style: solid;
+    cursor: 'default';
+    overflow: auto;
+    height: 200px;
+    text-align: left;
+    list-style-type: none;
+}
+
+/* AutoComplete highlighted item */
+
+.autocomplete_highlightedListItem
+{
+    background-color: #ffff99;
+    color: black;
+    padding: 1px;
+}
+
+/* AutoComplete item */
+
+.autocomplete_listItem
+{
+    background-color: window;
+    color: windowtext;
+    padding: 1px;
+}

@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "ContactUsHtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/swfobject.js"></script>
+<script>
+    try {
+        function getRandomFlash2() {
+            return new SWFObject("/Content/flas/XML-CountrySelector.swf", "XML-CountrySelector", "425", "420", "20");
+        }
+    }
+    catch (err) {
+        alert(err.message);
+    }
+</script>
+
+<section class="container">
+    <div class="container-fluid">
+        <!--  secondary-nav start -->
+        <div class="container padding">
+            <div class="row secondary-nav secondary-nav-margin">
+                <div class="col-lg-4 col-md-4">
+                    <i>
+                        <img src="~/Content/images/imgs/01.png" alt="Job seekers">
+                    </i><a href="@Url.Action("JobSeeker", "Jobs" )" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m">Job seekers</a>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <i>
+                        <img src="~/Content/images/imgs/02.png" alt="Employers">
+                    </i>@if (Session["username"] != null && !string.IsNullOrEmpty(Session["username"].ToString()))
+            {<a href="@Url.Action("PostJob", "Jobs")" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a>}
+            else
+            {<a href="@Url.Action("UnSignedEmployerRecruiter", "Jobs" )" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a>}
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <i>
+                        <img src="~/Content/images/imgs/03.png" alt="Other services">
+                    </i><a href="@Url.Action("OtherServices", "Jobs" )" class="button btn-otherservices button--antiman button--inverted button--border-thin button--text-thick button--size-m">Other Services</a>
+                </div>
+            </div>
+        </div>
+        <!--  secondary-nav start -->
+
+        <div class="container nav-tabs-main">
+            <div class="col-md-12 innerpages" id="about-us">
+                <div class="row">
+                    <div class="form-group col-md-6 ">
+                        <h3>Global Directory</h3>
+                        <div id="flaGlobaldir">
+                            <script type="text/javascript">
+                                var so = getRandomFlash2();
+                                so.addParam("scale", "noscale");
+                                so.write("flaGlobaldir");
+                                // ]]>
+                            </script>
+                        </div>
+                    </div>
+                    <div class="col-md-6 row">
+                        <h3>Query</h3>
+                        <!-- Right form -->
+                        @using (Html.BeginForm("SendQuery", "Contact", new { ReturnUrl = "" }, FormMethod.Post, new { role = "form",@class= "form-inline cont" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <p style="color:red">* Indicates mandatory input</p>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="formLabel" for="firstName">
+                                        Full Name*
+                                    </label><input class="form-control" type="text" id="firstName" name="firstName" placeholder="Enter your full name"
+                                                   value="" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="formLabel" for="email">
+                                        Email*
+                                    </label><input class="form-control" type="text" id="email" name="email" value="" placeholder="Enter email address" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="formLabel" for="companyName">
+                                        Company Name
+                                    </label><input class="form-control" name="companyName" id="companyName" placeholder="enter company name"
+                                                   type="text" maxlength="500" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="formLabel" for="contactNo">
+                                        Contact Number*
+                                    </label><input class="form-control" name="contactNo" id="contactNo" type="text" placeholder="enter contact number"
+                                                   maxlength="100" /><br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label for="ContactTelephoneNumber">Comment</label>
+                                    <textarea rows="5" cols="25" class="form-control" name="comment" placeholder="enter comments below" id="comment"></textarea>
+                                    <p style="color:#fff;margin-top: 10px;">
+                                        Note:- Please do not use this form for sending in details of a CV or applying for a position. For that purpose, click the "Job seekers" button above.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-green btn-lg btn-block" id="contactSubmit"> Submit</button>
+                                <button type="reset" class="btn btn-green btn-lg btn-block">Clear</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!-- Social Media Section -->
+            </div>
+            <!-- container End -->
+        </div>
+    </div>
+</section>

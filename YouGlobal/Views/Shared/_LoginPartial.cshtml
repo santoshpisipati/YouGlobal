@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Session["username"]!=null && !string.IsNullOrEmpty(Session["username"].ToString()))
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Session["username"].ToString()
+        </li>
+        <li>@using (Html.BeginForm("Home", "Home", System.Web.Mvc.FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.ActionLink("logOff", "logOff", "Account")
+        }</li>
+    </ul>
+}
+else
+{
+    <ul>
+        <li><i class="fa fa-pencil-square-o"></i> @Html.ActionLink("Register", "RegisterJs", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li><i class="fa fa-user"></i> @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

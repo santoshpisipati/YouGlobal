@@ -1,0 +1,68 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="container">
+    <!-- Header Section Main div -->
+    <div class="container-fluid">
+        <!--  secondary-nav start -->
+        <div class="container padding">
+            <div class="row secondary-nav secondary-nav-margin">
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/04.png" alt="Job seekers"></i><a href="@Url.Action("LookingforStaff", "Staff")" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m active">Looking for Staff?</a></div>
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/05.png" alt="Job seekers"></i><a href="@Url.Action("JoinUsHtml", "Join")" class="button btn-active  button--antiman button--inverted button--border-thin button--text-thick button--size-m">Why Not Join Us ?</a></div>
+                @if (Session["username"] != null && !string.IsNullOrEmpty(Session["username"].ToString()))
+                {
+                    if (Session["loggedinas"] != null && !string.IsNullOrEmpty(Convert.ToString(Session["loggedinas"])))
+                    {
+                        Int32 loggedIn = Convert.ToInt32(Session["loggedinas"]);
+                        if (loggedIn == 1)
+                        {  @Html.Partial("LoginModal")
+                            <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Job seekers"></i>@Html.ActionLink("Post Job", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin" })</div> }
+                        else
+                        {
+                            <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Job seekers"></i><a href="@Url.Action("PostJob", "Jobs")" class="button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin">Post Job</a></div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Job seekers"></i><a href="@Url.Action("PostJob", "Jobs")" class="button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin">Post Job</a></div>
+                    }
+
+                }
+                else
+                {
+                    @Html.Partial("LoginModal")
+                    <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Job seekers"></i>@Html.ActionLink("Post Job", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin" })</div>
+                }
+            </div>
+        </div>
+        <!--  secondary-nav start -->
+
+        <div class="container nav-tabs-main">
+            <div class="col-xs-12 innerpages" id="about-us">
+
+                <h2>Why not join us</h2>
+
+                <p>YOU Global is always interested to hear from recruiters who are interested in joining its unique model.</p>
+                <h4>Benefits</h4>
+                <p>As a recruiter with YOU Global, you enjoy exclusive access to our global brand, our custom engineered system, our global jobseeker database, and many other benefits.</p>
+                <p>
+                    With our growing online presence, and excellent incentive program, the earning potential is limitless. You will join a growing worldwide team that makes up YOU Global, and who are ready to network and interact with the common objective of delivering our clients the best service in the business.
+                </p>
+                <p>
+                    Best of all, no capital investment is required.
+                </p>
+                <p>
+                    <a href="#" class="underline">Click Here</a> for an overview of features and benefits.
+                </p>
+                <p>
+                    Interested? @Html.ActionLink("Contact YOU Global", "ContactUsHtml", "Contact", routeValues: null, htmlAttributes: new { id = "otherServics", @class = "underline" }) for more information, or email us at <a href="" class="underline">partners@you-global.com</a>
+                </p>
+            </div>
+            <!-- col-xs-9 End -->
+            <!-- Social Media Section -->
+        </div>
+        <!-- container End -->
+    </div>
+    <!-- container-fluid End -->
+</section>

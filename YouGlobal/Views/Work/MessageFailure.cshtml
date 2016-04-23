@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="container">
+    <div class="container-fluid">
+        <!--  secondary-nav start -->
+        <div class="container padding">
+            <div class="row secondary-nav secondary-nav-margin">
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/04.png" alt="Job seekers"></i><a href="@Url.Action("JobSeeker", "Jobs")" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m active">Job Search</a></div>
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/05.png" alt="Job seekers"></i>@Html.ActionLink("Upload CV", "JobSeekerEmp", "Jobs", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "button btn-uploadcv button--antiman button--inverted button--border-thin button--text-thick button--size-m" })</div>
+                @*<div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Other services"></i><a class="button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin" data-featherlight="#f2" data-featherlight-variant="fixwidth">Job Alerts</a></div>*@
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Job Alerts"></i><a href="@Url.Action("JobAlert", "Jobs")" class="button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin">Job Alerts</a></div>
+            </div>
+        </div>
+        <div class="container nav-tabs-main">
+            <div class="col-md-12 row innerpages" id="about-us">
+                <div class="left_articles">
+                    <h3>
+                        Find a new job that suits you.
+                    </h3>
+                    <p>
+                        Whether you're looking for work in Dubai, Australia, UK, or Venezuela, our clients
+                        are located around the globe. You Global can help find the right job for you. In
+                        today's competitive market place, it has never been more important to have your
+                        resume made available to employers whose requirements match your specific skills.
+                        Send us your details now, and let You Global connect you with your new employer.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

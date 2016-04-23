@@ -1,0 +1,225 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{var data = Model as FormCollection;}
+<section class="container">
+    <div class="container-fluid">
+        <!--  secondary-nav start -->
+        <div class="container padding">
+            <div class="row secondary-nav secondary-nav-margin">
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/04.png" alt="Job seekers"></i><a href="@Url.Action("JobSeeker", "Jobs")" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m active">Job Search</a></div>
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/05.png" alt="Job seekers"></i>@Html.ActionLink("Upload CV", "UploadCv", "Jobs", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "button btn-uploadcv button--antiman button--inverted button--border-thin button--text-thick button--size-m" })</div>
+                @*<div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Other services"></i><a class="button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin" data-featherlight="#f2" data-featherlight-variant="fixwidth">Job Alerts</a></div>*@
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Job Alerts"></i><a href="@Url.Action("JobAlert", "Jobs")" class="button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin">Job Alerts</a></div>
+            </div>
+        </div>
+        <div class="container nav-tabs-main">
+            <div class="col-md-12 row innerpages" id="about-us">
+                <div class="col-lg-12 col-md-12">
+                    <h2>Upload CV</h2>
+                    <p>Upload your resume and let us do the rest for you. Provide extra information to set your resume apart, or start searching for jobs immediately!</p>
+                    <p style="color:red">* Indicates mandatory input</p>
+                    <!-- Right form -->
+                    <p>Please complete details below, and expect to hear back from us soon.</p>
+                    <form name="submitcv" id="submitcv" class="form-inline uploadcv" action="@Url.Action("UploadResume", "Jobs",new { data = data})"
+                          method="post">
+                        <input type="hidden" name="SubmitSource" id="SubmitSource" value="uploadcv" />
+                        <ul>
+                            <span class="line"></span>
+                            <li class="active"><a href="@Url.Action("UploadCv", "Jobs", new { Model = Model })">1</a></li>
+                            <li><a href="@Url.Action("JobSeekerEmp", "Jobs" , new { Model = Model })">2</a></li>
+                            <li><a href="@Url.Action("JobSeekerUpCv", "Jobs" , new { Model = Model })">3</a></li>
+                        </ul>
+                        <h3>Personal Detail</h3>
+                        <div class="row">
+                            <div class="form-group colapsinput_cv col-md-6 ">
+                                <td class="body">
+                                    <label class="subheadings">
+                                        Email <font color="red">*</font>
+                                    </label>
+                                    @Html.TextBox("Email", string.Empty, new { @class = "form-control", maxlength = "50" })
+                                    @Html.DropDownList("Emailtype", new SelectList(((System.Data.DataTable)Session["emailtype"]).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @class = "form-control", Style = "width:70px" })
+                                </td>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="subheadings">
+                                    Title<font color="red">*</font>
+                                </label>
+                                @Html.DropDownList("title", new SelectList(((System.Data.DataTable)Session["title"]).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6 ">
+                                <label class="subheadings">
+                                    First Name <font color="red">*</font>
+                                </label>
+                                @Html.TextBox("FirstName", string.Empty, new { @class = "Field", maxlength = "50", onkeypress = "return LettersWithSpaceOnly(event);" })
+                                <div class="form-group col-md-6">
+                                    <label class="subheadings">
+                                        Middle Name/s <font color="red">*</font>
+                                    </label>
+                                    @Html.TextBox("MiddleName", string.Empty, new { @class = "Field", maxlength = "50", onkeypress = "return LettersWithSpaceOnly(event);" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6 ">
+                                    <label class="subheadings">
+                                        Family Name / Surname <font color="red">*</font>
+                                    </label>
+                                    @Html.TextBox("LastName", string.Empty, new { @class = "Field", maxlength = "50", onkeypress = "return LettersWithSpaceOnly(event);" })
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="subheadings">
+                                        Commonly known as
+                                    </label>
+                                    @Html.TextBox("NickName", string.Empty, new { @class = "Field", maxlength = "25", onkeypress = "return LettersWithSpaceOnly(event);" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6 ">
+                                    <label class="subheadings">
+                                        Birth date<font color="red">*</font>
+                                    </label>
+                                    @Html.TextBox("BirthDate", string.Empty, new { @class = "date11 Field", @readonly = true })
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="subheadings">
+                                        Gender<font color="red">*</font>
+                                    </label>
+                                    @Html.DropDownList("gender", new SelectList(((System.Data.DataTable)Session["gender"]).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6 ">
+                                    <label class="subheadings">
+                                        Nationality<font color="red">*</font>
+                                    </label>
+                                    <div id="divNation1" style="display: none">
+                                        @Html.ListBox("NationSelect", new SelectList((new System.Data.DataTable()).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @multiple = "multiple", @size = "5", @class = "fieldAlerts NationSelect1", @style = "width:163px" })
+                                        <div style="margin-left: 162px; margin-top: -6px;">
+                                            <img alt="Remove selected" src="../../Content/images/Delete.png" id="btnNRemove1" style="display: block !important;
+                                                                visibility: inherit !important;" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="InputMaritalstatus">Marital status</label>
+                                    <select class="form-control" id="InputMaritalstatus">
+                                        <option>Select your marital status</option>
+                                        <option value="M">Married</option>
+                                        <option value="S">Single</option>
+                                        <option value="D">Divorced</option>
+                                        <option value="W">Widowed</option>
+                                        <option value="F">De Facto</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                        <h3>Contact Detail</h3>
+                        <div class="row">
+                            <div class="outer">
+                                <div class="inner">
+                                    <label class="subheadings" for="phone">
+                                        Phone<font color="red">*</font>
+                                    </label>
+                                    <input type="hidden" id="hdfCC1" />
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <label class="subheadings">
+                                                    Type
+                                                </label>
+                                                @Html.DropDownList("Phonetype", new SelectList(((System.Data.DataTable)Session["phonetype"]).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @class = "form-control PTCV1", @onchange = "phonetypechange1(this)" })
+                                                <input type="hidden" id="PhonetypeDesc" name="PhonetypeDesc" />
+                                                <div style="float: right; margin-right: 8px; margin-top: 7px; display: none">
+                                                    <img alt="Remove selected" src="../../Content/images/Delete.png"
+                                                         onmouseover="showtip(this)" onclick="removeCVPhone(this)" class="phoneCVRemove"
+                                                         id="phoneCVRemove" style="display: block !important; visibility: inherit !important;" />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="subheadings">
+                                                    Country code
+                                                </label>
+                                                @Html.TextBox("Countrycode", "", new { @maxlength = "10", @class = "countrycodeA Field" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="subheadings">
+                                                    Local area code
+                                                </label>
+                                                @Html.TextBox("Localareacode", "", new { @maxlength = "20", @class = "Field", onkeypress = "return isNumber1(event);" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="subheadings">
+                                                    Number
+                                                </label>
+                                                @Html.TextBox("Phone", "", new { @maxlength = "20", @class = "Field", onkeypress = "return isPhoneNumber1(event);" })
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div id="divCVPhone">
+                                    </div>
+                                    <input type="button" value="Add" id="Button2" onclick="addCVPhoneControl(this)" />
+                                    <br />
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <label class="subheadings">
+                                                    Skype Name
+                                                </label>
+                                                @Html.TextBox("Skype", string.Empty, new { @class = "Field", onkeypress = "return nospaces1(this);" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="subheadings">
+                                                    Subscribe to Job Alerts
+                                                </label>
+                                                @Html.CheckBox("SubscribeAlert",true)
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" id="btnsubmit" value="Next" class="btn btn-upload btn-lg btn-block" />
+                            <button type="button" class="btn btn-upload btn-lg btn-block" value="clear">Clear</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Social Media Section -->
+        </div>
+        <!-- container End -->
+    </div>
+
+    <div class="lightbox jobalert" id="f2">
+        @using (Html.BeginForm("JobAlert", "Jobs", FormMethod.Post, new { @class = "form-inline cont", @onsubmit = "return checkFormFields(this);" }))
+        {
+            <div class="form-group col-md-12 row">
+                <label for="inputname">Name</label>
+                @Html.TextBox("Name", string.Empty, new { @class = "fieldQuick" })
+                <input type="text" class="form-control" id="inputname" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group col-md-12 row">
+                <label for="InputeEmail">Email</label>
+                @Html.TextBox("Email", string.Empty, new { @class = "fieldQuick" })
+            </div>
+            <div class="form-group col-md-12 row">
+                <label for="alertfrequency">job alerts frequency</label>
+                @Html.DropDownList("MailFrequency", new SelectList(((System.Data.DataTable)Session["FrequencyList"]).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @class = "fieldAlerts" })
+            </div>
+            <div class="form-group col-md-12 row">
+                <input type="submit" class="btn btn-jobalert btn-lg btn-block" value="Subscribe" />
+            </div>
+        }
+    </div>
+</section>

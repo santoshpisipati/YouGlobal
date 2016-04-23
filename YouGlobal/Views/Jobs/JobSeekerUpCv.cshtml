@@ -1,0 +1,118 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{var data = Model as FormCollection;}
+<section class="container">
+    <div class="container-fluid">
+        <!--  secondary-nav start -->
+        <div class="container padding">
+            <div class="row secondary-nav secondary-nav-margin">
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/04.png" alt="Job seekers"></i><a href="@Url.Action("JobSeeker", "Jobs")" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m active">Job Search</a></div>
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/04.png" alt="Job seekers"></i><a href="@Url.Action("UploadCv", "Jobs")" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m active">Upload CV</a></div>
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Other services"></i><a class="button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin" data-featherlight="#f2" data-featherlight-variant="fixwidth">Job Alerts</a></div>
+            </div>
+        </div>
+        <div class="container nav-tabs-main">
+            <div class="col-md-12 row innerpages" id="about-us">
+                <div class="col-md-12 ">
+                    <h2>Upload CV</h2>
+                    <p>Upload your resume and let us do the rest for you. Provide extra information to set your resume apart, or start searching for jobs immediately!</p>
+                    <p style="color:red">* Indicates mandatory input</p>
+
+                    <!-- Right form -->
+                    <p>Please complete details below, and expect to hear back from us soon.</p>
+                    <form name="submitcv" id="submitcv" class="form-inline uploadcv" action="@Url.Action("UploadResume", "Jobs",new { data = data})"
+                          method="post">
+                        <ul>
+                            <span class="line"></span>
+                            <li><a href="@Url.Action("UploadCv", "Jobs" , new { Model = Model })">1</a></li>
+                            <li><a href="@Url.Action("JobSeekerEmp", "Jobs", new { Model = Model })">2</a></li>
+                            <li class="active"><a href="@Url.Action("JobSeekerUpCv", "Jobs", new { Model = Model })">3</a></li>
+                        </ul>
+                        <h3>Attach CV</h3>
+                        <p>CV: Max File Size of 1000 KB (.doc, .docx, .rtf, .txt, .pdf, .htm, .html, .DOC, .DOCX, .RTF, .TXT, .PDF) *</p>
+                        <div class="outer" style="display: none;">
+                            <div class="inner">
+                                <p>
+                                    <u>Attach Documents:</u> <font size="1">
+                                    </font><span class="mandatoryString"><font color="red">&nbsp;*</font></span>
+                                </p>
+                                <input type="file" name="Attachresume" id="Attachresume" class="Attachresume1" onchange="get_filename1(this,1,'CV');" />
+                                <input type="button" name="removefile" value="remove" id="Button4" onclick="clearContents1('Attachresume1')" />
+                            </div>
+                        </div>
+                        <hr>
+                        <h3>Attach covering letter</h3>
+                        <p>COVER LETTER:</p>
+                        <p>Please either enter a cover letter here as text:</p>
+                        <div class="row">
+                            <div class="form-group col-md-10 ">
+                                <textarea class="form-control" rows="5" id="comment" placeholder="Enter your comment"></textarea>
+                            </div>
+                        </div>
+                        <h3>Or attach a cover letter file</h3>
+                        <p>Cover Letter: Max File Size of 500 KB (.doc, .docx, .rtf, .txt, .pdf, .htm, .html .DOC, .DOCX, .RTF, .TXT, .PDF)</p>
+                        <div class="row">
+                            <div class="form-group col-md-10 ">
+                                <label for="CoverLetterOptional">Attach Documents</label>
+                                <input type="file" name="CoverLetterOptional" id="CoverLetterOptional" class="CoverLetterOptional1"
+                                       onchange="get_filename1(this,2,'Cover Letter');" value="" />
+                                <input type="button" name="removefile" value="remove" id="Button5" onclick="clearContents1('CoverLetterOptional1')" />
+                            </div>
+                        </div>
+                        <hr>
+                        <h3>Remuneration</h3>
+                        <p>Photograph: Max File Size of 200 KB (.jpg, jpeg, .png, .gif, .PNG, .JPG, .JPEG, .jp2, .GIF)</p>
+                        <div class="row">
+                            <div class="inner">
+                                <p>
+                                    <u>Photograph:</u> <font size="1">
+                                        <%= ViewData["phmsg"]==null?"": ViewData["phmsg"].ToString() %>
+                                    </font><span class="mandatoryString"><font color="red"></font></span>
+                                </p>
+                                <input class="file1" id="file2" name="file1" type='file' title="test #1" onchange="get_filename1(this,6,'Image of Candidate');" />
+                                <div id="prev_file2">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" id="btnsubmit" value="Submit" class="btn btn-upload btn-lg btn-block" />
+                            <button type="button" class="btn btn-upload btn-lg btn-block" value="clear">Clear</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Social Media Section -->
+        </div>
+        <!-- container End -->
+    </div>
+    <!-- container-fluid End -->
+    <!-- Footer -->
+    <div class="lightbox jobalert" id="f2">
+        @using (Html.BeginForm("JobAlert", "Jobs", FormMethod.Post, new { @class = "form-inline cont", @onsubmit = "return checkFormFields(this);" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <form class="form-inline otherserform">
+                <div class="form-group col-md-12 row">
+                    <label for="inputname">Name</label>
+                    @Html.TextBox("Name", string.Empty, new { @class = "fieldQuick", @required = "required" })
+                </div>
+                <div class="form-group col-md-12 row">
+                    <label for="InputeEmail">Email</label>
+                    @Html.TextBox("Email", string.Empty, new { @class = "fieldQuick", @required = "required" })
+                </div>
+                <div class="form-group col-md-12 row">
+                    <label for="alertfrequency">job alerts frequency</label>
+                    @Html.DropDownList("MailFrequency", new SelectList(((System.Data.DataTable)Session["FrequencyList"]).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @class = "fieldAlerts" })
+                </div>
+                <div class="form-group col-md-12 row">
+                    <input type="submit" class="btn btn-jobalert btn-lg btn-block" value="Subscribe" />
+                </div>
+                <button type="submit" id="btnsubmit" value="Submit" class="btn btn-purple btn-lg btn-block">Subscribe</button>
+            </form>
+        }
+    </div>
+    <!-- container End -->
+</section>

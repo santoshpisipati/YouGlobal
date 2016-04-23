@@ -1,0 +1,140 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="container">
+    <div class="container-fluid">
+        <div id="leftInner">
+            <div class="subheader">
+                @if (Model is YG_Business.JobInfo && Model != null)
+            {
+                    <div class="bodySearchRes">
+                        @if (!string.IsNullOrEmpty(Model.ReferenceNo))
+                        {
+                            <div class="container-fluid">
+                                <!--  secondary-nav start -->
+
+                                <div class="container nav-tabs-main">
+                                    <div class="col-xs-12 innerpages job-description" id="about-us">
+                                        <div class="result-item">
+                                            <h2>@Model.Title</h2>
+                                            <span>@Html.Raw(@Model.Location) </span>
+                                            <p>YOU Global - Ref&nbsp;@Model.ReferenceNo</p>
+                                            @Html.Raw(@Model.JobContent)
+                                            <div class="form-group">
+                                                @*<button id="aaplyLink" value="submit"
+                                                            class="btn btn-red pull-let btn-lg btn-block" onclick="location.href='@Url.Action("ApplyOnline", "Work", new { id = Model.ReferenceNo })'">
+                                                        Apply
+                                                    </button>*@
+                                                @if (Session["username"] != null && !string.IsNullOrEmpty(Session["username"].ToString()))
+                                                {
+                                                    if (Session["loggedinas"] != null && !string.IsNullOrEmpty(Convert.ToString(Session["loggedinas"])))
+                                                    {
+                                                        Int32 loggedIn = Convert.ToInt32(Session["loggedinas"]);
+                                                        if (loggedIn == 1)
+                                                        {  <button id="aaplyLink" value="submit"
+                                                                   class="btn btn-red pull-let btn-lg btn-block" onclick="location.href='@Url.Action("ApplyOnline", "Work", new { id = Model.ReferenceNo })'">
+                                                Apply
+                                            </button> }
+                                                        else
+                                                        {
+                                                            @Html.Partial("LoginModal")
+                                                            <div class="col-lg-4 col-md-4">@Html.ActionLink("Apply", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-red pull-let btn-lg btn-block" })</div>
+                                                        }
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    @Html.Partial("LoginModal")
+                                                    <div class="col-lg-4 col-md-4">@Html.ActionLink("Apply", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-red pull-let btn-lg btn-block" })</div>
+                                                }
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Social Media Section -->
+                                </div>
+                                <!-- container End -->
+                            </div>
+                        }
+                        else
+                        {
+                            <table>
+                                <tr>
+                                    <td class='body'>
+                                        <p>
+                                            There isn't a job vacancy associated with this page. Please use the Job Search panel
+                                            to your left to search for advertised positions.
+                                        </p>
+                                        <p>
+                                            If you continue to experience problems, or you're sure you have the right page,
+                                            please <a href="mailto: admin@you-global.com?subject=Problem with YOU Global website">let us know</a>. Attaching a screen shot is usually very helpful.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="bodySearchRes">
+                        <table border="0" width="440" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td>
+                                    <table border="0" width="440" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td colspan="2" class="title" align="left" height="27">Requested job description is no longer available</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><hr /></td>
+                            </tr>
+                            <tr>
+                                <td class="bullets">
+                                    <br />
+                                    <p>This could be because:</p>
+                                    <ul style="margin-top:7px; margin-bottom:7px; padding-left: 40px;">
+                                        <li>The job posting no longer exists or has been removed</li>
+                                        <li>The URL might have been mistyped or is based on an old bookmark</li>
+                                        <li>There is an unforeseen problem in the search criteria or results</li>
+                                    </ul>
+                                    <br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><hr /></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <br />
+                                    <p>Please try the following:</p>
+                                    <ul style="margin-top:7px; margin-bottom:7px; padding-left: 40px;">
+                                        <li>Check the URL if you have entered it manually or copied from an email</li>
+                                        <li>Please <b>@Html.ActionLink("try the search again", "LookingForWork", "Work")</b> if you got here from the Search Results page</li>
+                                        <li>Please <b>@Html.ActionLink("contact us", "ContactUs", "Contact")</b> if the problem persists</li>
+                                    </ul>
+                                    <br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><br /></td>
+                            </tr>
+                            <tr>
+                                <td><p>Thank you for your patience and apologies for any inconvenience</p></td>
+                            </tr>
+                            <tr>
+                                <td><br /></td>
+                            </tr>
+                            <tr>
+                                <td><hr /></td>
+                            </tr>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

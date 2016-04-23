@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.rtl.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.default.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.mobile.all.min.css">
+    <script src="~/scripts/jquery-2.1.4.min.js"></script>
+    @*<script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/jszip.min.js"></script>
+    <script src="~/Scripts/kendo.all.min.js"></script>*@
+   <style>
+       span.k-in > span.highlight {background:pink}
+   </style>
+</head>
+<body>
+    <label for='search-terma'>Search </label><input type=text id='search-terma' />
+    <div id='searchable-tree' style="color: white;"></div>
+</body>
+</html>
+<script>
+    $('input#search-terma').keyup(function () {
+        var minlength = 3;
+        var that = this,
+        value = $(this).val();
+        if (value.length >= minlength) {
+            LoadTreeView(value);
+        }
+    });
+
+    function LoadTreeView(prntKy) {
+        var key = prntKy;
+        homogeneous = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: {
+                    url: '@Url.Action("searchOccupation", "TreeView")', dataType: "json",
+                    data: { 'term': key },
+                    dataType: "json"
+                }
+            }
+        });
+
+        //$("#searchable-tree").kendoTreeView().remove(".k-item");
+        //$("#searchable-tree").kendoTreeView().unbind("select");
+        var tv = $("#searchable-tree").kendoTreeView({
+            dataSource: homogeneous,
+            loadOnDemand: true,
+        }).data("kendoTreeView");
+        //$("#searchable-tree").data("kendoTreeView").setDataSource(data);
+    }
+
+
+    @*$('input#search-terma').keyup(function () {
+        var minlength = 3;
+        var that = this,
+        value = $(this).val();
+        if (value.length >= minlength) {
+            $.ajax({
+                url: '@Url.Action("searchOccupation", "TreeView")', dataType: "json",
+                type: "POST",
+                data: { term: value },
+                success: function (data) {
+                    if (data.length > 0) {
+                        $("#searchable-tree").kendoTreeView({
+                            dataSource: data,
+                            loadOnDemand: true
+                        }).data("kendoTreeView");
+                    }
+                    else {
+                        $("#searchable-tree").kendoTreeView({
+                            dataSource: [],
+                            loadOnDemand: true
+                        }).data("kendoTreeView");
+                    }
+                }
+            });
+        }
+    });*@
+
+        
+        
+        //$.getJSON("/TreeView/searchOccupation", function (data) {
+        //    var treeview = $("#searchable-tree").kendoTreeView({
+        //        dragAndDrop: false,
+        //        dataSource: data,
+        //    }).data();
+        //});
+        //$('#searchable-tree').kendoTreeView(
+        //dataSource = [
+        //    {
+        //        text: "Item 1 - Repeatable Beats",
+        //        items: [
+        //            { text: "Item 1.1 - Landing in the Sandbox" },
+        //            { text: "Item 1.2 - Lampoon the Moon, Sunlamp" }
+        //        ]
+        //    },
+        //    {
+        //        text: "Item 2"
+        //    },
+        //    {
+        //        text: "Months",
+        //        items: [
+        //            { text: "January" },
+        //            { text: "February" },
+        //            { text: "March" },
+        //            {
+        //                text: "April",
+        //                items: [
+        //                    { text: 'Rain' },
+        //                    { text: 'Sleet' },
+        //                    { text: 'Sunshine' },
+        //                    {
+        //                        text: 'Wind',
+        //                        items: [
+        //                        { text: 'santosh' },
+        //                        { text: 'ravi' },
+        //                        { text: 'Sunshine' },
+        //                        { text: 'Wind' }
+        //                        ]
+        //                    }
+        //                ]
+        //            },
+        //            { text: "May" },
+        //            { text: "June" },
+        //            { text: "July" },
+        //            { text: "August" },
+        //            {
+        //                text: "September",
+        //                items: [
+        //                    { text: 'Rain' },
+        //                    { text: 'Sleet' },
+        //                    { text: 'Sunshine' },
+        //                    { text: 'Bertha' },
+        //                    { text: 'Zzzzz...' }
+        //                ]
+        //            },
+        //            { text: "October" },
+        //            { text: "November" },
+        //            { text: "December" }
+        //        ]
+        //    }
+        //]);
+        //var tv = $('#searchable-tree').data('kendoTreeView');
+</script>

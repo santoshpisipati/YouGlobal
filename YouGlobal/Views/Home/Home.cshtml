@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "JobSeeker";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="tagline-text">
+                <h1>
+                    Welcome to the recruitment hot spot!<br>
+                    <span>Worldwide employment specialists.</span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="row secondary-nav ">
+        <div class="col-lg-4 col-md-4">
+            <i>
+                <img src="~/Content/images/imgs/01.png" alt="Job seekers">
+            </i>
+            <a href="@Url.Action("JobSeeker", "Jobs")" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m">Job seekers</a>
+        </div>
+        <div class="col-lg-4 col-md-4">
+            <i>
+                <img src="~/Content/images/imgs/02.png" alt="Employers">
+            </i>
+            @if (Session["username"] != null && !string.IsNullOrEmpty(Session["username"].ToString()))
+            {
+                if (Session["loggedinas"] != null && !string.IsNullOrEmpty(Convert.ToString(Session["loggedinas"])))
+                {
+                    Int32 loggedIn = Convert.ToInt32(Session["loggedinas"]);
+                    if (loggedIn == 1)
+                    { <a href="@Url.Action("UnSignedEmployerRecruiter", "Jobs")" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a> }
+                    else
+                    {
+                        <a href="@Url.Action("PostJob", "Jobs")" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a>
+                    }
+                }
+                else
+                {
+                    <a href="@Url.Action("PostJob", "Jobs")" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a>
+                }
+
+            }
+            else
+            {
+                <a href="@Url.Action("UnSignedEmployerRecruiter", "Jobs")" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a>
+            }
+        </div>
+        <div class="col-lg-4 col-md-4">
+            <i>
+                <img src="~/Content/images/imgs/03.png" alt="Other services">
+            </i><a href="@Url.Action("OtherServices", "Jobs" )" class="button btn-otherservices button--antiman button--inverted button--border-thin button--text-thick button--size-m">Other Services</a>
+        </div>
+    </div>
+    @if (TempData["notice"] != null)
+    {
+        <script type="text/javascript">
+            var test = '@TempData["notice"].ToString()';
+            var r = alert(test);
+            if (test.indexOf("Successful") > -1) {
+                window.location.href = '@Url.Action("Home","Home")';
+            }
+        </script>
+    }
+    <!-- container End -->
+    <!-- container-fluid End -->
+</section>

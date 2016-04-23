@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using PagedList.Mvc;
+@using PagedList;
+@using YG_Business;
+@{var jobPostings = Model as PagedList<JobInfo>; }
+
+<!-- Container Main div -->
+
+    <!-- Header Section Main div -->
+    <div class="container">
+        <!--  secondary-nav start -->
+        <div class="nav-tabs-main">
+            <div class="col-xs-12 innerpages search-result" id="about-us">
+                <h2>Search Results</h2>
+                <div class="sortbar  col-md-12">
+                    <p class="pull-left">
+                        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                    </p>
+                </div>
+                @if (jobPostings != null)
+                {
+                    foreach (var jobPosting in jobPostings)
+                    {
+                        <hr>
+                        <div class="result-item">
+                            <h3><a href="">@Html.ActionLink(jobPosting.Title, "JobDescription", "Jobs", new { id = jobPosting.ReferenceNo }, null)</a></h3>
+                            <span>@Html.Raw(@jobPosting.Location) </span>
+                            <p>@jobPosting.Summary</p>
+                            <div class="clearfix"></div>
+                        </div>
+                    }
+                }
+                <nav class="pagin col-md-12" style="text-align: right;">
+                    @Html.PagedListPager(jobPostings, Page => Url.Action("PageIndex", new { Page = Page, @class = "pagination" }))
+                    <div class="clearfix"></div>
+                </nav>
+            </div>
+            <!-- Social Media Section -->
+            <div class="clearfix"></div>
+        </div>
+        <!-- container End -->
+    </div>
+    <!-- container-fluid End -->
+    <!-- Footer -->

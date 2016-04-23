@@ -1,0 +1,222 @@
+﻿@model List<Sample.Web.ModalLogin.Classes.SiteMenu>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Simple";
+}
+@using System.Web.UI.WebControls;
+@using System.Data;
+<style>
+    /*Here We will add some css for style our treeview*/
+    .collapse {
+        width: 15px;
+        background-image: url(../../../../Content/images/ui-icons_ffffff_256x240.png);
+        background-repeat: no-repeat;
+        background-position: -36px -17px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .expand {
+        width: 15px;
+        background-image: url(../../../../Content/images/ui-icons_ffffff_256x240.png);
+        background-repeat: no-repeat;
+        background-position: -50px -17px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .treeview ul {
+        /*font: 14px Arial, Sans-Serif;
+        margin: 0;
+        padding-left: 20px;
+        list-style: none;
+        max-height: 150px;
+        overflow-y: scroll !important;
+        overflow-x: hidden;*/
+    }
+
+    .treeview > li > a {
+        font-weight: bold;
+    }
+
+    .treeview li {
+    }
+
+        .treeview li a {
+            padding: 4px;
+            font-size: 14px;
+            display: inline-block;
+            text-decoration: none;
+            width: auto;
+        }
+</style>
+
+@* Here We need some Jquery code for make this treeview collapsible *@
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".treeview li>ul").css('display', 'none'); // Hide all 2-level ul
+            $(".collapsible").click(function (e) {
+                e.preventDefault();
+                $(this).toggleClass("collapse expand");
+                $(this).closest('li').children('ul').slideToggle();
+            });
+        });
+    </script>
+}
+
+<section class="container">
+    <div class="row secondary-nav secondary-nav-margin">
+        <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/04.png" alt="Job Search"></i><a href="@Url.Action("JobSeeker", "Jobs")" class="button btn-active button--antiman button--inverted button--border-thin button--text-thick button--size-m">Job Search</a></div>
+        @if (Session["username"] != null && !string.IsNullOrEmpty(Session["username"].ToString()))
+        {
+            if (Session["loggedinas"] != null && !string.IsNullOrEmpty(Convert.ToString(Session["loggedinas"])))
+            {
+                Int32 loggedIn = Convert.ToInt32(Session["loggedinas"]);
+                if (loggedIn == 1)
+                {
+                    <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/05.png" alt="upload cv"></i><a href="@Url.Action("JobSeekerEmp", "Jobs")" class="button btn-uploadcv button--antiman button--inverted button--border-thin button--text-thick button--size-m">Upload CV</a></div>
+                }
+                else
+                {
+                    @Html.Partial("LoginModal")
+                    <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/05.png" alt="Job seekers"></i>@Html.ActionLink("Upload CV", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "button btn-uploadcv button--antiman button--inverted button--border-thin button--text-thick button--size-m" })</div>
+                }
+            }
+            else
+            {
+                @Html.Partial("LoginModal")
+                <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/05.png" alt="Job seekers"></i>@Html.ActionLink("Upload CV", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "button btn-uploadcv button--antiman button--inverted button--border-thin button--text-thick button--size-m" })</div>
+            }
+
+        }
+        else
+        {
+            @Html.Partial("LoginModal")
+            <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/05.png" alt="Job seekers"></i>@Html.ActionLink("Upload CV", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "button btn-uploadcv button--antiman button--inverted button--border-thin button--text-thick button--size-m" })</div>
+        }
+        <div class="col-lg-4 col-md-4"><i><img src="~/Content/images/06.png" alt="Job Alerts"></i><a href="@Url.Action("JobAlert", "Jobs")" class="button btn-jobalerts button--antiman button--inverted button--border-thin button--text-thick button--size-m cd-signin">Job Alerts</a></div>
+    </div>
+    <!--  secondary-nav start -->
+    <!-- jobsearch -->
+    <div class="container jobsearch">
+        <div class="row">
+            @using (Html.BeginForm("Search", "Jobs"))
+            {
+                <input type="text" class="form-control" name="Keywords" id="jobsearch" placeholder="Search By Keyword, Example = Account Manager , sales, or type in the Job Reference Code.">
+                <ul class="accordion" id="acc1">
+                    <li >
+                        <h4 class="h">
+                            <span style="color:white">Occupation</span>
+                        </h4>
+                        <div class="outer" style="width: 300px;">
+                            <div class="inner">
+                                <div id="divOccSel" style="display: none">
+                                    @Html.ListBox("OccupationSelect", new SelectList(((DataTable)(ViewData["occupation"] == null ? new DataTable() : ViewData["occupation"])).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @multiple = "multiple", @size = "5", @class = "fieldAlerts OccupationSelect" })
+                                    <div style="float: right">
+                                        <img title="Remove selected" src="../../Content/images/delete.png" id="btnOremove"
+                                             style="display: block !important; visibility: inherit !important;" />
+                                    </div>
+                                </div>
+                                <input type=text id='search-term' class="form-control txtShowDiv" maxlength="10" name="Empemployer" autocomplete="off" placeholder="Enter your Occupation" role="textbox" aria-autocomplete="list" aria-haspopup="true" />
+                                <div class="keywordText">
+                                    <i style="color:white;">Begin typing to select one or more options.</i>
+                                </div>
+                                <input type="hidden" id="hdf" value="0" />
+                            </div>
+                        </div>
+                        
+
+                    </li>
+                    <li>
+                        <h4 class="h">
+                            <span style="color:white">Industry</span>
+                        </h4>
+                        <div class="outer">
+                            <div class="inner">
+                                <div id="divIndSel" style="display: none">
+                                    @Html.ListBox("IndustrySelect", new SelectList(((DataTable)(ViewData["industry"] == null ? new DataTable() : ViewData["industry"])).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @multiple = "multiple", @size = "5", @class = "fieldAlerts IndustrySelect" })
+                                    <div style="float: right">
+                                        <img title="Remove selected" src="../../Content/images/delete.png" id="btnIremove"
+                                             style="display: block !important; visibility: inherit !important;" />
+                                    </div>
+                                </div>
+                                @*<input id="search-empInd" class="form-control divind" type="text" maxlength="10" name="Empemployer" autocomplete="off" placeholder="Enter your Occupation" role="textbox" aria-autocomplete="list" aria-haspopup="true" />*@
+                                <input type=text id='search-empIndtree' class="form-control industryin" maxlength="10" name="Empindustry" autocomplete="off" placeholder="Enter your industry" role="textbox" aria-autocomplete="list" aria-haspopup="true" />
+                                @*<div id='searchable-empIndtree' style="color: white;width:250px;"></div>*@
+                                <div class="indDiv">
+                                    <div id="tvDind" style="display:none;">
+                                        <div class="treeview">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="keywordText">
+                                    <i style="color:white;">Begin typing to select one or more options.</i>
+                                </div>
+                                <input type="hidden" id="hdfI" value="0" />
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <h4 class="h">
+                            <span style="color:white">Location</span>
+                        </h4>
+                        <div class="outer">
+                            <div class="inner">
+                                <input id="search-empLocationtree" class="form-control locationin" type="text" maxlength="10" name="Location" autocomplete="off" placeholder="Enter your Location" role="textbox" aria-autocomplete="list" aria-haspopup="true" />
+                                @*<div id='searchable-empLocationtree' style="color: white; width:288px;"></div>*@
+                                <div class="keywordText">
+                                    <i style="color:white;">Begin typing to select one or more options.</i>
+                                </div>
+                            </div>
+                            <input type="hidden" id="hdfLocation" value="0" />
+                            <input type="hidden" id="hdfL" value="0" />
+                        </div>
+                    </li>
+                    <li>
+                        <h4 class="h">
+                            <span style="color:white">Job Type</span>
+                        </h4>
+                        <div class="outer">
+                            <div class="inner">
+                                @Html.DropDownList("JobTypes", new SelectList(((DataTable)Session["SearchWorkTypeList"]).Rows as System.Collections.IEnumerable, "[2]", "[1]"), new { @class = "form-control" })
+                                <div class="keywordText">
+                                    <i style="color:white;">select any option above.</i>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <button id="btnFind" class="btn btn-red pull-right btn-lg btn-block searchbutton">
+                    FIND JOBS
+                </button>
+                <div class="treediv">
+                    <div id='search-termoccu' class="occupation" style="display:none"></div>
+                    <div id='searchable-empIndtree' class="industry" style="display:none"></div>
+                    <div id='searchable-empLocationtree' class="location" style="display:none"></div>
+                </div>
+            }
+
+            @using (Html.BeginForm("List", "Jobs", FormMethod.Post, new { @class = "listwrap" }))
+            {
+                @*<a class="link-listJob">
+                        LIST ALL JOBS
+                    </a>*@
+                <button class="link-listJob">
+                    LIST ALL JOBS
+                </button>
+            }
+        </div>
+        <div class="functionalModule">
+            <div class="functionalModuleInner">
+                <div id="searchJobsOuter">
+                </div>
+            </div>
+        </div>
+        <a class="scrolldown" href="#down"><img src="~/Content/images/scrolldown.png" /></a>
+    </div>
+    <!-- end jobsearch-->
+    <div class="clearfix"></div>
+
+    <!-- container End -->
+</section>
