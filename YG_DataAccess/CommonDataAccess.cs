@@ -23,15 +23,11 @@ namespace YG_DataAccess
 
         public static MySqlDataReader searchOccupation(string keyword)
         {
-            //string sql = "select title,isco08id from isco08 where title like concat(?keyword,'%') order by groupcode, title asc;";
-            //string sql = "select * from( Select isco08id,groupcode ,concat('>',title) as title from isco08 where type=1 Union Select t2.isco08id,t2.groupcode ,concat('>>',t2.title ) from isco08 t1 left join isco08 t2 on t1.groupcode=t2.parentcode where t2.type=2 " +
-            //            " Union Select t3.isco08id,t3.groupcode ,concat('>>>',t3.title  ) from isco08 t1 left join isco08 t2 on t1.groupcode=t2.parentcode and t2.type=2 left join isco08 t3 on t2.groupcode=t3.parentcode and t2.type=2 where t3.type=3 " +
-            //            " Union Select t4.isco08id,t4.groupcode ,concat('>>>>',t4.title ) from isco08 t1 left join isco08 t2 on t1.groupcode=t2.parentcode  left join isco08 t3 on t2.groupcode=t3.parentcode " +
-            //            " left join isco08 t4 on t3.groupcode=t4.parentcode and t3.type =3 where t4.type=4 ) a where title like concat('%',?keyword,'%') order by groupcode ,title ";
-
             string sql = "select SQL_NO_CACHE * from( Select  t1.isco08id as id1,t2.isco08id as id2,t3.isco08id as id3,t4.isco08id as id4,t1.groupcode as c1 ,t1.title as d1,t2.groupcode as c2 ,t2.title as d2 ,t3.groupcode as c3,t3.title as d3 ,t4.groupcode as c4 ," +
-                       " t4.title as d4,t1.keyword as k1,t2.keyword as k2,t3.keyword as k3, t4.keyword as k4 from isco08 t1  join isco08 t2 on t1.groupcode=t2.parentcode and t1.type=1  join isco08 t3 on t2.groupcode=t3.parentcode and t2.type=2 " +
-                       " join isco08 t4 on t3.groupcode=t4.parentcode and t3.type =3  where t4.type=4) a where ( d1 like concat('%',?keyword,'%') or d2 like concat('%',?keyword,'%') or d3 like concat('%',?keyword,'%') or d4 like concat('%',?keyword,'%') " +
+                       " t4.title as d4,t1.keyword as k1,t2.keyword as k2,t3.keyword as k3, t4.keyword as k4,JobDetailsCount(t1.isco08id) as t1Count,JobDetailsCount(t2.isco08id) as t2Count,JobDetailsCount(t3.isco08id) as t3Count,(JobDetailsCount(t1.isco08id) + JobDetailsCount(t2.isco08id) + JobDetailsCount(t3.isco08id)" +
+                        " + JobDetailsCount(t4.isco08id)) as Total " +
+                       " , JobDetailsCount(t4.isco08id) as t4Count from isco08 t1  join isco08 t2 on t1.groupcode=t2.parentcode and t1.type=1  join isco08 t3 on t2.groupcode=t3.parentcode and t2.type=2 " +
+                       " join isco08 t4 on t3.groupcode=t4.parentcode and t3.type =3  where t4.type=4  and JobDetailsCount(t4.isco08id)>0) a where ( d1 like concat('%',?keyword,'%') or d2 like concat('%',?keyword,'%') or d3 like concat('%',?keyword,'%') or d4 like concat('%',?keyword,'%') " +
                        " or c1 like concat('%',?keyword,'%') or c2 like concat('%',?keyword,'%') or c3 like concat('%',?keyword,'%') or c4 like concat('%',?keyword,'%') " +
                        " or k1 like concat('%',?keyword,'%') or k2 like concat('%',?keyword,'%') or k3 like concat('%',?keyword,'%') or k4 like concat('%',?keyword,'%') ) order by c4 ";
             return DataAccess.ExecuteReader(sql, new MySqlParameter("keyword", keyword));
@@ -46,11 +42,34 @@ namespace YG_DataAccess
 
         public static MySqlDataReader searchIndustry(string keyword)
         {
-            string sql = "Select SQL_NO_CACHE * from (Select  t1.isicRev4id as id1,t2.isicRev4id as id2,t3.isicRev4id as id3, t4.isicRev4id as id4,t1.description as d1, t1.code as c1,t2.description as d2,t2.code as c2,t3.description as d3,t3.code as c3,t4.description as d4,t4.code as c4,t4.code,t1.keyword as k1,t2.keyword k2,t3.keyword as k3,t4.keyword as k4 " +
-                       " from ISICRev4 t1 inner join ISICRev4 t2 on t2.parentcode=t1.code and t1.level=1  INNER JOIN ISICRev4 t3 on t3.parentcode=t2.code and t2.level=2 INNER JOIN ISICRev4 t4 on t4.parentcode=t3.code and t3.level=3 " +
-                       " where t4.level=4 ) a where ( d1 like concat('%',?keyword,'%') or d2 like concat('%',?keyword,'%') or d3 like concat('%',?keyword,'%') or d4 like concat('%',?keyword,'%') " +
+            string sql = "Select SQL_NO_CACHE * from (Select  t1.isicRev4id as id1,t2.isicRev4id as id2,t3.isicRev4id as id3, t4.isicRev4id as id4,t1.description as d1, t1.code as c1,t2.description as d2,t2.code as c2,t3.description as d3,t3.code as c3,t4.description as d4,t4.code as c4,t4.code,t1.keyword as k1,t2.keyword k2,t3.keyword as k3,t4.keyword as k4,JobIndustryDetailsCount(t1.isicRev4id) as t1Count, JobIndustryDetailsCount(t2.isicRev4id) as t2Count, JobIndustryDetailsCount(t3.isicRev4id) as t3Count  " +
+                      ",JobDetailsCount(t4.isicRev4id) as t4Count,(JobIndustryDetailsCount(t1.isicRev4id) + JobIndustryDetailsCount(t2.isicRev4id) +" + 
+                        "JobIndustryDetailsCount(t3.isicRev4id) +" +
+                        "JobIndustryDetailsCount(t4.isicRev4id)) as Total from ISICRev4 t1 inner join ISICRev4 t2 on t2.parentcode=t1.code and t1.level=1  INNER JOIN ISICRev4 t3 on "+ "t3.parentcode=t2.code and t2.level=2 INNER JOIN ISICRev4 t4 on t4.parentcode=t3.code and t3.level=3 " +
+                       " where t4.level=4  and JobIndustryDetailsCount(t4.isicRev4id)>0) a where ( d1 like concat('%',?keyword,'%') or d2 like concat('%',?keyword,'%') or d3 like concat('%',?keyword,'%') or d4 like concat('%',?keyword,'%') " +
                        " or c1 like concat('%',?keyword,'%') or c2 like concat('%',?keyword,'%') or c3 like concat('%',?keyword,'%') or c4 like concat('%',?keyword,'%') " +
-                       " or k1 like concat('%',?keyword,'%') or k2 like concat('%',?keyword,'%') or k3 like concat('%',?keyword,'%') or k4 like concat('%',?keyword,'%') ) order by id4,code";
+                       " or k1 like concat('%',?keyword,'%') or k2 like concat('%',?keyword,'%') or k3 like concat('%',?keyword,'%') or k4 like concat('%',?keyword,'%') ) order by c4";
+
+            return DataAccess.ExecuteReader(sql, new MySqlParameter("keyword", keyword));
+        }
+
+        public static MySqlDataReader searchAllOccupation(string keyword)
+        {
+            string sql = "select SQL_NO_CACHE * from( Select  t1.isco08id as id1,t2.isco08id as id2,t3.isco08id as id3,t4.isco08id as id4,t1.groupcode as c1 ,t1.title as d1,t2.groupcode as c2 ,t2.title as d2 ,t3.groupcode as c3,t3.title as d3 ,t4.groupcode as c4 ," +
+                       " t4.title as d4,t1.keyword as k1,t2.keyword as k2,t3.keyword as k3, t4.keyword as k4 from isco08 t1  join isco08 t2 on t1.groupcode=t2.parentcode and t1.type=1  join isco08 t3 on t2.groupcode=t3.parentcode and t2.type=2 " +
+                       " join isco08 t4 on t3.groupcode=t4.parentcode and t3.type =3  where t4.type=4) a where ( d1 like concat('%',?keyword,'%') or d2 like concat('%',?keyword,'%') or d3 like concat('%',?keyword,'%') or d4 like concat('%',?keyword,'%') " +
+                       " or c1 like concat('%',?keyword,'%') or c2 like concat('%',?keyword,'%') or c3 like concat('%',?keyword,'%') or c4 like concat('%',?keyword,'%') " +
+                       " or k1 like concat('%',?keyword,'%') or k2 like concat('%',?keyword,'%') or k3 like concat('%',?keyword,'%') or k4 like concat('%',?keyword,'%') ) order by c4 ";
+            return DataAccess.ExecuteReader(sql, new MySqlParameter("keyword", keyword));
+        }
+
+        public static MySqlDataReader searchAllIndustry(string keyword)
+        {
+            string sql = "Select SQL_NO_CACHE * from (Select  t1.isicRev4id as id1,t2.isicRev4id as id2,t3.isicRev4id as id3, t4.isicRev4id as id4,t1.description as d1, t1.code as c1,t2.description as d2,t2.code as c2,t3.description as d3,t3.code as c3,t4.description as d4,t4.code as c4,t4.code,t1.keyword as k1,t2.keyword k2,t3.keyword as k3,t4.keyword as k4 " +
+                        " from ISICRev4 t1 inner join ISICRev4 t2 on t2.parentcode=t1.code and t1.level=1  INNER JOIN ISICRev4 t3 on t3.parentcode=t2.code and t2.level=2 INNER JOIN ISICRev4 t4 on t4.parentcode=t3.code and t3.level=3 " +
+                        " where t4.level=4 ) a where ( d1 like concat('%',?keyword,'%') or d2 like concat('%',?keyword,'%') or d3 like concat('%',?keyword,'%') or d4 like concat('%',?keyword,'%') " +
+                        " or c1 like concat('%',?keyword,'%') or c2 like concat('%',?keyword,'%') or c3 like concat('%',?keyword,'%') or c4 like concat('%',?keyword,'%') " +
+                        " or k1 like concat('%',?keyword,'%') or k2 like concat('%',?keyword,'%') or k3 like concat('%',?keyword,'%') or k4 like concat('%',?keyword,'%') ) order by id4,code";
 
             return DataAccess.ExecuteReader(sql, new MySqlParameter("keyword", keyword));
         }

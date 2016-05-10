@@ -57,7 +57,10 @@
         <img src="~/Content/images/slider-img/slider-2.jpg">
         <img src="~/Content/images/slider-img/slider-3.jpg">
     </div>
-    <img id="loadingbusy" src="~/Content/images/imgs/ajax-loader.gif" class="busyindicator" alt="" /> 
+    <div  id="loadingbusy" class="busyindicator">
+        <img src="~/Content/images/imgs/ajax-loader.gif" class="busyindicatordiv" alt="" /> 
+    </div>
+   
     <div class="container-main-div">
         <!-- Header Section Main div -->
         <section class="container header-section">
@@ -232,7 +235,7 @@
                   source: function (request, response) {
                       $('#loadingbusy').show();
                       $.ajax({
-                          url: '@Url.Action("searchOccupation", "Jobs")', dataType: "json",
+                          url: '@Url.Action("searchOccupationCount", "Jobs")', dataType: "json",
                           type: "POST",
                           data: { term: request.term },
                           success: function (data) {
@@ -240,7 +243,7 @@
                                   var occupationDiv = document.getElementById("search-termoccu");
                                   occupationDiv.style.display = "block";
                                   $('#loadingbusy').hide()
-                                  $('#search-termoccu').treeview({
+                             $('#search-termoccu').treeview({
                                       levels: 1,
                                       showTags: true,
                                       color: "white",
@@ -318,6 +321,7 @@
                                                       if (c2.substring(0, c1.length) == c1) {
                                                           $('textarea#search-term').textext()[0].tags().removeTag([this.text]);
                                                           $('textarea#search-term').textext()[0].tags().addTags([code]);
+                                                        
                                                           $(this).text(code);
                                                           $(this).val(id);
                                                           $(".OccupationSelect option").each(function () {
@@ -388,7 +392,7 @@
                   source: function (request, response) {
                       $('#loadingbusy').show();
                       $.ajax({
-                          url: '@Url.Action("searchIndustry", "Jobs")', dataType: "json",
+                          url: '@Url.Action("searchIndustryCount", "Jobs")', dataType: "json",
                           type: "POST",
                           data: { term: request.term },
                           success: function (data) {

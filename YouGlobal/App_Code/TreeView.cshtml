@@ -1,9 +1,9 @@
-﻿@helper GetTreeView(List<Sample.Web.ModalLogin.Classes.SiteMenu> siteMenu, int parentID)
+﻿@helper GetTreeView(List<Sample.Web.ModalLogin.Classes.Tier> siteMenu, int parentID)
 {
 foreach (var i in siteMenu.Where(a => a.ParentMenuID.Equals(parentID)))
 {
         <li style="width: 500px;">
-            @{var submenu = siteMenu.Where(a => a.ParentMenuID.Equals(i.MenuID)).Count();}
+            @{var submenu = siteMenu.Where(a => a.ParentMenuID.Equals(i.TierId)).Count();}
             @if (submenu > 0)
             {
                 <span class="collapse collapsible">&nbsp;</span>
@@ -18,7 +18,7 @@ foreach (var i in siteMenu.Where(a => a.ParentMenuID.Equals(parentID)))
             @if (submenu > 0)
             {
                 <ul>
-                    @GetTreeView(siteMenu, i.MenuID)
+                    @GetTreeView(siteMenu, i.TierId)
                 </ul>
             }
         </li>

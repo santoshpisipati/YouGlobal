@@ -22,6 +22,11 @@ namespace Sample.Web.ModalLogin.Controllers
             return View("AboutUs");
         }
 
+        public ActionResult Error()
+        {
+            return View("Error");
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
