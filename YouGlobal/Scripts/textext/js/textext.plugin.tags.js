@@ -582,7 +582,7 @@
 	 * @date 2011/08/19
 	 * @id TextExtTags.addTags
 	 */
-	p.addTags = function(tags)
+	p.addTags = function(tags,id,Value)
 	{
 		if(!tags || tags.length == 0)
 		    return;
@@ -594,15 +594,15 @@
 			container = self.containerElement(),
 			i, tag
 			;
-
-		for(i = 0; i < tags.length; i++)
-		{
-		    tag = tags[i];
-		    if (isNaN(tag)) {
-		        if (tag && self.isTagAllowed(tag))
-		            container.append(self.renderTag(tag));
-		    }
-		}
+		container.append(self.renderTag(Value));
+		//for(i = 0; i < tags.length; i++)
+		//{
+		//    tag = tags[i];
+		//    if (isNaN(tag)) {
+		//        if (tag && self.isTagAllowed(tag))
+		//            container.append(self.renderTag(Value));
+		//    }
+		//}
 
 		self.updateFormCache();
 		core.getFormData();
@@ -649,20 +649,28 @@
 	 * @date 2011/08/19
 	 * @id TextExtTags.removeTag
 	 */
-	p.removeTag = function(tag)
+	p.removeTag = function(tag,id,value,control)
 	{
-		var self = this,
-			core = self.core(),
-            container = self.containerElement(),
-			element
+	    var self = this,
+           core = self.core(),
+           container = self.containerElement(),
+           element,
+           text = tag[0];
 	    ;
+
+	    var tree = $(control).fancytree("getTree"),
+           node2 = tree.getNodeByKey(id);
+	    if (node2.selected)
+	        node2.toggleSelected();
+		
+
 
 		if (container[0].previousElementSibling.id == 'IndustrySearch') {
 		    var listb = document.getElementById('IndustrySelect');
 		    var listbid = document.getElementById('IndustrySelectID');
 		    var len = listb.options.length;
 		    for (var i = listb.options.length - 1 ; i >= 0 ; i--) {
-		        if (listb.options[i].text == tag[0].textContent) {
+		        if (listb.options[i].text == value) {
 		            listb.options.remove(i);
 		            listbid.options.remove(i);
 		        }
@@ -672,7 +680,7 @@
 		    var occuList = document.getElementById('OccupationSelect');
 		    var len = occuList.options.length;
 		    for (var i = occuList.options.length - 1 ; i >= 0 ; i--) {
-		        if (occuList.options[i].text == tag[0].textContent) {
+		        if (occuList.options[i].text == value) {
 		            occuList.options.remove(i);
 		        }
 		    }
@@ -681,7 +689,7 @@
 		    var indList = document.getElementById('IndustrySelect');
 		    var len = indList.options.length;
 		    for (var i = indList.options.length - 1 ; i >= 0 ; i--) {
-		        if (indList.options[i].text == tag[0].textContent) {
+		        if (indList.options[i].text == value) {
 		            indList.options.remove(i);
 		        }
 		    }
@@ -690,8 +698,32 @@
 		    var occuList = document.getElementById('OccupationSelect');
 		    var len = occuList.options.length;
 		    for (var i = occuList.options.length - 1 ; i >= 0 ; i--) {
-		        if (occuList.options[i].text == tag[0].textContent) {
+		        if (occuList.options[i].text == value) {
 		            occuList.options.remove(i);
+		        }
+		    }
+		    var children = tag[0].nodes;
+		    if (children) {
+		        for (var i = 0; i < children.length; i++) {
+		            var childNode = children[i];
+		            var nodeId = childNode['nodeId'];
+		            $('#search-termoccu').treeview('uncheckNode', [nodeId, { silent: true }]);
+		            var subchildren = childNode.nodes;
+		            if (subchildren) {
+		                for (var j = 0; j < subchildren.length; j++) {
+		                    var childSubNode = subchildren[j];
+		                    var nodeId = childSubNode['nodeId'];
+		                    $('#search-termoccu').treeview('uncheckNode', [nodeId, { silent: true }]);
+		                    var subsubchildren = childSubNode.nodes;
+		                    if (subsubchildren) {
+		                        for (var j = 0; j < subsubchildren.length; j++) {
+		                            var childSubSubNode = subsubchildren[j];
+		                            var nodeId = childSubSubNode['nodeId'];
+		                            $('#search-termoccu').treeview('uncheckNode', [nodeId, { silent: true }]);
+		                        }
+		                    }
+		                }
+		            }
 		        }
 		    }
 		}
@@ -702,7 +734,7 @@
 		    var loctypelist = document.getElementById('SelectedLocationTypeList');
 		    var len = loclist.options.length;
 		    for (var i = loclist.options.length - 1 ; i >= 0 ; i--) {
-		        if (loclist.options[i].text == tag[0].textContent) {
+		        if (loclist.options[i].text == value) {
 		            loclist.options.remove(i);
 		            locidlist.options.remove(i);
 		            if (loctypelist != null)

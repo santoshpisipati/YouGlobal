@@ -40,7 +40,7 @@
         selectedIcon: '',
         checkedIcon: 'glyphicon glyphicon-check',
         uncheckedIcon: 'glyphicon glyphicon-unchecked',
-
+        partialcheckedIcon: 'glyphicon glyphicon-minus-sign',
         color: undefined, // '#000000',
         backColor: undefined, // '#FFFFFF',
         borderColor: undefined, // '#dddddd',
@@ -56,6 +56,7 @@
         showBorder: true,
         showIcon: true,
         showCheckbox: false,
+        showPartialCheckbox: false,
         showTags: false,
         multiSelect: false,
 
@@ -67,6 +68,7 @@
         onNodeExpanded: undefined,
         onNodeSelected: undefined,
         onNodeUnchecked: undefined,
+        onNodePartialUnchecked: undefined,
         onNodeUnselected: undefined,
         onSearchComplete: undefined,
         onSearchCleared: undefined
@@ -128,6 +130,7 @@
 
             // Expand / collapse methods
             checkAll: $.proxy(this.checkAll, this),
+            partialCheckNode: $.proxy(this.partialCheckNode, this),
             checkNode: $.proxy(this.checkNode, this),
             uncheckAll: $.proxy(this.uncheckAll, this),
             uncheckNode: $.proxy(this.uncheckNode, this),
@@ -233,6 +236,10 @@
 
         if (typeof (this.options.onNodeUnchecked) === 'function') {
             this.$element.on('nodeUnchecked', this.options.onNodeUnchecked);
+        }
+
+        if (typeof (this.options.onNodePartialUnchecked) === 'function') {
+            this.$element.on('onNodePartialUnchecked', this.options.onNodePartialUnchecked);
         }
 
         if (typeof (this.options.onNodeUnselected) === 'function') {
@@ -454,6 +461,30 @@
         }
     };
 
+    Tree.prototype.setPartialCheckedState = function (node, state, options) {
+
+        if (state === node.state.checked) return;
+
+        if (state) {
+
+            // Check node
+            node.state.checked = true;
+
+            if (!options.silent) {
+                this.$element.trigger('nodeUnchecked', $.extend(true, {}, node));
+            }
+        }
+        else {
+
+            // Uncheck node
+            node.state.checked = false;
+            if (!options.silent) {
+                this.$element.trigger('partialnodeUnchecked', $.extend(true, {}, node));
+            }
+        }
+    };
+    
+
     Tree.prototype.setDisabledState = function (node, state, options) {
 
         if (state === node.state.disabled) return;
@@ -566,7 +597,7 @@
 
             // Add check / unchecked icon
             if (_this.options.showCheckbox) {
-
+                var siblingsChecked = '';
                 var classList = ['check-icon'];
                 if (node.state.checked) {
                     classList.push(_this.options.checkedIcon);
@@ -581,6 +612,95 @@
 					);
             }
 
+            if (_this.options.showPartialCheckbox) {
+                var siblingsChecked = '';
+                var siblingsunChecked = '';
+                var classList = ['check-icon'];
+                var item;
+                var item1;
+                var item2;
+                if (node.state.checked) {
+                    var parent = $('#search-termoccu').treeview('getParent', node);
+                    if (parent.nodes != undefined && parent.nodes.length > 0) {
+                        siblingsChecked = '';
+                        for (var i = 0; i < parent.nodes.length; i++) {
+                            item = parent.nodes[i];
+                            if (item.state.checked) {
+                                siblingsChecked += ',' + item.state.checked.toString();
+                            }
+                        }
+                        if (item.nodes !== undefined && item.nodes.length > 0) {
+                            for (var j = 0; j < item.nodes.length; j++) {
+                                item1 = item.nodes[j];
+                                if (item1.state.checked) {
+                                    siblingsChecked += ',' + item1.state.checked.toString();
+                                }
+                                else {
+                                    siblingsChecked += ',' + item1.state.checked.toString();
+                                }
+                            }
+                        }
+                        if (item1 !== undefined && item1.nodes !== undefined && item1.nodes.length > 0) {
+                            for (var k = 0; k < item1.nodes.length; k++) {
+                                item2 = item1.nodes[k];
+                                if (item2.state.checked) {
+                                    siblingsChecked += ',' + item2.state.checked.toString();
+                                }
+
+                            }
+                        }
+                    }
+                    if (siblingsChecked.indexOf('false') > 0) {
+                        classList.push(_this.options.partialcheckedIcon);
+                    }
+                    else {
+                        classList.push(_this.options.checkedIcon);
+                    }
+                }
+                else {
+                    siblingsunChecked = '';
+                    var parent = $('#search-termoccu').treeview('getParent', node);
+                    if (parent.nodes != undefined && parent.nodes.length > 0) {
+                        for (var i = 0; i < parent.nodes.length; i++) {
+                            item = parent.nodes[i];
+                            if (item.state.checked) {
+                                siblingsunChecked += ',' + item.state.checked.toString();
+                            }
+
+                        }
+                        if (item.nodes !== undefined && item.nodes.length > 0) {
+                            for (var j = 0; j < item.nodes.length; j++) {
+                                item1 = item.nodes[j];
+                                if (item1.state.checked) {
+                                    siblingsunChecked += ',' + item1.state.checked.toString();
+                                }                                
+                            }
+                        }
+                        if (item1 !== undefined && item1.nodes !== undefined && item1.nodes.length > 0) {
+                            for (var k = 0; k < item1.nodes.length; k++) {
+                                item2 = item1.nodes[k];
+                                if (item2.state.checked) {
+                                    siblingsunChecked += ',' + item2.state.checked.toString();
+                                }
+
+                            }
+                        }
+                    }
+                    if (siblingsunChecked.indexOf(',true') > 0) {
+                        classList.push(_this.options.partialcheckedIcon);
+                    }
+                    else {
+                        classList.push(_this.options.uncheckedIcon);
+                    }
+                }
+
+                treeItem
+					.append($(_this.template.icon)
+						.addClass(classList.join(' '))
+					);
+            }
+
+
             // Add text
             if (_this.options.enableLinks) {
                 // Add hyperlink
@@ -594,6 +714,12 @@
                 // otherwise just text
                 treeItem
 					.append(node.text);
+            }
+
+            if (_this.options.showTags) {
+                treeItem
+					.append($(_this.template.button)
+					);
             }
 
             // Add tags as badges
@@ -688,11 +814,12 @@
 
     Tree.prototype.template = {
         list: '<ul class="list-group"></ul>',
-        item: '<li class="list-group-item"></li>',
+        item: '<li class="list-group-item expand-icon"></li>',
         indent: '<span class="indent"></span>',
         icon: '<span class="icon"></span>',
-        link: '<a href="#" style="color:inherit;"></a>',
+        link: '<a href="#" style="color:inherit;"> <input type="checkbox" /></a>',
         badge: '<span class="badge"></span>'
+        //,button: '<input type="button" value="Select" class="selectbutton"/>'
     };
 
     Tree.prototype.css = '.treeview .list-group-item{cursor:pointer}.treeview span.indent{margin-left:10px;margin-right:10px}.treeview span.icon{width:12px;margin-right:5px}.treeview .node-disabled{color:silver;cursor:not-allowed}'
@@ -795,7 +922,6 @@
         return this.findNodes('false', 'g', 'state.disabled');
     };
 
-
     /**
 		Set a node state to selected
 		@param {Object|Number} identifiers - A valid node, node id or array of node identifiers
@@ -834,7 +960,6 @@
 
         this.render();
     };
-
 
     /**
 		Collapse all tree nodes
@@ -939,7 +1064,6 @@
         this.render();
     };
 
-
     /**
 		Check all tree nodes
 		@param {optional Object} options
@@ -961,6 +1085,14 @@
     Tree.prototype.checkNode = function (identifiers, options) {
         this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
             this.setCheckedState(node, true, options);
+        }, this));
+
+        this.render();
+    };
+
+    Tree.prototype.partialCheckNode = function (identifiers, options) {
+        this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+            this.setPartialCheckedState(node, true, options);
         }, this));
 
         this.render();
@@ -990,7 +1122,7 @@
         }, this));
 
         this.render();
-    };
+    };    
 
     /**
 		Toggles a nodes checked state; checking if unchecked, unchecking if checked.

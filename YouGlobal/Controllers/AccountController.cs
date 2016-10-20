@@ -86,6 +86,7 @@ namespace Sample.Web.ModalLogin.Controllers
                     {
                         login.EmailId = model.UserName;
                         login.Password = CryptorEngine.Encrypt(model.LoginPassword, true);
+                        string password1 = CryptorEngine.Decrypt("Y16Q5zGIDklecz7D46LO3Q==", true);
                         member = Logininfo.GetLoginDetails(login);
                         if (member != null)
                         {

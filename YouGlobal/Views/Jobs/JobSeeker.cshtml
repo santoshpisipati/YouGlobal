@@ -57,8 +57,8 @@
                                         <img title="Remove selected" src="../../Content/images/delete.png" id="btnOremove"
                                              style="display: block !important; visibility: inherit !important;" />
                                     </div>
-                                </div>
-                                @Html.TextArea("EmpOccupation", string.Empty, new { @id = "search-term", @class = "form-control txtShowDiv", placeholder = "Enter your Occupation" })
+                                </div>                              
+                                @Html.TextBox("EmpOccupation", string.Empty, new { @id = "search-term", @class = "form-control txtShowDiv", @role = "tagsinput", placeholder = "Enter your Occupation" })
                                 <div class="keywordText">
                                     <i style="color:white;"></i>
                                 </div>
@@ -81,7 +81,7 @@
                                              style="display: block !important; visibility: inherit !important;" />
                                     </div>
                                 </div>
-                                @Html.TextArea("Empindustry", string.Empty, new { @id = "search-empIndtree", @class = "form-control industryin", placeholder = "Enter your Industry" })
+                                @Html.TextBox("Empindustry", string.Empty, new { @id = "search-empIndtree", @class = "form-control industryin", placeholder = "Enter your Industry" })
                                 <div class="indDiv">
                                     <div id="tvDind" style="display:none;">
                                         <div class="treeview">
@@ -128,7 +128,7 @@
                 </button>
                 <div class="treediv">
                     <div id='search-termoccu' class="occupation" style="display:none">
-                        <img id="occloading" src="~/Content/images/imgs/ajax-loader.gif" class="busyindicator" alt="" /> 
+                        <img id="occloading" src="~/Content/images/imgs/ajax-loader.gif" class="busyindicator" alt="" />                        
                     </div>
                     <div id='searchable-empIndtree' class="industry" style="display:none">
                         <img id="indloading" src="~/Content/images/imgs/ajax-loader.gif" class="busyindicator" alt="" /> 

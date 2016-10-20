@@ -264,94 +264,100 @@ namespace YG_MVC.Controllers
                     Tier = new Tier();
                     Tier.TierId = drOccupation["id1"].ToString() != null ? Convert.ToInt32(drOccupation["id1"].ToString()) : 0;
                     Tier.ParentMenuID = 0;
-                    Tier.nodes = new List<Tier1>();
-                    Tier.value = drOccupation["id1"].ToString() + " " + drOccupation["c1"].ToString();
-                    Tier.text = string.Format("{0} ({1})", drOccupation["d1"].ToString(), total);
+                    Tier.children = new List<Tier1>();
+                    Tier.key = drOccupation["id1"].ToString() + " " + drOccupation["c1"].ToString();
+                    Tier.title = string.Format("{0} ({1})", drOccupation["d1"].ToString(), total);
                     result.Add("> " + drOccupation["c1"].ToString() + " " + drOccupation["d1"].ToString());
                 }
                 else
                 {
-                    total = total + t4jobsCount; Tier.text = string.Format("{0} ({1})", drOccupation["d1"].ToString(), total);
+                    total = total + t4jobsCount; Tier.title = string.Format("{0} ({1})", drOccupation["d1"].ToString(), total);
                 }
 
                 if (!result.Contains(">> " + drOccupation["c2"].ToString() + " " + drOccupation["d2"].ToString()))
                 {
-                    if (Tier.nodes == null)
+                    if (Tier.children == null)
                     {
                         t1jobsCount = 0; t1jobsCount = t1jobsCount + t4jobsCount;
-                        Tier.nodes = new List<Tier1>();
-                        Tier1.text = string.Format("{0} ({1})", drOccupation["d2"].ToString(), t1jobsCount);
-                        Tier1.Tier1Id = drOccupation["id21"].ToString() != null ? Convert.ToInt32(drOccupation["id2"].ToString()) : 0;
-                        Tier1.value = drOccupation["id2"].ToString() + " " + drOccupation["c2"].ToString();
-                        Tier.nodes.Add(Tier1);
+                        Tier.children = new List<Tier1>();
+                        Tier1.title = string.Format("{0} ({1})", drOccupation["d2"].ToString(), t1jobsCount);
+                        Tier1.Tier1Id = drOccupation["id2"].ToString() != null ? Convert.ToInt32(drOccupation["id2"].ToString()) : 0;
+                        Tier1.key = drOccupation["id2"].ToString() + " " + drOccupation["c2"].ToString();
+                        Tier1.parentString += "," + drOccupation["id1"].ToString();
+                        Tier.children.Add(Tier1);
                     }
                     else
                     {
                         t1jobsCount = 0; t1jobsCount = t1jobsCount + t4jobsCount;
                         Tier1 = new Tier1();
-                        Tier1.value = drOccupation["id2"].ToString() + " " + drOccupation["c2"].ToString();
+                        Tier1.key = drOccupation["id2"].ToString() + " " + drOccupation["c2"].ToString();
                         Tier1.Tier1Id = drOccupation["id2"].ToString() != null ? Convert.ToInt32(drOccupation["id2"].ToString()) : 0;
-                        Tier1.text = string.Format("{0} ({1})", drOccupation["d2"].ToString(), t1jobsCount);
-                        Tier.nodes.Add(Tier1);
+                        Tier1.title = string.Format("{0} ({1})", drOccupation["d2"].ToString(), t1jobsCount);
+                        Tier1.parentString += "," + drOccupation["id1"].ToString();
+                        Tier.children.Add(Tier1);
                     }
                     result.Add(">> " + drOccupation["c2"].ToString() + " " + drOccupation["d2"].ToString());
                 }
                 else
                 {
-                    t1jobsCount = t1jobsCount + t4jobsCount; Tier1.text = string.Format("{0} ({1})", drOccupation["d2"].ToString(), t1jobsCount);
+                    t1jobsCount = t1jobsCount + t4jobsCount; Tier1.title = string.Format("{0} ({1})", drOccupation["d2"].ToString(), t1jobsCount);
                 }
                 if (!result.Contains(">>> " + drOccupation["c3"].ToString() + " " + drOccupation["d3"].ToString()))
                 {
                     string tree = drOccupation["d3"].ToString();
-                    if (Tier1.nodes == null)
+                    if (Tier1.children == null)
                     {
                         t2jobsCount = 0;
                         t2jobsCount = t4jobsCount;
-                        Tier1.nodes = new List<Tier2>();
+                        Tier1.children = new List<Tier2>();
                         Tier2 = new Tier2();
-                        Tier2.text = string.Format("{0} ({1})", drOccupation["d3"].ToString(), t2jobsCount);
+                        Tier2.title = string.Format("{0} ({1})", drOccupation["d3"].ToString(), t2jobsCount);
                         Tier2.Tier2Id = drOccupation["id3"].ToString() != null ? Convert.ToInt32(drOccupation["id3"].ToString()) : 0;
-                        Tier2.value = drOccupation["id3"].ToString() + " " + drOccupation["c3"].ToString();
-                        Tier1.nodes.Add(Tier2);
+                        Tier2.key = drOccupation["id3"].ToString() + " " + drOccupation["c3"].ToString();
+                        Tier2.parentString += drOccupation["id1"].ToString() + "," + drOccupation["id2"].ToString();
+                        Tier1.children.Add(Tier2);
                     }
                     else
                     {
                         t2jobsCount = t4jobsCount;
                         Tier2 = new Tier2();
-                        Tier2.value = drOccupation["id3"].ToString() + " " + drOccupation["c3"].ToString();
-                        Tier2.text = string.Format("{0} ({1})", drOccupation["d3"].ToString(), t2jobsCount);
+                        Tier2.key = drOccupation["id3"].ToString() + " " + drOccupation["c3"].ToString();
+                        Tier2.title = string.Format("{0} ({1})", drOccupation["d3"].ToString(), t2jobsCount);
                         Tier2.Tier2Id = drOccupation["id3"].ToString() != null ? Convert.ToInt32(drOccupation["id3"].ToString()) : 0;
-                        Tier1.nodes.Add(Tier2);
+                        Tier2.parentString += drOccupation["id1"].ToString() + "," + drOccupation["id2"].ToString();
+                        Tier1.children.Add(Tier2);
                     }
                     result.Add(">>> " + drOccupation["c3"].ToString() + " " + drOccupation["d3"].ToString());
                 }
                 else
                 {
-                    t2jobsCount = t2jobsCount + t4jobsCount; Tier2.text = string.Format("{0} ({1})", drOccupation["d3"].ToString(), t2jobsCount);
+                    t2jobsCount = t2jobsCount + t4jobsCount; Tier2.title = string.Format("{0} ({1})", drOccupation["d3"].ToString(), t2jobsCount);
                 }
                 if (t4jobsCount > 0)
                 {
-                    if (Tier2.nodes == null)
+                    if (Tier2.children == null)
                     {
-                        Tier2.nodes = new List<Tier3>();
+                        Tier2.children = new List<Tier3>();
                         Tier3 = new Tier3();
-                        Tier3.text = string.Format("{0} ({1})", drOccupation["d4"].ToString(), t4jobsCount);
-                        Tier3.value = drOccupation["id4"].ToString() + " " + drOccupation["c4"].ToString();
-                        Tier2.nodes.Add(Tier3);
+                        Tier3.title = string.Format("{0} ({1})", drOccupation["d4"].ToString(), t4jobsCount);
+                        Tier3.key = drOccupation["id4"].ToString() + " " + drOccupation["c4"].ToString();
+                        Tier3.parentString += drOccupation["id1"].ToString() + "," + drOccupation["id2"].ToString() + "," + drOccupation["id3"].ToString();
+                        Tier2.children.Add(Tier3);
                     }
                     else
                     {
                         Tier3 = new Tier3();
-                        Tier3.text = string.Format("{0} ({1})", drOccupation["d4"].ToString(), t4jobsCount);
-                        Tier3.value = drOccupation["id4"].ToString() + " " + drOccupation["c4"].ToString();
-                        if (Tier2.nodes == null)
+                        Tier3.title = string.Format("{0} ({1})", drOccupation["d4"].ToString(), t4jobsCount);
+                        Tier3.key = drOccupation["id4"].ToString() + " " + drOccupation["c4"].ToString();
+                        Tier3.parentString += drOccupation["id1"].ToString() + "," + drOccupation["id2"].ToString() + "," + drOccupation["id3"].ToString();
+                        if (Tier2.children == null)
                         {
-                            Tier2.nodes = new List<Tier3>();
-                            Tier2.nodes.Add(Tier3);
+                            Tier2.children = new List<Tier3>();
+                            Tier2.children.Add(Tier3);
                         }
                         else
                         {
-                            Tier2.nodes.Add(Tier3);
+                            Tier2.children.Add(Tier3);
                         }
                         result.Add(">>>> " + drOccupation["c4"].ToString() + " " + drOccupation["d4"].ToString());
                     }
@@ -365,7 +371,7 @@ namespace YG_MVC.Controllers
             drOccupation.Close();
             drOccupation.Dispose();
             Tier = new Tier();
-            Tier.text = "- Any -";
+            Tier.title = "- Any -";
             treeViewResult.Insert(0, Tier);
             return Json(treeViewResult, JsonRequestBehavior.AllowGet);
         }
@@ -388,77 +394,77 @@ namespace YG_MVC.Controllers
                     Tier = new Tier();
                     Tier.TierId = drOccupation["id1"].ToString() != null ? Convert.ToInt32(drOccupation["id1"].ToString()) : 0;
                     Tier.ParentMenuID = 0;
-                    Tier.nodes = new List<Tier1>();
-                    Tier.value = drOccupation["id1"].ToString() + " " + drOccupation["c1"].ToString();
-                    Tier.text = drOccupation["d1"].ToString();
+                    Tier.children = new List<Tier1>();
+                    Tier.key = drOccupation["id1"].ToString() + " " + drOccupation["c1"].ToString();
+                    Tier.title = drOccupation["d1"].ToString();
                     result.Add("> " + drOccupation["c1"].ToString() + " " + drOccupation["d1"].ToString());
                 }
 
                 if (!result.Contains(">> " + drOccupation["c2"].ToString() + " " + drOccupation["d2"].ToString()))
                 {
-                    if (Tier.nodes == null)
+                    if (Tier.children == null)
                     {
-                        Tier.nodes = new List<Tier1>();
-                        Tier1.text = drOccupation["d2"].ToString();
+                        Tier.children = new List<Tier1>();
+                        Tier1.title = drOccupation["d2"].ToString();
                         Tier1.Tier1Id = drOccupation["id21"].ToString() != null ? Convert.ToInt32(drOccupation["id2"].ToString()) : 0;
-                        Tier1.value = drOccupation["id2"].ToString() + " " + drOccupation["c2"].ToString();
-                        Tier.nodes.Add(Tier1);
+                        Tier1.key = drOccupation["id2"].ToString() + " " + drOccupation["c2"].ToString();
+                        Tier.children.Add(Tier1);
                     }
                     else
                     {
                         Tier1 = new Tier1();
-                        Tier1.value = drOccupation["id2"].ToString() + " " + drOccupation["c2"].ToString();
+                        Tier1.key = drOccupation["id2"].ToString() + " " + drOccupation["c2"].ToString();
                         Tier1.Tier1Id = drOccupation["id2"].ToString() != null ? Convert.ToInt32(drOccupation["id2"].ToString()) : 0;
-                        Tier1.text = drOccupation["d2"].ToString();
-                        Tier.nodes.Add(Tier1);
+                        Tier1.title = drOccupation["d2"].ToString();
+                        Tier.children.Add(Tier1);
                     }
                     result.Add(">> " + drOccupation["c2"].ToString() + " " + drOccupation["d2"].ToString());
                 }
 
                 if (!result.Contains(">>> " + drOccupation["c3"].ToString() + " " + drOccupation["d3"].ToString()))
                 {
-                    if (Tier1.nodes == null)
+                    if (Tier1.children == null)
                     {
-                        Tier1.nodes = new List<Tier2>();
+                        Tier1.children = new List<Tier2>();
                         Tier2 = new Tier2();
-                        Tier2.text = drOccupation["d3"].ToString();
+                        Tier2.title = drOccupation["d3"].ToString();
                         Tier2.Tier2Id = drOccupation["id3"].ToString() != null ? Convert.ToInt32(drOccupation["id3"].ToString()) : 0;
-                        Tier2.value = drOccupation["id3"].ToString() + " " + drOccupation["c3"].ToString();
-                        Tier1.nodes.Add(Tier2);
+                        Tier2.key = drOccupation["id3"].ToString() + " " + drOccupation["c3"].ToString();
+                        Tier1.children.Add(Tier2);
                     }
                     else
                     {
                         Tier2 = new Tier2();
-                        Tier2.value = drOccupation["id3"].ToString() + " " + drOccupation["c3"].ToString();
-                        Tier2.text = drOccupation["d3"].ToString();
+                        Tier2.key = drOccupation["id3"].ToString() + " " + drOccupation["c3"].ToString();
+                        Tier2.title = drOccupation["d3"].ToString();
                         Tier2.Tier2Id = drOccupation["id3"].ToString() != null ? Convert.ToInt32(drOccupation["id3"].ToString()) : 0;
-                        Tier1.nodes.Add(Tier2);
+                        Tier1.children.Add(Tier2);
                     }
                     result.Add(">>> " + drOccupation["c3"].ToString() + " " + drOccupation["d3"].ToString());
                 }
                
 
-                if (Tier2.nodes == null)
+                if (Tier2.children == null)
                 {
-                    Tier2.nodes = new List<Tier3>();
+                    Tier2.children = new List<Tier3>();
                     Tier3 = new Tier3();
-                    Tier3.text = drOccupation["d4"].ToString();
-                    Tier3.value = drOccupation["id4"].ToString() + " " + drOccupation["c4"].ToString();
-                    Tier2.nodes.Add(Tier3);
+                    Tier3.title = drOccupation["d4"].ToString();
+                    Tier3.key = drOccupation["id4"].ToString() + " " + drOccupation["c4"].ToString();
+                    Tier2.children.Add(Tier3);
                 }
                 else
                 {
                     Tier3 = new Tier3();
-                    Tier3.text = drOccupation["d4"].ToString();
-                    Tier3.value = drOccupation["id4"].ToString() + " " + drOccupation["c4"].ToString();
-                    if (Tier2.nodes == null)
+                    Tier3.title = drOccupation["d4"].ToString();
+                    Tier3.key = drOccupation["id4"].ToString() + " " + drOccupation["c4"].ToString();
+                    if (Tier2.children == null)
                     {
-                        Tier2.nodes = new List<Tier3>();
-                        Tier2.nodes.Add(Tier3);
+                        Tier2.children = new List<Tier3>();
+                        Tier2.children.Add(Tier3);
                     }
                     else
                     {
-                        Tier2.nodes.Add(Tier3);
+                        Tier2.children.Add(Tier3);
                     }
                     result.Add(">>>> " + drOccupation["c4"].ToString() + " " + drOccupation["d4"].ToString());
                 }
@@ -471,7 +477,7 @@ namespace YG_MVC.Controllers
             drOccupation.Close();
             drOccupation.Dispose();
             Tier = new Tier();
-            Tier.text = "- Any -";
+            Tier.title = "- Any -";
             treeViewResult.Insert(0, Tier);
             return Json(treeViewResult, JsonRequestBehavior.AllowGet);
         }
@@ -500,94 +506,94 @@ namespace YG_MVC.Controllers
                     Tier = new Tier();
                     Tier.TierId = drIndustry["id1"].ToString() != null ? Convert.ToInt32(drIndustry["id1"].ToString()) : 0;
                     Tier.ParentMenuID = 0;
-                    Tier.nodes = new List<Tier1>();
-                    Tier.value = drIndustry["id1"].ToString() + " " + drIndustry["c1"].ToString();
-                    Tier.text = string.Format("{0} ({1})", drIndustry["d1"].ToString(), total);
+                    Tier.children = new List<Tier1>();
+                    Tier.key = drIndustry["id1"].ToString() + " " + drIndustry["c1"].ToString();
+                    Tier.title = string.Format("{0} ({1})", drIndustry["d1"].ToString(), total);
                     result.Add("> " + drIndustry["c1"].ToString() + " " + drIndustry["d1"].ToString());
                 }
                 else
                 {
-                    total = total + t4jobsCount; Tier.text = string.Format("{0} ({1})", drIndustry["d1"].ToString(), total);
+                    total = total + t4jobsCount; Tier.title = string.Format("{0} ({1})", drIndustry["d1"].ToString(), total);
                 }
 
                 if (!result.Contains(">> " + drIndustry["c2"].ToString() + " " + drIndustry["d2"].ToString()))
                 {
-                    if (Tier.nodes == null)
+                    if (Tier.children == null)
                     {
                         t1jobsCount = 0; t1jobsCount = t1jobsCount + t4jobsCount;
-                        Tier.nodes = new List<Tier1>();
-                        Tier1.text = string.Format("{0} ({1})", drIndustry["d2"].ToString(), t1jobsCount);
+                        Tier.children = new List<Tier1>();
+                        Tier1.title = string.Format("{0} ({1})", drIndustry["d2"].ToString(), t1jobsCount);
                         Tier1.Tier1Id = drIndustry["id21"].ToString() != null ? Convert.ToInt32(drIndustry["id2"].ToString()) : 0;
-                        Tier1.value = drIndustry["id2"].ToString() + " " + drIndustry["c2"].ToString();
-                        Tier.nodes.Add(Tier1);
+                        Tier1.key = drIndustry["id2"].ToString() + " " + drIndustry["c2"].ToString();
+                        Tier.children.Add(Tier1);
                     }
                     else
                     {
                         t1jobsCount = 0; t1jobsCount = t1jobsCount + t4jobsCount;
                         Tier1 = new Tier1();
-                        Tier1.value = drIndustry["id2"].ToString() + " " + drIndustry["c2"].ToString();
+                        Tier1.key = drIndustry["id2"].ToString() + " " + drIndustry["c2"].ToString();
                         Tier1.Tier1Id = drIndustry["id2"].ToString() != null ? Convert.ToInt32(drIndustry["id2"].ToString()) : 0;
-                        Tier1.text = string.Format("{0} ({1})", drIndustry["d2"].ToString(), t1jobsCount);
-                        Tier.nodes.Add(Tier1);
+                        Tier1.title = string.Format("{0} ({1})", drIndustry["d2"].ToString(), t1jobsCount);
+                        Tier.children.Add(Tier1);
                     }
                     result.Add(">> " + drIndustry["c2"].ToString() + " " + drIndustry["d2"].ToString());
                 }
                 else
                 {
-                    t1jobsCount = t1jobsCount + t4jobsCount; Tier1.text = string.Format("{0} ({1})", drIndustry["d2"].ToString(), t1jobsCount);
+                    t1jobsCount = t1jobsCount + t4jobsCount; Tier1.title = string.Format("{0} ({1})", drIndustry["d2"].ToString(), t1jobsCount);
                 }
                 if (!result.Contains(">>> " + drIndustry["c3"].ToString() + " " + drIndustry["d3"].ToString()))
                 {
                     string tree = drIndustry["d3"].ToString();
-                    if (Tier1.nodes == null)
+                    if (Tier1.children == null)
                     {
                         t2jobsCount = 0;
                         t2jobsCount = t4jobsCount;
-                        Tier1.nodes = new List<Tier2>();
+                        Tier1.children = new List<Tier2>();
                         Tier2 = new Tier2();
-                        Tier2.text = string.Format("{0} ({1})", drIndustry["d3"].ToString(), t2jobsCount);
+                        Tier2.title = string.Format("{0} ({1})", drIndustry["d3"].ToString(), t2jobsCount);
                         Tier2.Tier2Id = drIndustry["id3"].ToString() != null ? Convert.ToInt32(drIndustry["id3"].ToString()) : 0;
-                        Tier2.value = drIndustry["id3"].ToString() + " " + drIndustry["c3"].ToString();
-                        Tier1.nodes.Add(Tier2);
+                        Tier2.key = drIndustry["id3"].ToString() + " " + drIndustry["c3"].ToString();
+                        Tier1.children.Add(Tier2);
                     }
                     else
                     {
                         t2jobsCount = t4jobsCount;
                         Tier2 = new Tier2();
-                        Tier2.value = drIndustry["id3"].ToString() + " " + drIndustry["c3"].ToString();
-                        Tier2.text = string.Format("{0} ({1})", drIndustry["d3"].ToString(), t2jobsCount);
+                        Tier2.key = drIndustry["id3"].ToString() + " " + drIndustry["c3"].ToString();
+                        Tier2.title = string.Format("{0} ({1})", drIndustry["d3"].ToString(), t2jobsCount);
                         Tier2.Tier2Id = drIndustry["id3"].ToString() != null ? Convert.ToInt32(drIndustry["id3"].ToString()) : 0;
-                        Tier1.nodes.Add(Tier2);
+                        Tier1.children.Add(Tier2);
                     }
                     result.Add(">>> " + drIndustry["c3"].ToString() + " " + drIndustry["d3"].ToString());
                 }
                 else
                 {
-                    t2jobsCount = t2jobsCount + t4jobsCount; Tier2.text = string.Format("{0} ({1})", drIndustry["d3"].ToString(), t2jobsCount);
+                    t2jobsCount = t2jobsCount + t4jobsCount; Tier2.title = string.Format("{0} ({1})", drIndustry["d3"].ToString(), t2jobsCount);
                 }
                 if (t4jobsCount > 0)
                 {
-                    if (Tier2.nodes == null)
+                    if (Tier2.children == null)
                     {
-                        Tier2.nodes = new List<Tier3>();
+                        Tier2.children = new List<Tier3>();
                         Tier3 = new Tier3();
-                        Tier3.text = string.Format("{0} ({1})", drIndustry["d4"].ToString(), t4jobsCount);
-                        Tier3.value = drIndustry["id4"].ToString() + " " + drIndustry["c4"].ToString();
-                        Tier2.nodes.Add(Tier3);
+                        Tier3.title = string.Format("{0} ({1})", drIndustry["d4"].ToString(), t4jobsCount);
+                        Tier3.key = drIndustry["id4"].ToString() + " " + drIndustry["c4"].ToString();
+                        Tier2.children.Add(Tier3);
                     }
                     else
                     {
                         Tier3 = new Tier3();
-                        Tier3.text = string.Format("{0} ({1})", drIndustry["d4"].ToString(), t4jobsCount);
-                        Tier3.value = drIndustry["id4"].ToString() + " " + drIndustry["c4"].ToString();
-                        if (Tier2.nodes == null)
+                        Tier3.title = string.Format("{0} ({1})", drIndustry["d4"].ToString(), t4jobsCount);
+                        Tier3.key = drIndustry["id4"].ToString() + " " + drIndustry["c4"].ToString();
+                        if (Tier2.children == null)
                         {
-                            Tier2.nodes = new List<Tier3>();
-                            Tier2.nodes.Add(Tier3);
+                            Tier2.children = new List<Tier3>();
+                            Tier2.children.Add(Tier3);
                         }
                         else
                         {
-                            Tier2.nodes.Add(Tier3);
+                            Tier2.children.Add(Tier3);
                         }
                         result.Add(">>>> " + drIndustry["c4"].ToString() + " " + drIndustry["d4"].ToString());
                     }
@@ -601,7 +607,7 @@ namespace YG_MVC.Controllers
             drIndustry.Close();
             drIndustry.Dispose();
             Tier = new Tier();
-            Tier.text = "- Any -";
+            Tier.title = "- Any -";
             treeViewResult.Insert(0, Tier);
             return Json(treeViewResult, JsonRequestBehavior.AllowGet);
         }
@@ -625,90 +631,90 @@ namespace YG_MVC.Controllers
                     Tier = new Tier();
                     Tier.TierId = ParentMenuID;
                     Tier.ParentMenuID = 0;
-                    Tier.nodes = new List<Tier1>();
-                    Tier.value = drIndustry["id1"].ToString() + " " + drIndustry["c1"].ToString();
-                    Tier.text = drIndustry["d1"].ToString();
+                    Tier.children = new List<Tier1>();
+                    Tier.key = drIndustry["id1"].ToString() + " " + drIndustry["c1"].ToString();
+                    Tier.title = drIndustry["d1"].ToString();
                     result.Add("> " + drIndustry["c1"].ToString() + " " + drIndustry["d1"].ToString());
                 }
                 if (!result.Contains(">> " + drIndustry["c2"].ToString() + " " + drIndustry["d2"].ToString()))
                 {
-                    if (Tier.nodes == null)
+                    if (Tier.children == null)
                     {
-                        Tier.nodes = new List<Tier1>();
-                        Tier1.text = drIndustry["d2"].ToString();
-                        Tier1.value = drIndustry["id2"].ToString() + " " + drIndustry["c2"].ToString() + " " + drIndustry["c1"].ToString();
-                        Tier.nodes.Add(Tier1);
+                        Tier.children = new List<Tier1>();
+                        Tier1.title = drIndustry["d2"].ToString();
+                        Tier1.key = drIndustry["id2"].ToString() + " " + drIndustry["c2"].ToString() + " " + drIndustry["c1"].ToString();
+                        Tier.children.Add(Tier1);
                     }
                     else
                     {
                         Tier1 = new Tier1();
-                        Tier1.value = drIndustry["id2"].ToString() + " " + drIndustry["c2"].ToString() + " " + drIndustry["c1"].ToString();
-                        Tier1.text = drIndustry["d2"].ToString();
-                        Tier.nodes.Add(Tier1);
+                        Tier1.key = drIndustry["id2"].ToString() + " " + drIndustry["c2"].ToString() + " " + drIndustry["c1"].ToString();
+                        Tier1.title = drIndustry["d2"].ToString();
+                        Tier.children.Add(Tier1);
                     }
                     result.Add(">> " + drIndustry["c2"].ToString() + " " + drIndustry["d2"].ToString());
                 }
                 if (!result.Contains(">>> " + drIndustry["c3"].ToString() + " " + drIndustry["d3"].ToString()))
                 {
-                    if (Tier1.nodes == null)
+                    if (Tier1.children == null)
                     {
-                        Tier1.nodes = new List<Tier2>();
+                        Tier1.children = new List<Tier2>();
                         Tier2 = new Tier2();
-                        Tier2.value = drIndustry["id3"].ToString() + " " + drIndustry["c3"].ToString() + " " + drIndustry["c1"].ToString();
-                        Tier2.text = drIndustry["d3"].ToString();
-                        Tier1.nodes.Add(Tier2);
+                        Tier2.key = drIndustry["id3"].ToString() + " " + drIndustry["c3"].ToString() + " " + drIndustry["c1"].ToString();
+                        Tier2.title = drIndustry["d3"].ToString();
+                        Tier1.children.Add(Tier2);
                     }
                     else
                     {
                         Tier2 = new Tier2();
-                        Tier2.value = drIndustry["id3"].ToString() + " " + drIndustry["c3"].ToString() + " " + drIndustry["c1"].ToString();
-                        Tier2.text = drIndustry["d3"].ToString();
-                        if (Tier2.nodes == null)
+                        Tier2.key = drIndustry["id3"].ToString() + " " + drIndustry["c3"].ToString() + " " + drIndustry["c1"].ToString();
+                        Tier2.title = drIndustry["d3"].ToString();
+                        if (Tier2.children == null)
                         {
-                            Tier1.nodes = new List<Tier2>();
-                            Tier1.nodes.Add(Tier2);
+                            Tier1.children = new List<Tier2>();
+                            Tier1.children.Add(Tier2);
                         }
                         else
                         {
-                            Tier1.nodes.Add(Tier2);
+                            Tier1.children.Add(Tier2);
                         }
                     }
                     result.Add(">>> " + drIndustry["c3"].ToString() + " " + drIndustry["d3"].ToString());
                 }
-                if (Tier2.nodes == null)
+                if (Tier2.children == null)
                 {
-                    Tier2.nodes = new List<Tier3>();
+                    Tier2.children = new List<Tier3>();
                     Tier3 = new Tier3();
-                    Tier3.text = drIndustry["d4"].ToString();
-                    Tier3.value = drIndustry["id4"].ToString() + " " + drIndustry["c4"].ToString() + " " + drIndustry["c1"].ToString();
-                    Tier2.nodes.Add(Tier3);
+                    Tier3.title = drIndustry["d4"].ToString();
+                    Tier3.key = drIndustry["id4"].ToString() + " " + drIndustry["c4"].ToString() + " " + drIndustry["c1"].ToString();
+                    Tier2.children.Add(Tier3);
                 }
                 else
                 {
                     Tier3 = new Tier3();
-                    Tier3.text = drIndustry["d4"].ToString();
-                    Tier3.value = drIndustry["id4"].ToString() + " " + drIndustry["c4"].ToString() + " " + drIndustry["c1"].ToString();
-                    if (Tier2.nodes == null)
+                    Tier3.title = drIndustry["d4"].ToString();
+                    Tier3.key = drIndustry["id4"].ToString() + " " + drIndustry["c4"].ToString() + " " + drIndustry["c1"].ToString();
+                    if (Tier2.children == null)
                     {
-                        Tier2.nodes = new List<Tier3>();
-                        Tier2.nodes.Add(Tier3);
+                        Tier2.children = new List<Tier3>();
+                        Tier2.children.Add(Tier3);
                     }
                     else
                     {
-                        Tier2.nodes.Add(Tier3);
+                        Tier2.children.Add(Tier3);
                     }
                     result.Add(">>>> " + drIndustry["c4"].ToString() + " " + drIndustry["d4"].ToString());
                 }
-                if (Tier.text != menuName)
+                if (Tier.title != menuName)
                 {
-                    menuName = Tier.text;
+                    menuName = Tier.title;
                     treeViewResult.Add(Tier);
                 }
             }
             drIndustry.Close();
             drIndustry.Dispose();
             Tier = new Tier();
-            Tier.text = "- Any -";
+            Tier.title = "- Any -";
             treeViewResult.Insert(0, Tier);
             return Json(treeViewResult, JsonRequestBehavior.AllowGet);
         }
@@ -732,90 +738,90 @@ namespace YG_MVC.Controllers
                     Tier = new Tier();
                     Tier.TierId = ParentMenuID;
                     Tier.ParentMenuID = 0;
-                    Tier.nodes = new List<Tier1>();
-                    Tier.value = drIndustry["id1"].ToString() + " " + drIndustry["c1"].ToString();
-                    Tier.text = drIndustry["d1"].ToString();
+                    Tier.children = new List<Tier1>();
+                    Tier.key = drIndustry["id1"].ToString() + " " + drIndustry["c1"].ToString();
+                    Tier.title = drIndustry["d1"].ToString();
                     result.Add("> " + drIndustry["c1"].ToString() + " " + drIndustry["d1"].ToString());
                 }
                 if (!result.Contains(">> " + drIndustry["c2"].ToString() + " " + drIndustry["d2"].ToString()))
                 {
-                    if (Tier.nodes == null)
+                    if (Tier.children == null)
                     {
-                        Tier.nodes = new List<Tier1>();
-                        Tier1.text = drIndustry["d2"].ToString();
-                        Tier1.value = drIndustry["id2"].ToString() + " " + drIndustry["c2"].ToString() + " " + drIndustry["c1"].ToString();
-                        Tier.nodes.Add(Tier1);
+                        Tier.children = new List<Tier1>();
+                        Tier1.title = drIndustry["d2"].ToString();
+                        Tier1.key = drIndustry["id2"].ToString() + " " + drIndustry["c2"].ToString() + " " + drIndustry["c1"].ToString();
+                        Tier.children.Add(Tier1);
                     }
                     else
                     {
                         Tier1 = new Tier1();
-                        Tier1.value = drIndustry["id2"].ToString() + " " + drIndustry["c2"].ToString() + " " + drIndustry["c1"].ToString();
-                        Tier1.text = drIndustry["d2"].ToString();
-                        Tier.nodes.Add(Tier1);
+                        Tier1.key = drIndustry["id2"].ToString() + " " + drIndustry["c2"].ToString() + " " + drIndustry["c1"].ToString();
+                        Tier1.title = drIndustry["d2"].ToString();
+                        Tier.children.Add(Tier1);
                     }
                     result.Add(">> " + drIndustry["c2"].ToString() + " " + drIndustry["d2"].ToString());
                 }
                 if (!result.Contains(">>> " + drIndustry["c3"].ToString() + " " + drIndustry["d3"].ToString()))
                 {
-                    if (Tier1.nodes == null)
+                    if (Tier1.children == null)
                     {
-                        Tier1.nodes = new List<Tier2>();
+                        Tier1.children = new List<Tier2>();
                         Tier2 = new Tier2();
-                        Tier2.value = drIndustry["id3"].ToString() + " " + drIndustry["c3"].ToString() + " " + drIndustry["c1"].ToString();
-                        Tier2.text = drIndustry["d3"].ToString();
-                        Tier1.nodes.Add(Tier2);
+                        Tier2.key = drIndustry["id3"].ToString() + " " + drIndustry["c3"].ToString() + " " + drIndustry["c1"].ToString();
+                        Tier2.title = drIndustry["d3"].ToString();
+                        Tier1.children.Add(Tier2);
                     }
                     else
                     {
                         Tier2 = new Tier2();
-                        Tier2.value = drIndustry["id3"].ToString() + " " + drIndustry["c3"].ToString() + " " + drIndustry["c1"].ToString();
-                        Tier2.text = drIndustry["d3"].ToString();
-                        if (Tier2.nodes == null)
+                        Tier2.key = drIndustry["id3"].ToString() + " " + drIndustry["c3"].ToString() + " " + drIndustry["c1"].ToString();
+                        Tier2.title = drIndustry["d3"].ToString();
+                        if (Tier2.children == null)
                         {
-                            Tier1.nodes = new List<Tier2>();
-                            Tier1.nodes.Add(Tier2);
+                            Tier1.children = new List<Tier2>();
+                            Tier1.children.Add(Tier2);
                         }
                         else
                         {
-                            Tier1.nodes.Add(Tier2);
+                            Tier1.children.Add(Tier2);
                         }
                     }
                     result.Add(">>> " + drIndustry["c3"].ToString() + " " + drIndustry["d3"].ToString());
                 }
-                if (Tier2.nodes == null)
+                if (Tier2.children == null)
                 {
-                    Tier2.nodes = new List<Tier3>();
+                    Tier2.children = new List<Tier3>();
                     Tier3 = new Tier3();
-                    Tier3.text = drIndustry["d4"].ToString();
-                    Tier3.value = drIndustry["id4"].ToString() + " " + drIndustry["c4"].ToString() + " " + drIndustry["c1"].ToString();
-                    Tier2.nodes.Add(Tier3);
+                    Tier3.title = drIndustry["d4"].ToString();
+                    Tier3.key = drIndustry["id4"].ToString() + " " + drIndustry["c4"].ToString() + " " + drIndustry["c1"].ToString();
+                    Tier2.children.Add(Tier3);
                 }
                 else
                 {
                     Tier3 = new Tier3();
-                    Tier3.text = drIndustry["d4"].ToString();
-                    Tier3.value = drIndustry["id4"].ToString() + " " + drIndustry["c4"].ToString() + " " + drIndustry["c1"].ToString();
-                    if (Tier2.nodes == null)
+                    Tier3.title = drIndustry["d4"].ToString();
+                    Tier3.key = drIndustry["id4"].ToString() + " " + drIndustry["c4"].ToString() + " " + drIndustry["c1"].ToString();
+                    if (Tier2.children == null)
                     {
-                        Tier2.nodes = new List<Tier3>();
-                        Tier2.nodes.Add(Tier3);
+                        Tier2.children = new List<Tier3>();
+                        Tier2.children.Add(Tier3);
                     }
                     else
                     {
-                        Tier2.nodes.Add(Tier3);
+                        Tier2.children.Add(Tier3);
                     }
                     result.Add(">>>> " + drIndustry["c4"].ToString() + " " + drIndustry["d4"].ToString());
                 }
-                if (Tier.text != menuName)
+                if (Tier.title != menuName)
                 {
-                    menuName = Tier.text;
+                    menuName = Tier.title;
                     treeViewResult.Add(Tier);
                 }
             }
             drIndustry.Close();
             drIndustry.Dispose();
             Tier = new Tier();
-            Tier.text = "- Any -";
+            Tier.title = "- Any -";
             treeViewResult.Insert(0, Tier);
 
             return Json(treeViewResult, JsonRequestBehavior.AllowGet);
@@ -832,8 +838,15 @@ namespace YG_MVC.Controllers
                 while (drOccupationCount.Read())
                 {
                     OccupationCount occupationCount = new OccupationCount();
-                    occupationCount.Id = Convert.ToInt32(drOccupationCount["jobdetailid"].ToString());
-                    occupationCount.Count = Convert.ToInt32(drOccupationCount["isco08id"].ToString());
+                    if (!string.IsNullOrEmpty(drOccupationCount["jobdetailid"].ToString()))
+                        occupationCount.Id = Convert.ToInt32(drOccupationCount["jobdetailid"].ToString());
+                    else
+                        occupationCount.Id = 0;
+                    //occupationCount.Id = Convert.ToInt32(drOccupationCount["jobdetailid"].ToString());
+                    if (!string.IsNullOrEmpty(drOccupationCount["isco08id"].ToString()))
+                        occupationCount.Count = Convert.ToInt32(drOccupationCount["isco08id"].ToString());
+                    else
+                        occupationCount.Count = 0;
                     DummyCountList.Add(occupationCount);
                 }
             }
@@ -855,8 +868,15 @@ namespace YG_MVC.Controllers
                 while (drIndustryCount.Read())
                 {
                     IndustryCount industryCount = new IndustryCount();
-                    industryCount.Id = Convert.ToInt32(drIndustryCount["jobdetailid"].ToString());
-                    industryCount.Count = Convert.ToInt32(drIndustryCount["isicRev4id"].ToString());
+                    if (!string.IsNullOrEmpty(drIndustryCount["jobdetailid"].ToString()))
+                        industryCount.Id = Convert.ToInt32(drIndustryCount["jobdetailid"].ToString());
+                    else
+                        industryCount.Id = 0;
+                    if (!string.IsNullOrEmpty(drIndustryCount["isicRev4id"].ToString()))
+                        industryCount.Count = Convert.ToInt32(drIndustryCount["isicRev4id"].ToString());
+                    else
+                        industryCount.Count = 0;
+
                     DummyCountList.Add(industryCount);
                 }
             }
@@ -890,9 +910,9 @@ namespace YG_MVC.Controllers
                         sitemenu = new Tier();
                         sitemenu.TierId = ParentMenuID;
                         sitemenu.ParentMenuID = 0;
-                        sitemenu.nodes = new List<Tier1>();
-                        sitemenu.value = drLocation["countryid"].ToString() + ":1";
-                        sitemenu.text = drLocation["name"].ToString();
+                        sitemenu.children = new List<Tier1>();
+                        sitemenu.key = drLocation["countryid"].ToString() + ":1";
+                        sitemenu.title = drLocation["name"].ToString();
                         result.Add("<span style='color:#9AC435'> > " + drLocation["name"].ToString() + "</span>");
                         kv = new KeyValuePair<string, string>(drLocation["countryid"].ToString() + ":1", "<span style='color:#9AC435'> > " + drLocation["name"].ToString() + "</span>");
                         lst.Add(kv);
@@ -902,19 +922,19 @@ namespace YG_MVC.Controllers
                 {
                     if (!result.Contains("<span style='color:#124812'> >> " + drLocation["locationname"].ToString() + "</span>"))
                     {
-                        if (sitemenu.nodes == null)
+                        if (sitemenu.children == null)
                         {
-                            sitemenu.nodes = new List<Tier1>();
-                            subItem.text = drLocation["locationname"].ToString();
-                            subItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + ":2";
-                            sitemenu.nodes.Add(subItem);
+                            sitemenu.children = new List<Tier1>();
+                            subItem.title = drLocation["locationname"].ToString();
+                            subItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + ":2";
+                            sitemenu.children.Add(subItem);
                         }
                         else
                         {
                             subItem = new Tier1();
-                            subItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + ":2";
-                            subItem.text = drLocation["locationname"].ToString();
-                            sitemenu.nodes.Add(subItem);
+                            subItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + ":2";
+                            subItem.title = drLocation["locationname"].ToString();
+                            sitemenu.children.Add(subItem);
                         }
                         result.Add("<span style='color:#124812'> >> " + drLocation["locationname"].ToString() + "</span>");
                         kv = new KeyValuePair<string, string>(drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + ":2", "<span style='color:#124812'> >> " + drLocation["locationname"].ToString() + "</span>");
@@ -925,27 +945,27 @@ namespace YG_MVC.Controllers
                 {
                     if (!result.Contains("<span style='color:#51C0EE'> >>> " + drLocation["sublocation"].ToString() + "</span>"))
                     {
-                        if (subItem.nodes == null)
+                        if (subItem.children == null)
                         {
-                            subItem.nodes = new List<Tier2>();
+                            subItem.children = new List<Tier2>();
                             subSubItem = new Tier2();
-                            subSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + ":3";
-                            subSubItem.text = drLocation["sublocation"].ToString();
-                            subItem.nodes.Add(subSubItem);
+                            subSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + ":3";
+                            subSubItem.title = drLocation["sublocation"].ToString();
+                            subItem.children.Add(subSubItem);
                         }
                         else
                         {
                             subSubItem = new Tier2();
-                            subSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + ":3";
-                            subSubItem.text = drLocation["sublocation"].ToString();
-                            if (subSubItem.nodes == null)
+                            subSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + ":3";
+                            subSubItem.title = drLocation["sublocation"].ToString();
+                            if (subSubItem.children == null)
                             {
-                                subItem.nodes = new List<Tier2>();
-                                subItem.nodes.Add(subSubItem);
+                                subItem.children = new List<Tier2>();
+                                subItem.children.Add(subSubItem);
                             }
                             else
                             {
-                                subItem.nodes.Add(subSubItem);
+                                subItem.children.Add(subSubItem);
                             }
                         }
                         result.Add("<span style='color:#51C0EE'> >>> " + drLocation["sublocation"].ToString() + "</span>");
@@ -957,27 +977,27 @@ namespace YG_MVC.Controllers
                 {
                     if (!result.Contains("<span style='color:#0000FF'> >>>> " + drLocation["subsublocation"].ToString() + "</span>"))
                     {
-                        if (subSubItem.nodes == null)
+                        if (subSubItem.children == null)
                         {
-                            subSubItem.nodes = new List<Tier3>();
+                            subSubItem.children = new List<Tier3>();
                             subSubSubItem = new Tier3();
-                            subSubSubItem.text = drLocation["subsublocation"].ToString();
-                            subSubSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + ":4";
-                            subSubItem.nodes.Add(subSubSubItem);
+                            subSubSubItem.title = drLocation["subsublocation"].ToString();
+                            subSubSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + ":4";
+                            subSubItem.children.Add(subSubSubItem);
                         }
                         else
                         {
                             subSubSubItem = new Tier3();
-                            subSubSubItem.text = drLocation["subsublocation"].ToString();
-                            subSubSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + ":4";
-                            if (subSubItem.nodes == null)
+                            subSubSubItem.title = drLocation["subsublocation"].ToString();
+                            subSubSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + ":4";
+                            if (subSubItem.children == null)
                             {
-                                subSubItem.nodes = new List<Tier3>();
-                                subSubItem.nodes.Add(subSubSubItem);
+                                subSubItem.children = new List<Tier3>();
+                                subSubItem.children.Add(subSubSubItem);
                             }
                             else
                             {
-                                subSubItem.nodes.Add(subSubSubItem);
+                                subSubItem.children.Add(subSubSubItem);
                             }
                             result.Add("<span style='color:#0000FF'> >>>> " + drLocation["subsublocation"].ToString() + "</span>");
                             kv = new KeyValuePair<string, string>(drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + ":4", "<span style='color:#0000FF'> >>>> " + drLocation["subsublocation"].ToString() + "</span>");
@@ -993,15 +1013,15 @@ namespace YG_MVC.Controllers
                         {
                             subSubSubItem.Nodes = new List<Tier4>();
                             subSubSubSubItem = new Tier4();
-                            subSubSubSubItem.text = drLocation["groupname"].ToString();
-                            subSubSubSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + "," + drLocation["location_groupid"].ToString() + ":5";
+                            subSubSubSubItem.title = drLocation["groupname"].ToString();
+                            subSubSubSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + "," + drLocation["location_groupid"].ToString() + ":5";
                             subSubSubItem.Nodes.Add(subSubSubSubItem);
                         }
                         else
                         {
                             subSubSubSubItem = new Tier4();
-                            subSubSubSubItem.text = drLocation["groupname"].ToString();
-                            subSubSubSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + "," + drLocation["location_groupid"].ToString() + ":5";
+                            subSubSubSubItem.title = drLocation["groupname"].ToString();
+                            subSubSubSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + "," + drLocation["location_groupid"].ToString() + ":5";
                             if (subSubSubItem.Nodes == null)
                             {
                                 subSubSubItem.Nodes = new List<Tier4>();
@@ -1017,17 +1037,17 @@ namespace YG_MVC.Controllers
                         }
                     }
                 }
-                if (sitemenu.text != menuName)
+                if (sitemenu.title != menuName)
                 {
-                    menuName = sitemenu.text;
-                    if (!string.IsNullOrEmpty(sitemenu.text) && sitemenu.text != " ")
+                    menuName = sitemenu.title;
+                    if (!string.IsNullOrEmpty(sitemenu.title) && sitemenu.title != " ")
                     {
                         treeViewResult.Add(sitemenu);
                     }
                 }
             }
             sitemenu = new Tier();
-            sitemenu.text = "- Anywhere -";
+            sitemenu.title = "- Anywhere -";
             treeViewResult.Insert(0, sitemenu);
             drLocation.Close();
             drLocation.Dispose();
@@ -1045,9 +1065,9 @@ namespace YG_MVC.Controllers
             while (drEmployer.Read())
             {
                 Tier sitemenu = new Tier();
-                sitemenu.value = drEmployer["employerid"].ToString();
-                sitemenu.text = drEmployer["employername"].ToString();
-                sitemenu.nodes = null;
+                sitemenu.key = drEmployer["employerid"].ToString();
+                sitemenu.title = drEmployer["employername"].ToString();
+                sitemenu.children = null;
                 new KeyValuePair<string, string>(drEmployer["employerid"].ToString(), drEmployer["employername"].ToString());
                 treeViewResult.Add(sitemenu);
             }
@@ -1080,9 +1100,9 @@ namespace YG_MVC.Controllers
                         sitemenu = new Tier();
                         sitemenu.TierId = ParentMenuID;
                         sitemenu.ParentMenuID = 0;
-                        sitemenu.nodes = new List<Tier1>();
-                        sitemenu.value = drLocation["countryid"].ToString() + ":1";
-                        sitemenu.text = drLocation["name"].ToString();
+                        sitemenu.children = new List<Tier1>();
+                        sitemenu.key = drLocation["countryid"].ToString() + ":1";
+                        sitemenu.title = drLocation["name"].ToString();
                         result.Add("<span style='color:#9AC435'> > " + drLocation["name"].ToString() + "</span>");
                         kv = new KeyValuePair<string, string>(drLocation["countryid"].ToString() + ":1", "<span style='color:#9AC435'> > " + drLocation["name"].ToString() + "</span>");
                         lst.Add(kv);
@@ -1092,19 +1112,19 @@ namespace YG_MVC.Controllers
                 {
                     if (!result.Contains("<span style='color:#124812'> >> " + drLocation["locationname"].ToString() + "</span>"))
                     {
-                        if (sitemenu.nodes == null)
+                        if (sitemenu.children == null)
                         {
-                            sitemenu.nodes = new List<Tier1>();
-                            subItem.text = drLocation["locationname"].ToString();
-                            subItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + ":2";
-                            sitemenu.nodes.Add(subItem);
+                            sitemenu.children = new List<Tier1>();
+                            subItem.title = drLocation["locationname"].ToString();
+                            subItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + ":2";
+                            sitemenu.children.Add(subItem);
                         }
                         else
                         {
                             subItem = new Tier1();
-                            subItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + ":2";
-                            subItem.text = drLocation["locationname"].ToString();
-                            sitemenu.nodes.Add(subItem);
+                            subItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + ":2";
+                            subItem.title = drLocation["locationname"].ToString();
+                            sitemenu.children.Add(subItem);
                         }
                         result.Add("<span style='color:#124812'> >> " + drLocation["locationname"].ToString() + "</span>");
                         kv = new KeyValuePair<string, string>(drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + ":2", "<span style='color:#124812'> >> " + drLocation["locationname"].ToString() + "</span>");
@@ -1115,27 +1135,27 @@ namespace YG_MVC.Controllers
                 {
                     if (!result.Contains("<span style='color:#51C0EE'> >>> " + drLocation["sublocation"].ToString() + "</span>"))
                     {
-                        if (subItem.nodes == null)
+                        if (subItem.children == null)
                         {
-                            subItem.nodes = new List<Tier2>();
+                            subItem.children = new List<Tier2>();
                             subSubItem = new Tier2();
-                            subSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + ":3";
-                            subSubItem.text = drLocation["sublocation"].ToString();
-                            subItem.nodes.Add(subSubItem);
+                            subSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + ":3";
+                            subSubItem.title = drLocation["sublocation"].ToString();
+                            subItem.children.Add(subSubItem);
                         }
                         else
                         {
                             subSubItem = new Tier2();
-                            subSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + ":3";
-                            subSubItem.text = drLocation["sublocation"].ToString();
-                            if (subSubItem.nodes == null)
+                            subSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + ":3";
+                            subSubItem.title = drLocation["sublocation"].ToString();
+                            if (subSubItem.children == null)
                             {
-                                subItem.nodes = new List<Tier2>();
-                                subItem.nodes.Add(subSubItem);
+                                subItem.children = new List<Tier2>();
+                                subItem.children.Add(subSubItem);
                             }
                             else
                             {
-                                subItem.nodes.Add(subSubItem);
+                                subItem.children.Add(subSubItem);
                             }
                         }
                         result.Add("<span style='color:#51C0EE'> >>> " + drLocation["sublocation"].ToString() + "</span>");
@@ -1147,27 +1167,27 @@ namespace YG_MVC.Controllers
                 {
                     if (!result.Contains("<span style='color:#0000FF'> >>>> " + drLocation["subsublocation"].ToString() + "</span>"))
                     {
-                        if (subSubItem.nodes == null)
+                        if (subSubItem.children == null)
                         {
-                            subSubItem.nodes = new List<Tier3>();
+                            subSubItem.children = new List<Tier3>();
                             subSubSubItem = new Tier3();
-                            subSubSubItem.text = drLocation["subsublocation"].ToString();
-                            subSubSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + ":4";
-                            subSubItem.nodes.Add(subSubSubItem);
+                            subSubSubItem.title = drLocation["subsublocation"].ToString();
+                            subSubSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + ":4";
+                            subSubItem.children.Add(subSubSubItem);
                         }
                         else
                         {
                             subSubSubItem = new Tier3();
-                            subSubSubItem.text = drLocation["subsublocation"].ToString();
-                            subSubSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + ":4";
-                            if (subSubItem.nodes == null)
+                            subSubSubItem.title = drLocation["subsublocation"].ToString();
+                            subSubSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + ":4";
+                            if (subSubItem.children == null)
                             {
-                                subSubItem.nodes = new List<Tier3>();
-                                subSubItem.nodes.Add(subSubSubItem);
+                                subSubItem.children = new List<Tier3>();
+                                subSubItem.children.Add(subSubSubItem);
                             }
                             else
                             {
-                                subSubItem.nodes.Add(subSubSubItem);
+                                subSubItem.children.Add(subSubSubItem);
                             }
                             result.Add("<span style='color:#0000FF'> >>>> " + drLocation["subsublocation"].ToString() + "</span>");
                             kv = new KeyValuePair<string, string>(drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + ":4", "<span style='color:#0000FF'> >>>> " + drLocation["subsublocation"].ToString() + "</span>");
@@ -1183,15 +1203,15 @@ namespace YG_MVC.Controllers
                         {
                             subSubSubItem.Nodes = new List<Tier4>();
                             subSubSubSubItem = new Tier4();
-                            subSubSubSubItem.text = drLocation["groupname"].ToString();
-                            subSubSubSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + "," + drLocation["location_groupid"].ToString() + ":5";
+                            subSubSubSubItem.title = drLocation["groupname"].ToString();
+                            subSubSubSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + "," + drLocation["location_groupid"].ToString() + ":5";
                             subSubSubItem.Nodes.Add(subSubSubSubItem);
                         }
                         else
                         {
                             subSubSubSubItem = new Tier4();
-                            subSubSubSubItem.text = drLocation["groupname"].ToString();
-                            subSubSubSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + "," + drLocation["location_groupid"].ToString() + ":5";
+                            subSubSubSubItem.title = drLocation["groupname"].ToString();
+                            subSubSubSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + "," + drLocation["location_groupid"].ToString() + ":5";
                             if (subSubSubItem.Nodes == null)
                             {
                                 subSubSubItem.Nodes = new List<Tier4>();
@@ -1207,10 +1227,10 @@ namespace YG_MVC.Controllers
                         }
                     }
                 }
-                if (sitemenu.text != menuName)
+                if (sitemenu.title != menuName)
                 {
-                    menuName = sitemenu.text;
-                    if (!string.IsNullOrEmpty(sitemenu.text) && sitemenu.text != " ")
+                    menuName = sitemenu.title;
+                    if (!string.IsNullOrEmpty(sitemenu.title) && sitemenu.title != " ")
                     {
                         treeViewResult.Add(sitemenu);
                     }
@@ -1615,13 +1635,13 @@ namespace YG_MVC.Controllers
                 Session.Add("JobIndustySub", dt);
             }
             DataTable dtIndustrySub = (DataTable)Session["JobIndustySub"];
-            string str = "<option value=''>-- Any --</option>";
+            string str = "<option key=''>-- Any --</option>";
             if (!string.IsNullOrEmpty(classification))
             {
                 DataRow[] drSeq = dtIndustrySub.Select("Classification='" + classification + "'");
                 foreach (DataRow item in drSeq)
                 {
-                    str += "<option class='" + item["Classification"].ToString() + "' value='" + item["SubClassification"].ToString() + "'>" + item["SubClassification"].ToString() + "</option>";
+                    str += "<option class='" + item["Classification"].ToString() + "' key='" + item["SubClassification"].ToString() + "'>" + item["SubClassification"].ToString() + "</option>";
                 }
             }
             return str;
@@ -1635,7 +1655,7 @@ namespace YG_MVC.Controllers
 
             foreach (DataRow item in dtIndustry.Rows)
             {
-                str += "<option value='" + item["JobIndustrySubId"].ToString() + "'>" + item["classification"].ToString() + "</option>";
+                str += "<option key='" + item["JobIndustrySubId"].ToString() + "'>" + item["classification"].ToString() + "</option>";
             }
 
             return str;
@@ -1751,9 +1771,9 @@ namespace YG_MVC.Controllers
                 {
                     inc = 1;
                     jobContent += "<p><strong> RESPONSIBILITIES </strong></p><ul class='list'>";
-                    foreach (string value in model.DutiesList)
+                    foreach (string key in model.DutiesList)
                     {
-                        jobContent += string.Format("<li>{0}</li>", value);
+                        jobContent += string.Format("<li>{0}</li>", key);
                     }
                     jobContent += "</ul>";
                 }
@@ -1767,11 +1787,11 @@ namespace YG_MVC.Controllers
                 {
                     inc = 1;
                     jobContent += "<p><strong> MUST HAVES </strong></p><ul class='list'>";
-                    foreach (string value in model.MustHaveList)
+                    foreach (string key in model.MustHaveList)
                     {
                         inc = inc + 1;
-                        lst.Add(new EssentialCriteriaInfo { EssentialCriteriaId = 0, AnswerLength = 500, Description = value, SortOrder = inc });
-                        jobContent += string.Format("<li>{0}</li>", value);
+                        lst.Add(new EssentialCriteriaInfo { EssentialCriteriaId = 0, AnswerLength = 500, Description = key, SortOrder = inc });
+                        jobContent += string.Format("<li>{0}</li>", key);
                     }
                     jobContent += "</ul>";
                 }
@@ -1784,11 +1804,11 @@ namespace YG_MVC.Controllers
                 {
                     inc = 1;
                     jobContent += "<p><strong> NICE TO HAVES </strong></p><ul class='list'>";
-                    foreach (string value in model.NiceToHaveList)
+                    foreach (string key in model.NiceToHaveList)
                     {
                         inc = inc + 1;
-                        lstDesi.Add(new DesirableCriteriaInfo { DesirableCriteriaId = 0, AnswerLength = 500, Description = value, SortOrder = inc });
-                        jobContent += string.Format("<li>{0}</li>", value);
+                        lstDesi.Add(new DesirableCriteriaInfo { DesirableCriteriaId = 0, AnswerLength = 500, Description = key, SortOrder = inc });
+                        jobContent += string.Format("<li>{0}</li>", key);
                     }
                     jobContent += "</ul>";
                 }
@@ -1800,9 +1820,9 @@ namespace YG_MVC.Controllers
                 if (model.Remuneration != null && model.Remuneration.Count > 0)
                 {
                     jobContent += "<p><strong> REMUNERATION </strong></p><ul class='list'>";
-                    foreach (string value in model.Remuneration)
+                    foreach (string key in model.Remuneration)
                     {
-                        jobContent += string.Format("<li>{0}</li>", value);
+                        jobContent += string.Format("<li>{0}</li>", key);
                     }
                     jobContent += "</ul><p>&nbsp;</p>";
                 }
@@ -1942,10 +1962,10 @@ namespace YG_MVC.Controllers
                         sitemenu = new Tier();
                         sitemenu.TierId = ParentMenuID;
                         sitemenu.ParentMenuID = 0;
-                        sitemenu.nodes = new List<Tier1>();
-                        sitemenu.value = drLocation["countryid"].ToString() + ":1";
+                        sitemenu.children = new List<Tier1>();
+                        sitemenu.key = drLocation["countryid"].ToString() + ":1";
                         item = drLocation["name"].ToString();
-                        sitemenu.text = drLocation["name"].ToString();
+                        sitemenu.title = drLocation["name"].ToString();
                         result.Add("<span style='color:#9AC435'> > " + drLocation["name"].ToString() + "</span>");
                         kv = new KeyValuePair<string, string>(drLocation["countryid"].ToString() + ":1", "<span style='color:#9AC435'> > " + drLocation["name"].ToString() + "</span>");
                         lst.Add(kv);
@@ -1956,19 +1976,19 @@ namespace YG_MVC.Controllers
                     if (!result.Contains("<span style='color:#124812'> >> " + drLocation["locationname"].ToString() + "</span>"))
                     {
                         item = item + " > " + drLocation["locationname"].ToString();
-                        if (sitemenu.nodes == null)
+                        if (sitemenu.children == null)
                         {
-                            sitemenu.nodes = new List<Tier1>();
-                            subItem.text = item;
-                            subItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + ":2";
-                            sitemenu.nodes.Add(subItem);
+                            sitemenu.children = new List<Tier1>();
+                            subItem.title = item;
+                            subItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + ":2";
+                            sitemenu.children.Add(subItem);
                         }
                         else
                         {
                             subItem = new Tier1();
-                            subItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + ":2";
-                            subItem.text = item;
-                            sitemenu.nodes.Add(subItem);
+                            subItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + ":2";
+                            subItem.title = item;
+                            sitemenu.children.Add(subItem);
                         }
                         result.Add("<span style='color:#124812'> >> " + drLocation["locationname"].ToString() + "</span>");
                         kv = new KeyValuePair<string, string>(drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + ":2", "<span style='color:#124812'> >> " + drLocation["locationname"].ToString() + "</span>");
@@ -1980,27 +2000,27 @@ namespace YG_MVC.Controllers
                     if (!result.Contains("<span style='color:#51C0EE'> >>> " + drLocation["sublocation"].ToString() + "</span>"))
                     {
                         item = item + " > " + drLocation["sublocation"].ToString();
-                        if (subItem.nodes == null)
+                        if (subItem.children == null)
                         {
-                            subItem.nodes = new List<Tier2>();
+                            subItem.children = new List<Tier2>();
                             subSubItem = new Tier2();
-                            subSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + ":3";
-                            subSubItem.text = item;
-                            subItem.nodes.Add(subSubItem);
+                            subSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + ":3";
+                            subSubItem.title = item;
+                            subItem.children.Add(subSubItem);
                         }
                         else
                         {
                             subSubItem = new Tier2();
-                            subSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + ":3";
-                            subSubItem.text = item;
-                            if (subSubItem.nodes == null)
+                            subSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + ":3";
+                            subSubItem.title = item;
+                            if (subSubItem.children == null)
                             {
-                                subItem.nodes = new List<Tier2>();
-                                subItem.nodes.Add(subSubItem);
+                                subItem.children = new List<Tier2>();
+                                subItem.children.Add(subSubItem);
                             }
                             else
                             {
-                                subItem.nodes.Add(subSubItem);
+                                subItem.children.Add(subSubItem);
                             }
                         }
                         result.Add("<span style='color:#51C0EE'> >>> " + drLocation["sublocation"].ToString() + "</span>");
@@ -2013,27 +2033,27 @@ namespace YG_MVC.Controllers
                     if (!result.Contains("<span style='color:#0000FF'> >>>> " + drLocation["subsublocation"].ToString() + "</span>"))
                     {
                         item = item + " > " + drLocation["subsublocation"].ToString();
-                        if (subSubItem.nodes == null)
+                        if (subSubItem.children == null)
                         {
-                            subSubItem.nodes = new List<Tier3>();
+                            subSubItem.children = new List<Tier3>();
                             subSubSubItem = new Tier3();
-                            subSubSubItem.text = item;
-                            subSubSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + ":4";
-                            subSubItem.nodes.Add(subSubSubItem);
+                            subSubSubItem.title = item;
+                            subSubSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + ":4";
+                            subSubItem.children.Add(subSubSubItem);
                         }
                         else
                         {
                             subSubSubItem = new Tier3();
-                            subSubSubItem.text = item;
-                            subSubSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + ":4";
-                            if (subSubItem.nodes == null)
+                            subSubSubItem.title = item;
+                            subSubSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + ":4";
+                            if (subSubItem.children == null)
                             {
-                                subSubItem.nodes = new List<Tier3>();
-                                subSubItem.nodes.Add(subSubSubItem);
+                                subSubItem.children = new List<Tier3>();
+                                subSubItem.children.Add(subSubSubItem);
                             }
                             else
                             {
-                                subSubItem.nodes.Add(subSubSubItem);
+                                subSubItem.children.Add(subSubSubItem);
                             }
                             result.Add("<span style='color:#0000FF'> >>>> " + drLocation["subsublocation"].ToString() + "</span>");
                             kv = new KeyValuePair<string, string>(drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + ":4", "<span style='color:#0000FF'> >>>> " + drLocation["subsublocation"].ToString() + "</span>");
@@ -2050,15 +2070,15 @@ namespace YG_MVC.Controllers
                         {
                             subSubSubItem.Nodes = new List<Tier4>();
                             subSubSubSubItem = new Tier4();
-                            subSubSubSubItem.text = item;
-                            subSubSubSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + "," + drLocation["location_groupid"].ToString() + ":5";
+                            subSubSubSubItem.title = item;
+                            subSubSubSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + "," + drLocation["location_groupid"].ToString() + ":5";
                             subSubSubItem.Nodes.Add(subSubSubSubItem);
                         }
                         else
                         {
                             subSubSubSubItem = new Tier4();
-                            subSubSubSubItem.text = item;
-                            subSubSubSubItem.value = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + "," + drLocation["location_groupid"].ToString() + ":5";
+                            subSubSubSubItem.title = item;
+                            subSubSubSubItem.key = drLocation["countryid"].ToString() + "," + drLocation["locationid"].ToString() + "," + drLocation["sublocationid"].ToString() + "," + drLocation["subsublocationid"].ToString() + "," + drLocation["location_groupid"].ToString() + ":5";
                             if (subSubSubItem.Nodes == null)
                             {
                                 subSubSubItem.Nodes = new List<Tier4>();
@@ -2074,10 +2094,10 @@ namespace YG_MVC.Controllers
                         }
                     }
                 }
-                if (sitemenu.text != menuName)
+                if (sitemenu.title != menuName)
                 {
-                    menuName = sitemenu.text;
-                    if (!string.IsNullOrEmpty(sitemenu.text) && sitemenu.text != " ")
+                    menuName = sitemenu.title;
+                    if (!string.IsNullOrEmpty(sitemenu.title) && sitemenu.title != " ")
                     {
                         treeViewResult.Add(sitemenu);
                     }
