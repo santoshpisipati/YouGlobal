@@ -21,6 +21,8 @@ namespace YG_Business
         public bool IsEmployer { get; set; }
         public bool IsConsultant { get; set; }
 
+        public string ActivationLink { get; set; }
+
         public DateTime CreatedOn { get; set; }
     }
 

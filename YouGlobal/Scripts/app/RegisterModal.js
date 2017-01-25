@@ -65,21 +65,21 @@ Sample.Web.ModalLogin.Views.RegisterModal = {
 //function registerAuser(FirstName, LastName, Email, RegisterPassword, ConfirmPassword, PhoneCode, AreaCode, PhoneNumber, RegisterAs, CaptchaValue, antiForgeryToken, successCallback, failureCallback) {
 //    var data = { "__RequestVerificationToken": antiForgeryToken, "FirstName": FirstName, "FirstName": FirstName, "Email": Email, "RegisterPassword": RegisterPassword, "ConfirmPassword": ConfirmPassword, "PhoneCode": PhoneCode, "AreaCode": AreaCode, "PhoneNumber": PhoneNumber, "RegisterAs": RegisterAs, "CaptchaValue": CaptchaValue };
 function registerAuser(form) {
-        $.ajax({
-            url: "/Account/RegisterJs",
-            type: "POST",
-            data: form
-        })
-        .done(function (data) {
-            if (data.Success === "True") {
-                //alert("Registration Successful");
-                Sample.Web.ModalLogin.Views.RegisterModal.loginSuccess();
-            }
-            else {
-                Sample.Web.ModalLogin.Views.RegisterModal.loginFailure(data.Message);
-            }
-        })
-        .fail(function (jqxhr, textStatus, errorThrown) {
-            Sample.Web.ModalLogin.Views.RegisterModal.loginFailure(errorThrown);
-        });
-    }
+    $.ajax({
+        url: "/Account/RegisterJs",
+        type: "POST",
+        data: form
+    })
+    .done(function (data) {
+        if (data.Success === "True") {
+            //alert("Registration Successful");
+            Sample.Web.ModalLogin.Views.RegisterModal.loginSuccess();
+        }
+        else {
+            Sample.Web.ModalLogin.Views.RegisterModal.loginFailure(data.Message);
+        }
+    })
+    .fail(function (jqxhr, textStatus, errorThrown) {
+        Sample.Web.ModalLogin.Views.RegisterModal.loginFailure(errorThrown);
+    });
+}

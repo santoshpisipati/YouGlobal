@@ -90,6 +90,7 @@ namespace Sample.Web.ModalLogin.Controllers
                         Int32 Id = Logininfo.UpdateMemberEmail(changeEmail.SecondaryEmail, memberID);
                         if (Id > 0)
                         {
+                            SendMail(changeEmail.SecondaryEmail, "", false);
                             Session["username"] = null;
                             return RedirectToAction("Home", "Home");
                         }

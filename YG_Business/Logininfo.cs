@@ -8,7 +8,7 @@ namespace YG_Business
     {
         public static MySqlDataReader AddMember(Member member)
         {
-            return AccountAccess.AddMember(member.FirstName, member.LastName, member.Password, member.PhoneNo, DateTime.Now, member.EmailId, member.IsJobSeeker, member.IsEmployer, member.IsConsultant);
+            return AccountAccess.AddMember(member.FirstName, member.LastName, member.Password, member.PhoneNo, DateTime.Now, member.EmailId, member.ActivationLink, member.IsJobSeeker, member.IsEmployer, member.IsConsultant);
         }
 
         public static Member GetLoginDetails(Login login)
@@ -35,6 +35,11 @@ namespace YG_Business
         public static int UpdateMemberEmail(string email,int memberId)
         {
             return AccountAccess.UpdateMemberEmail(email, memberId);
+        }
+
+        public int ActivateUserAccount(string actKey)
+        {
+            return AccountAccess.ActivateUserAccount(actKey);
         }
     }
 }

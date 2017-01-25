@@ -6,10 +6,10 @@ namespace YG_DataAccess
 {
     public class AccountAccess
     {
-        public static MySqlDataReader AddMember(string firstName, string lastName, string password, string phnNumber, DateTime date, string emailId, bool isJobSeeker, bool IsEmployer, bool IsConsultant)
+        public static MySqlDataReader AddMember(string firstName, string lastName, string password, string phnNumber, DateTime date, string emailId, string activationLink, bool isJobSeeker, bool IsEmployer, bool IsConsultant)
         {
-            string sql = "insert into `globalpanda`.`members`(`firstname`,`lastname`,`email`,`password`,`phonenumber`,`isactive`,`createdon`,`isJobSeeker`,`IsEmployer`,`IsConsultant`)" +
-                         "values (?firstname,?lastname,?email,?password,?phonenumber,?isactive,?createdon,?isJobSeeker,?IsEmployer,?IsConsultant)";
+            string sql = "insert into `globalpanda`.`members`(`firstname`,`lastname`,`email`,`password`,`phonenumber`,`isactive`,`ActivationKey`,`createdon`,`isJobSeeker`,`IsEmployer`,`IsConsultant`)" +
+                         "values (?firstname,?lastname,?email,?password,?phonenumber,?isactive,?ActivationKey,?createdon,?isJobSeeker,?IsEmployer,?IsConsultant)";
 
             return DataAccess.ExecuteReader(sql, new MySqlParameter("firstName", firstName)
                                                , new MySqlParameter("lastName", lastName)
@@ -17,6 +17,7 @@ namespace YG_DataAccess
                                                , new MySqlParameter("password", password)
                                                , new MySqlParameter("phonenumber", phnNumber)
                                                , new MySqlParameter("isactive", true)
+                                               , new MySqlParameter("ActivationKey", activationLink)
                                                , new MySqlParameter("createdon", DateTime.Now)
                                                , new MySqlParameter("isJobSeeker", isJobSeeker)
                                                , new MySqlParameter("IsEmployer", IsEmployer)
@@ -26,7 +27,7 @@ namespace YG_DataAccess
         public static Member GetLoginDetails(string emailId, string password)
         {
             Member member = new Member();
-            string sql = string.Format("select * from members where email='{0}' and password='{1}'", emailId, password);
+            string sql = string.Format("select * from members where email='{0}' ,password='{1}' and ActivationKey=''", emailId, password);
             MySqlDataReader reader = DataAccess.ExecuteReader(sql);
             if (reader.HasRows)
             {
@@ -133,6 +134,13 @@ namespace YG_DataAccess
         {
             string sql = "update members set email=?email where memberId=?memberId";
             int id = Convert.ToInt32(DataAccess.ExecuteNonQuery(sql, new MySqlParameter("email", email), new MySqlParameter("memberId", memberId)));
+            return id;
+        }
+
+        public static int ActivateUserAccount(string Actkey)
+        {
+            string sql = "update members set ActivationKey='' where ActivationKey=?ActivationKey";
+            int id = Convert.ToInt32(DataAccess.ExecuteNonQuery(sql, new MySqlParameter("ActivationKey", Actkey)));
             return id;
         }
     }

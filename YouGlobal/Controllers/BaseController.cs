@@ -1,4 +1,5 @@
 ﻿using ICSharpCode.SharpZipLib.Zip;
+using Sample.Web.ModalLogin.Helpers;
 using System;
 using System.Configuration;
 using System.Data;
@@ -386,6 +387,7 @@ namespace Sample.Web.ModalLogin.Controllers
             {
                 StringBuilder builder3 = new StringBuilder();
                 builder3.Append(string.Concat(new object[] { exception.Message, '\r', '\n', exception.StackTrace }));
+                
                 MailMessage message3 = new MailMessage
                 {
                     From = new MailAddress(address, displayName),
@@ -413,9 +415,59 @@ namespace Sample.Web.ModalLogin.Controllers
             return flag;
         }
 
-        public void SendMail(string mailid)
+        public void SendMail(string mailid,string link, bool isRegistered)
         {
-            
+            string body = "";
+            if (isRegistered)
+            {
+                body = "<p>Email From:({0})</p><p>Message:<a href=" + link + ">Please click to activate your account</a></p>";
+            }
+            else
+            {
+                body = "<p>New Email id has been updated in our system</p><p>Please login with the new username and password you have registered with us. </p> ";
+            }
+            string address = ConfigurationManager.AppSettings.Get("emailAddress");
+            string displayName = ConfigurationManager.AppSettings.Get("emailName");
+            try
+            {
+                MailMessage message = new MailMessage
+                {
+                    From = new MailAddress(address, displayName),
+                    Subject = "YOU Global - user registration - activation request",
+                    Body = body,
+                    IsBodyHtml = true
+                };
+                string str = "YOU Global";
+                message.To.Add(new MailAddress(mailid, str));
+                string str8 = ConfigurationManager.AppSettings.Get("bcc.emailAddresses");
+                string str9 = ConfigurationManager.AppSettings.Get("bcc.emailNames");
+                SmtpClient sc = new SmtpClient();
+                sc.Host = ConfigurationManager.AppSettings["smtpHost"].ToString();
+                string smtpUser = ConfigurationManager.AppSettings["smtpUserName"].ToString();
+                string smtpPwd = ConfigurationManager.AppSettings["smtpPassword"].ToString();
+                sc.Credentials = new System.Net.NetworkCredential(smtpUser, smtpPwd);
+                sc.Send(message);
+            }
+            catch (Exception ex)
+            {
+                StringBuilder builder3 = new StringBuilder();
+                builder3.Append(string.Concat(new object[] { ex.Message, '\r', '\n', ex.StackTrace }));
+                MailMessage message3 = new MailMessage
+                {
+                    From = new MailAddress(address, displayName),
+                    Subject = "Dunst Consulting Site Error - Contact Us",
+                    Priority = MailPriority.High,
+                    Body = builder3.ToString(),
+                    IsBodyHtml = false
+                };
+                message3.To.Add(new MailAddress(address, displayName));
+                SmtpClient sc = new SmtpClient();
+                sc.Host = ConfigurationManager.AppSettings["smtpHost"].ToString();
+                string smtpUser = ConfigurationManager.AppSettings["smtpUserName"].ToString();
+                string smtpPwd = ConfigurationManager.AppSettings["smtpPassword"].ToString();
+                sc.Credentials = new System.Net.NetworkCredential(smtpUser, smtpPwd);
+                sc.Send(message3);
+            }
         }
 
         public abstract string DefaultViewName { get; }

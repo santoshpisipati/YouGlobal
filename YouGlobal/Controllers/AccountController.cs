@@ -6,6 +6,7 @@ using Sample.Web.ModalLogin.Classes;
 using Sample.Web.ModalLogin.Helpers;
 using Sample.Web.ModalLogin.Models;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Net;
@@ -357,7 +358,6 @@ namespace Sample.Web.ModalLogin.Controllers
                                     Logininfo.AddMember(member);
                                     TempData["notice"] = "Registration Successful.";
                                     returnValue = new { Success = "True", Message = "Registration Successful." };
-
                                     return Json(returnValue, JsonRequestBehavior.AllowGet);
                                 }
                             }
@@ -377,6 +377,9 @@ namespace Sample.Web.ModalLogin.Controllers
         [Recaptcha.RecaptchaControlMvc.CaptchaValidator]
         public ActionResult Register(RegisterLoginModel model, bool captchaValid, string captchaErrorMessage)
         {
+            string ServerName = ConfigurationManager.AppSettings.Get("ServerName");
+            string UserActivationKey = CryptorEngine.Encrypt(DateTime.Now.ToString("ddMMyyyyHHmmsstt") + ",User", true);
+            string link = ServerName + "/Account/ActivateUserAccount?Actcode=" + UserActivationKey;
             if (ModelState.IsValid)
             {
                 if (model != null)
@@ -392,6 +395,7 @@ namespace Sample.Web.ModalLogin.Controllers
                         member.EmailId = model.RegisterModel.Email;
                         member.FirstName = model.RegisterModel.FirstName;
                         member.LastName = model.RegisterModel.LastName;
+                        member.ActivationLink = UserActivationKey;
                         string[] result = model.RegisterModel.PhoneCode.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
                         member.PhoneNo = !string.IsNullOrEmpty(model.RegisterModel.PhoneNumber) ? string.Format("{0} {1} {2}", result[0], model.RegisterModel.AreaCode, model.RegisterModel.PhoneNumber) : "";
                         if (!string.IsNullOrEmpty(model.RegisterModel.RegisterPassword))
@@ -418,6 +422,20 @@ namespace Sample.Web.ModalLogin.Controllers
                 }
             }
             return Json(false);
+        }
+
+        public ActionResult ActivateUserAccount(string Actcode)
+        {
+            Logininfo loginfo = new Logininfo();
+            int rowseffected = loginfo.ActivateUserAccount(Actcode);
+            if (rowseffected > 0)
+            {
+                return RedirectToAction("Home", "Home");
+            }
+            else
+            {
+                return View("Error");
+            }
         }
 
         //
