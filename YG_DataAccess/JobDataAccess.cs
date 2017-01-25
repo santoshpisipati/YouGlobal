@@ -92,14 +92,14 @@ namespace YG_DataAccess
             return DataAccess.ExecuteReader(sql, new MySqlParameter("keyword", keywords), new MySqlParameter("role", role), new MySqlParameter("location", location), new MySqlParameter("jobType", workArrangement));
         }
 
-        public MySqlDataReader ListJobs()
+        public MySqlDataReader ListJobs(long firstPage,long lastPage)
         {
             string sql = "Select SQL_NO_CACHE JD.jobdetailid as jobid,JD.title as jobtitle,JD.referenceno,JD.searchtitle,JD.summary,JT.jobtypeid," +
                          "JT.type as jobtype,JD.status,JD.createddate,case when (JD.modifieddate='0001-01-01 00:00:00' or JD.modifieddate is null) then JD.createddate else JD.modifieddate end as modifieddate, " +
                          " case when (JD.modifieddate='0001-01-01 00:00:00' or JD.modifieddate is null) then 0 else 1 end as ismodified, JD.isApprove from jobdetail JD " +
-                         "inner join jobtype JT on JD.typeid = JT.jobtypeid  where JD.isApprove and published and status in(2,3,4,6) order by modifieddate desc";
+                         "inner join jobtype JT on JD.typeid = JT.jobtypeid  where JD.isApprove and published and status in(2,3,4,6) order by modifieddate desc LIMIT ?firstPage ,?LastPage";
 
-            MySqlDataReader reader = DataAccess.ExecuteReader(sql);
+            MySqlDataReader reader = DataAccess.ExecuteReader(sql, new MySqlParameter("firstPage", firstPage), new MySqlParameter("LastPage", lastPage));
 
             return reader;
         }

@@ -18,14 +18,23 @@ namespace YG_Business
             return AccountAccess.GetLoginDetails(login.EmailId, login.Password);
         }
 
-        public static Int32 GetMemberId(string emailId, string password)
+        public static int GetMemberId(string emailId, string password)
         {
             return AccountAccess.GetMemberId(emailId, password);
         }
 
-        public static Int32 ResetPassword(string password, Int32 memberId)
+        public static int ResetPassword(string password, int memberId)
         {
             return AccountAccess.ResetPassword(password, memberId);
+        }
+        public static Member GetMemberDetails(int memberId)
+        {
+            return AccountAccess.GetMemberDetails(memberId);
+        }
+
+        public static int UpdateMemberEmail(string email,int memberId)
+        {
+            return AccountAccess.UpdateMemberEmail(email, memberId);
         }
     }
 }

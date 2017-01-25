@@ -94,7 +94,7 @@
                             <li>@Html.ActionLink("Why Not Join Us?", "JoinUsHtml", "Join", null, new { id = "mainNavJobsBoard", @class = "key" })</li>
                             <li>@Html.ActionLink("Contact Us", "ContactUsHtml", "Contact", null, new { id = "mainNavContactUs", @class = "key" })</li>
                             <li>@Html.ActionLink("Terms Of Use", "TermsOfUse", "Home", null, new { id = "mainNavContactUs", @class = "key" })</li>
-                            <li>@Html.ActionLink("Privacy & Cookies", "Privacy", "Home", null, new { id = "mainNavContactUs", @class = "key" })</li>
+                            <li>@Html.ActionLink("Privacy Statement", "Privacy", "Home", null, new { id = "mainNavContactUs", @class = "key" })</li>
                             @*<li>@Html.ActionLink("TreeView", "Index", "TreeView", null, new { id = "mainNavTreeview", @class = "key" })</li>
                                 <li>@Html.ActionLink("Sample", "Sample", "TreeView", null, new { id = "mainNavTreeview", @class = "key" })</li>*@
                         </ul>
@@ -149,7 +149,7 @@
     <!----- Banner Js -------->
     <link rel="stylesheet" href="~/Content/css/index-slider.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="~/Content/css/yg.css" type="text/css" media="screen" />
-    <script src="~/Scripts/index-slider-effect.js"></script>
+    @*<script src="~/Scripts/index-slider-effect.js"></script>*@
     <script src="~/Scripts/index-slider.js"></script>
     <script src="~/Scripts/bootstrap-treeview.js"></script>
     <script src="~/Scripts/expand.js"></script>
@@ -165,18 +165,17 @@
     <script src="~/Scripts/jquery.fancytree.js"></script>
     @*for treeview*@
 
-    
     @*<script src="~/Scripts/bootstrap-tagsinput.js"></script>*@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootbox.js"></script>
     <link rel="stylesheet" href="~/Content/css/pagination.css" type="text/css" />
-    @*<link rel="stylesheet" href="~/Content/css/bootstrap-tagsinput.css" type="text/css">*@
-    @*<link rel="stylesheet" href="http://live.datatables.net/media/css/demo_table.css" type="text/css" media="screen" />*@
-    @*<link rel="stylesheet" href="~/Scripts/textext/css/textext.core.css" type="text/css">
-    <link rel="stylesheet" href="~/Scripts/textext/css/textext.plugin.tags.css" type="text/css">
-    <script src="~/Scripts/textext/js/textext.core.js"></script>
-    <script src="~/Scripts/textext/js/textext.plugin.tags.js"></script>*@
+    
     <script type="text/javascript">
+       
+      
+       
         $("input#PhoneCode").autocomplete({
             source: function (request, response) {
                 $.ajax({
@@ -291,7 +290,7 @@
 
                                   var occupationDiv = document.getElementById("search-termoccu");
                                   occupationDiv.style.display = "block";
-                                  $('#loadingbusy').hide();
+                                  //$('#loadingbusy').hide();
                                   $('#search-termoccu').fancytree({
                                       checkbox: true,
                                       selectMode: 3,
@@ -300,18 +299,13 @@
                                           data.result = data;
                                       },
                                       select: function (event, data) {
-                                          //$('textarea#search-term').tagsinput({
-                                          //    allowDuplicates: false,
-                                          //    itemValue: 'id',  // this will be used to set id of tag
-                                          //    itemText: 'text' // this will be used to set text of tag
-                                          //});
                                           if (data.node.selected) {
                                               // Get a list of all selected nodes, and convert to a key array:
                                               var selKeys = $.map(data.tree.getSelectedNodes(), function (node) {
                                                   return node.key;
                                               });
-                                              $("#echoSelection3").text(selKeys.join(", "));
 
+                                              $("#echoSelection3").text(selKeys.join(", "));
                                               // Get a list of all selected TOP nodes
                                               var selRootNodes = data.tree.getSelectedNodes(true);
                                               // ... and convert to a key array:
@@ -321,7 +315,7 @@
                                               $("#echoSelectionRootKeys3").text(selRootKeys.join(", "));
                                               $("#echoSelectionRoots3").text(selRootNodes.join(", "));
                                               sel = true;
-                                              var position = $("textarea#search-term").offset();
+                                              var position = $("input#search-term").offset();
                                               $(".ui-autocomplete").css("top", position.top + 20);
                                               readyToClose = false;
                                               var id = data.node.key;
@@ -333,13 +327,8 @@
                                               if (code == '- Any -') {
                                                   $(".OccupationSelect option").each(function () {
                                                       RemoveOccupationTag(data.node.title);
-                                                      //$('textarea#search-term').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#search-termoccu' });
-                                                      //$('textarea#search-term').textext()[0].tags().removeTag([this.text]);
                                                       $(this).remove();
                                                   });
-                                                  //var allKeys = $('#search-termoccu').fancytree('getRootNode').getChildren().each(function (node, data) {
-
-                                                  //});
                                                   var allKeys = $('#search-termoccu').fancytree('getRootNode').getChildren();
                                                   for (i = 0; i < allKeys.length; i++) {
                                                       if (!allKeys[i].selected)
@@ -347,7 +336,7 @@
                                                   }
                                                   var lst = "<option selected='true' value='0'>" + code + "</option>";
                                                   $(".OccupationSelect").html(lst);
-                                                  var terms = split($('textarea#search-term').val());
+                                                  var terms = split($('input#search-term').val());
                                                   if (terms.length <= 3) {
                                                       // remove the current input
                                                       terms.pop();
@@ -355,11 +344,6 @@
                                                       terms.push(selRootNodes[selRootNodes.length - 1].title);
                                                       // add placeholder to get the comma-and-space at the end
                                                       terms.push("");
-                                                      //$('textarea#IndustrySearch').val(terms.join(", "));
-                                                      //$('textarea#search-term').tagsinput('add', { id: selRootNodes[selRootNodes.length - 1].key, text: selRootNodes[selRootNodes.length - 1].title, control: '#search-termoccu' });
-                                                      //OccupationSelect(data.node);
-
-                                                      //$('textarea#search-term').textext()[0].tags().addTags([node.text]);
                                                       return false;
                                                   } else {
                                                       var last = terms.pop();
@@ -397,18 +381,12 @@
                                                           }
                                                           else {
                                                               if (c2.substring(0, c1.length) == c1) {
-                                                                  //$('textarea#search-term').textext()[0].tags().removeTag([this.text]);
-                                                                  //$('textarea#search-term').textext()[0].tags().addTags([code]);
-                                                                  //$('textarea#search-term').tagsinput('add', { id: data.node.key, text: data.node.title, control: '#search-termoccu' });
-                                                                  //OccupationSelect(selRootNodes[selRootNodes.length - 1]);
                                                                   $(this).text(code);
                                                                   $(this).val(id);
                                                                   $(".OccupationSelect option").each(function () {
                                                                       if ($(this).val().split(' ')[1] != c1) {
                                                                           if ($(this).val().split(' ')[1].substring(0, c1.length) == c1) {
                                                                               RemoveOccupationTag(selRootNodes[selRootNodes.length - 1].title);
-                                                                              //$('textarea#search-term').tagsinput('remove', { id: data.node.key, text: data.node.title, item: data.node, control: '#search-termoccu' });
-                                                                              //$('textarea#search-term').textext()[0].tags().removeTag([this.text]);
                                                                               $(this).remove();
                                                                           }
                                                                       }
@@ -430,7 +408,7 @@
                                               if (exist == 0) {
                                                   var lst = "<option selected='true' value='" + id + "'>" + code + "</option>";
                                                   $(".OccupationSelect").append(lst);
-                                                  var terms = split($('textarea#search-term').val());
+                                                  var terms = split($('input#search-term').val());
                                                   if (terms.length <= 3) {
                                                       // remove the current input
                                                       terms.pop();
@@ -438,11 +416,6 @@
                                                       terms.push(selRootNodes[selRootNodes.length - 1].title);
                                                       // add placeholder to get the comma-and-space at the end
                                                       terms.push("");
-                                                      //$('textarea#IndustrySearch').val(terms.join(", "));
-
-                                                      //OccupationSelect(selRootNodes[selRootNodes.length - 1]);
-                                                      //$('textarea#search-term').tagsinput('add', { id: data.node.key, text: data.node.title, control: '#search-termoccu' });
-                                                      //$('textarea#search-term').textext()[0].tags().addTags([node.text]);
                                                       return false;
                                                   } else {
                                                       var last = terms.pop();
@@ -455,23 +428,24 @@
                                               $('#hdf').val('1');
                                           }
                                           else {
-                                              RemoveOccupationTag(data.node.title);
-                                              // Get a list of all selected TOP nodes
-                                              //$('textarea#search-term').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#search-termoccu' });
+                                              var id = data.node.key;
+                                              var c1= $.trim(id.split(' ')[1]);
+                                              $(".OccupationSelect option").each(function () {
+                                                  if ($(this).val().split(' ')[1] != c1) {
+                                                      if ($(this).val().split(' ')[1].substring(0, c1.length) == c1) {
+                                                          $(this).remove();
+                                                          RemoveOccupationTag(this.innerText);
+                                                      }
+                                                  }
+                                              });
+                                             
 
                                           }
                                       },
                                       dblclick: function (event, data) {
-                                          //data.node.toggleSelected();
                                       },
                                       keydown: function (event, data) {
-                                          //if (event.which === 32) {
-                                          //    data.node.toggleSelected();
-                                          //    return false;
-                                          //}
                                       },
-                                      // The following options are only required, if we have more than one tree on one page:
-                                      //        initId: "treeData",
                                       cookieId: "fancytree-Cb3",
                                       idPrefix: "fancytree-Cb3-",
                                   });
@@ -480,7 +454,7 @@
                                       url: '@Url.Action("searchOccupationCount", "Jobs")', dataType: "json",
                                       type: "POST",
                                       data: { term: request.term },
-                                      success: function (data) { }
+                                      success: function (data) { $('#loadingbusy').hide(); }
                                   })).done();
                               }
                           }
@@ -646,10 +620,6 @@
             }
         }
 
-        //$('#search-empIndtree').textext({ plugins: 'tags' }).bind('tagClick', function (e, tag, value, callback) {
-        //});
-
-
         function RemoveIndustryTag(value) {
             var indList = document.getElementById('IndustrySelect');
             var len = indList.options.length;
@@ -672,21 +642,12 @@
                             var industryDiv = document.getElementById("searchable-empIndtree");
                             industryDiv.style.display = "block";
                             $('#loadingbusy').hide();
-                            //$('textarea#search-empIndtree').tagsinput({
-                            //    allowDuplicates: false,
-                            //    itemValue: 'id',  // this will be used to set id of tag
-                            //    itemText: 'text' // this will be used to set text of tag
-                            //});
+
                             $('#searchable-empIndtree').fancytree({
                                 checkbox: true,
                                 selectMode: 3,
                                 source: data,
-                                //lazyLoad: function (event, ctx) {
-                                //    ctx.result = { url: "ajax-sub2.json", debugDelay: 1000 };
-                                //},
-                                //loadChildren: function (event, ctx) {
-                                //    ctx.node.fixSelection3AfterClick();
-                                //},
+
                                 select: function (event, data) {
                                     if (data.node.selected) {
                                         if (data.node.value != null)
@@ -706,11 +667,11 @@
                                         $("#echoSelectionRootKeys3").text(selRootKeys.join(", "));
                                         $("#echoSelectionRoots3").text(selRootNodes.join(", "));
                                         sel = true;
-                                        var position = $("textarea#search-term").offset();
+                                        var position = $("input#search-term").offset();
                                         $(".ui-autocomplete").css("top", position.top + 20);
                                         readyToClose = false;
-                                        var id = selRootNodes[selRootNodes.length - 1].key;
-                                        var code = $.trim(selRootNodes[selRootNodes.length - 1].title);
+                                        var id = selRootNodes[0].key;
+                                        var code = $.trim(selRootNodes[0].title);
                                         var exist = 0;
                                         var clength;
                                         var c1;
@@ -718,7 +679,6 @@
                                         if (code == '- Any -') {
                                             $(".IndustrySelect option").each(function () {
                                                 RemoveIndustryTag(selRootNodes[selRootNodes.length - 1].title);
-                                                //$('textarea#search-empIndtree').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#searchable-empIndtree' });
                                                 $(this).remove();
                                             });
                                             var allKeys = $('#searchable-empIndtree').fancytree('getRootNode').getChildren();
@@ -728,7 +688,7 @@
                                             }
                                             var lst = "<option selected='true' value='0'>" + code + "</option>";
                                             $(".IndustrySelect").html(lst);
-                                            var terms = split($('textarea#search-empIndtree').val());
+                                            var terms = split($('input#search-empIndtree').val());
                                             if (terms.length <= 3) {
                                                 // remove the current input
                                                 terms.pop();
@@ -736,9 +696,6 @@
                                                 terms.push(node.text);
                                                 // add placeholder to get the comma-and-space at the end
                                                 terms.push("");
-                                                //$('textarea#IndustrySearch').val(terms.join(", "));
-                                                //$('textarea#search-empIndtree').tagsinput('add', { id: data.node.key, text: data.node.title, control: '#searchable-empIndtree' });
-                                                //$('textarea#search-empIndtree').textext()[0].tags().addTags([node.text]);
                                                 IndustrySelect(node);
                                                 return false;
                                             } else {
@@ -762,13 +719,10 @@
                                                         $(".IndustrySelect option").each(function () {
                                                             if ($(this).attr('indsection') == c1) {
                                                                 RemoveIndustryTag(selRootNodes[selRootNodes.length - 1].title);
-
-                                                                //$('textarea#search-empIndtree').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#searchable-empIndtree' });
                                                                 $(this).remove();
                                                             }
                                                         });
                                                         var lst = "<option indsection='" + sect + "' selected='true' value='" + id + "'>" + code + "</option>";
-                                                        //$('textarea#search-empIndtree').tagsinput('add', { id: data.node.key, text: data.node.title, control: '#searchable-empIndtree' });
                                                         $(".IndustrySelect").append(lst);
                                                         exist = 1;
                                                         return;
@@ -831,19 +785,15 @@
                                             $(".IndustrySelect").append(lst);
                                             var lstid = "<option selected='true' value='" + id + "'>" + id + "</option>";
                                             $(".IndustryID").append(lst);
-                                            var terms = split($('textarea#search-empIndtree').val());
+                                            var terms = split($('input#search-empIndtree').val());
                                             if (terms.length <= 3) {
                                                 // remove the current input
                                                 terms.pop();
                                                 // add the selected item
                                                 //terms.push(node.text);
-                                                terms.push(selRootNodes[selRootNodes.length - 1].title);
+                                                terms.push(selRootNodes[0].title);
                                                 // add placeholder to get the comma-and-space at the end
                                                 terms.push("");
-                                                //$('textarea#IndustrySearch').val(terms.join(", "));
-                                                //$('textarea#search-empIndtree').tagsinput('add', { id: data.node.key, text: data.node.title, control: '#searchable-empIndtree' });
-                                                //$('textarea#search-empIndtree').textext()[0].tags().addTags([node.text]);
-                                                //IndustrySelect(node);
                                                 return false;
                                             } else {
                                                 var last = terms.pop();
@@ -856,22 +806,25 @@
                                         $('#hdfI').val('1');
                                     }
                                     else {
-                                        RemoveIndustryTag(data.node.title);
+                                        var id = data.node.key;
+                                        var c1 = $.trim(id.split(' ')[1]);
+                                        $(".IndustrySelect option").each(function () {
+                                            if ($(this).val().split(' ')[1] != c1) {
+                                                if ($(this).val().split(' ')[1].substring(0, c1.length) == c1) {
+                                                    $(this).remove();
+                                                    RemoveIndustryTag(this.innerText);
+                                                }
+                                            }
+                                        });
+
+                                       
                                         // Get a list of all selected TOP nodes
-                                        //$('textarea#search-empIndtree').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#searchable-empIndtree' });
                                     }
                                 },
                                 dblclick: function (event, data) {
-                                    //data.node.toggleSelected();
                                 },
                                 keydown: function (event, data) {
-                                    //if (event.which === 32) {
-                                    //    data.node.toggleSelected();
-                                    //    return false;
-                                    //}
                                 },
-                                // The following options are only required, if we have more than one tree on one page:
-                                //        initId: "treeData",
                                 cookieId: "fancytree-Cb3",
                                 idPrefix: "fancytree-Cb3-"
                             });
@@ -880,7 +833,7 @@
                                 url: '@Url.Action("searchIndustryCount", "Jobs")', dataType: "json",
                                 type: "POST",
                                 data: { term: request.term },
-                                success: function (data) { }
+                                success: function (data) { $('#loadingbusy').hide(); }
                             })).done();
                         }
                     }
@@ -941,17 +894,12 @@
                              var locationDiv = document.getElementById("searchable-empLocationtree");
                              locationDiv.style.display = "block";
                              $('#loadingbusy').hide();
-                             //$('textarea#search-empLocationsearch').tagsinput({
-                             //    allowDuplicates: false,
-                             //    itemValue: 'id',  // this will be used to set id of tag
-                             //    itemText: 'text' // this will be used to set text of tag
-                             //});
                              console.log(data.length);
+
                              $('#searchable-empLocationtree').fancytree({
                                  checkbox: true,
                                  selectMode: 3,
                                  source: data,
-
                                  lazyLoad: function (event, ctx) {
                                      ctx.result = {
                                          url: '@Url.Action("SearchLocationWithId", "Jobs")', dataType: "json",
@@ -968,7 +916,6 @@
                                              return node.key;
                                          });
                                          $("#echoSelection3").text(selKeys.join(", "));
-
                                          // Get a list of all selected TOP nodes
                                          var selRootNodes = data.tree.getSelectedNodes(true);
                                          // ... and convert to a key array:
@@ -1005,23 +952,20 @@
                                              }
                                              var lst = "<option selected='true' value='0:1'>- Anywhere -</option>";
                                              $(".LocationAlert option").each(function () {
-                                                 //$('textarea#search-empLocationsearch').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#searchable-empLocationtree' });
+                                                 RemoveLocationTag(this);
                                                  $(this).remove();
                                              });
                                              $(".LocationAlert").html(lst);
                                              $('#LocationSearch').val('');
                                              this.value = '';
-                                             var terms = split($('textarea#search-empLocationsearch').val());
+                                             var terms = split($('input#search-empLocationsearch').val());
                                              if (terms.length <= 3) {
                                                  // remove the current input
                                                  terms.pop();
                                                  // add the selected item
-                                                 terms.push(node.text);
+                                                 terms.push(data.node.title);
                                                  // add placeholder to get the comma-and-space at the end
                                                  terms.push("");
-                                                 //$('textarea#empLocationsearch').val(terms.join(", "));
-                                                 //$('textarea#search-empLocationsearch').tagsinput('add', { id: data.node.key, text: data.node.title, control: '#searchable-empLocationtree' });
-                                                 //$('textarea#search-empLocationsearch').textext()[0].tags().addTags([node.text]);
                                                  return false;
                                              } else {
                                                  var last = terms.pop();
@@ -1043,7 +987,7 @@
                                                  type: "get",
                                                  data: { locationId: nid, locationType: nt },
                                                  async: false,
-                                                 success: function (data) { }
+                                                 success: function (data) { $('#loadingbusy').hide(); }
                                              });
                                          }
 
@@ -1079,27 +1023,24 @@
                                                  $(".LocationType").append(lstType);
                                                  //this.value = '';
                                              }
-                                             locationDiv.style.display = "none";
                                          }
                                          return false;
                                      }
                                      else {
-                                         RemoveLocationTag(data.node.title);
-                                         // Get a list of all selected TOP nodes
-                                         //$('textarea#search-empLocationsearch').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#searchable-empLocationtree' });
+                                         $(".LocationID option").each(function () {
+                                             if ($(this).val().split(' ')[1] != c1) {
+                                                 if ($(this).val().split(' ')[1].substring(0, c1.length) == c1) {
+                                                     $(this).remove();
+                                                     RemoveLocationTag(this.innerText);
+                                                 }
+                                             }
+                                         });
                                      }
                                  },
                                  dblclick: function (event, data) {
-                                     //data.node.toggleSelected();
                                  },
                                  keydown: function (event, data) {
-                                     //if (event.which === 32) {
-                                     //    data.node.toggleSelected();
-                                     //    return false;
-                                     //}
                                  },
-                                 // The following options are only required, if we have more than one tree on one page:
-                                 //        initId: "treeData",
                                  cookieId: "fancytree-Cb3",
                                  idPrefix: "fancytree-Cb3-"
                              });
@@ -1108,7 +1049,7 @@
                                  url: '@Url.Action("SearchLocationWithId", "Jobs")', dataType: "json",
                                  type: "POST",
                                  data: { term: request.term },
-                                 success: function (data) { }
+                                 success: function (data) { $('#loadingbusy').hide(); }
                              })).done();
                          }
 
@@ -1163,7 +1104,7 @@
              source: function (request, response) {
                  $('#loadingbusy').show();
                  $.ajax({
-                     url: '@Url.Action("SearchIndustry", "Jobs")', dataType: "json",
+                     url: '@Url.Action("searchIndustry", "Jobs")', dataType: "json",
                      type: "POST",
                      data: { term: request.term },
                      success: function (data) {
@@ -1177,12 +1118,7 @@
                                  checkbox: true,
                                  selectMode: 3,
                                  source: data,
-                                 //lazyLoad: function (event, ctx) {
-                                 //    ctx.result = { url: "ajax-sub2.json", debugDelay: 1000 };
-                                 //},
-                                 //loadChildren: function (event, ctx) {
-                                 //    ctx.node.fixSelection3AfterClick();
-                                 //},
+
                                  select: function (event, data) {
                                      readyToClose = false;
                                      $("#divIndSel").show();
@@ -1285,19 +1221,20 @@
                                      $('#hdfI').val('1');
                                  },
                                  dblclick: function (event, data) {
-                                     //data.node.toggleSelected();
                                  },
                                  keydown: function (event, data) {
-                                     //if (event.which === 32) {
-                                     //    data.node.toggleSelected();
-                                     //    return false;
-                                     //}
                                  },
                                  // The following options are only required, if we have more than one tree on one page:
-                                 //        initId: "treeData",
                                  cookieId: "fancytree-Cb3",
                                  idPrefix: "fancytree-Cb3-"
                              });
+                             var tree = $('input#search-empInd').next().fancytree("getTree");
+                             tree.reload($.ajax({
+                                 url: '@Url.Action("searchIndustry", "Jobs")', dataType: "json",
+                                 type: "POST",
+                                 data: { term: request.term },
+                                 success: function (data) { $('#loadingbusy').hide(); }
+                             })).done();
                          }
                      }
                  })
@@ -1309,7 +1246,7 @@
             source: function (request, response) {
                 $('#loadingbusy').show();
                 $.ajax({
-                    url: '@Url.Action("SearchOccupation", "Jobs")', dataType: "json",
+                    url: '@Url.Action("searchOccupation", "Jobs")', dataType: "json",
                     type: "POST",
                     data: { term: request.term },
                     success: function (data) {
@@ -1323,12 +1260,7 @@
                                 checkbox: true,
                                 selectMode: 3,
                                 source: data,
-                                //lazyLoad: function (event, ctx) {
-                                //    ctx.result = { url: "ajax-sub2.json", debugDelay: 1000 };
-                                //},
-                                //loadChildren: function (event, ctx) {
-                                //    ctx.node.fixSelection3AfterClick();
-                                //},
+
                                 select: function (event, data) {
                                     var code = data.node.title;
                                     var id = data.node.key.split(' ')[1].length
@@ -1356,26 +1288,26 @@
                                         if (code != "- Any -") {
                                             data.node.title = code;
                                         }
-                                        occupationDiv.style.display = "none";
+                                        occupationDiv[0].style.display = "none";
                                     }
                                 },
                                 dblclick: function (event, data) {
-                                    //data.node.toggleSelected();
                                 },
                                 keydown: function (event, data) {
-                                    //if (event.which === 32) {
-                                    //    data.node.toggleSelected();
-                                    //    return false;
-                                    //}
                                 },
                                 // The following options are only required, if we have more than one tree on one page:
-                                //        initId: "treeData",
                                 cookieId: "fancytree-Cb3",
                                 idPrefix: "fancytree-Cb3-"
                             });
+                            var tree = $('input#search-empOccu').next().fancytree("getTree");
+                            tree.reload($.ajax({
+                                url: '@Url.Action("searchOccupation", "Jobs")', dataType: "json",
+                                type: "POST",
+                                data: { term: request.term },
+                                success: function (data) { $('#loadingbusy').hide(); }
+                            })).done();
                         }
-                        else
-                        {
+                        else {
                             $('#loadingbusy').hide();
                         }
                     }
@@ -1402,12 +1334,7 @@
                                 checkbox: true,
                                 selectMode: 3,
                                 source: data,
-                                //lazyLoad: function (event, ctx) {
-                                //    ctx.result = { url: "ajax-sub2.json", debugDelay: 1000 };
-                                //},
-                                //loadChildren: function (event, ctx) {
-                                //    ctx.node.fixSelection3AfterClick();
-                                //},
+
                                 select: function (event, data) {
                                     var code = data.node.key;
                                     var cls;
@@ -1419,22 +1346,23 @@
                                     var code1 = $('#project').text();
                                     $('#project').text(code1 + data.node.key);
                                     $(this).siblings().val(code);
-                                    locationDiv.style.display = "none";
+                                    locationDiv[0].style.display = "none";
                                 },
                                 dblclick: function (event, data) {
-                                    //data.node.toggleSelected();
                                 },
                                 keydown: function (event, data) {
-                                    //if (event.which === 32) {
-                                    //    data.node.toggleSelected();
-                                    //    return false;
-                                    //}
                                 },
                                 // The following options are only required, if we have more than one tree on one page:
-                                //        initId: "treeData",
                                 cookieId: "fancytree-Cb3",
                                 idPrefix: "fancytree-Cb3-"
                             });
+                            var tree = $('input#search-empLoca').next().fancytree("getTree");
+                            tree.reload($.ajax({
+                                url: '@Url.Action("SearchLocationWithOutAny", "Jobs")', dataType: "json",
+                                type: "POST",
+                                data: { term: request.term },
+                                success: function (data) { $('#loadingbusy').hide(); }
+                            })).done();
                         }
                     }
                 })
@@ -1450,8 +1378,6 @@
                         success: function (data) {
                             $('#loadingbusy').hide();
                             if (data.length > 0) {
-                                //var employerDiv = document.getElementById("emptreepostJob");
-                                //employerDiv.style.display = "block";
                                 var employerDiv = $('input#search-empText').next();
                                 for (i = 0; i < employerDiv.length - 1; i++) {
                                     employerDiv[i].style.display = "none";
@@ -1460,41 +1386,240 @@
                                     checkbox: true,
                                     selectMode: 3,
                                     source: data,
-                                    //lazyLoad: function (event, ctx) {
-                                    //    ctx.result = { url: "ajax-sub2.json", debugDelay: 1000 };
-                                    //},
-                                    //loadChildren: function (event, ctx) {
-                                    //    ctx.node.fixSelection3AfterClick();
-                                    //},
+
                                     select: function (event, data) {
                                         var code1 = $('#project').text();
                                         $('#project').text(code1 + data.node.key);
                                         var id = data.node.key;
                                         var code = $.trim(data.node.title);
-                                        data.node.key= code;
+                                        data.node.key = code;
                                         $(this).siblings().val(code);
-                                        employerDiv.style.display = "none";
+                                        employerDiv[0].style.display = "none";
                                     },
                                     dblclick: function (event, data) {
-                                        //data.node.toggleSelected();
                                     },
                                     keydown: function (event, data) {
-                                        //if (event.which === 32) {
-                                        //    data.node.toggleSelected();
-                                        //    return false;
-                                        //}
                                     },
                                     // The following options are only required, if we have more than one tree on one page:
-                                    //        initId: "treeData",
                                     cookieId: "fancytree-Cb3",
                                     idPrefix: "fancytree-Cb3-"
                                 });
+                                var tree = $('input#search-empText').next().fancytree("getTree");
+                                tree.reload($.ajax({
+                                    url: '@Url.Action("SearchEmployer", "Jobs")', dataType: "json",
+                                    type: "POST",
+                                    data: { term: request.term },
+                                    success: function (data) { $('#loadingbusy').hide(); }
+                                })).done();
                             }
                         }
                     })
                 }
             });
         }
+
+        $('input#CurrentOccupation').autocomplete(
+       {
+           source: function (request, response) {
+               $('#loadingbusy').show();
+               $.ajax({
+                   url: '@Url.Action("searchOccupation", "Jobs")', dataType: "json",
+                   type: "POST",
+                   data: { term: request.term },
+                   success: function (data) {
+                       $('#loadingbusy').hide();
+                       if (data.length > 0) {
+                           var occuTreeDiv = document.getElementById("occutreeCurrpostJob");
+                           occuTreeDiv.style.display = "block";
+                           $('#occutreeCurrpostJob').fancytree({
+                               checkbox: true,
+                               selectMode: 3,
+                               source: data,
+                               select: function (event, data) {
+                                   var txt = $(this).val();
+                                   var code = data.node.title;
+                                   var cls = data.node.key.split(' ')[1].length
+                                   if (cls != '4') {
+                                       alert('Please select an option beginning with Tier 4.');
+                                       $(this).val('');
+                                       $('.CurrentOccupationA').val('');
+                                       return false;
+                                   }
+                                   else {
+                                       $('#CurrentOccupationId').val(data.node.key.split(' ')[0]);
+                                       if (code != "- Any -") {
+                                           $('input#CurrentOccupation').val(code);
+                                           occuTreeDiv.style.display = "none";
+                                       }
+                                   }
+                               },
+                               dblclick: function (event, data) {
+                               },
+                               keydown: function (event, data) {
+                               },
+                               // The following options are only required, if we have more than one tree on one page:
+                               cookieId: "fancytree-Cb3",
+                               idPrefix: "fancytree-Cb3-"
+                           });
+                           var tree = $('#occutreeCurrpostJob').fancytree("getTree");
+                           tree.reload($.ajax({
+                               url: '@Url.Action("searchOccupation", "Jobs")', dataType: "json",
+                               type: "POST",
+                               data: { term: request.term },
+                               success: function (data) { $('#loadingbusy').hide(); }
+                           })).done();
+                       }
+                   }
+               })
+           }
+       });
+
+        $('input#CurrentIndustry').autocomplete(
+       {
+           source: function (request, response) {
+               $('#loadingbusy').show();
+               $.ajax({
+                   url: '@Url.Action("searchIndustry", "Jobs")', dataType: "json",
+                   type: "POST",
+                   data: { term: request.term },
+                   success: function (data) {
+                       $('#loadingbusy').hide();
+                       if (data.length > 0) {
+                           var indTreeDiv = document.getElementById("IndtreeCurrpostJob");
+                           indTreeDiv.style.display = "block";
+                           $('#IndtreeCurrpostJob').fancytree({
+                               checkbox: true,
+                               selectMode: 3,
+                               source: data,
+                               select: function (event, data) {
+                                   var txt = $(this).val();
+                                   var code = data.node.title;
+                                   var cls = data.node.key.split(' ')[1].length
+                                   if (cls != '4') {
+                                       alert('Please select an option beginning with Tier 4.');
+                                       $(this).val('');
+                                       $('.CurrentIndustryA').val('');
+                                       return false;
+                                   }
+                                   else {
+                                       $('#CurrentIndustryId').val(data.node.key.split(' ')[0]);
+                                       if (code != "- Any -") {
+                                           $('input#CurrentIndustry').val(code);
+                                           indTreeDiv.style.display = "none";
+                                       }
+                                   }
+                               },
+                               dblclick: function (event, data) {
+                               },
+                               keydown: function (event, data) {
+                               },
+                               // The following options are only required, if we have more than one tree on one page:
+                               cookieId: "fancytree-Cb3",
+                               idPrefix: "fancytree-Cb3-"
+                           });
+                           var tree = $('#IndtreeCurrpostJob').fancytree("getTree");
+                           tree.reload($.ajax({
+                               url: '@Url.Action("searchIndustry", "Jobs")', dataType: "json",
+                               type: "POST",
+                               data: { term: request.term },
+                               success: function (data) { $('#loadingbusy').hide(); }
+                           })).done();
+                       }
+                   }
+               })
+           }
+       });
+
+        $('input#Currentemplocation').autocomplete(
+      {
+          source: function (request, response) {
+              $('#loadingbusy').show();
+              $.ajax({
+                  url: '@Url.Action("SearchLocationWithOutAny", "Jobs")', dataType: "json",
+                  type: "POST",
+                  data: { term: request.term },
+                  success: function (data) {
+                      $('#loadingbusy').hide();
+                      if (data.length > 0) {
+                          var loctreeDiv = document.getElementById("loctreeCurrpostJob");
+                          loctreeDiv.style.display = "block";
+                          $('#loctreeCurrpostJob').fancytree({
+                              checkbox: true,
+                              selectMode: 3,
+                              source: data,
+                              select: function (event, data) {
+                                  var code = data.node.title;
+                                  var id = data.node.key.split(' ')[0];
+                                  $('#CurrentemplocationId').val(id);
+                                  $('.CurrentemplocationA').val(code);
+                                  $('input#Currentemplocation').val(code);
+                                  loctreeDiv.style.display = "none";
+                              },
+                              dblclick: function (event, data) {
+                              },
+                              keydown: function (event, data) {
+                              },
+                              // The following options are only required, if we have more than one tree on one page:
+                              cookieId: "fancytree-Cb3",
+                              idPrefix: "fancytree-Cb3-"
+                          });
+                          var tree = $('#loctreeCurrpostJob').fancytree("getTree");
+                          tree.reload($.ajax({
+                              url: '@Url.Action("SearchLocationWithOutAny", "Jobs")', dataType: "json",
+                              type: "POST",
+                              data: { term: request.term },
+                              success: function (data) { $('#loadingbusy').hide(); }
+                          })).done();
+                      }
+                  }
+              })
+          }
+      });
+
+        $('input#Currentemployer').autocomplete(
+     {
+         source: function (request, response) {
+             $('#loadingbusy').show();
+             $.ajax({
+                 url: '@Url.Action("SearchEmployer", "Jobs")', dataType: "json",
+                 type: "POST",
+                 data: { term: request.term },
+                 success: function (data) {
+                     $('#loadingbusy').hide();
+                     if (data.length > 0) {
+                         var empTreeDiv = document.getElementById("emptreeCurrpostJob");
+                         empTreeDiv.style.display = "block";
+                         $('#emptreeCurrpostJob').fancytree({
+                             checkbox: true,
+                             selectMode: 3,
+                             source: data,
+                             select: function (event, data) {
+                                 var code = data.node.title;
+                                 var id = data.node.key.split(' ')[0];
+                                 $('input#Currentemployer').val(code);
+                                 empTreeDiv.style.display = "none";
+                             },
+                             dblclick: function (event, data) {
+                             },
+                             keydown: function (event, data) {
+
+                             },
+                             // The following options are only required, if we have more than one tree on one page:
+                             cookieId: "fancytree-Cb3",
+                             idPrefix: "fancytree-Cb3-"
+                         });
+                         var tree = $('#emptreeCurrpostJob').fancytree("getTree");
+                         tree.reload($.ajax({
+                             url: '@Url.Action("SearchEmployer", "Jobs")', dataType: "json",
+                             type: "POST",
+                             data: { term: request.term },
+                             success: function (data) { $('#loadingbusy').hide(); }
+                         })).done();
+                     }
+                 }
+             })
+         }
+     });
 
         $('input#search-empLocaa').autocomplete(
         {
@@ -1513,12 +1638,7 @@
                                 checkbox: true,
                                 selectMode: 3,
                                 source: data,
-                                //lazyLoad: function (event, ctx) {
-                                //    ctx.result = { url: "ajax-sub2.json", debugDelay: 1000 };
-                                //},
-                                //loadChildren: function (event, ctx) {
-                                //    ctx.node.fixSelection3AfterClick();
-                                //},
+
                                 select: function (event, data) {
                                     var code = data.node.key;
                                     var cls;
@@ -1530,28 +1650,28 @@
                                     var code1 = $('#project').text();
                                     $('#project').text(code1 + data.node.key);
                                     $(this).siblings().val(code);
-                                    locationDiv.style.display = "none";
+                                    locationDiv[0].style.display = "none";
                                 },
                                 dblclick: function (event, data) {
-                                    //data.node.toggleSelected();
                                 },
                                 keydown: function (event, data) {
-                                    //if (event.which === 32) {
-                                    //    data.node.toggleSelected();
-                                    //    return false;
-                                    //}
                                 },
                                 // The following options are only required, if we have more than one tree on one page:
-                                //        initId: "treeData",
                                 cookieId: "fancytree-Cb3",
                                 idPrefix: "fancytree-Cb3-"
                             });
+                            var tree = $('#loctreepostJob').fancytree("getTree");
+                            tree.reload($.ajax({
+                                url: '@Url.Action("SearchLocationWithOutAny", "Jobs")', dataType: "json",
+                                type: "POST",
+                                data: { term: request.term },
+                                success: function (data) { $('#loadingbusy').hide(); }
+                            })).done();
                         }
                     }
                 })
             }
         });
-
 
         $("input#search-empText").autocomplete({
             source: function (request, response) {
@@ -1569,12 +1689,6 @@
                                 checkbox: true,
                                 selectMode: 3,
                                 source: data,
-                                //lazyLoad: function (event, ctx) {
-                                //    ctx.result = { url: "ajax-sub2.json", debugDelay: 1000 };
-                                //},
-                                //loadChildren: function (event, ctx) {
-                                //    ctx.node.fixSelection3AfterClick();
-                                //},
                                 select: function (event, data) {
                                     var code1 = $('#project').text();
                                     $('#project').text(code1 + data.node.key);
@@ -1582,22 +1696,23 @@
                                     var code = $.trim(data.node.title);
                                     data.node.title = code;
                                     $(this).siblings().val(code);
-                                    employerDiv.style.display = "none";
+                                    employerDiv[0].style.display = "none";
                                 },
                                 dblclick: function (event, data) {
-                                    //data.node.toggleSelected();
                                 },
                                 keydown: function (event, data) {
-                                    //if (event.which === 32) {
-                                    //    data.node.toggleSelected();
-                                    //    return false;
-                                    //}
                                 },
                                 // The following options are only required, if we have more than one tree on one page:
-                                //        initId: "treeData",
                                 cookieId: "fancytree-Cb3",
                                 idPrefix: "fancytree-Cb3-"
                             });
+                            var tree = $('#emptreepostJob').fancytree("getTree");
+                            tree.reload($.ajax({
+                                url: '@Url.Action("SearchEmployer", "Jobs")', dataType: "json",
+                                type: "POST",
+                                data: { term: request.term },
+                                success: function (data) { $('#loadingbusy').hide(); }
+                            })).done();
                         }
                     }
                 })
@@ -1617,17 +1732,11 @@
                         if (data.length > 0) {
                             var locationDiv = $('input#search-empLoca').next()
                             locationDiv[0].style.display = "block";
-
-                            $('#emptreepostJob').fancytree({
+                            $('#loctreepostJob').fancytree({
                                 checkbox: true,
                                 selectMode: 3,
                                 source: data,
-                                //lazyLoad: function (event, ctx) {
-                                //    ctx.result = { url: "ajax-sub2.json", debugDelay: 1000 };
-                                //},
-                                //loadChildren: function (event, ctx) {
-                                //    ctx.node.fixSelection3AfterClick();
-                                //},
+
                                 select: function (event, data) {
                                     var code = data.node.key;
                                     var cls;
@@ -1639,22 +1748,23 @@
                                     var code1 = $('#project').text();
                                     $('#project').text(code1 + data.node.key);
                                     $(this).siblings().val(code);
-                                    locationDiv.style.display = "none";
+                                    locationDiv[0].style.display = "none";
                                 },
                                 dblclick: function (event, data) {
-                                    //data.node.toggleSelected();
                                 },
                                 keydown: function (event, data) {
-                                    //if (event.which === 32) {
-                                    //    data.node.toggleSelected();
-                                    //    return false;
-                                    //}
                                 },
                                 // The following options are only required, if we have more than one tree on one page:
-                                //        initId: "treeData",
                                 cookieId: "fancytree-Cb3",
                                 idPrefix: "fancytree-Cb3-"
                             });
+                            var tree = $('#loctreepostJob').fancytree("getTree");
+                            tree.reload($.ajax({
+                                url: '@Url.Action("SearchLocationWithOutAny", "Jobs")', dataType: "json",
+                                type: "POST",
+                                data: { term: request.term },
+                                success: function (data) { $('#loadingbusy').hide(); }
+                            })).done();
                         }
                     }
                 })
@@ -1666,7 +1776,7 @@
             source: function (request, response) {
                 $('#loadingbusy').show();
                 $.ajax({
-                    url: '@Url.Action("SearchOccupation", "Jobs")', dataType: "json",
+                    url: '@Url.Action("searchOccupation", "Jobs")', dataType: "json",
                     type: "POST",
                     data: { term: request.term },
                     success: function (data) {
@@ -1674,20 +1784,13 @@
                         if (data.length > 0) {
                             var occupationDiv = document.getElementById("occutreepostJob");
                             occupationDiv.style.display = "block";
-                            $('#occutreepostJob').treeview({
-                                levels: 99,
-                                showTags: true,
-                                color: "white",
-                                backColor: "transparent",
-                                expandIcon: 'glyphicon glyphicon-plus',
-                                collapseIcon: 'glyphicon  glyphicon-minus',
-                                onhoverColor: "rgba(0, 0, 0, 0.69)",
-                                data: data,
-                                showIcon: false,
-                                showCheckbox: true,
-                                onNodeChecked: function (event, node) {
-                                    var code = node.text;
-                                    var id = node.value.split(' ')[1].length
+                            $('input#search-empOccu').next().fancytree({
+                                checkbox: true,
+                                selectMode: 3,
+                                source: data,
+                                select: function (event, data) {
+                                    var code = $.trim(data.node.title);
+                                    var id = data.node.key.split(' ')[1].length
                                     var cls;
                                     cls = $.trim(code.split(' ')[3]);
                                     if (id != 4) {
@@ -1696,10 +1799,10 @@
                                         return false;
                                     }
                                     else {
-                                        $(this).siblings().val(node.text);
-                                        var code = $.trim(node.text);
+                                        $(this).siblings().val(data.node.title);
+                                        var code = $.trim(data.node.title);
                                         code = code.replace(">", "").replace(">", "").replace(">", "").replace(">", "");
-                                        var items = node.value.split(' ');
+                                        var items = data.node.key.split(' ');
                                         if (items.length > 1) {
                                             $('input#ISICRev4Id').val(items[0]);
                                         }
@@ -1708,14 +1811,27 @@
                                         }
                                         node.value = $.trim(code);
                                         var code1 = $('#project').text();
-                                        $('#project').text(code1 + node.value);
+                                        $('#project').text(code1 + data.node.key);
                                         if (code != "- Any -") {
-                                            node.value = code;
+                                            node.data.title = code;
                                         }
-                                        occupationDiv.style.display = "none";
+                                        occupationDiv[0].style.display = "none";
                                     }
-                                }
-                            })
+                                },
+                                dblclick: function (event, data) {
+                                },
+                                keydown: function (event, data) {
+                                },
+                                cookieId: "fancytree-Cb3",
+                                idPrefix: "fancytree-Cb3-"
+                            });
+                            var tree = $('#loctreepostJob').fancytree("getTree");
+                            tree.reload($.ajax({
+                                url: '@Url.Action("SearchLocationWithOutAny", "Jobs")', dataType: "json",
+                                type: "POST",
+                                data: { term: request.term },
+                                success: function (data) { $('#loadingbusy').hide(); }
+                            })).done();
                         }
                     }
                 })
@@ -1727,7 +1843,7 @@
             source: function (request, response) {
                 $('#loadingbusy').show();
                 $.ajax({
-                    url: '@Url.Action("SearchIndustry", "Jobs")', dataType: "json",
+                    url: '@Url.Action("searchIndustry", "Jobs")', dataType: "json",
                     type: "POST",
                     data: { term: request.term },
                     success: function (data) {
@@ -1735,27 +1851,20 @@
                         if (data.length > 0) {
                             var industryDiv = document.getElementById("indtreepostJob");
                             industryDiv.style.display = "block";
-                            $('#indtreepostJob').treeview({
-                                levels: 99,
-                                showTags: true,
-                                color: "white",
-                                backColor: "transparent",
-                                expandIcon: 'glyphicon glyphicon-plus',
-                                collapseIcon: 'glyphicon  glyphicon-minus',
-                                onhoverColor: "rgba(0, 0, 0, 0.69)",
-                                data: data,
-                                showIcon: false,
-                                showCheckbox: true,
-                                onNodeChecked: function (event, node) {
+                            $('indtreepostJob').next().fancytree({
+                                checkbox: true,
+                                selectMode: 3,
+                                source: data,
+                                select: function (event, data) {
                                     readyToClose = false;
                                     $("#divIndSel").show();
                                     var position = $("input#search-empInd").offset();
                                     $(".ui-autocomplete").css("top", position.top + 20);
-                                    var id = node.value;
-                                    var sect = node.value.split(' ')[2];
-                                    var code = $.trim(node.text);
-                                    node.text = '';
-                                    node.value = '';
+                                    var id = data.node.key;
+                                    var sect = data.node.key.split(' ')[2];
+                                    var code = $.trim(data.node.value);
+                                    data.node.key = '';
+                                    data.node.value = '';
                                     var exist = 0;
                                     var clength;
                                     var c1;
@@ -1777,9 +1886,7 @@
                                             if (c1.length == 1) {
                                                 if ($(this).attr('indsection') == c1) {
                                                     $(".IndustrySelect option").each(function () {
-                                                        if ($(this).attr('indsection') == c1)
-                                                        {
-                                                            //$('input#search-empInd').textext()[0].tags().removeTag([this.text]);
+                                                        if ($(this).attr('indsection') == c1) {
                                                             $(this).remove();
                                                         }
                                                     });
@@ -1865,7 +1972,7 @@
                 source: function (request, response) {
                     $('#loadingbusy').show();
                     $.ajax({
-                        url: '@Url.Action("SearchIndustry", "Jobs")', dataType: "json",
+                        url: '@Url.Action("searchIndustry", "Jobs")', dataType: "json",
                         type: "POST",
                         data: { term: request.term },
                         success: function (data) {
@@ -1873,17 +1980,10 @@
                             if (data.length > 0) {
                                 var IndustryDiv = document.getElementById("indtreepostJob");
                                 IndustryDiv.style.display = "block";
-
                                 $('#indtreepostJob').fancytree({
                                     checkbox: true,
                                     selectMode: 3,
                                     source: data,
-                                    //lazyLoad: function (event, ctx) {
-                                    //    ctx.result = { url: "ajax-sub2.json", debugDelay: 1000 };
-                                    //},
-                                    //loadChildren: function (event, ctx) {
-                                    //    ctx.node.fixSelection3AfterClick();
-                                    //},
                                     select: function (event, data) {
                                         readyToClose = false;
                                         $("#divIndSel").show();
@@ -1912,19 +2012,19 @@
                                         }
                                     },
                                     dblclick: function (event, data) {
-                                        //data.node.toggleSelected();
                                     },
                                     keydown: function (event, data) {
-                                        //if (event.which === 32) {
-                                        //    data.node.toggleSelected();
-                                        //    return false;
-                                        //}
                                     },
-                                    // The following options are only required, if we have more than one tree on one page:
-                                    //        initId: "treeData",
                                     cookieId: "fancytree-Cb3",
                                     idPrefix: "fancytree-Cb3-"
                                 });
+                                var tree = $('#indtreepostJob').fancytree("getTree");
+                                tree.reload($.ajax({
+                                    url: '@Url.Action("searchIndustry", "Jobs")', dataType: "json",
+                                    type: "POST",
+                                    data: { term: request.term },
+                                    success: function (data) { $('#loadingbusy').hide(); }
+                                })).done();
                             }
                         }
                     });
@@ -1947,19 +2047,6 @@
 
         $('.ui - autocomplete').click(function () {
             $('.ui-autocomplete').show();
-        });
-
-        $(function () {
-            if ($(".OccupationSelect > option").length == 0)
-                $("#divOccSel").hide();
-            else
-                $("#divOccSel").show();
-
-            if ($(".IndustrySelect > option").length == 0)
-                $("#divIndSel").hide();
-            else
-                $("#divIndSel").show();
-
         });
 
         $("#btnOremove").click(function () {
@@ -1997,9 +2084,6 @@
             }
         });
 
-        //$('#search-empOccuj').textext({ plugins: 'tags' }).bind('tagClick', function (e, tag, value, callback) {
-        //});
-
         function RemoveOccuJobAlertTag(value) {
             var occuList = document.getElementById('OccupationSelect');
             var len = occuList.options.length;
@@ -2010,12 +2094,12 @@
             }
         }
 
-        $('textarea#search-empOccuj').autocomplete(
+        $('input#search-empOccuj').autocomplete(
             {
                 source: function (request, response) {
                     $('#loadingbusy').show();
                     $.ajax({
-                        url: '@Url.Action("SearchOccupation", "Jobs")', dataType: "json",
+                        url: '@Url.Action("searchOccupation", "Jobs")', dataType: "json",
                         type: "POST",
                         data: { term: request.term },
                         success: function (data) {
@@ -2023,26 +2107,14 @@
                             if (data.length > 0) {
                                 var occupationDiv = document.getElementById("occutreepostJob");
                                 occupationDiv.style.display = "block";
-                                //$('textarea#search-empOccuj').tagsinput({
-                                //    allowDuplicates: false,
-                                //    itemValue: 'id',  // this will be used to set id of tag
-                                //    itemText: 'text' // this will be used to set text of tag
-                                //});
                                 $('#occutreepostJob').fancytree({
                                     checkbox: true,
                                     selectMode: 3,
                                     source: data,
-                                    //lazyLoad: function (event, ctx) {
-                                    //    ctx.result = { url: "ajax-sub2.json", debugDelay: 1000 };
-                                    //},
-                                    //loadChildren: function (event, ctx) {
-                                    //    ctx.node.fixSelection3AfterClick();
-                                    //},
                                     select: function (event, data) {
                                         if (data.node.selected) {
                                             if (data.node.value != null)
                                                 var sect = data.node.value.split(' ')[2];
-                                            // Get a list of all selected nodes, and convert to a key array:
                                             var selKeys = $.map(data.tree.getSelectedNodes(), function (node) {
                                                 return node.key;
                                             });
@@ -2058,7 +2130,7 @@
                                             $("#echoSelectionRoots3").text(selRootNodes.join(", "));
                                             readyToClose = false;
                                             //$("#divOccSel").show();
-                                            var position = $("textarea#search-empOccuj").offset();
+                                            var position = $("input#search-empOccuj").offset();
                                             $(".ui-autocomplete").css("top", position.top + 20);
                                             readyToClose = false;
 
@@ -2070,13 +2142,11 @@
                                             var c2;
                                             if (code == '- Any -') {
                                                 $(".OccupationSelect option").each(function () {
-                                                    //$('textarea#search-empOccuj').textext()[0].tags().removeTag(data.node, data.node.key, data.node.title);
-                                                    //$('textarea#search-empOccuj').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#occutreepostJob' });
                                                     $(this).remove();
                                                 });
                                                 var lst = "<option selected='true' value='0'>" + code + "</option>";
                                                 $(".OccupationSelect").html(lst);
-                                                var terms = split($('textarea#search-empOccuj').val());
+                                                var terms = split($('input#search-empOccuj').val());
                                                 if (terms.length <= 3) {
                                                     // remove the current input
                                                     terms.pop();
@@ -2084,9 +2154,6 @@
                                                     terms.push(data.node.title);
                                                     // add placeholder to get the comma-and-space at the end
                                                     terms.push("");
-                                                    //$('textarea#IndustrySearch').val(terms.join(", "));
-                                                    //$('textarea#search-empOccuj').textext()[0].tags().addTags(data.node.title,data.node.key, data.node.title);
-                                                    //$('textarea#search-empOccuj').tagsinput('add', { id: data.node.key, text: data.node.title, control: '#occutreepostJob' });
                                                     return false;
                                                 } else {
                                                     var last = terms.pop();
@@ -2125,15 +2192,11 @@
                                                         }
                                                         else {
                                                             if (c2.substring(0, c1.length) == c1) {
-                                                                //$('textarea#search-empOccuj').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#occutreepostJob' });
-                                                                //$('textarea#search-empOccuj').tagsinput('add', { id: data.node.key, text: data.node.title, control: '#occutreepostJob' });
-                                                                //$('textarea#search-empOccuj').textext()[0].tags().addTags(code, data.node.key, data.node.title);
                                                                 $(this).text(code);
                                                                 $(this).val(id);
                                                                 $(".OccupationSelect option").each(function () {
                                                                     if ($(this).val().split(' ')[1] != c1) {
                                                                         if ($(this).val().split(' ')[1].substring(0, c1.length) == c1) {
-                                                                            //$('textarea#search-empOccuj').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#occutreepostJob' });
                                                                             $(this).remove();
                                                                         }
                                                                     }
@@ -2154,7 +2217,10 @@
                                             if (exist == 0) {
                                                 var lst = "<option selected='true' value='" + id + "'>" + code + "</option>";
                                                 $(".OccupationSelect").append(lst);
-                                                var terms = split($('textarea#search-empOccuj').val());
+                                                var n = id.split(' ');
+                                                var lstid = "<option selected='true' value='" + n[0] + "'>" + n[0] + "</option>";
+                                                $(".OccupationSelectID").append(lstid);
+                                                var terms = split($('input#search-empOccuj').val());
                                                 if (terms.length <= 3) {
                                                     // remove the current input
                                                     terms.pop();
@@ -2162,8 +2228,7 @@
                                                     terms.push(data.node.text);
                                                     // add placeholder to get the comma-and-space at the end
                                                     terms.push("");
-                                                    //$('textarea#IndustrySearch').val(terms.join(", "));
-                                                    //$('textarea#search-empOccuj').tagsinput('add', { id: data.node.key, text: data.node.title, control: '#occutreepostJob' });
+
                                                     return false;
                                                 } else {
                                                     var last = terms.pop();
@@ -2172,31 +2237,28 @@
                                                     $(this).attr("style", "border: solid 1px red;");
                                                     return false;
                                                 }
-                                                //OccupationDiv.style.display = "none";
                                             }
                                             $('#hdf').val('1');
                                         }
                                         else {
                                             RemoveOccuJobAlertTag(data.node.title);
                                             // Get a list of all selected TOP nodes
-                                            //$('textarea#search-empIndtree').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#searchable-empIndtree' });
-                                            //$('textarea#search-empOccuj').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#occutreepostJob' });
                                         }
                                     },
                                     dblclick: function (event, data) {
-                                        //data.node.toggleSelected();
                                     },
                                     keydown: function (event, data) {
-                                        //if (event.which === 32) {
-                                        //    data.node.toggleSelected();
-                                        //    return false;
-                                        //}
                                     },
-                                    // The following options are only required, if we have more than one tree on one page:
-                                    //        initId: "treeData",
                                     cookieId: "fancytree-Cb3",
                                     idPrefix: "fancytree-Cb3-"
                                 });
+                                var tree = $('#occutreepostJob').fancytree("getTree");
+                                tree.reload($.ajax({
+                                    url: '@Url.Action("searchOccupation", "Jobs")', dataType: "json",
+                                    type: "POST",
+                                    data: { term: request.term },
+                                    success: function (data) { $('#loadingbusy').hide(); }
+                                })).done();
                             }
                         }
 
@@ -2296,11 +2358,8 @@
             });
         });
 
-        //$('#search-empLocationpost').textext({ plugins: 'tags' }).bind('tagClick', function (e, tag, value, callback) {
-        //});
-
         //PostJob
-        $('textarea#search-empLocationpost').autocomplete(
+        $('input#search-empLocationpost').autocomplete(
          {
              source: function (request, response) {
                  $('#loadingbusy').show();
@@ -2311,23 +2370,13 @@
                      success: function (data) {
                          $('#loadingbusy').hide();
                          if (data.length > 0) {
-                             //$('textarea#search-empLocationpost').tagsinput({
-                             //    allowDuplicates: false,
-                             //    itemValue: 'id',  // this will be used to set id of tag
-                             //    itemText: 'text' // this will be used to set text of tag
-                             //});
+
                              var locationDiv = document.getElementById("searchable-empLocationtree");
                              locationDiv.style.display = "block";
                              $('#searchable-empLocationtree').fancytree({
                                  checkbox: true,
                                  selectMode: 3,
                                  source: data,
-                                 //lazyLoad: function (event, ctx) {
-                                 //    ctx.result = { url: "ajax-sub2.json", debugDelay: 1000 };
-                                 //},
-                                 //loadChildren: function (event, ctx) {
-                                 //    ctx.node.fixSelection3AfterClick();
-                                 //},
                                  select: function (event, data) {
                                      if (data.node.selected) {
                                          if (data.node.value != null)
@@ -2337,7 +2386,6 @@
                                              return node.key;
                                          });
                                          $("#echoSelection3").text(selKeys.join(", "));
-
                                          // Get a list of all selected TOP nodes
                                          var selRootNodes = data.tree.getSelectedNodes(true);
                                          // ... and convert to a key array:
@@ -2347,14 +2395,12 @@
                                          $("#echoSelectionRootKeys3").text(selRootKeys.join(", "));
                                          $("#echoSelectionRoots3").text(selRootNodes.join(", "));
                                          readyToClose = false;
-                                         //$("#divOccSel").show();
-                                         var position = $("textarea#search-empLocationpost").offset();
+                                         var position = $("input#search-empLocationpost").offset();
                                          $(".ui-autocomplete").css("top", position.top + 20);
-                                         $('textarea#search-empLocationpost').val('');
+                                         $('input#search-empLocationpost').val('');
                                          sel = true;
                                          readyToClose = false;
-                                         //$("#divAlertLocSel").show();
-                                         var position = $("textarea#search-empLocationpost").offset();
+                                         var position = $("input#search-empLocationpost").offset();
                                          $(".ui-autocomplete").css("top", position.top + 20);
                                          var code = $.trim(data.node.title);
                                          var id = data.node.key;
@@ -2484,7 +2530,6 @@
                                                      }
                                                  },
                                                  error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                                     //alert("Status: " + textStatus); alert("Error: " + errorThrown);
                                                  }
                                              });
                                          }
@@ -2503,7 +2548,6 @@
                                                      }
                                                  },
                                                  error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                                     //alert("Status: " + textStatus); alert("Error: " + errorThrown);
                                                  }
                                              });
                                          }
@@ -2522,7 +2566,6 @@
                                                      }
                                                  },
                                                  error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                                     //alert("Status: " + textStatus); alert("Error: " + errorThrown);
                                                  }
                                              });
                                          }
@@ -2541,7 +2584,6 @@
                                                      }
                                                  },
                                                  error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                                     //alert("Status: " + textStatus); alert("Error: " + errorThrown);
                                                  }
                                              });
                                          }
@@ -2560,7 +2602,6 @@
                                                      }
                                                  },
                                                  error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                                     //alert("Status: " + textStatus); alert("Error: " + errorThrown);
                                                  }
                                              });
                                          }
@@ -2571,16 +2612,16 @@
                                                  type: "get",
                                                  data: { locationId: nid, locationType: nt },
                                                  async: false,
-                                                 success: function (data) { }
+                                                 success: function (data) { $('#loadingbusy').hide(); }
                                              });
                                          }
 
                                          if (exist == 0) {
                                              if (window.location.href.indexOf("JobSeeker") > -1) {
-                                                 $('textarea#search-empLocationpost').val(code);
+                                                 $('input#search-empLocationpost').val(code);
                                              }
                                              else {
-                                                 $('textarea#search-empLocationpost').val('')
+                                                 $('input#search-empLocationpost').val('')
                                              }
                                              var lst = "<option selected='true' value='" + id + "'>" + code + "</option>";
                                              var idarr = id.split(',');//code.split('>');
@@ -2601,8 +2642,6 @@
                                                      terms.push(data.node.title);
                                                      // add placeholder to get the comma-and-space at the end
                                                      terms.push("");
-                                                     //$('textarea#IndustrySearch').val(terms.join(", "));
-                                                     //$('textarea#search-empLocationpost').tagsinput('add', { id: data.node.key, text: data.node.title, control: '#searchable-empLocationtree' });
                                                      return false;
                                                  } else {
                                                      var last = terms.pop();
@@ -2628,8 +2667,6 @@
                                                      terms.push(data.node.title);
                                                      // add placeholder to get the comma-and-space at the end
                                                      terms.push("");
-                                                     //$('textarea#IndustrySearch').val(terms.join(", "));
-                                                     //$('textarea#search-empLocationpost').textext()[0].tags().addTags([node.text, 1]);
                                                      return false;
                                                  } else {
                                                      var last = terms.pop();
@@ -2644,26 +2681,24 @@
                                          return false;
                                      }
                                      else {
-                                         //RemoveLocationJobAlertTag(data.node.title);
-                                         // Get a list of all selected TOP nodes
-                                         //$('textarea#search-empIndtree').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#searchable-empIndtree' });
-                                         //$('textarea#search-empLocationpost').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#searchable-empLocationtree' });
                                      }
                                  },
                                  dblclick: function (event, data) {
-                                     //data.node.toggleSelected();
                                  },
                                  keydown: function (event, data) {
-                                     //if (event.which === 32) {
-                                     //    data.node.toggleSelected();
-                                     //    return false;
-                                     //}
+
                                  },
                                  // The following options are only required, if we have more than one tree on one page:
-                                 //        initId: "treeData",
                                  cookieId: "fancytree-Cb3",
                                  idPrefix: "fancytree-Cb3-"
-                             });                            
+                             });
+                             var tree = $('#searchable-empLocationtree').fancytree("getTree");
+                             tree.reload($.ajax({
+                                 url: '@Url.Action("SearchLocationWithOutAny", "Jobs")', dataType: "json",
+                                 type: "POST",
+                                 data: { term: request.term },
+                                 success: function (data) { $('#loadingbusy').hide(); }
+                             })).done();
                          }
                      }
                  });
@@ -2791,8 +2826,6 @@
             }
         }
 
-        //$('#IndustrySearch').textext({ plugins: 'tags' }).bind('tagClick', function (e, tag, value, callback) {
-        //});
         $('#IndustrySearch').autocomplete(
         {
             source: function (request, response) {
@@ -2811,21 +2844,12 @@
                             $('.chosen-select').append(toAppend);
                             var locationDiv = document.getElementById("indtreepostJob");
                             locationDiv.style.display = "block";
-                            //$('#IndustrySearch').tagsinput({
-                            //    allowDuplicates: false,
-                            //    itemValue: 'id',  // this will be used to set id of tag
-                            //    itemText: 'text' // this will be used to set text of tag
-                            //});
+
                             $('#indtreepostJob').fancytree({
                                 checkbox: true,
                                 selectMode: 3,
                                 source: data,
-                                //lazyLoad: function (event, ctx) {
-                                //    ctx.result = { url: "ajax-sub2.json", debugDelay: 1000 };
-                                //},
-                                //loadChildren: function (event, ctx) {
-                                //    ctx.node.fixSelection3AfterClick();
-                                //},
+
                                 select: function (event, data) {
                                     if (data.node.selected) {
                                         if (data.node.value != null)
@@ -2845,12 +2869,10 @@
                                         $("#echoSelectionRootKeys3").text(selRootKeys.join(", "));
                                         $("#echoSelectionRoots3").text(selRootNodes.join(", "));
                                         readyToClose = false;
-                                        //$("#divOccSel").show();
-                                        var position = $("textarea#search-empOccuj").offset();
+                                        var position = $("input#search-empOccuj").offset();
                                         $(".ui-autocomplete").css("top", position.top + 20);
                                         readyToClose = false;
-                                        //$("#divAlertIndSel").show();
-                                        var position = $("textarea#IndustrySearch").offset();
+                                        var position = $("input#IndustrySearch").offset();
                                         $(".ui-autocomplete").css("top", position.top + 20);
                                         readyToClose = false;
                                         var id = data.node.key;
@@ -2864,23 +2886,18 @@
 
                                         if (code == '- Any -') {
                                             $(".IndustryAlert option").each(function () {
-                                                //$('textarea#IndustrySearch').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#indtreepostJob' });
                                                 $(this).remove();
                                             });
                                             var lst = "<option selected='true' value='0'>" + code + "</option>";
                                             $(".IndustryAlert").html(lst);
-                                            var terms = split($('textarea#IndustrySearch').val());
+                                            var terms = split($('input#IndustrySearch').val());
                                             if (terms.length <= 3) {
                                                 // remove the current input
                                                 terms.pop();
                                                 // add the selected item
-                                                //terms.push(node.text);
                                                 terms.push(data.node.title);
                                                 // add placeholder to get the comma-and-space at the end
                                                 terms.push("");
-                                                //$('textarea#IndustrySearch').val(terms.join(", "));
-                                                //$('textarea#IndustrySearch').tagsinput('add', { id: data.node.key, text: data.node.title, control: '#indtreepostJob' });
-                                                //$('textarea#IndustrySearch').textext()[0].tags().addTags([node.text]);
                                                 return false;
                                             } else {
                                                 var last = terms.pop();
@@ -2908,12 +2925,10 @@
                                                         $(".IndustryAlert option").each(function () {
                                                             if ($(this).attr('indsection') == c1) {
                                                                 $(this).remove();
-                                                                //$('textarea#IndustrySearch').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#indtreepostJob' });
+
                                                             }
                                                         });
                                                         var lst = "<option indsection='" + sect + "' selected='true' value='" + id + "'>" + code + "</option>";
-                                                        ;
-                                                        //$('textarea#IndustrySearch').tagsinput('add', { id: data.node.key, text: data.node.title, control: '#indtreepostJob' });
                                                         $(".IndustryAlert").append(lst);
                                                         exist = 1;
                                                         return;
@@ -2991,8 +3006,6 @@
                                                 terms.push(data.node.title);
                                                 // add placeholder to get the comma-and-space at the end
                                                 terms.push("");
-                                                //$('textarea#IndustrySearch').val(terms.join(", "));
-                                                //$('textarea#IndustrySearch').tagsinput('add', { id: data.node.key, text: data.node.title, control: '#indtreepostJob' });
                                                 return false;
                                             } else {
                                                 var last = terms.pop();
@@ -3007,25 +3020,24 @@
                                     }
                                     else {
                                         RemoveIndJobAlertTag(data.node.title);
-                                        // Get a list of all selected TOP nodes
-                                        //$('textarea#search-empIndtree').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#searchable-empIndtree' });
-                                        //$('textarea#IndustrySearch').tagsinput('remove', { id: data.node.key, text: data.node.title, control: '#indtreepostJob' });
                                     }
                                 },
                                 dblclick: function (event, data) {
-                                    //data.node.toggleSelected();
                                 },
                                 keydown: function (event, data) {
-                                    //if (event.which === 32) {
-                                    //    data.node.toggleSelected();
-                                    //    return false;
-                                    //}
+
                                 },
                                 // The following options are only required, if we have more than one tree on one page:
-                                //        initId: "treeData",
                                 cookieId: "fancytree-Cb3",
                                 idPrefix: "fancytree-Cb3-"
-                            });                          
+                            });
+                            var tree = $('#indtreepostJob').fancytree("getTree");
+                            tree.reload($.ajax({
+                                url: '@Url.Action("SearchIndustryWithAny", "Jobs")', dataType: "json",
+                                type: "POST",
+                                data: { term: request.term },
+                                success: function (data) { $('#loadingbusy').hide(); }
+                            })).done();
                         };
                     }
                 });
@@ -3048,7 +3060,7 @@
                     }
                 });
             },
-            // source: '<%= Url.Action("SearchOccupation", "Jobs")%>',
+            // source: '<%= Url.Action("searchOccupation", "Jobs")%>',
             minLength: 1,
             select: function (event, ui) {
                 sel = true;
@@ -3152,7 +3164,189 @@
                 }
             }
         });
+        function countryAutoA() {
+            $('.countrycodeA').autocomplete(
+            {
+                source: function (request, response) {
+                    $('#loadingbusy').show();
+                    $.ajax({
+                        url: '@Url.Action("SearchCountryCode", "Jobs")', dataType: "json",
+                        type: "POST",
+                        minLength: 1,
+                        data: { term: request.term },
+                        success: function (data) {
+                            $('#loadingbusy').hide();
+                            response($.map(data, function (item) {
+                                return { label: item.Value, value: item.Key };
+                            }))
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    var code = ui.item.value;
+                    ui.item.value = code.substring(code.indexOf('(') + 1, code.indexOf(')'));
+                    $('#hdfCC1').val('1');
+                },
+                change: function (event, ui) {
+                    if (ui.item) {
+                        $('#hdfCC1').val('');
+                        return;
+                    }
+                    if ($('#hdfCC1').val() == '') {
+                        $(this).val('');
+                        alert('The Country code field contains invalid data. Please make a selection from the list without editing the selection you make.');
+                    }
+                    $('#hdfCC1').val('');
+                }
+            });
+            $('.countrycodeA').keypress(function () {
+                $('#hdfCC1').val('');
+            });
+        }
+        $('.countrycodeA').autocomplete(
+            {
+                source: function (request, response) {
+                    $('#loadingbusy').show();
+                    $.ajax({
+                        url: '@Url.Action("SearchCountryCode", "Jobs")', dataType: "json",
+                        type: "POST",
+                        minLength: 1,
+                        data: { term: request.term },
+                        success: function (data) {
+                            $('#loadingbusy').hide();
+                            response($.map(data, function (item) {
+                                return { label: item.Value, value: item.Key };
+                            }))
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    var code = ui.item.value;
+                    ui.item.value = code.substring(code.indexOf('(') + 1, code.indexOf(')'));
+                    $('#hdfCC1').val('1');
+                },
+                change: function (event, ui) {
+                    if (ui.item) {
+                        $('#hdfCC1').val('');
+                        return;
+                    }
+                    if ($('#hdfCC1').val() == '') {
+                        $(this).val('');
+                        alert('The Country code field contains invalid data. Please make a selection from the list without editing the selection you make.');
+                    }
+                    $('#hdfCC1').val('');
+                }
+            });
+
+        function selectedcountry(dropdownList) {
+            var selection = $('#CurrentState').val(); //get the selection made in the dropdownlist
+            if (selection != '') {
+                $('#loadingbusy').show();
+                fillCities(selection)
+            }
+        }
+
+        function fillCities(Cityid) {
+            $.ajax({
+                url: '@Url.Action("GetCities", "Contact")', dataType: "json",
+                type: "POST",
+                data: { CityId: Cityid },
+                success: function (data) {
+                    if (data.length > 1) {
+                        var occupationDiv = document.getElementById("areas");
+                        occupationDiv.style.display = "block";
+                        var occupationDiv = document.getElementById("consultants");
+                        occupationDiv.style.display = "none";
+                        $('#areas').html('');
+                        for (var a in data) {
+                            var appendtext = "<option value=" + data[a].Id + ">" + data[a].Text + "</option>";
+                            $("#areas").append(appendtext);
+                            $('#loadingbusy').hide();
+                        }
+                    }
+                    else {
+                        var occupationDiv = document.getElementById("areas");
+                        occupationDiv.style.display = "none";
+                        GetConsultants(Cityid, true)
+                    }
+                },
+                error: function (request) {
+                    alert(request.responseText);
+                }
+            });
+        }
+
+        function selectConsultants(dropdownList) {
+            var selection = $('.getareas').val(); //get the selection made in the dropdownlist
+            if (selection != '') {
+                $('#loadingbusy').show();
+                GetConsultants(dropdownList.value,false)
+            }
+        }
+
+        function selectContactInfo(dropdownList) {
+            var selection = $('.getareas').val(); //get the selection made in the dropdownlist
+            if (selection != '') {
+                $('#loadingbusy').show();
+                fillContactDetails(dropdownList.value)
+            }
+        }
+
+        function GetConsultants(AreaId, fromInfo) {
+            $.ajax({
+                url: '@Url.Action("GetConsultants", "Contact")', dataType: "json",
+                type: "POST",
+                data: { CityId: AreaId, fromInfo: fromInfo },
+                success: function (data) {
+                    if (data.length > 0) {
+                        var occupationDiv = document.getElementById("consultants");
+                        occupationDiv.style.display = "block";
+                        $('#consultants').html('');
+                        for (var a in data) {
+                            var appendtext = "<option value=" + data[a].Id + ">" + data[a].Text + "</option>";
+                            $("#consultants").append(appendtext);
+                            $('#loadingbusy').hide();
+                        }
+                    }
+                    else {
+                        fillContactDetails(AreaId)
+                    }
+                },
+                error: function (request) {
+                    alert(request.responseText);
+                }
+            });
+        }
+
+        function fillContactDetails(Contactid) {
+            $.ajax({
+                url: '@Url.Action("GetContactDetails", "Contact")', dataType: "json",
+                type: "POST",
+                data: { ContactInfoid: Contactid },
+                success: function (data) {
+                    if (data.Id > 0) {
+
+                        document.getElementById('image').src = data.bioImage;
+                        document.getElementById('headername').innerHTML = data.bioName;
+                        document.getElementById('geofami').innerHTML = data.GeographicFamiliarity;
+                        document.getElementById('languages').innerHTML = data.Languages;
+                        document.getElementById('indspec').innerHTML = data.IndustrySpecialisation;
+                        document.getElementById('formalqual').innerHTML = data.FormalQualifications;
+                        document.getElementById('phone').innerHTML = data.telephoneNumber;
+                        document.getElementById('email').innerHTML = data.email;
+                        document.getElementById('skype').innerHTML = data.skype;
+                        $('#loadingbusy').hide();
+                    }
+                },
+                error: function (request) {
+                    alert(request.responseText);
+                }
+            });
+        }
+
         $('#loadingbusy').hide();
+    </script>
+    <script>
     </script>
     <script src="~/Scripts/yg.js"></script>
 

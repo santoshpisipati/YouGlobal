@@ -29,12 +29,12 @@ namespace YG_Business
             return dFormattedDate;
         }
 
-        public List<JobInfo> ListJobs()
+        public List<JobInfo> ListJobs(long firstPage, long lastPage)
         {
             List<JobInfo> lst = new List<JobInfo>();
             JobDataAccess job = new JobDataAccess();
             JobInfo info;
-            MySqlDataReader reader = job.ListJobs();
+            MySqlDataReader reader = job.ListJobs(firstPage,lastPage);
 
             if (reader.HasRows)
             {

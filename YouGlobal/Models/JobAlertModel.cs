@@ -31,7 +31,8 @@ namespace YG_MVC.Models
         public List<int> LocationSelect { get; set; }
         public List<string> SelectedLocationIDList { get; set; }
         public List<int> WorkTypeSelect { get; set; }
-
+        public List<int> OccupationSelect { get; set; }
+        public List<int> OccupationSelectID { get; set; }        
         public int MailFrequency { get; set; }
     }
 }

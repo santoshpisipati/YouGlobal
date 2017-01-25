@@ -56,7 +56,6 @@ $('input#search-empIndustry').bind("keyup focus", function () {
     }
 });
 
-
 $('input#search-empOccu').bind("keyup focus", function () {
     if ($('input#search-empOccu').val().length > 0) {
         var occuDiv = document.getElementById("occutreepostJob");
@@ -116,8 +115,8 @@ $('input#search-empInd').keyup(function () {
 //Job Upload Cv
 
 //Job Search
-$('textarea#search-term').bind("keyup focus", function () {
-    if ($('textarea#search-term').val().length > 0) {
+$('input#search-term').bind("keyup focus", function () {
+    if ($('input#search-term').val().length > 0) {
         var occupation = document.getElementById("search-termoccu");
         var industry = document.getElementById("searchable-empIndtree");
         var location = document.getElementById("searchable-empLocationtree");
@@ -132,12 +131,11 @@ $('textarea#search-term').bind("keyup focus", function () {
         occupation.style.display = "none";
         industry.style.display = "none";
         location.style.display = "none";
-
     }
 });
 
-$('textarea#search-empIndtree').bind("keyup focus", function () {
-    if ($('textarea#search-empIndtree').val().length > 0) {
+$('input#search-empIndtree').bind("keyup focus", function () {
+    if ($('input#search-empIndtree').val().length > 0) {
         var occupation = document.getElementById("search-termoccu");
         var industry = document.getElementById("searchable-empIndtree");
         var location = document.getElementById("searchable-empLocationtree");
@@ -152,7 +150,6 @@ $('textarea#search-empIndtree').bind("keyup focus", function () {
         occupation.style.display = "none";
         industry.style.display = "none";
         location.style.display = "none";
-
     }
 });
 
@@ -172,7 +169,6 @@ $('input#search-empLocationsearch').bind("keyup focus", function () {
         occupation.style.display = "none";
         industry.style.display = "none";
         location.style.display = "none";
-
     }
 });
 //Job Search
@@ -281,6 +277,15 @@ function countJobContentChar(val) {
         val.value = val.value.substring(0, 150);
     } else {
         $('#JobContentChar').text(150 - len + " Characters Left.");
+    }
+};
+
+function countCommentChar(val) {
+    var len = val.value.length;
+    if (len >= 1000) {
+        val.value = val.value.substring(0, 1000);
+    } else {
+        $('#Commentlen').text(1000 - len + " Characters Left.");
     }
 };
 
@@ -837,8 +842,8 @@ function yearvalidation1(id) {
     var todt;
     fd = fd == '' ? '01' : (fd < 10 ? '0' + fd : fd);
     td = td == '' ? fd : (td < 10 ? '0' + td : td);
-    fdt = new Date(fy + '-' + (fm == '' ? '01' : ($('.CurrentFM').attr('selectedIndex') < 10 ? ('0' + $('.CurrentFM').attr('selectedIndex')) : $('.CurrentFM').attr('selectedIndex'))) + '-' + fd);
-    todt = new Date(ty + '-' + (tm == '' ? '12' : ($('.CurrentTM').attr('selectedIndex') < 10 ? ('0' + $('.CurrentTM').attr('selectedIndex')) : $('.CurrentTM').attr('selectedIndex'))) + '-' + td);
+    fdt = new Date(fy + '-' + (fm == '' ? '01' : ($('.CurrentFM')[0].selectedIndex < 10 ? ('0' + $('.CurrentFM')[0].selectedIndex) : $('.CurrentFM')[0].selectedIndex)) + '-' + fd);
+    todt = new Date(ty + '-' + (tm == '' ? '12' : ($('.CurrentTM')[0].selectedIndex < 10 ? ('0' + $('.CurrentTM')[0].selectedIndex) : $('.CurrentTM')[0].selectedIndex)) + '-' + td);
     if (fy != '') {
         if (isNaN(fdt)) {
             alert('invalid date');
@@ -1228,7 +1233,7 @@ function isNumber1(e) {
     }
 }
 
-function isPhoneNumber1(evt) {
+function isPhoneNumber1(e) {
     if (e.ctrlKey || e.metaKey)
         return true;
     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
@@ -1278,6 +1283,7 @@ function addCVPhoneControl(id) {
      .attr("id", 'phoneDiv' + counter);
     $(c1).clone().appendTo(newTextBoxDiv);
     newTextBoxDiv.find("input").val('');
+    newTextBoxDiv.find("input").prop('readonly', false);
     newTextBoxDiv.find("div").show();
     newTextBoxDiv.appendTo("#divCVPhone");
     countryAutoA();
@@ -1307,7 +1313,7 @@ function showtip(id) {
 function showTagtip(id) {
     var img = $(id);
     var title = $(img).attr("tag");
-//    $(img).opentip(title, { showEffect: 'blindDown', tipJoint: "top left", removeElementsOnHide: true, stem: true, target: true, tipjoint: ['center', 'top'], hideTrigger: "tip", hideTriggers: ["trigger", "tip"], showOn: "creation", hideOn: "mouseout", fixed: true, background: "rgb(234, 236, 240)", borderColor: "rgb(187, 187, 187)" });
+    //    $(img).opentip(title, { showEffect: 'blindDown', tipJoint: "top left", removeElementsOnHide: true, stem: true, target: true, tipjoint: ['center', 'top'], hideTrigger: "tip", hideTriggers: ["trigger", "tip"], showOn: "creation", hideOn: "mouseout", fixed: true, background: "rgb(234, 236, 240)", borderColor: "rgb(187, 187, 187)" });
 }
 
 function checkCurrentAmount1(id) {
@@ -1409,7 +1415,7 @@ function checkExpFrequency1() {
 
 $(document).ready(function () {
     $('.CoverLetter1').keyup(function () {
-        textCounter(this, 'desCoverLettContent1', 2000, null);
+        textCounter(this, 'desCoverLettContent', 2000, null);
     })
     $("#CurrentFromAmt").keypress(function (e) {
         if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
@@ -1570,6 +1576,15 @@ function onlyAlphabets(e, t) {
     }
 }
 
+function onlyNumeric(evt, t) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+
 function validateEmailId(email) {
     var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     if (expr.test(email)) {
@@ -1707,7 +1722,6 @@ $("#btnLocREmove").click(function () {
         $("#divAlertLocSel").hide();
 });
 
-
 function checkCriteria(check) {
     var valid;
     if (checkFormFields(check)) {
@@ -1734,9 +1748,9 @@ function textCounter(field, cntfield, maxlimit, remHiddenFieldName) {
     var objCnt = document.getElementById(cntfield);
     var drawStr = "";
     if (remainingLen < 0) {
-        drawStr = "<font size='1' color='red'>characters left: " + remainingLen + "</font>";
+        drawStr = "<font size='2' color='red'>characters left: " + remainingLen + "</font>";
     } else {
-        drawStr = "<font size='1'>characters left: " + remainingLen + "</font>";
+        drawStr = "<font size='2'>characters left: " + remainingLen + "</font>";
     }
     if (remHiddenFieldName != null) {
         drawStr += "<input type='hidden' name='";

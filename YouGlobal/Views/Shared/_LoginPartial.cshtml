@@ -1,15 +1,26 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Session["username"]!=null && !string.IsNullOrEmpty(Session["username"].ToString()))
+@if (Session["username"] != null && !string.IsNullOrEmpty(Session["username"].ToString()))
 {
     <ul class="nav navbar-nav navbar-right">
         <li>
             @Session["username"].ToString()
+            <ul class="dropdown">
+                <li>
+                   @using (Html.BeginForm("Home", "Home", System.Web.Mvc.FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.ActionLink("Settings", "Settings", "Home")
+                   }
+                </li>
+                <li>@using (Html.BeginForm("Home", "Home", System.Web.Mvc.FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.ActionLink("Log out", "Logout", "Account")
+                }</li>
+            </ul>
         </li>
-        <li>@using (Html.BeginForm("Home", "Home", System.Web.Mvc.FormMethod.Post, new { id = "logoutForm" }))
-        {
-            @Html.ActionLink("logOff", "logOff", "Account")
-        }</li>
-    </ul>
+        <li>
+            
+    </li>
+</ul>
 }
 else
 {

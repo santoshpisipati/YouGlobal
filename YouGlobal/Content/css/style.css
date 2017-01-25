@@ -1,6 +1,6 @@
 ﻿@font-face {
     font-family: FontAwesome;
-    src: url('../fonts/FontAwesome.otf') format('opentype');
+    src: url(../fonts/FontAwesome.otf) format('opentype');
 }
 
 body {
@@ -98,7 +98,7 @@ ul.list {
             .header-section .nav-main-div ul li {
                 list-style: none;
                 display: block;
-                float: left;
+                float: right;
             }
 
                 .header-section .nav-main-div ul li a {
@@ -771,20 +771,20 @@ html > body .border-none {
     position: relative;
 }
 
-    .uploadcvulli {
-        width: 40px;
-        height: 40px;
-        background: #fff;
-        float: left;
-        margin: 10px 30px;
-        color: #c21c44;
-        font-size: 1.2em;
-        text-align: center;
-        line-height: 2.4em;
-        border-radius: 2em;
-        position: relative;
-        z-index: 3;
-    }
+.uploadcvulli {
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    float: left;
+    margin: 10px 30px;
+    color: #c21c44;
+    font-size: 1.2em;
+    text-align: center;
+    line-height: 2.4em;
+    border-radius: 2em;
+    position: relative;
+    z-index: 3;
+}
 
 .uploadcv span.line {
     width: 75%;
@@ -1101,7 +1101,7 @@ select::-ms-expand {
 .goble-directory {
     background: rgba(255, 255, 255, 0.04);
     padding: 40px;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
     border: 1px solid rgba(255, 255, 255, 0.18);
     background-image: url(../images/globle_bg.png);
     background-position: right;
@@ -1167,6 +1167,11 @@ label.subheadings {
     width: 90%;
 }
 
+.mandatoryError {
+    margin: -15px 0 23px 0;
+    width: 90%;
+}
+
 .employers label.subheadings {
     width: auto;
     float: left;
@@ -1175,7 +1180,7 @@ label.subheadings {
 .uploadcvtable td {
     border: none !important;
     padding: 8px 13px !important;
-    width:50%;
+    width: 50%;
 }
 
 .uploadcvtable {
@@ -1202,9 +1207,9 @@ input#SubscribeAlert {
 }
 
 .jobsearch {
-    margin: 40px auto;
+    /*margin: 40px auto;*/
     position: relative;
-    min-height: 450px;
+    /*min-height: 450px;*/
     width: 100%;
 }
 
@@ -1214,8 +1219,28 @@ input#SubscribeAlert {
 
 .jobsearch .searchbutton {
     position: absolute;
-    top: 2%;
+    top: 10px;
     right: 3px;
+    background: #C03;
+    color: #fff;
+    z-index: 5;
+}
+
+.jobsearchlisiting {
+    margin: 40px auto;
+    position: relative;
+    min-height: 450px;
+    width: 100%;
+}
+
+#jobsearchlisiting:focus:valid {
+    border: 0 !important;
+}
+
+.jobsearchlisiting .searchbutton {
+    position: absolute;
+    top: 10px;
+    right: 0px;
     background: #C03;
     color: #fff;
     z-index: 5;
@@ -1936,6 +1961,22 @@ button.link-listJob:hover {
     }
 }
 
+.form-control-margin {
+    margin-bottom: 25px;
+}
+
+.search {
+    min-height: inherit !important;
+}
+
+    .search button {
+        top: 10px;
+    }
+
+.tag-margin-bottom-0 {
+    margin-bottom: 0px;
+}
+
 /****************************************
  IMPORTANT!
 *****************************************
@@ -2062,7 +2103,7 @@ dd {
     overflow-y: scroll;
     height: 100%;
     border: solid 2px #18E109;
-    border-radius:1%;
+    border-radius: 1%;
 }
 
 .occupation {
@@ -2071,18 +2112,16 @@ dd {
     overflow-y: scroll;
     height: 100%;
     border: solid 2px #18E109;
-    border-radius:1%;
+    border-radius: 1%;
 }
 
-.treediv{
-    background:rgba(0, 0, 0, 0.69);
+.treediv {
+    background: rgba(0, 0, 0, 0.69);
 }
 
 /*treeview search*/
 
-
 /*treeview jobseekeremp*/
-
 
 .jobseekeremplocation {
     color: white;
@@ -2091,8 +2130,8 @@ dd {
     height: 150px;
     border: solid 2px #18E109;
     border-radius: 1%;
-    margin-top: 16px;
-    margin-left: 7px;
+    /*margin-top: 16px;
+    margin-left: 7px;*/
     width: 100%;
 }
 
@@ -2102,7 +2141,7 @@ dd {
     overflow-y: scroll;
     height: 150px;
     border: solid 2px #18E109;
-    border-radius:1%;
+    border-radius: 1%;
 }
 
 .jobseekerempoccupation {
@@ -2110,7 +2149,7 @@ dd {
     overflow-y: scroll;
     height: 150px;
     border: solid 2px #18E109;
-    border-radius:1%;
+    border-radius: 1%;
 }
 
 .jobseekerempemployer {
@@ -2118,14 +2157,59 @@ dd {
     overflow-y: scroll;
     height: 150px;
     border: solid 2px #18E109;
-    border-radius:1%;
-    width: 550px;
+    border-radius: 1%;
+    width: 520px;
 }
 
-ul.fancytree-container{
+ul.fancytree-container {
     white-space: normal !important;
 }
-span.fancytree-title{
-    width:80%;
+
+span.fancytree-title {
+    width: 80%;
 }
 /*treeview jobseekeremp*/
+
+#rc-imageselect {
+    transform: scale(0.77);
+    -webkit-transform: scale(0.77);
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+}
+
+@media screen and (max-height: 575px) {
+    #rc-imageselect, .g-recaptcha {
+        transform: scale(0.77);
+        -webkit-transform: scale(0.77);
+        transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+    }
+}
+
+ ul li ul.dropdown{
+       min-width: 100%;
+background: black;
+display: none;
+position: absolute;
+z-index: 999;
+right: 0 !important;
+width: 40px;
+height: 40px;
+text-align: right;
+    }
+    ul li:hover ul.dropdown{
+        display: block;	/* Display the dropdown */
+    }
+    ul li ul.dropdown li{
+        display: block;
+    }
+
+.alertmodal {
+    height: auto !important;
+    width: 300px !important;
+    left: 618px !important;
+    display: block !important;
+    position: relative !important;
+    top: -388.2px !important;
+    background-color: black !important;
+}

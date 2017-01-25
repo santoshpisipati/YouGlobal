@@ -37,7 +37,7 @@
                                     @Html.ListBox("RemoveSelectedLocation", new SelectList(((System.Data.DataTable)new System.Data.DataTable()).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @multiple = "multiple", @size = "6", @class = "form-control" })
                                 </div>
                                 <i>Begin typing to select one or more options.</i>
-                                @Html.TextArea("LocationSearch", string.Empty, new { @id = "search-empLocationpost", @class = "form-control LocationSearch", placeholder = "please enter location", @Style = "width:100px" })
+                                @Html.TextBox("LocationSearch", string.Empty, new { @id = "search-empLocationpost", @class = "form-control LocationSearch", placeholder = "please enter location", @Style = "width:100px" })
                                 <div id='searchable-empLocationtree' class="jobseekeremplocation" style="display:none"></div>
                             </td>
                         </tr>

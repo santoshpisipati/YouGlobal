@@ -17,7 +17,7 @@ using YG_Business;
 namespace Sample.Web.ModalLogin.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -62,7 +62,13 @@ namespace Sample.Web.ModalLogin.Controllers
         public ActionResult Login(string returnUrl)
         {
             Session["username"] = null;
-            return View();
+            if (returnUrl == "/Account/Settings")
+            {
+                return Redirect("~/Account/Settings");
+            }
+            else
+
+                return View();
         }
 
         //
@@ -86,7 +92,6 @@ namespace Sample.Web.ModalLogin.Controllers
                     {
                         login.EmailId = model.UserName;
                         login.Password = CryptorEngine.Encrypt(model.LoginPassword, true);
-                        string password1 = CryptorEngine.Decrypt("Y16Q5zGIDklecz7D46LO3Q==", true);
                         member = Logininfo.GetLoginDetails(login);
                         if (member != null)
                         {
@@ -96,11 +101,12 @@ namespace Sample.Web.ModalLogin.Controllers
                                 {
                                     string userName = member.FirstName;
                                     Session["memberID"] = member.MemberId;
-                                    Session["username"] = string.Format("Hello,{0} !", userName);
+                                    Session["username"] = string.Format("Hello {0} !", userName);
                                     if (member.IsJobSeeker) { Session["loggedinas"] = "1"; }
                                     if (member.IsEmployer) { Session["loggedinas"] = "2"; }
                                     if (member.IsConsultant) { Session["loggedinas"] = "3"; }
-                                    return Json(true);
+
+                                    return Json(member);
                                 }
                             }
                         }
@@ -351,6 +357,7 @@ namespace Sample.Web.ModalLogin.Controllers
                                     Logininfo.AddMember(member);
                                     TempData["notice"] = "Registration Successful.";
                                     returnValue = new { Success = "True", Message = "Registration Successful." };
+
                                     return Json(returnValue, JsonRequestBehavior.AllowGet);
                                 }
                             }
@@ -638,7 +645,7 @@ namespace Sample.Web.ModalLogin.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult logOff()
+        public ActionResult Logout()
         {
             Session["username"] = null;
             return Redirect("~/Home");
@@ -682,6 +689,14 @@ namespace Sample.Web.ModalLogin.Controllers
             get
             {
                 return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+
+        public override string DefaultViewName
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
 

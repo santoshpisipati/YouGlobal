@@ -273,7 +273,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Classes\ReCaptchaClass.cs" />
-    <Compile Include="Classes\SampleTier.cs" />
     <Compile Include="Classes\Tier.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -353,6 +352,7 @@
     <Compile Include="Helpers\TreeView.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppliedJobModel.cs" />
+    <Compile Include="Models\ContactUsModel.cs" />
     <Compile Include="Models\EmailFriendModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\JobAlertModel.cs" />
@@ -499,6 +499,7 @@
     <Content Include="Scripts\app\LoginModal.js" />
     <Content Include="Scripts\app\RegisterModal.js" />
     <Content Include="Scripts\autocomplete.js" />
+    <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootstrap-tagsinput.js" />
     <Content Include="Scripts\bootstrap-treeview.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -934,6 +935,8 @@
     <Content Include="Scripts\jszip.min.js" />
     <Content Include="Scripts\kendo.all.min.js" />
     <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\Shared\ListJobs.cshtml" />
+    <Content Include="Views\Home\Settings.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

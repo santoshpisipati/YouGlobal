@@ -996,5 +996,40 @@ namespace YG_Business
             dr.Dispose();
             return dt;
         }
+
+        public static MySqlDataReader listCountries()
+        {
+            CommonDataAccess cda = new CommonDataAccess();
+            MySqlDataReader reader = cda.listCountries();
+            return reader;
+        }
+
+        public static MySqlDataReader GetCities(int cityId)
+        {
+            CommonDataAccess cda = new CommonDataAccess();
+            MySqlDataReader reader = cda.GetCities(cityId);
+            return reader;
+        }
+
+        public static MySqlDataReader GetConsultants(int cityId)
+        {
+            CommonDataAccess cda = new CommonDataAccess();
+            MySqlDataReader reader = cda.GetConsultants(cityId);
+            return reader;
+        }
+
+        public static MySqlDataReader GetConsultantsfromInfo(int cityId)
+        {
+            CommonDataAccess cda = new CommonDataAccess();
+            MySqlDataReader reader = cda.GetConsultantsfromInfo(cityId);
+            return reader;
+        }
+
+        public static MySqlDataReader GetContactDetails(int cityId)
+        {
+            CommonDataAccess cda = new CommonDataAccess();
+            MySqlDataReader reader = cda.GetContactDetails(cityId);
+            return reader;
+        }
     }
 }

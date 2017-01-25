@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Sample.Web.ModalLogin.Models.ContactUsModel
+@{
     ViewBag.Title = "ContactUsHtml";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -45,62 +46,104 @@
         <div class="container nav-tabs-main">
             <div class="col-md-12 innerpages" id="about-us">
                 <div class="row">
-                    <div class="form-group col-md-6 ">
+                    <div class="form-group">
                         <h3>Global Directory</h3>
-                        <div id="flaGlobaldir">
-                            <script type="text/javascript">
-                                var so = getRandomFlash2();
-                                so.addParam("scale", "noscale");
-                                so.write("flaGlobaldir");
-                                // ]]>
-                            </script>
+                        @*<div id="flaGlobaldir">
+                <script type="text/javascript">
+                    var so = getRandomFlash2();
+                    so.addParam("scale", "noscale");
+                    so.write("flaGlobaldir");
+                    // ]]>
+                </script>
+            </div>*@
+                        <div class="row col-md-12 goble-directory">
+                            <div class="row">
+                                <form class="form-inline cont">
+                                    <div class="form-group col-md-4">
+                                        <label for="InputfullName">Select Location</label>
+                                        @Html.DropDownListFor(m => m.CountryId , Model.CountryList, new { @class = "form-control", ID = "CurrentState",@onchange="selectedcountry(this)",@required = "required" })
+                                        <select class="form-control getareas" id="areas" style="display:none" onchange="selectConsultants(this)"></select>
+                                        <select class="form-control getconsultants" id="consultants" style="display:none" onchange="selectContactInfo(this)"></select>
+                                    </div>
+                                    </form>
+                            </div>
+                            <div class="col-md-2"><img id="image" class="img-rounded"></div>
+                            <div class="col-md-10">
+
+                                <h2 id="headername">@Model.ConsultantName</h2>
+                                <dl class="dl-horizontal">
+                                    <dt>Geographic Familiarity : </dt>
+                                    <dd id="geofami">@Model.GeographicFamiliarity</dd>
+                                    <dt>Languages :</dt>
+                                    <dd id="languages">@Model.Languages</dd>
+                                    <dt>Industry Specialisation :</dt>
+                                    <dd id="indspec">@Model.IndustrySpecialisation</dd>
+                                    <dt>Formal Qualifications :</dt>
+                                    <dd id="formalqual">@Model.FormalQualifications</dd>
+                                </dl>
+
+                                @*<h2 id="contacthearder" style="display:none">Contact Detail</h2>*@
+                                <dl class="dl-horizontal">
+                                    <dt><i class="glyphicon glyphicon-phone"></i></dt>
+                                    <dd id="phone">@Model.telephoneNumber</dd>
+                                    <dt><i class="glyphicon glyphicon-envelope"></i></dt>
+                                    <dd id="email">@Model.email</dd>
+                                    <dt><i class="glyphicon glyphicon-envelope"></i></dt>
+                                    <dd id="skype">@Model.skype</dd>
+                                </dl>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6 row">
+
+                    </div>
+                    <div class="row">
                         <h3>Query</h3>
                         <!-- Right form -->
-                        @using (Html.BeginForm("SendQuery", "Contact", new { ReturnUrl = "" }, FormMethod.Post, new { role = "form",@class= "form-inline cont" }))
+                        @using (Html.BeginForm("SendQuery", "Contact", FormMethod.Post, new { @class = "form-inline cont" }))
                         {
-                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="SubmitSource" id="SubmitSource" value="contactus" />
+                            @Html.ValidationSummary(true)
                             <p style="color:red">* Indicates mandatory input</p>
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label class="formLabel" for="firstName">
+                                    <label class="formLabel" for="fullName">
                                         Full Name*
-                                    </label><input class="form-control" type="text" id="firstName" name="firstName" placeholder="Enter your full name"
+                                    </label><input class="form-control" type="text" id="fullName" name="Full Name" placeholder="Enter your full name"
                                                    value="" />
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="formLabel" for="email">
                                         Email*
-                                    </label><input class="form-control" type="text" id="email" name="email" value="" placeholder="Enter email address" />
+                                    </label><input class="form-control" type="text" id="email" name="Email" value="" placeholder="Enter email address" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label class="formLabel" for="companyName">
                                         Company Name
-                                    </label><input class="form-control" name="companyName" id="companyName" placeholder="enter company name"
+                                    </label><input class="form-control" name="companyName" id="Company name" placeholder="enter company name"
                                                    type="text" maxlength="500" />
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="formLabel" for="contactNo">
                                         Contact Number*
-                                    </label><input class="form-control" name="contactNo" id="contactNo" type="text" placeholder="enter contact number"
+                                    </label><input class="form-control" name="contactNo" id="Contact number" pattern="\b\d{3}[-.]?\d{3}[-.]?\d{4}\b" oninvalid="setCustomValidity('*please enter 10-digit number')" type="text" placeholder="enter contact number"
                                                    maxlength="100" /><br />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-12">
-                                    <label for="ContactTelephoneNumber">Comment</label>
-                                    <textarea rows="5" cols="25" class="form-control" name="comment" placeholder="enter comments below" id="comment"></textarea>
+                                    <label for="Comment">Comment</label>
+                                    @Html.TextArea("Comment", new { @maxlength = "1000", @class = "form-control", @rows = "5",@cols = "25", @onkeyup = "countCommentChar(this)", placeholder = "enter comments below" })
+                                    @*<textarea rows="5" cols="25" class="form-control" onkeyup = "countJobContentChar(this)" maxlength="1000" name="comment" placeholder="enter comments below" id="comment"></textarea>*@
+                                    <div style="color:white" id="Commentlen"></div>
                                     <p style="color:#fff;margin-top: 10px;">
-                                        Note:- Please do not use this form for sending in details of a CV or applying for a position. For that purpose, click the "Job seekers" button above.
+                                        Note:- Please do not use this form for sending in your CV or applying for a position. For that purpose, click the "Job seekers" button above.
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-green btn-lg btn-block" id="contactSubmit"> Submit</button>
+                                <button type="submit" id="btnsubmit" value="Submit" class="btn btn-green btn-lg btn-block">Submit</button>
                                 <button type="reset" class="btn btn-green btn-lg btn-block">Clear</button>
                             </div>
                         }

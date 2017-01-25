@@ -1,0 +1,32 @@
+﻿@model Sample.Web.ModalLogin.Models.ChangeEmail
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="container">
+    <div class="container-fluid">
+        @using (Html.BeginForm("ChangeEmail", "Home", FormMethod.Post, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="container nav-tabs-main">
+                <div class="col-xs-12 innerpages" id="employer">
+                    <h2>Forgot Password</h2>
+                    <form class="form-inline row col-md-6 employers">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email)
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter your registered email id", @readonly = "readonly" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.SecondaryEmail)
+                            @Html.TextBoxFor(m => m.SecondaryEmail, new { @class = "form-control", placeholder = "Enter your secondary email id" })
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-green btn-lg btn-block" id="btnLogin">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+</section>

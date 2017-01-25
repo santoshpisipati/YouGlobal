@@ -208,12 +208,14 @@ namespace Sample.Web.ModalLogin.Controllers
             string str = (base.Request["SubmitSource"] ?? "default").ToLower().Trim();
             string address = ConfigurationManager.AppSettings.Get("emailAddress");
             string displayName = ConfigurationManager.AppSettings.Get("emailName");
+            string replyAddress = "";
+            string replyDisplayName = "";
             try
             {
                 TableCell cell8;
                 StringBuilder builder = new StringBuilder();
                 builder.Append("<html><head><style type='text/css'> body { font-family: Arial, Verdana, Sans-Serif; } </style></head><body>");
-                builder.Append("<p>The following details have been submitted at the You Global website from page " + base.Request.UrlReferrer + ";</p>");
+                builder.Append("<p>The following details have been submitted at the YOU Global website from page " + base.Request.UrlReferrer + ";</p>");
                 Table table = new Table
                 {
                     CellPadding = 3,
@@ -243,6 +245,14 @@ namespace Sample.Web.ModalLogin.Controllers
                         BorderWidth = 1,
                         Text = str4 + ":"
                     };
+                    if (str4 == "Email")
+                    {
+                        replyAddress = base.Request.Params[str4].Replace("\r", "").Replace("\n", "<br />");
+                    }
+                    if (str4 == "Full Name")
+                    {
+                        replyDisplayName = base.Request.Params[str4].Replace("\r", "").Replace("\n", "<br />");
+                    }
                     row2.Cells.Add(cell3);
                     TableCell cell4 = new TableCell
                     {
@@ -292,7 +302,7 @@ namespace Sample.Web.ModalLogin.Controllers
                         Text = "None"
                     };
                     row3.Cells.Add(cell8);
-                    table.Rows.Add(row3);
+                    //table.Rows.Add(row3);
                     num++;
                 }
                 cell7.RowSpan = num;
@@ -332,7 +342,11 @@ namespace Sample.Web.ModalLogin.Controllers
                 stream.Close();
                 string str5 = ConfigurationManager.AppSettings.Get(str + ".emailAddress") ?? (ConfigurationManager.AppSettings.Get("default.emailAddress") ?? "admin@you-global.com");
                 string str6 = ConfigurationManager.AppSettings.Get(str + ".emailName") ?? (ConfigurationManager.AppSettings.Get("default.emailName") ?? "YOU Global");
-                string str7 = ConfigurationManager.AppSettings.Get(str + ".subject") ?? (ConfigurationManager.AppSettings.Get("default.subject") ?? "You Global Website Form Submisson");
+                string str7 = ConfigurationManager.AppSettings.Get(str + ".subject") ?? (ConfigurationManager.AppSettings.Get("default.subject") ?? "YOU Global website form - Other Services inquiry");
+                if (base.Request.UrlReferrer.ToString().Contains("ContactUsHtml"))
+                {
+                    str7 = string.Format("{0}-{1}", ConfigurationManager.AppSettings.Get(str + ".subject"), replyDisplayName) ?? (ConfigurationManager.AppSettings.Get("default.subject") ?? "You Global Contact Us Submisson");
+                }
                 MailMessage message = new MailMessage
                 {
                     From = new MailAddress(address, displayName),
@@ -340,6 +354,7 @@ namespace Sample.Web.ModalLogin.Controllers
                     Body = builder.ToString(),
                     IsBodyHtml = true
                 };
+                message.ReplyToList.Add(new MailAddress(replyAddress, replyDisplayName));
                 message.To.Add(new MailAddress(str5, str6));
                 string str8 = ConfigurationManager.AppSettings.Get("bcc.emailAddresses");
                 string str9 = ConfigurationManager.AppSettings.Get("bcc.emailNames");
@@ -396,6 +411,11 @@ namespace Sample.Web.ModalLogin.Controllers
                 }
             }
             return flag;
+        }
+
+        public void SendMail(string mailid)
+        {
+            
         }
 
         public abstract string DefaultViewName { get; }

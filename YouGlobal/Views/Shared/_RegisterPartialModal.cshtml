@@ -1,5 +1,13 @@
 ﻿@model Sample.Web.ModalLogin.Models.RegisterLoginModel
 
+@section scripts{
+    <script type="text/javascript">
+ $(document).ready(function () {
+     document.getElementById("phonenumber").maxLength = "15";
+     document.getElementById("areacode").maxLength = "4";
+ });
+    </script>
+}
 <div class="col-sm-12">
     @using (Html.BeginForm("RegisterJs", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", id = "registerform" }))
     {
@@ -16,14 +24,14 @@
             @Html.TextBoxFor(m => m.RegisterModel.LastName, new { @maxlength = "100", @class = "form-control", @onkeydown = "return onlyAlphabets(event,this);", placeholder = "please enter last name" })
             @Html.ValidationMessageFor(m => m.RegisterModel.LastName, "", new { @class = "text-danger" })
         </div>
-            <div class="form-group">
-                @Html.Label("Email")
-                @Html.TextBoxFor(m => m.RegisterModel.Email, new { @maxlength = "100", @class = "form-control", placeholder = "please enter Email" })
-                @Html.ValidationMessageFor(m => m.RegisterModel.Email, "", new { @class = "text-danger" })
-            </div>
+        <div class="form-group">
+            @Html.Label("Email")
+            @Html.TextBoxFor(m => m.RegisterModel.Email, new { @maxlength = "100", @class = "form-control", placeholder = "please enter Email" })
+            @Html.ValidationMessageFor(m => m.RegisterModel.Email, "", new { @class = "text-danger" })
+        </div>
             <div class="form-group">
                 @Html.Label("Password")
-                @Html.PasswordFor(m => m.RegisterModel.RegisterPassword, new { @maxlength = "10", @class = "form-control", @onblur = "checklength(this.value)", placeholder = "please enter password" })
+                @Html.PasswordFor(m => m.RegisterModel.RegisterPassword, new { @maxlength = "10", @class = "form-control", @onblur = "checklength(this.value)", placeholder = "please enter 6 to 10 characters" })
                 @Html.ValidationMessageFor(m => m.RegisterModel.RegisterPassword, "", new { @class = "text-danger" })
                 <span id="pwdmsg" style="font-size: small; position: relative;"></span>
             </div>
@@ -34,16 +42,16 @@
             </div>
             <div class="form-group">
                 @Html.Label("Phone Code")
-                @Html.DropDownListFor(m => m.RegisterModel.PhoneCode, new SelectList(((System.Data.DataTable)Session["PhoneCodes"]).Rows as System.Collections.IEnumerable, "[0]", "[0]"), new { @class = "form-control"})
+                @Html.DropDownListFor(m => m.RegisterModel.PhoneCode, new SelectList(((System.Data.DataTable)Session["PhoneCodes"]).Rows as System.Collections.IEnumerable, "[0]", "[0]"), new { @class = "form-control" })
             </div>
             <div class="form-group">
                 @Html.Label("Area Code")
-                @Html.TextBoxFor(m => m.RegisterModel.AreaCode, new { @maxlength = "4", @class = "form-control", placeholder = "please enter area code" })
+                @Html.TextBoxFor(m => m.RegisterModel.AreaCode, new { @maxlength = "4", @class = "form-control", @id = "areacode", @onkeydown = "return onlyNumeric(event,this);", placeholder = "please enter up to 4 digits" })
                 @Html.ValidationMessageFor(m => m.RegisterModel.AreaCode, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 @Html.Label("Phone Number")
-                @Html.TextBoxFor(m => m.RegisterModel.PhoneNumber, new { @maxlength = "100", @class = "form-control", placeholder = "please enter phone number" })
+                @Html.TextBoxFor(m => m.RegisterModel.PhoneNumber, new { @maxlength = "15", @class = "form-control", @id = "phonenumber", @onkeydown = "return onlyNumeric(event,this);", placeholder = "please enter phone number" })
                 @Html.ValidationMessageFor(m => m.RegisterModel.PhoneNumber, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
@@ -54,7 +62,7 @@
                                     new SelectListItem { Text = "Recruitment consultant", Value = "3" }}, new { @class = "form-control selectpicker", required = "required" })
             </div>
             <div class="form-group">
-                <div class="g-recaptcha" data-sitekey="6Le55gsTAAAAAECMHA20yc54KQK2jvlqTprM3xjy"></div>
+                <div class="g-recaptcha" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;" data-sitekey="6Le55gsTAAAAAECMHA20yc54KQK2jvlqTprM3xjy"></div>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-green btn-lg btn-block btn-success" id="btnLogin">Register</button>

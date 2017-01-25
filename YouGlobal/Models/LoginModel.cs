@@ -17,7 +17,7 @@ namespace Sample.Web.ModalLogin.Models
         public string Email { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please Provide password")]
-        [StringLength(10, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(10, ErrorMessage = "This password must contain a minimum of {2} characters.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         public string RegisterPassword { get; set; }
 
@@ -28,13 +28,13 @@ namespace Sample.Web.ModalLogin.Models
 
         public string PinCode { get; set; }
 
-        [Required(ErrorMessage = "Your must provide a PhoneNumber")]
+        [Required(ErrorMessage = "You must enter a phone number")]
         [Display(Name = "Home Phone")]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
+        [RegularExpression(@"^[1-9]\d{5,15}$", ErrorMessage = "Not a valid Phone number")]
         public string PhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "Your must provide a PhoneNumber")]
+        [Required]
         public string RegisterAs { get; set; }
 
         public string PhoneCode { get; set; }

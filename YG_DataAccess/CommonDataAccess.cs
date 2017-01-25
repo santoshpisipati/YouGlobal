@@ -43,9 +43,9 @@ namespace YG_DataAccess
         public static MySqlDataReader searchIndustry(string keyword)
         {
             string sql = "Select SQL_NO_CACHE * from (Select  t1.isicRev4id as id1,t2.isicRev4id as id2,t3.isicRev4id as id3, t4.isicRev4id as id4,t1.description as d1, t1.code as c1,t2.description as d2,t2.code as c2,t3.description as d3,t3.code as c3,t4.description as d4,t4.code as c4,t4.code,t1.keyword as k1,t2.keyword k2,t3.keyword as k3,t4.keyword as k4,JobIndustryDetailsCount(t1.isicRev4id) as t1Count, JobIndustryDetailsCount(t2.isicRev4id) as t2Count, JobIndustryDetailsCount(t3.isicRev4id) as t3Count  " +
-                      ",JobDetailsCount(t4.isicRev4id) as t4Count,(JobIndustryDetailsCount(t1.isicRev4id) + JobIndustryDetailsCount(t2.isicRev4id) +" + 
+                      ",JobDetailsCount(t4.isicRev4id) as t4Count,(JobIndustryDetailsCount(t1.isicRev4id) + JobIndustryDetailsCount(t2.isicRev4id) +" +
                         "JobIndustryDetailsCount(t3.isicRev4id) +" +
-                        "JobIndustryDetailsCount(t4.isicRev4id)) as Total from ISICRev4 t1 inner join ISICRev4 t2 on t2.parentcode=t1.code and t1.level=1  INNER JOIN ISICRev4 t3 on "+ "t3.parentcode=t2.code and t2.level=2 INNER JOIN ISICRev4 t4 on t4.parentcode=t3.code and t3.level=3 " +
+                        "JobIndustryDetailsCount(t4.isicRev4id)) as Total from ISICRev4 t1 inner join ISICRev4 t2 on t2.parentcode=t1.code and t1.level=1  INNER JOIN ISICRev4 t3 on " + "t3.parentcode=t2.code and t2.level=2 INNER JOIN ISICRev4 t4 on t4.parentcode=t3.code and t3.level=3 " +
                        " where t4.level=4  and JobIndustryDetailsCount(t4.isicRev4id)>0) a where ( d1 like concat('%',?keyword,'%') or d2 like concat('%',?keyword,'%') or d3 like concat('%',?keyword,'%') or d4 like concat('%',?keyword,'%') " +
                        " or c1 like concat('%',?keyword,'%') or c2 like concat('%',?keyword,'%') or c3 like concat('%',?keyword,'%') or c4 like concat('%',?keyword,'%') " +
                        " or k1 like concat('%',?keyword,'%') or k2 like concat('%',?keyword,'%') or k3 like concat('%',?keyword,'%') or k4 like concat('%',?keyword,'%') ) order by c4";
@@ -381,5 +381,39 @@ namespace YG_DataAccess
             string sql = "select SQL_NO_CACHE emailtypeid, name from emailtypes order by name";
             return DataAccess.ExecuteReader(sql);
         }
-    }
+
+        public MySqlDataReader listCountries()
+        {
+            string sql = "select SQL_NO_CACHE id, name from contactuslocations order by name";
+            return DataAccess.ExecuteReader(sql);
+        }
+
+        public MySqlDataReader GetCities(int CityId)
+        {
+            string sql = "select SQL_NO_CACHE id, Name from contactareas  where LocationId = ?CityId  order by Name ";
+            MySqlDataReader dr = DataAccess.ExecuteReader(sql, new MySqlParameter("CityId", CityId));
+            return dr;
+        }
+
+        public MySqlDataReader GetConsultants(int CityId)
+        {
+            string sql = "select SQL_NO_CACHE id, ConsultantName from contactusinfo  where AreaId = ?CityId  order by ConsultantName ";
+            MySqlDataReader dr = DataAccess.ExecuteReader(sql, new MySqlParameter("CityId", CityId));
+            return dr;
+        }
+        public MySqlDataReader GetConsultantsfromInfo(int CityId)
+        {
+            string sql = "select SQL_NO_CACHE id, ConsultantName from contactusinfo  where LocationId = ?CityId  order by ConsultantName ";
+            MySqlDataReader dr = DataAccess.ExecuteReader(sql, new MySqlParameter("CityId", CityId));
+            return dr;
+        }
+
+
+        public MySqlDataReader GetContactDetails(int Contactid)
+        {
+            string sql = "select SQL_NO_CACHE * from contactusinfo  where Id = ?Contactid  order by Name ";
+            MySqlDataReader dr = DataAccess.ExecuteReader(sql, new MySqlParameter("Contactid", Contactid));
+            return dr;
+        }
+    } 
 }

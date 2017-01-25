@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Sample.Web.ModalLogin.Models;
+using System;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using YG_Business;
 
 namespace Sample.Web.ModalLogin.Controllers
 {
@@ -60,6 +62,42 @@ namespace Sample.Web.ModalLogin.Controllers
         public ActionResult TermsOfUse()
         {
             return View("TermsOfUse");
+        }
+        public ActionResult Settings()
+        {
+            ChangeEmail ce = new ChangeEmail();
+            Member member = Logininfo.GetMemberDetails(Convert.ToInt32(Session["memberID"].ToString()));
+            if (member.MemberId > 0)
+            {
+                ce.Email = member.EmailId;
+            }
+            return View(ce);
+        }
+
+        public ActionResult ChangeEmail(ChangeEmail changeEmail)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(changeEmail);
+            }
+            if (changeEmail != null)
+            {
+                Int32 memberID = Logininfo.GetMemberId(changeEmail.Email, "");
+                if (memberID > 0)
+                {
+                    if (!string.IsNullOrEmpty(changeEmail.SecondaryEmail))
+                    {
+                        Int32 Id = Logininfo.UpdateMemberEmail(changeEmail.SecondaryEmail, memberID);
+                        if (Id > 0)
+                        {
+                            Session["username"] = null;
+                            return RedirectToAction("Home", "Home");
+                        }
+                    }
+                }
+            }
+            Session["username"] = null;
+            return RedirectToAction("Home", "Home");
         }
     }
 }

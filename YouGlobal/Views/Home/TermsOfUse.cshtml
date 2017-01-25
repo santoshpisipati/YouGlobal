@@ -16,7 +16,29 @@
                 <div class="col-lg-4 col-md-4">
                     <i>
                         <img src="~/Content/images/imgs/02.png" alt="Employers">
-                    </i><a href="@Url.Action("PostJob", "Jobs" )" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a>
+                    </i>
+                    @if (Session["username"] != null && !string.IsNullOrEmpty(Session["username"].ToString()))
+            {
+                if (Session["loggedinas"] != null && !string.IsNullOrEmpty(Convert.ToString(Session["loggedinas"])))
+                {
+                    Int32 loggedIn = Convert.ToInt32(Session["loggedinas"]);
+                    if (loggedIn == 1)
+                    { <a href="@Url.Action("UnSignedEmployerRecruiter", "Jobs")" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a> }
+                    else
+                    {
+                                <a href="@Url.Action("PostJob", "Jobs")" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a>
+                            }
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("PostJob", "Jobs")" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a>
+                        }
+
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("UnSignedEmployerRecruiter", "Jobs")" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a>
+                    }
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <i>
@@ -55,7 +77,7 @@
                                     You may view, download for caching purposes only, and print pages from the website for your own personal use, subject to the restrictions set out below and elsewhere in these terms and conditions.
                                 </p>
                                 <p>In the absence of written permission from a properly authorised representative of YOU Global, you must not:</p>
-                                <ul>
+                                <ul class='list'>
                                     <li>republish material from this website (including republication on another website);</li>
                                     <li>sell, rent or sub-license material from the website;</li>
                                     <li> show any material from the website in public;</li>
@@ -134,7 +156,7 @@
                                 </p>
                                 <p>
                                     Without prejudice to the generality of the foregoing paragraph, YOU Global does not warrant that:
-                                    <ul>
+                                    <ul class='list'>
                                         <li>this website will be constantly available, or available at all; or</li>
                                         <li>the information on this website is complete, true, accurate or non-misleading</li>
                                     </ul>
@@ -154,7 +176,7 @@
                         <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
                             <div class="panel-body">
                                 <p>YOU Global will not be liable to you (whether under the law of contact, the law of torts or otherwise) in relation to the contents of, or use of, or otherwise in connection with, this website:</p>
-                                <ul>
+                               <ul class='list'>
                                     <li>to the extent that the website is provided free-of-charge, for any direct loss;</li>
                                     <li>for any indirect, special or consequential loss; or</li>
                                     <li>for any business losses, loss of revenue, income, profits or anticipated savings, loss of contracts or business relationships, loss of reputation or goodwill, or loss or corruption of information or data.</li>
@@ -174,7 +196,7 @@
                         <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
                             <div class="panel-body">
                                 <p>Nothing in this website disclaimer will exclude or limit any warranty implied by law that it would be unlawful to exclude or limit; and nothing in this website disclaimer will exclude or limit YOU Global’s liability in respect of any:</p>
-                                <ul>
+                               <ul class='list'>
                                     <li>death or personal injury caused by YOU Global’s negligence;</li>
                                     <li>fraud or fraudulent misrepresentation on the part of YOU Global; or</li>
                                     <li>matter which it would be illegal or unlawful for YOU Global to exclude or limit, or to attempt or purport to exclude or limit, its liability.</li>
@@ -226,7 +248,6 @@
                         <div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
                             <div class="panel-body">
                                 <p>You hereby indemnify YOU Global and undertake to keep YOU Global indemnified against any losses, damages, costs, liabilities and expenses (including without limitation legal expenses and any amounts paid by YOU Global to a third party in settlement of a claim or dispute on the advice of YOU Global’s legal advisers) incurred or suffered by YOU Global arising out of any breach by you of any provision of these terms and conditions, or arising out of any claim that you have breached any provision of these terms and conditions.</p>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -241,7 +262,6 @@
                         <div id="collapse11" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading11">
                             <div class="panel-body">
                                 <p>Without prejudice to YOU Global’s other rights under these terms and conditions, if you breach these terms and conditions in any way, YOU Global may take such action as YOU Global deems appropriate to deal with the breach, including suspending your access to the website, prohibiting you from accessing the website, blocking computers using your IP address from accessing the website, contacting your internet service provider to request that they block your access to the website and/or bringing court proceedings against you.</p>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -274,7 +294,6 @@
                                 <p>
                                     You may not transfer, sub-contract, assign or otherwise deal with your rights and/or obligations under these terms and conditions.
                                 </p>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -289,7 +308,6 @@
                         <div id="collapse14" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading14">
                             <div class="panel-body">
                                 <p>If a provision of these terms and conditions is determined by any court or other competent authority to be unlawful and/or unenforceable, the other provisions will continue in effect. If any unlawful and/or unenforceable provision would be lawful or enforceable if part of it were deleted, that part will be deemed to be deleted, and the rest of the provision will continue in effect. </p>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -304,7 +322,6 @@
                         <div id="collapse15" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading15">
                             <div class="panel-body">
                                 <p>These terms and conditions, together with any other documentation or written information that may have been provided to you by YOU Global with respect to the use of this website, constitute the entire agreement between you and YOU Global in relation to your use of this website, and supersede all previous agreements in respect of your use of this website.</p>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -319,7 +336,6 @@
                         <div id="collapse16" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading16">
                             <div class="panel-body">
                                 <p>These terms and conditions will be governed by and construed in accordance with the laws of a jurisdiction at YOU Global’s sole discretion, and any disputes relating to these terms and conditions will be subject to the non-exclusive jurisdiction of the courts of a jurisdiction at YOU Global’s discretion.</p>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -335,7 +351,6 @@
                             <div class="panel-body">
                                 <p>The full name of YOU Global is YOU Global Consultants. </p>
                                 <p>YOU Global Consultants is registered in Dubai, United Arab Emirates. Further detail may be made available upon your inquiry.</p>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -349,8 +364,8 @@
                         </div>
                         <div id="collapse18" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading18">
                             <div class="panel-body">
-                                <p>This document was created using a Contractology template available at http://www.freenetlaw.com/.</p>
-                                </ul>
+                                <p>This document was created using a Contractology template available at <a href="http://www.freenetlaw.com" class="underline" target="_blank">http://www.freenetlaw.com</a>
+                                </p>
                             </div>
                         </div>
                     </div>

@@ -101,8 +101,26 @@ namespace YG_MVC.Controllers
             return base.View("JobSeeker");
         }
 
+        /// <summary>
+        /// Jobs the seeker emp.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult JobSeekerEmp()
         {
+            int loginId = (int)Session["memberID"];
+            JobApplyModel model = new JobApplyModel();
+            if (loginId > 0)
+            {
+                Member member = Logininfo.GetMemberDetails(loginId);
+                if (member != null && member.MemberId > 0)
+                {
+                    Job obj = new Job();
+                    ViewData["FirstName"] = member.FirstName;
+                    ViewData["LastName"] = member.LastName;
+                    ViewData["PhoneNo"] = member.PhoneNo;
+                    ViewData["EmailId"] = member.EmailId;
+                }
+            }
             this.ShowHotJobs();
             GetOccupationCount();
             GetIndustryCount();
@@ -137,7 +155,7 @@ namespace YG_MVC.Controllers
 
         public ActionResult PostJob()
         {
-            int memberId = !string.IsNullOrEmpty(Session["memberID"].ToString()) ? int.Parse(Session["memberID"].ToString()) : 0;
+            int memberId = Session["memberID"] != null ? int.Parse(Session["memberID"].ToString()) : 0;
             JobDetailInfo jobDetailInfo = new JobDetailInfo();
             string JobCodePrefix = GetJobPrefix(memberId);
             if (!string.IsNullOrEmpty(JobCodePrefix))
@@ -228,14 +246,51 @@ namespace YG_MVC.Controllers
         [HttpPost]
         public ActionResult Search(SearchCriteria searchCriteria)
         {
+            Common objCom = new Common();
             Job objJob = new Job();
             base.Session["LastSearchCriteria"] = null;
             base.Session.Remove("LastSearchCriteria");
             base.Session["LastSearchCriteria"] = searchCriteria;
-            var pageSize = 6;
-            var items = objJob.SearchJobs(searchCriteria.Industry, searchCriteria.Role, searchCriteria.Location, searchCriteria.WorkArrangement, searchCriteria.Keywords, "");
+            if (searchCriteria.IndustrySelect != null)
+            {
+                foreach (string i in searchCriteria.IndustrySelect)
+                {
+                    if (i != "0")
+                        searchCriteria.Industry = i.Split(' ')[0] + "," + searchCriteria.Industry;
+                }
+                if (!string.IsNullOrEmpty(searchCriteria.Industry))
+                {
+                    searchCriteria.Industry = searchCriteria.Industry.Remove(searchCriteria.Industry.Length - 1);
+                    ViewData["industry"] = objCom.GetIndustry(searchCriteria.Industry);
+                }
+            }
+
+            if (ViewData["industry"] == null)
+                ViewData["industry"] = new DataTable();
+
+            if (searchCriteria.OccupationSelect != null)
+            {
+                foreach (string i in searchCriteria.OccupationSelect)
+                {
+                    if (i != "0")
+                        searchCriteria.Occupation = i.Split(' ')[0] + "," + searchCriteria.Occupation;
+                }
+                if (!string.IsNullOrEmpty(searchCriteria.Occupation))
+                {
+                    searchCriteria.Occupation = searchCriteria.Occupation.Remove(searchCriteria.Occupation.Length - 1);
+                    ViewData["occupation"] = objCom.GetOccupation(searchCriteria.Occupation);
+                }
+            }
+            if (ViewData["occupation"] == null)
+                ViewData["occupation"] = new DataTable();
+
+            if (searchCriteria.Location == "- Anywhere -")
+                searchCriteria.Location = string.Empty;
+            var pageSize = 10;
+            var items = objJob.SearchJobs(searchCriteria.Industry, searchCriteria.Role, searchCriteria.Location, searchCriteria.WorkArrangement, searchCriteria.Keywords, searchCriteria.Occupation);
             ViewBag.OnePageOfProducts = 1;
             PagedList<JobInfo> listitems = new PagedList<JobInfo>(items, 1, pageSize);
+            Session["items"] = items;
             return base.View("JobsListing", listitems);
             //return base.View("Index");
         }
@@ -442,7 +497,6 @@ namespace YG_MVC.Controllers
                     }
                     result.Add(">>> " + drOccupation["c3"].ToString() + " " + drOccupation["d3"].ToString());
                 }
-               
 
                 if (Tier2.children == null)
                 {
@@ -1250,7 +1304,8 @@ namespace YG_MVC.Controllers
             base.Session.Remove("LastSearchCriteria");
             base.Session["LastSearchCriteria"] = new SearchCriteria();
             var pageSize = 10;
-            var items = objJob.ListJobs();
+            var items = objJob.ListJobs(0, 12 - 1);
+            Session["items"] = items;
             ViewBag.OnePageOfProducts = 1;
             PagedList<JobInfo> listitems = new PagedList<JobInfo>(items, 1, pageSize);
             return base.View("JobsListing", listitems);
@@ -1259,11 +1314,21 @@ namespace YG_MVC.Controllers
         public ViewResult PageIndex(int? page)
         {
             Job objJob = new Job();
-            var listitems = objJob.ListJobs();
+            List<JobInfo> listitems = new List<JobInfo>();
+            if (Session["items"] != null)
+            {
+                if (page == 0) { listitems = objJob.ListJobs(0, 12 - 1); Session["items"] = listitems; }
+                else
+                {
+                    int d = ((page - 1) * 11 + 1 ?? 1);
+                    listitems = objJob.ListJobs(d, d + 12 - 1);
+                    Session["items"] = listitems;
+                }
+            }
             var pageSize = 10;
             int PageCount = Convert.ToInt32(Math.Ceiling((double)(listitems.Count()
                         / pageSize)));
-            int pageNumber = (page ?? 1);
+            int pageNumber = PageCount;
             ViewBag.OnePageOfProducts = pageNumber;
             return base.View("JobsListing", listitems.ToPagedList(pageNumber, pageSize));
         }
@@ -1286,7 +1351,6 @@ namespace YG_MVC.Controllers
             return this.Index();
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult SearchCountryCode(string term)
         {
             Common obj = new Common();
@@ -1321,6 +1385,13 @@ namespace YG_MVC.Controllers
                 info.LocationList = new List<YG_Business.JobAlertLocation>();
                 info.IndustryList = new List<YG_Business.JobAlertIndustry>();
                 info.OccupationList = new List<YG_Business.JobAlertOccupation>();
+                YG_Business.JobAlertOccupation occupationInfo;
+                foreach (int occupation in model.OccupationSelectID)
+                {
+                    occupationInfo = new YG_Business.JobAlertOccupation();
+                    occupationInfo.AlertOccupationId = occupation;
+                    info.OccupationList.Add(occupationInfo);
+                }
                 YG_Business.JobAlertIndustry industryInfo;
                 foreach (int industry in model.IndustrySelectID)
                 {

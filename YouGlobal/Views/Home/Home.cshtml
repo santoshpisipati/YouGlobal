@@ -2,6 +2,18 @@
     ViewBag.Title = "JobSeeker";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script>
+    function onclickevent(button) {
+        if (button.id != "jobseek") {
+            bootbox.alert("You are logged in as a registered job seeker. To access the facilities available to employers or recruiters, please log out, then log in or register separately as an employer or recruiter.");
+        }
+        else
+        {
+            bootbox.alert("You are logged in as a registered employer or recruiter. To access the facilities available as a job seeker, please log out, then log in or register separately as a job seeker.");
+           
+        }
+    }
+</script>
 <section class="container">
     <div class="row">
         <div class="col-lg-12">
@@ -14,11 +26,46 @@
         </div>
     </div>
     <div class="row secondary-nav ">
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- dialog body -->
+                    <div class="modal-body">
+                        @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                    </div>
+                    <!-- dialog buttons -->
+                    <div class="modal-footer"><button type="submit" class="btn btn-green btn-lg btn-block" id="btnLogin">Ok</button></div>
+                </div>
+            </div>
+        </div>
         <div class="col-lg-4 col-md-4">
             <i>
                 <img src="~/Content/images/imgs/01.png" alt="Job seekers">
             </i>
-            <a href="@Url.Action("JobSeeker", "Jobs")" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m">Job seekers</a>
+            @if (Session["username"] != null && !string.IsNullOrEmpty(Session["username"].ToString()))
+            {
+                if (Session["loggedinas"] != null && !string.IsNullOrEmpty(Convert.ToString(Session["loggedinas"])))
+                {
+                    Int32 loggedIn = Convert.ToInt32(Session["loggedinas"]);
+                    if (loggedIn == 1)
+                    { <a href="@Url.Action("JobSeeker", "Jobs")" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m">Job seekers</a>
+
+                    }
+                    else
+                    {
+                        <a onclick="return onclickevent(this);" id="jobseek" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m">Job seekers</a>
+                    }
+                }
+                else
+                {
+                    <a onclick="return onclickevent(this);" id="jobseek" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m">Job seekers</a>
+                }
+            }
+            else
+            {
+                <a href="@Url.Action("JobSeeker", "Jobs")" class="button btn-jobseeker button--antiman button--inverted button--border-thin button--text-thick button--size-m">Job seekers</a>
+            }
+
         </div>
         <div class="col-lg-4 col-md-4">
             <i>
@@ -30,7 +77,7 @@
                 {
                     Int32 loggedIn = Convert.ToInt32(Session["loggedinas"]);
                     if (loggedIn == 1)
-                    { <a href="@Url.Action("UnSignedEmployerRecruiter", "Jobs")" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a> }
+                    { <button onclick="return onclickevent(this);" id="emp" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</button> }
                     else
                     {
                         <a href="@Url.Action("PostJob", "Jobs")" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a>

@@ -58,15 +58,21 @@ Sample.Web.ModalLogin.Views.LoginModal = {
 Sample.Web.ModalLogin.Identity = {
     LoginIntoStd: function (username, password, rememberme, IsJobSeeker, IsEmployer, IsConsultant, antiForgeryToken, successCallback, failureCallback) {
         var data = { "__RequestVerificationToken": antiForgeryToken, "username": username, "password": password, "rememberme": rememberme, "IsJobSeeker": IsJobSeeker, "IsEmployer": IsEmployer, "IsConsultant": IsConsultant };
-
         $.ajax({
             url: "/Account/Login",
             type: "POST",
             data: data
         })
-        .done(function (loginSuccessful) {
-            if (loginSuccessful) {
-                successCallback();
+        .done(function (member) {
+            if (member.MemberId > 0) {
+                if (member.IsJobSeeker) {
+                    window.location.href = "/Jobs/JobSeeker";
+                    return false;
+                }
+                else {
+                    window.location.href = "/Jobs/UnSignedEmployerRecruiter";
+                    return false;
+                }
             }
             else {
                 failureCallback("Invalid login attempt.");

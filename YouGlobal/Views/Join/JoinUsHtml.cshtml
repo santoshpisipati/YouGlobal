@@ -53,10 +53,33 @@
                     Best of all, no capital investment is required.
                 </p>
                 <p>
-                    <a href="#" class="underline">Click Here</a> for an overview of features and benefits.
+                    <a href="~/Content/summary.pdf" title="http://www.you-global.com/summary.pdf" onclick="window.open(this.href); return false;"><u>Click Here</u></a>
+                    for an overview of features and benefits.
                 </p>
                 <p>
-                    Interested? @Html.ActionLink("Contact YOU Global", "ContactUsHtml", "Contact", routeValues: null, htmlAttributes: new { id = "otherServics", @class = "underline" }) for more information, or email us at <a href="" class="underline">partners@you-global.com</a>
+                    Interested? @Html.ActionLink("Contact YOU Global", "ContactUsHtml", "Contact", routeValues: null, htmlAttributes: new { id = "otherServics", @class = "underline" }) for more information, or email us at
+                    <script type="text/javascript" language="javascript">
+    // Email obfuscator script 2.1 by Tim Williams, University of Arizona
+    // Random encryption key feature by Andrew Moulden, Site Engineering Ltd
+    // This code is freeware provided these four comment lines remain intact
+        {
+            coded = "E4phetp6@8H9-XOHJ4O.VHf"
+            key = "BMxo5hkFgQIPEc8abRvlYeK37uHsriCXjdTmV14JUGOZtAN09W6pDy2zSqfLnw"
+            shift = coded.length
+            link = ""
+            for (i = 0; i < coded.length; i++) {
+                if (key.indexOf(coded.charAt(i)) == -1) {
+                    ltr = coded.charAt(i)
+                    link += (ltr)
+                }
+                else {
+                    ltr = (key.indexOf(coded.charAt(i)) - shift + key.length) % key.length
+                    link += (key.charAt(ltr))
+                }
+            }
+            document.write("<a href='mailto:" + link + "'>" + link + "</a>")
+        }
+                    </script>
                 </p>
             </div>
             <!-- col-xs-9 End -->

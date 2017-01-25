@@ -43,7 +43,7 @@
         <div class="row">
             @using (Html.BeginForm("Search", "Jobs"))
             {
-                <input type="text" class="form-control" name="Keywords" id="jobsearch" placeholder="Search By Keyword, Example = Account Manager , sales,` or type in the Job Reference Code.">
+                <input type="text" class="form-control" name="Keywords" id="jobsearch" placeholder="Search By Job Reference Code.">
                 <ul class="accordion" id="acc1">
                     <li>
                         <h4 class="h">
@@ -115,7 +115,7 @@
                         </h4>
                         <div class="outer">
                             <div class="inner">
-                                @Html.DropDownList("JobTypes", new SelectList(((DataTable)Session["SearchWorkTypeList"]).Rows as System.Collections.IEnumerable, "[2]", "[1]"), new { @class = "form-control" })
+                                @Html.DropDownList("Role", new SelectList(((DataTable)Session["SearchWorkTypeList"]).Rows as System.Collections.IEnumerable, "[2]", "[1]"), new { @class = "form-control" })
                                 <div class="keywordText">
                                     @*<i style="color:white;">select any option above.</i>*@
                                 </div>
@@ -162,7 +162,7 @@
                 </div>
             </div>
         </div>
-        <a class="scrolldown" href="#down"><img src="~/Content/images/scrolldown.png" /></a>
+        @*<a class="scrolldown" href="#down"><img src="~/Content/images/scrolldown.png" /></a>*@
     </div>
     <!-- end jobsearch-->
     <div class="clearfix"></div>

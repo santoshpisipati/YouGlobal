@@ -63,18 +63,30 @@ namespace Sample.Web.ModalLogin.Controllers
         return base.View("EmailAFriend", model);
     }
 
-    public ActionResult ApplyOnline(string id)
-    {
-        JobApplyModel model = new JobApplyModel();
-        Job obj = new Job();
-        JobInfo info = obj.GetJobInfoByReferenceNo(id);
-        model.JobId = info.JobId;
-        model.JobTitle = info.Title;
-        model.ReferenceNo = id;
-        model.EssentialCriteriaList = obj.GetEssentialCriteria(info.JobId);
-        model.DesirableCriteriaList = obj.GetDesirableCriteria(info.JobId);
-        return base.View("JobApply", model);
-    }
+        public ActionResult ApplyOnline(string id)
+        {
+            int loginId = (int)Session["memberID"];
+            JobApplyModel model = new JobApplyModel();
+            if (loginId > 0)
+            {
+                Member member = Logininfo.GetMemberDetails(loginId);
+                if (member != null && member.MemberId > 0)
+                {
+                    Job obj = new Job();
+                    JobInfo info = obj.GetJobInfoByReferenceNo(id);
+                    model.FirstName = member.FirstName;
+                    model.LastName = member.LastName;
+                    model.ContactNumber = member.PhoneNo;
+                    model.Email = member.EmailId;
+                    model.JobId = info.JobId;
+                    model.JobTitle = info.Title;
+                    model.ReferenceNo = id;
+                    model.EssentialCriteriaList = obj.GetEssentialCriteria(info.JobId);
+                    model.DesirableCriteriaList = obj.GetDesirableCriteria(info.JobId);
+                }
+            }
+            return base.View("JobApply", model);
+        }
 
     [AcceptVerbs(HttpVerbs.Post)]
     public ActionResult ApplyJob(JobApplyModel model, FormCollection col)

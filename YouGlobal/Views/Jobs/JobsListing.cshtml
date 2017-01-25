@@ -4,12 +4,114 @@
 @using PagedList.Mvc;
 @using PagedList;
 @using YG_Business;
+@using System.Data;
 @{var jobPostings = Model as PagedList<JobInfo>; }
 
 <!-- Container Main div -->
 
     <!-- Header Section Main div -->
     <div class="container">
+
+        <div class="container jobsearchlisiting search">
+            <div class="row">
+                    @using (Html.BeginForm("Search", "Jobs"))
+                    {
+                        <input type="text" class="form-control" name="Keywords" id="jobsearch" placeholder="Search By Keyword, Example = Account Manager , sales,` or type in the Job Reference Code.">
+                        <ul class="accordion" id="acc1">
+                            <li>
+                                <h4 class="h">
+                                    <span style="color:white">Occupation</span>
+                                </h4>
+                                <div class="outer" style="width: 300px;">
+                                    <div class="inner">
+                                        <div id="divOccSel" style="display: none">
+                                            @Html.ListBox("OccupationSelect", new SelectList(((DataTable)(ViewData["occupation"] == null ? new DataTable() : ViewData["occupation"])).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @multiple = "multiple", @size = "5", @class = "fieldAlerts OccupationSelect" })
+                                            <div style="float: right">
+                                                <img title="Remove selected" src="../../Content/images/delete.png" id="btnOremove"
+                                                     style="display: block !important; visibility: inherit !important;" />
+                                            </div>
+                                        </div>
+                                        @Html.TextBox("EmpOccupation", string.Empty, new { @id = "search-term", @class = "form-control txtShowDiv", @role = "tagsinput", placeholder = "Enter your Occupation" })
+                                        <div class="keywordText">
+                                            <i style="color:white;"></i>
+                                        </div>
+                                        <input type="hidden" id="hdf" value="0" />
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <h4 class="h">
+                                    <span style="color:white">Industry</span>
+                                </h4>
+                                <div class="outer" style="width: 300px;">
+                                    <div class="inner">
+                                        <div id="divIndSel" style="display: none">
+                                            @Html.ListBox("IndustrySelect", new SelectList(((DataTable)(ViewData["industry"] == null ? new DataTable() : ViewData["industry"])).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @multiple = "multiple", @size = "5", @class = "fieldAlerts IndustrySelect" })
+                                            <div style="float: right">
+                                                <img title="Remove selected" src="../../Content/images/delete.png" id="btnIremove"
+                                                     style="display: block !important; visibility: inherit !important;" />
+                                            </div>
+                                        </div>
+                                        @Html.TextBox("Empindustry", string.Empty, new { @id = "search-empIndtree", @class = "form-control industryin", placeholder = "Enter your Industry" })
+                                        <div class="indDiv">
+                                            <div id="tvDind" style="display:none;">
+                                                <div class="treeview">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="keywordText">
+                                            <i style="color:white;"></i>
+                                        </div>
+                                        <input type="hidden" id="hdfI" value="0" />
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <h4 class="h">
+                                    <span style="color:white">Location</span>
+                                </h4>
+                                <div class="outer" style="width: 300px;">
+                                    <div class="inner">
+                                        <input id="search-empLocationsearch" class="form-control locationin" type="text" maxlength="10" name="Location" autocomplete="off" placeholder="Enter your Location" role="textbox" aria-autocomplete="list" aria-haspopup="true" />
+                                        <div class="keywordText">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="hdfLocation" value="0" />
+                                    <input type="hidden" id="hdfL" value="0" />
+                                </div>
+                            </li>
+                            <li>
+                                <h4 class="h">
+                                    <span style="color:white">Job Type</span>
+                                </h4>
+                                <div class="outer">
+                                    <div class="inner">
+                                        @Html.DropDownList("JobTypes", new SelectList(((DataTable)Session["SearchWorkTypeList"]).Rows as System.Collections.IEnumerable, "[2]", "[1]"), new { @class = "form-control" })
+                                        <div class="keywordText">
+                                            @*<i style="color:white;">select any option above.</i>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <button id="btnFind" class="btn btn-red pull-right btn-lg btn-block searchbutton">
+                            FIND JOBS
+                        </button>
+                        <div class="treediv">
+                            <div id='search-termoccu' class="occupation" style="display:none">
+                                <img id="occloading" src="~/Content/images/imgs/ajax-loader.gif" class="busyindicator" alt="" />
+                            </div>
+                            <div id='searchable-empIndtree' class="industry" style="display:none">
+                                <img id="indloading" src="~/Content/images/imgs/ajax-loader.gif" class="busyindicator" alt="" />
+                            </div>
+                            <div id='searchable-empLocationtree' class="location" style="display:none">
+                                <img id="locloading" src="~/Content/images/imgs/ajax-loader.gif" class="busyindicator" alt="" />
+                            </div>
+                        </div>
+                    }
+            </div>
+        </div>
+
         <!--  secondary-nav start -->
         <div class="nav-tabs-main">
             <div class="col-xs-12 innerpages search-result" id="about-us">

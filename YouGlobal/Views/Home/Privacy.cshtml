@@ -16,7 +16,29 @@
                 <div class="col-lg-4 col-md-4">
                     <i>
                         <img src="~/Content/images/imgs/02.png" alt="Employers">
-                    </i><a href="@Url.Action("PostJob", "Jobs" )" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a>
+                    </i>
+                    @if (Session["username"] != null && !string.IsNullOrEmpty(Session["username"].ToString()))
+            {
+                if (Session["loggedinas"] != null && !string.IsNullOrEmpty(Convert.ToString(Session["loggedinas"])))
+                {
+                    Int32 loggedIn = Convert.ToInt32(Session["loggedinas"]);
+                    if (loggedIn == 1)
+                    { <a href="@Url.Action("UnSignedEmployerRecruiter", "Jobs")" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a> }
+                    else
+                    {
+                                <a href="@Url.Action("PostJob", "Jobs")" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a>
+                            }
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("PostJob", "Jobs")" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a>
+                        }
+
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("UnSignedEmployerRecruiter", "Jobs")" class="button btn-employer button--antiman button--inverted button--border-thin button--text-thick button--size-m">Employers/Recruiters</a>
+                    }
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <i>

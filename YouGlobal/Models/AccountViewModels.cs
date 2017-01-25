@@ -110,4 +110,17 @@ namespace Sample.Web.ModalLogin.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+    public class ChangeEmail
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "SecondaryEmail")]
+        public string SecondaryEmail { get; set; }
+    }
 }

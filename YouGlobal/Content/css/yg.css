@@ -16,6 +16,12 @@ a, .accordion .switch a {
     text-decoration: underline;
 }
 
+.nounderline {
+    text-decoration: none;
+}
+
+
+
 .accordion {
     margin: 0;
     /*padding: 10px;*/

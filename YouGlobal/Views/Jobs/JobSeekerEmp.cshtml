@@ -40,7 +40,7 @@
                                         <label class="subheadings">
                                             Enter your email address. <font color="red">*</font>
                                         </label>
-                                        @Html.TextBox("Email", string.Empty, new { @class = "form-control", maxlength = "50", placeholder = "Enter your email address" })
+                                        @Html.TextBox("Email", ViewData["EmailId"], new { @class = "form-control", maxlength = "50", placeholder = "Enter your email address" })
                                         @Html.DropDownList("Emailtype", new SelectList(((System.Data.DataTable)Session["emailtype"]).Rows as System.Collections.IEnumerable, "[0]", "[1]"), new { @class = "form-control", Style = "width:70px" })
                                     </td>
                                 </div>
@@ -56,7 +56,7 @@
                                     <label class="subheadings">
                                         First Name <font color="red">*</font>
                                     </label>
-                                    @Html.TextBox("FirstName", string.Empty, new { @class = "form-control", maxlength = "50", placeholder = "Enter your first name", onkeypress = "return LettersWithSpaceOnly(event);" })
+                                    @Html.TextBox("FirstName", ViewData["FirstName"], new { @class = "form-control", maxlength = "50", placeholder = "Enter your first name", onkeypress = "return LettersWithSpaceOnly(event);" })
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="subheadings">
@@ -70,7 +70,7 @@
                                     <label class="subheadings">
                                         Family name / surname <font color="red">*</font>
                                     </label>
-                                    @Html.TextBox("LastName", string.Empty, new { @class = "form-control", maxlength = "50", placeholder = "Enter your family/surname name", onkeypress = "return LettersWithSpaceOnly(event);" })
+                                    @Html.TextBox("LastName", ViewData["LastName"], new { @class = "form-control", maxlength = "50", placeholder = "Enter your family/surname name", onkeypress = "return LettersWithSpaceOnly(event);" })
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="subheadings">
@@ -124,13 +124,13 @@
                                     <div class="inner">
                                         <table class="table uploadcvtable">
                                             <tr>
-                                                <td>
+                                                @*<td>
                                                     <label class="subheadings" for="phone">
                                                         Phone<font color="red">*</font>
                                                     </label>
                                                     @Html.TextBox("Phone", "", new { @maxlength = "10", @class = "countrycodeA form-control", placeholder = "Enter your phone number" })
                                                     <input type="hidden" id="hdfCC1" />
-                                                </td>
+                                                </td>*@
                                                 <td>
                                                     <label class="subheadings">
                                                         Type
@@ -143,27 +143,25 @@
                                                              id="phoneCVRemove" style="display: block !important; visibility: inherit !important;" />
                                                     </div>
                                                 </td>
-                                            </tr>
-                                            <tr>
                                                 <td>
                                                     <label class="subheadings">
                                                         Country code
                                                     </label>
                                                     @Html.TextBox("Countrycode", "", new { @maxlength = "10", @class = "countrycodeA form-control", placeholder = "Enter your country code" })
                                                 </td>
+                                            </tr>
+                                            <tr>
                                                 <td>
                                                     <label class="subheadings">
                                                         Local area code
                                                     </label>
                                                     @Html.TextBox("Localareacode", "", new { @maxlength = "20", @class = "form-control", onkeypress = "return isNumber1(event);", placeholder = "Enter your local area code" })
                                                 </td>
-                                            </tr>
-                                            <tr>
                                                 <td>
                                                     <label class="subheadings">
                                                         Number
                                                     </label>
-                                                    @Html.TextBox("Phone", "", new { @maxlength = "20", @class = "form-control", placeholder = "Enter your number", onkeypress = "return isPhoneNumber1(event);" })
+                                                    @Html.TextBox("Phone", ViewData["PhoneNo"], new { @maxlength = "20", @class = "form-control", placeholder = "Enter your number",@readonly= "readonly", onkeypress = "return isPhoneNumber1(event);" })
                                                 </td>
                                             </tr>
                                         </table>
@@ -228,6 +226,7 @@
                                                     Your current employer name
                                                 </label>
                                                 @Html.TextBox("Currentemployer", string.Empty, new { @class = "form-control CurrentemployerA", placeholder = "Enter your currrent employer name" })
+                                                <div id='emptreeCurrpostJob' class="jobseekerempemployer" style="display:none"></div>
                                             </td>
                                             <td>
                                                 <label class="subheadings">
@@ -235,6 +234,7 @@
                                                 </label>
                                                 @Html.TextBox("Currentemplocation", string.Empty, new { @class = "form-control CurrentemplocationA", placeholder = "Enter your current location name" })
                                                 @Html.Hidden("CurrentemplocationId")
+                                                <div id='loctreeCurrpostJob' class="jobseekerempemployer" style="display:none"></div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -244,6 +244,7 @@
                                                 </label>
                                                 @Html.TextBox("CurrentOccupation", string.Empty, new { @class = "form-control CurrentOccupationA", placeholder = "Enter your current occupation name" })
                                                 @Html.Hidden("CurrentOccupationId", string.Empty, new { @class = "CurrentOccupationIdA" })
+                                                <div id='occutreeCurrpostJob' class="jobseekerempemployer" style="display:none"></div>
                                             </td>
                                             <td>
                                                 <label class="subheadings">
@@ -251,6 +252,7 @@
                                                 </label>
                                                 @Html.TextBox("CurrentIndustry", string.Empty, new { @class = "form-control CurrentIndustryA", placeholder = "Enter your current location name" })
                                                 @Html.Hidden("CurrentIndustryId", string.Empty, new { @class = "CurrentIndustryIdA" })
+                                                <div id='IndtreeCurrpostJob' class="jobseekerempemployer" style="display:none"></div>
                                             </td>
                                         </tr>
                                     </table>
@@ -372,14 +374,15 @@
                             </ul>
                             <h3>Attach CV</h3>
                             <p>CV: Max File Size of 1000 KB *</p>
-                            <div class="outer" style="display: none;">
-                                <div class="inner">
-                                    <p>
-                                        <u>Attach Documents:</u> <font size="1">
-                                        </font><span class="mandatoryString"><font color="red">&nbsp;*</font></span>
-                                    </p>
+                            <p>
+                                <u>Attach Documents:</u> <font size="1">
+                                </font><span class="mandatoryString"><font color="red">&nbsp;*</font></span>
+                            </p>
+                            <div class="row">
+                                <div class="form-group col-md-10 ">
                                     <input type="file" name="Attachresume" id="Attachresume" class="custom-file-input" placeholder="Enter your comment" onchange="get_filename1(this,1,'CV');" />
                                     <button type="button" name="removefile" value="remove" class="btn btn-upload btn-lg btn-block" id="Button4" onclick="clearContents1('Attachresume1')">Remove</button>
+                                    
                                 </div>
                             </div>
                             <hr>
@@ -389,6 +392,7 @@
                             <div class="row">
                                 <div class="form-group col-md-10 ">
                                     @Html.TextArea("CoverLetter", new { @class = "form-control CoverLetter1", rows = 5, placeholder = "Type or paste your cover letter here" })
+                                    <div id="desCoverLettContent"></div>
                                 </div>
                             </div>
                             <p>or</p>
@@ -419,7 +423,7 @@
                             <div class="form-group">
                                 <a href="#" class="btn btn-upload btn-lg btn-block" rel="div2">Previous</a>
                                 <button type="submit" id="btnsubmit" value="Submit" class="btn btn-upload btn-lg btn-block">Submit</button>
-                                <button type="button" class="btn btn-upload btn-lg btn-block" value="clear">Clear</button>
+                                <button type="reset" class="btn btn-upload btn-lg btn-block" value="clear">Clear</button>
                             </div>
                         </div>
                     </form>
